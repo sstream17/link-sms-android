@@ -30,14 +30,9 @@ class SmartReplyManager(private val fragment: MessageListFragment) {
 
     private val messageEntry: EditText by lazy { fragment.rootView!!.findViewById<View>(R.id.message_entry) as EditText }
     private val smartReplyContainer: ViewGroup by lazy { fragment.rootView!!.findViewById(R.id.smart_reply_container) as ViewGroup }
-    private val smartReplySuggestionsContainer: ViewGroup by lazy { smartReplyContainer.findViewById(R.id.smart_reply_suggestions_container) as ViewGroup }
-    private val closeSmartReply: ImageButton by lazy { smartReplyContainer.findViewById(R.id.close_smart_replies) as ImageButton }
 
     fun applySuggestions(suggestions: List<SmartReplySuggestion>, firstLoad: Boolean = false) {
         Log.v("SmartReplyManager", "Suggestions size: ${suggestions.size}")
-
-        closeSmartReply.imageTintList = ColorStateList.valueOf(fragment.argManager.colorAccent)
-        closeSmartReply.setOnClickListener { closeSmartReply() }
 
         handler.removeCallbacksAndMessages(null)
         handler.postDelayed({
@@ -71,7 +66,7 @@ class SmartReplyManager(private val fragment: MessageListFragment) {
                         layout
                     }.forEach { view ->
                         if (view != null) {
-                            smartReplySuggestionsContainer.addView(view)
+                            smartReplyContainer.addView(view)
                         }
                     }
                 } catch (e: Exception) {
@@ -83,10 +78,7 @@ class SmartReplyManager(private val fragment: MessageListFragment) {
 
     fun hideContainer() {
         if (smartReplyContainer.visibility == View.GONE) {
-            if (smartReplySuggestionsContainer.childCount > 0) {
-                smartReplySuggestionsContainer.removeAllViews()
-            }
-
+            smartReplyContainer.removeAllViews()
             return
         }
 
@@ -99,7 +91,7 @@ class SmartReplyManager(private val fragment: MessageListFragment) {
 
             if (value == 0) {
                 smartReplyContainer.visibility = View.GONE
-                smartReplySuggestionsContainer.removeAllViews()
+                smartReplyContainer.removeAllViews()
             }
         }
         animator.interpolator = ANIMATION_INTERPOLATOR
@@ -116,7 +108,7 @@ class SmartReplyManager(private val fragment: MessageListFragment) {
     }
 
     private fun showContainer(loadViewsIntoContainer: () -> Unit) {
-        smartReplySuggestionsContainer.removeAllViews()
+        smartReplyContainer.removeAllViews()
 
         if (smartReplyContainer.visibility == View.VISIBLE) {
             // animate it out, to remove the view, then back in, since we will be filling it with new views
@@ -127,7 +119,7 @@ class SmartReplyManager(private val fragment: MessageListFragment) {
                     .start()
 
             Handler().postDelayed({
-                smartReplySuggestionsContainer.removeAllViews()
+                smartReplyContainer.removeAllViews()
                 loadViewsIntoContainer()
 
                 smartReplyContainer.animate()
@@ -164,24 +156,9 @@ class SmartReplyManager(private val fragment: MessageListFragment) {
                 .start()
     }
 
-    private fun closeSmartReply() {
-        hideContainer()
-
-        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-        if (prefs.getBoolean(CANCELLED_SMART_REPLY_PREF, true)) {
-            prefs.edit().putBoolean(CANCELLED_SMART_REPLY_PREF, false).commit()
-            AlertDialog.Builder(activity!!)
-                    .setMessage(R.string.use_smart_replies_dialog)
-                    .setPositiveButton(android.R.string.ok) { _, _ -> }
-                    .setNegativeButton(R.string.use_smart_reply_settings) { _, _ -> SettingsActivity.startFeatureSettings(activity!!) }
-                    .show()
-        }
-    }
-
     companion object {
         private val ANIMATION_INTERPOLATOR = DecelerateInterpolator()
         private const val ANIMATION_DURATION = 200L
         private const val ANIMATION_START_DELAY = 0L
-        private const val CANCELLED_SMART_REPLY_PREF = "cancelled_smart_reply"
     }
 }
