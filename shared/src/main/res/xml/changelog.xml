@@ -17,7 +17,7 @@
 <changelog>
 
     <version
-        name="1.5.0.1"
+        name="6.0.0"
         description="January 10th, 2020">
         <text>Start of changes for sstream17 fork</text>
         <text>Updated the look and behavior of smart reply suggestions</text>
