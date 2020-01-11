@@ -10,3 +10,4 @@ api_keys.properties
 keystore.properties
 *.jks
 *.keystore
+.vs/

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (C) 2017 Luke Klinker
+  ~ Copyright (C) 2020 Luke Klinker
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -91,7 +91,8 @@
                 android:id="@+id/drawer_feature_settings"
                 android:icon="@drawable/ic_feature_settings"
                 android:orderInCategory="3"
-                android:title="@string/menu_feature_settings" />
+                android:title="@string/menu_feature_settings"
+                android:visible="false"/>
 
             <item
                 android:id="@+id/drawer_settings"
