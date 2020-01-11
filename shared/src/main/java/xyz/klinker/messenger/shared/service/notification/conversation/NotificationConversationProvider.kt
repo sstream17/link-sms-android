@@ -122,7 +122,7 @@ class NotificationConversationProvider(private val service: Context, private val
             .setPriority(if (Settings.headsUp) Notification.PRIORITY_MAX else Notification.PRIORITY_DEFAULT)
             .setCategory(Notification.CATEGORY_MESSAGE)
             .setGroupSummary(false)
-            .setGroup(NotificationConstants.GROUP_KEY_MESSAGES)
+            .setGroup("${NotificationConstants.GROUP_KEY_MESSAGES}-${conversation.id}")
             .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
             .addPerson(conversation)
 
