@@ -73,7 +73,7 @@ class FeatureSettingsFragment : MaterialPreferenceFragment() {
         preference.setOnPreferenceChangeListener { _, o ->
             val useSmartReplyTimeout = o as Boolean
             ApiUtils.updateSmartReplyTimeout(Account.accountId, useSmartReplyTimeout)
-            false
+            true
         }
     }
 
