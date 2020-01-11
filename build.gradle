@@ -25,8 +25,8 @@ apiKeys.load(new FileInputStream(propsFile))
 buildscript {
 
     ext.buildInfo = [
-            'id'                : 'com.stream.messenger',
-            'name'              : '6.0.0',
+            'id'                : 'xyz.klinker.messenger',
+            'name'              : '6.1.0',
             'number'            : System.getenv("BUILD_NUMBER") as Integer ?: 135,
     ]
 

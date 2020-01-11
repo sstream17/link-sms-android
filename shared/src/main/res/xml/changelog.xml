@@ -17,6 +17,12 @@
 <changelog>
 
     <version
+        name="6.1.0"
+        description="January 10th, 2020">
+        <text>Update settings organization to start accepting open source contributions</text>
+    </version>
+
+    <version
         name="6.0.0"
         description="January 10th, 2020">
         <text>Start of changes for sstream17 fork</text>
