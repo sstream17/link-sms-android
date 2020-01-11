@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Luke Klinker
+ * Copyright (C) 2020 Luke Klinker
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ import android.widget.ArrayAdapter
 /**
  * Fragment for modifying app settings_global.
  */
+@Suppress("DEPRECATION")
 class GlobalSettingsFragment : MaterialPreferenceFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +51,8 @@ class GlobalSettingsFragment : MaterialPreferenceFragment() {
 
         initThemeRedirect()
         initMmsConfigurationRedirect()
+        initAdvancedFeaturesRedirect()
+        initExperimentsRedirect()
 
         initPhoneNumber()
         initKeyboardLayout()
@@ -81,6 +84,22 @@ class GlobalSettingsFragment : MaterialPreferenceFragment() {
         findPreference(getString(R.string.pref_mms_configuration))
                 .setOnPreferenceClickListener {
                     SettingsActivity.startMmsSettings(activity)
+                    false
+                }
+    }
+
+    private fun initAdvancedFeaturesRedirect() {
+        findPreference(getString(R.string.pref_feature_settings))
+                .setOnPreferenceClickListener {
+                    SettingsActivity.startFeatureSettings(activity)
+                    false
+                }
+    }
+
+    private fun initExperimentsRedirect() {
+        findPreference(getString(R.string.pref_experiment_settings))
+                .setOnPreferenceClickListener {
+                    SettingsActivity.startExperimentSettings(activity)
                     false
                 }
     }
