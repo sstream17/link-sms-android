@@ -175,6 +175,5 @@
     <!-- Open Source Experiments -->
     <string name="pref_experiment_settings" translatable="false">experiment_settings</string>
     <string name="pref_open_source_link" translatable="false">open_source_link</string>
-    <string name="pref_smart_reply_timeout" translatable="false">smart_reply_timeout</string>
 
 </resources>

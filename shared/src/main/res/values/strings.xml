@@ -607,8 +607,6 @@
     <string name="experiments_info_disclaimer_2">As such, they come with no guarantee that they will work the way you expect, will continue to be maintained, or even remain available. <b>These features come with no support.</b></string>
     <string name="experiments_info_disclaimer_3">That said, they would not have been merged into the app if they did not work, solve a specific problem, or add to the app\'s functionality.</string>
     <string name="experiments_preferences_section_title">Experimental Settings</string>
-    <string name="smart_reply_timeout">Send Smart Replies After Delay</string>
-    <string name="smart_reply_timeout_summary">Smart replies will automatically send after a short delay</string>
 
     <!-- Theme Options -->
     <string name="day_night">Default (Day/Night)</string>
