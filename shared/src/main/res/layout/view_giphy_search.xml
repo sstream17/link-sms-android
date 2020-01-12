@@ -6,7 +6,7 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <xyz.klinker.giphy.GiphyView
+    <xyz.stream.giphy.GiphyView
         android:id="@+id/giphy"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

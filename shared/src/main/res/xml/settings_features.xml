@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <xyz.klinker.messenger.shared.view.MaterialPreferenceCategory
+    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_app_features_category"
         android:title="@string/app_features">
 
@@ -30,9 +30,9 @@
             android:summary="@string/internal_browser_summary"
             android:defaultValue="true" />
 
-    </xyz.klinker.messenger.shared.view.MaterialPreferenceCategory>
+    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
 
-    <xyz.klinker.messenger.shared.view.MaterialPreferenceCategory
+    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_messaging_category"
         android:title="@string/messaging_features">
 
@@ -66,9 +66,9 @@
             android:summary="@string/signature_summary"
             android:title="@string/signature" />
 
-    </xyz.klinker.messenger.shared.view.MaterialPreferenceCategory>
+    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
 
-    <xyz.klinker.messenger.shared.view.MaterialPreferenceCategory
+    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_quick_compose_category"
         android:title="@string/quick_compose">
 
@@ -77,12 +77,12 @@
             android:key="@string/pref_quick_compose"
             android:summary="@string/quick_compose_notification_summary" />
 
-        <xyz.klinker.messenger.view.preference.QuickComposeFavoriteUserPreference
+        <xyz.stream.messenger.view.preference.QuickComposeFavoriteUserPreference
             android:dependency="@string/pref_quick_compose"
             android:key="@string/pref_quick_compose_favorites"
             android:summary="@string/quick_compose_favorites_summary"
             android:title="@string/quick_compose_favorites" />
 
-    </xyz.klinker.messenger.shared.view.MaterialPreferenceCategory>
+    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
 
 </PreferenceScreen>
