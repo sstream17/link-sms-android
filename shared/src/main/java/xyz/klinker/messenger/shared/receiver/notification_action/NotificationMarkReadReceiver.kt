@@ -18,7 +18,7 @@ open class NotificationMarkReadReceiver : BroadcastReceiver() {
             return
         }
 
-        xyz.klinker.messenger.shared.receiver.notification_action.NotificationMarkReadReceiver.Companion.handle(intent, context)
+        handle(intent, context)
     }
 
     companion object {
@@ -27,7 +27,7 @@ open class NotificationMarkReadReceiver : BroadcastReceiver() {
 
         fun handle(intent: Intent?, context: Context) {
             Thread {
-                val conversationId = intent?.getLongExtra(xyz.klinker.messenger.shared.receiver.notification_action.NotificationMarkReadReceiver.Companion.EXTRA_CONVERSATION_ID, -1) ?: return@Thread
+                val conversationId = intent?.getLongExtra(EXTRA_CONVERSATION_ID, -1) ?: return@Thread
                 DataSource.readConversation(context, conversationId)
                 val conversation = DataSource.getConversation(context, conversationId)
 
