@@ -75,6 +75,12 @@
             android:defaultValue="true" />
 
         <SwitchPreference
+            android:key="@string/pref_bundle_notifications"
+            android:title="@string/bundle_notifications"
+            android:summary="@string/bundle_notifications_summary"
+            android:defaultValue="false" />
+
+        <SwitchPreference
             android:key="@string/pref_dismiss_notifications_on_reply_android_p"
             android:title="@string/dismiss_notifications_on_reply"
             android:summary="@string/dismiss_notifications_on_reply_summary"

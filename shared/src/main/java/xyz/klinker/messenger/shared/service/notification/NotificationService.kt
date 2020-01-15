@@ -74,6 +74,10 @@ class Notifier(private val context: Context) {
 
             notifyLatestConversation(conversation)
 
+            if (Settings.bundleNotifications) {
+                notifySummary(conversations)
+            }
+
             applyRepeat()
             wakeScreen()
 

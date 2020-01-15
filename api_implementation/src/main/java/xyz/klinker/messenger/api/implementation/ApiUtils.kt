@@ -26,9 +26,7 @@ import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.concurrent.atomic.AtomicBoolean
 
-import retrofit2.Call
 import retrofit2.Response
 import xyz.klinker.messenger.api.Api
 import xyz.klinker.messenger.api.entity.*
@@ -1094,6 +1092,15 @@ object ApiUtils {
     fun updateShowHistoryInNotification(accountId: String?, showHistory: Boolean) {
         if (accountId != null) {
             updateSetting(accountId, "history_in_notifications", "boolean", showHistory)
+        }
+    }
+
+    /**
+     * Update the notification bundle option
+     */
+    fun updateBundleNotifications(accountId: String?, bundleNotifications: Boolean) {
+        if (accountId != null) {
+            updateSetting(accountId, "bundle_notifications", "boolean", bundleNotifications)
         }
     }
 
