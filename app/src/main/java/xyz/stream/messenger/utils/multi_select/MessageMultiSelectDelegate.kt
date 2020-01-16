@@ -19,12 +19,12 @@ import xyz.stream.messenger.fragment.bottom_sheet.MessageShareFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.data.*
 import xyz.stream.messenger.shared.data.model.Message
+import xyz.stream.messenger.shared.util.ActivityUtils
 import xyz.stream.messenger.shared.util.ColorUtils
 import java.util.*
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.speech.tts.TextToSpeech
-import xyz.klinker.messenger.shared.util.ActivityUtils
 
 
 @Suppress("DEPRECATION")
