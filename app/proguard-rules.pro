@@ -7,7 +7,7 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
--keep public class xyz.klinker.messenger.** { *; }
+-keep public class xyz.stream.messenger.** { *; }
 -keep public class com.google.firebase.** { *; }
 
 ## Android Support Rules ##

@@ -575,7 +575,7 @@ Gebruik het standaard kanaal om meldingen weer te geven voor conversaties die je
     <string name="off">Uit</string>
     <string name="on">Aan</string>
     <string name="share_promo">Hey, I am loving Pulse for texting! Give it a try:
-https://play.google.com/store/apps/details?id=xyz.klinker.messenger</string>
+https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="verifying_password">Wachtwoord verifiëren...</string>
     <!-- Rate it -->
     <string name="rate_it">Rate it!</string>

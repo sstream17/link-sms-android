@@ -17,6 +17,12 @@
 <changelog>
 
     <version
+        name="1.0.0"
+        description="January 13th, 2020">
+        <text>Restarted version number for new package name</text>
+    </version>
+
+    <version
         name="6.1.0"
         description="January 10th, 2020">
         <text>Update settings organization to start accepting open source contributions</text>
