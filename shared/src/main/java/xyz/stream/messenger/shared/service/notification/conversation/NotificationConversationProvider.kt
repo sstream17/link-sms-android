@@ -172,7 +172,7 @@ class NotificationConversationProvider(private val service: Context, private val
     }
 
     private fun buildMessagingStyle(conversation: NotificationConversation): NotificationCompat.MessagingStyle? {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N || !Settings.historyInNotifications) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             return null
         }
 
@@ -188,6 +188,9 @@ class NotificationConversationProvider(private val service: Context, private val
 
         for (i in messages.indices.reversed()) {
             val message = messages[i]
+
+            println(message.from)
+            println(message.read)
 
             val person: Person? = if (message.type == Message.TYPE_RECEIVED) {
                 // we split it so that we only get the first name,
@@ -251,7 +254,12 @@ class NotificationConversationProvider(private val service: Context, private val
                 m.setData(message.mimeType, Uri.parse(message.data))
             }
 
-            messagingStyle.addMessage(m)
+            if (Settings.historyInNotifications) {
+                messagingStyle.addMessage(m)
+            }
+            else if (!message.read) {
+                messagingStyle.addMessage(m)
+            }
         }
 
         return messagingStyle
