@@ -614,7 +614,7 @@ Utilisez le canal par défaut pour personnaliser les conversations auxquelles vo
     <string name="channels_global_warning_3">Avec Android Oreo, certaines des options ci-dessus vous redirigeront vers les paramètres des <i>canaux de notifications</i> d\'Android. Pour en savoir plus à propos de ces canaux, de la façon dont ils fonctionnent, et pourquoi ils doivent être utilisés, dirigez vous vers la page d\'aide de Pulse.</string>
     <string name="off">Inactif</string>
     <string name="on">Actif</string>
-    <string name="share_promo">Hey, j\'utilise Pulse pour envoyer des messages ! Essaye le : https://play.google.com/store/apps/details?id=xyz.klinker.messenger</string>
+    <string name="share_promo">Hey, j\'utilise Pulse pour envoyer des messages ! Essaye le : https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="verifying_password">Vérification du mot de passe...</string>
     <!-- Rate it -->
     <string name="rate_it">Noter l\'application !</string>

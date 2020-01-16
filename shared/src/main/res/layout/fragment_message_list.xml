@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<xyz.klinker.messenger.view.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<xyz.stream.messenger.view.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <xyz.klinker.messenger.shared.view.WhitableToolbar
+                <xyz.stream.messenger.shared.view.WhitableToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -199,7 +199,7 @@
 
                     </FrameLayout>
 
-                    <xyz.klinker.messenger.view.ImageKeyboardEditText
+                    <xyz.stream.messenger.view.ImageKeyboardEditText
                         android:id="@+id/message_entry"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -243,4 +243,4 @@
 
     </LinearLayout>
 
-</xyz.klinker.messenger.view.ElasticDragDismissFrameLayout>
+</xyz.stream.messenger.view.ElasticDragDismissFrameLayout>

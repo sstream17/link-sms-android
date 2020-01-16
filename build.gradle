@@ -25,9 +25,9 @@ apiKeys.load(new FileInputStream(propsFile))
 buildscript {
 
     ext.buildInfo = [
-            'id'                : 'xyz.klinker.messenger',
-            'name'              : '6.1.0',
-            'number'            : System.getenv("BUILD_NUMBER") as Integer ?: 135,
+            'id'                : 'xyz.stream.messenger',
+            'name'              : '1.0.0',
+            'number'            : System.getenv("BUILD_NUMBER") as Integer ?: Calendar.getInstance().get(Calendar.DAY_OF_YEAR),
     ]
 
     ext.versions = [
