@@ -65,7 +65,7 @@ import xyz.stream.messenger.shared.util.billing.PurchasedItemCallback
 class MyAccountFragment : MaterialPreferenceFragmentCompat() {
 
     private val fragmentActivity: FragmentActivity? by lazy { activity }
-    private var billing: xyz.stream.messenger.shared.util.billing.BillingHelper? = null
+    private var billing: BillingHelper? = null
 
     /**
      * Gets a device id for this device. This will be a 32-bit random hex value.
@@ -79,7 +79,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
     override fun onCreatePreferences(bundle: Bundle?, s: String?) {
         addPreferencesFromResource(R.xml.my_account)
 
-        billing = xyz.stream.messenger.shared.util.billing.BillingHelper(fragmentActivity)
+        billing = BillingHelper(fragmentActivity)
 
         if (initSetupPreference()) {
             initLifetimeSubscriberPreference()
@@ -102,8 +102,8 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
         if (openTrialUpgradePreference) {
             upgradeTrial()
 
-            xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.accountExpiredFreeTrial(fragmentActivity!!)
-            xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.accountFreeTrialUpgradeDialogShown(fragmentActivity!!)
+            AnalyticsHelper.accountExpiredFreeTrial(fragmentActivity!!)
+            AnalyticsHelper.accountFreeTrialUpgradeDialogShown(fragmentActivity!!)
             
             openTrialUpgradePreference = false
         }
@@ -190,7 +190,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
             if (!runUi) {
                 if (hasSubs && Account.exists() && Account.subscriptionType == Account.SubscriptionType.FREE_TRIAL) {
                     Account.updateSubscription(fragmentActivity!!, Account.SubscriptionType.SUBSCRIBER, 1L, true)
-                    xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.accountRestoreSubToTrial(fragmentActivity!!)
+                    AnalyticsHelper.accountRestoreSubToTrial(fragmentActivity!!)
                 }
 
                 return@Thread
@@ -264,7 +264,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
 
             preference.setOnPreferenceClickListener {
                 upgradeTrial()
-                xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.accountFreeTrialUpgradeDialogShown(fragmentActivity!!)
+                AnalyticsHelper.accountFreeTrialUpgradeDialogShown(fragmentActivity!!)
                 false
             }
         }
@@ -360,7 +360,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
 
                         Thread { ApiUtils.deleteAccount(accountId) }.start()
 
-                        startActivity(Intent(fragmentActivity!!, xyz.stream.messenger.api.implementation.RecreateAccountActivity::class.java))
+                        startActivity(Intent(fragmentActivity!!, RecreateAccountActivity::class.java))
                     }.show()
             true
         }
@@ -376,9 +376,9 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
         }
 
         preference.setOnPreferenceClickListener {
-            val intent = Intent(activity, ContactResyncService::class.java)
-            activity?.startService(intent)
-            activity?.onBackPressed()
+            val intent = Intent(fragmentActivity, ContactResyncService::class.java)
+            fragmentActivity?.startService(intent)
+            fragmentActivity?.onBackPressed()
             true
         }
     }
@@ -432,7 +432,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
 
                 val login = Intent(fragmentActivity!!, InitialLoadActivity::class.java)
                 login.putExtra(InitialLoadActivity.UPLOAD_AFTER_SYNC, true)
-                login.putExtra(xyz.stream.messenger.api.implementation.LoginActivity.ARG_SKIP_LOGIN, true)
+                login.putExtra(LoginActivity.ARG_SKIP_LOGIN, true)
                 startActivity(login)
                 fragmentActivity?.finish()
             }
@@ -445,12 +445,12 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
                     .setMessage(R.string.redirect_to_play_store)
                     .setPositiveButton(R.string.play_store) { _: DialogInterface, _: Int ->
                         val intent = Intent(Intent.ACTION_VIEW)
-                        intent.data = Uri.parse("https://play.google.com/store/apps/details?id=xyz.stream.messenger")
+                        intent.data = Uri.parse("https://play.google.com/store/apps/details?id=xyz.klinker.messenger")
                         fragmentActivity?.startActivity(intent)
                     }.show()
         } else {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("https://play.google.com/store/apps/details?id=xyz.stream.messenger")
+            intent.data = Uri.parse("https://play.google.com/store/apps/details?id=xyz.klinker.messenger")
             fragmentActivity?.startActivity(intent)
 
             Toast.makeText(fragmentActivity, R.string.redirect_to_play_store, Toast.LENGTH_LONG).show()
@@ -506,7 +506,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
             }
         } else if (!billing!!.handleOnActivityResult(requestCode, responseCode, data)) {
             if (requestCode == SETUP_REQUEST && responseCode != Activity.RESULT_CANCELED) {
-                if (responseCode == xyz.stream.messenger.api.implementation.LoginActivity.RESULT_START_DEVICE_SYNC) {
+                if (responseCode == LoginActivity.RESULT_START_DEVICE_SYNC) {
                     ApiUploadService.start(fragmentActivity!!)
                     returnToConversationsAfterLogin()
 
@@ -514,7 +514,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
                     nav.menu.findItem(R.id.drawer_account).setTitle(R.string.menu_account)
 
                     fragmentActivity!!.startService(Intent(fragmentActivity!!, SimpleLifetimeSubscriptionCheckService::class.java))
-                } else if (responseCode == xyz.stream.messenger.api.implementation.LoginActivity.RESULT_START_NETWORK_SYNC) {
+                } else if (responseCode == LoginActivity.RESULT_START_NETWORK_SYNC) {
                     restoreAccount()
                 }
             } else if (requestCode == ONBOARDING_REQUEST) {
@@ -539,13 +539,13 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
                     // record the purchase to the API
                     Thread { ApiUtils.recordNewPurchase(product.productId) }.start()
 
-                    xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.accountCompetedPurchase(fragmentActivity!!)
-                    xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.userSubscribed(fragmentActivity!!, productId)
+                    AnalyticsHelper.accountCompetedPurchase(fragmentActivity!!)
+                    AnalyticsHelper.userSubscribed(fragmentActivity!!, productId)
                     Account.setHasPurchased(fragmentActivity!!, true)
                 }
 
                 if (Account.accountId == null) {
-                    xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.userSubscribed(fragmentActivity!!, productId)
+                    AnalyticsHelper.userSubscribed(fragmentActivity!!, productId)
 
                     if (product.productId.contains("lifetime")) {
                         Account.updateSubscription(fragmentActivity!!, Account.SubscriptionType.LIFETIME, Date(1))
@@ -560,7 +560,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
                     val newExperation = ProductPurchased.getExpiration(product.productId)
                     val oldSubscription = Account.subscriptionType
 
-                    xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.userUpgraded(fragmentActivity!!, productId)
+                    AnalyticsHelper.userUpgraded(fragmentActivity!!, productId)
                     if (product.productId.contains("lifetime")) {
                         Account.updateSubscription(fragmentActivity!!, Account.SubscriptionType.LIFETIME, Date(newExperation))
                     } else {
@@ -582,7 +582,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
     }
 
     private fun purchaseCancelled(message: String? = null) {
-        xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.purchaseError(fragmentActivity!!)
+        AnalyticsHelper.purchaseError(fragmentActivity!!)
         if (message != null) {
             fragmentActivity?.runOnUiThread { Toast.makeText(activity, message, Toast.LENGTH_SHORT).show() }
         }
@@ -593,7 +593,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
     }
 
     private fun promptCancelTrial() {
-        AlertDialog.Builder(activity!!)
+        AlertDialog.Builder(fragmentActivity!!)
                 .setCancelable(false)
                 .setMessage(R.string.purchase_cancelled_trial_finished)
                 .setPositiveButton(R.string.ok) { _, _ -> deleteAccount() }
@@ -630,10 +630,10 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
     }
 
     private fun startLoginActivity(signInOnly: Boolean = false) {
-        val intent = Intent(context, xyz.stream.messenger.api.implementation.LoginActivity::class.java)
-        intent.putExtra(xyz.stream.messenger.api.implementation.LoginActivity.ARG_FORCE_NO_CREATE_ACCOUNT, signInOnly)
-        intent.putExtra(xyz.stream.messenger.api.implementation.LoginActivity.ARG_BACKGROUND_COLOR, Settings.mainColorSet.color)
-        intent.putExtra(xyz.stream.messenger.api.implementation.LoginActivity.ARG_ACCENT_COLOR, Settings.mainColorSet.colorAccent)
+        val intent = Intent(fragmentActivity, LoginActivity::class.java)
+        intent.putExtra(LoginActivity.ARG_FORCE_NO_CREATE_ACCOUNT, signInOnly)
+        intent.putExtra(LoginActivity.ARG_BACKGROUND_COLOR, Settings.mainColorSet.color)
+        intent.putExtra(LoginActivity.ARG_ACCENT_COLOR, Settings.mainColorSet.colorAccent)
         startActivityForResult(intent, SETUP_REQUEST)
     }
 
@@ -643,16 +643,16 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
 
 
     companion object {
-        val ONBOARDING_REQUEST = 54320
-        val SETUP_REQUEST = 54321
-        val PURCHASE_REQUEST = 54322
-        val TRIAL_REQUEST = 5432
+        const val ONBOARDING_REQUEST = 54320
+        const val SETUP_REQUEST = 54321
+        const val PURCHASE_REQUEST = 54322
+        const val TRIAL_REQUEST = 5432
 
-        val RESULT_SIGN_IN = 54323
-        val RESULT_START_TRIAL = 54321
+        const val RESULT_SIGN_IN = 54323
+        const val RESULT_START_TRIAL = 54321
 
-        val RESPONSE_START_TRIAL = 101
-        val RESPONSE_SKIP_TRIAL_FOR_NOW = 102
+        const val RESPONSE_START_TRIAL = 101
+        const val RESPONSE_SKIP_TRIAL_FOR_NOW = 102
 
         var openTrialUpgradePreference = false
     }
