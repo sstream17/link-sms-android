@@ -189,9 +189,6 @@ class NotificationConversationProvider(private val service: Context, private val
         for (i in messages.indices.reversed()) {
             val message = messages[i]
 
-            println(message.from)
-            println(message.read)
-
             val person: Person? = if (message.type == Message.TYPE_RECEIVED) {
                 // we split it so that we only get the first name,
                 // if there is more than one
@@ -254,10 +251,7 @@ class NotificationConversationProvider(private val service: Context, private val
                 m.setData(message.mimeType, Uri.parse(message.data))
             }
 
-            if (Settings.historyInNotifications) {
-                messagingStyle.addMessage(m)
-            }
-            else if (!message.read) {
+            if (Settings.historyInNotifications || !message.read) {
                 messagingStyle.addMessage(m)
             }
         }
