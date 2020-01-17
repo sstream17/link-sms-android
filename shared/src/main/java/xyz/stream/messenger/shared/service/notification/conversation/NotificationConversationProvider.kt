@@ -251,7 +251,7 @@ class NotificationConversationProvider(private val service: Context, private val
                 m.setData(message.mimeType, Uri.parse(message.data))
             }
 
-            if (Settings.historyInNotifications || !message.read) {
+            if (Settings.historyInNotifications || !message.seen) {
                 messagingStyle.addMessage(m)
             }
         }
