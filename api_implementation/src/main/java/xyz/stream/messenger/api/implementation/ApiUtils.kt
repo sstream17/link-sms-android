@@ -26,9 +26,7 @@ import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.concurrent.atomic.AtomicBoolean
 
-import retrofit2.Call
 import retrofit2.Response
 import xyz.stream.messenger.api.Api
 import xyz.stream.messenger.api.entity.*
@@ -1098,6 +1096,15 @@ object ApiUtils {
     }
 
     /**
+     * Update the notification bundle option
+     */
+    fun updateBundleNotifications(accountId: String?, bundleNotifications: Boolean) {
+        if (accountId != null) {
+            updateSetting(accountId, "bundle_notifications", "boolean", bundleNotifications)
+        }
+    }
+
+    /**
      * Update the notification dismissal option
      */
     fun updateDismissNotificationsAfterReply(accountId: String?, dismiss: Boolean) {
@@ -1507,7 +1514,7 @@ object ApiUtils {
     }
 
     /**
-     * Dismiss a notification across all devices.
+     * Update a user preference.
      */
     private fun updateSetting(accountId: String?, pref: String?, type: String?, value: Any?) {
         val message = "update $pref setting"

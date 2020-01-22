@@ -98,20 +98,6 @@ class ReplyService : IntentService("Reply Service") {
             NotificationManagerCompat.from(this).cancel(conversationId.toInt())
         }
 
-//        if (Settings.dismissNotificationAfterReply) {
-//            val conversationIdInt = conversationId.toInt()
-//            val manager = NotificationManagerCompat.from(this)
-//
-//            Thread {
-//                try {
-//                    Thread.sleep(1000)
-//                } catch (e: Exception) {
-//                }
-//
-//                manager.cancel(conversationIdInt)
-//            }.start()
-//        }
-
         ApiUtils.dismissNotification(Account.accountId,
                 Account.deviceId,
                 conversationId)

@@ -63,6 +63,7 @@ class GlobalSettingsFragment : MaterialPreferenceFragment() {
         initSoundEffects()
         initStripUnicode()
         initNotificationHistory()
+        initNotificationBundle()
         initDismissNotificationsOnReply()
         initEmojiStyle()
     }
@@ -230,6 +231,16 @@ class GlobalSettingsFragment : MaterialPreferenceFragment() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             (findPreference(getString(R.string.pref_notification_category)) as PreferenceCategory)
                     .removePreference(pref)
+        }
+    }
+
+    private fun initNotificationBundle() {
+        val pref = findPreference(getString(R.string.pref_bundle_notifications))
+        pref.setOnPreferenceChangeListener { _, o ->
+            val bundle = o as Boolean
+            ApiUtils.updateBundleNotifications(Account.accountId,
+                    bundle)
+            true
         }
     }
 

@@ -18,10 +18,10 @@ import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.Conversation
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import xyz.stream.messenger.shared.util.ActivityUtils
 import java.util.*
 import android.graphics.PorterDuff
 import android.util.Log
-import xyz.klinker.messenger.shared.util.ActivityUtils
 
 @Suppress("DEPRECATION")
 class ConversationsMultiSelectDelegate(private val fragment: ConversationListFragment) : MultiSelector() {

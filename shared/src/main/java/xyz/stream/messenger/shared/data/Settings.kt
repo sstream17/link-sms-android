@@ -63,6 +63,7 @@ object Settings {
     var rightToLeftSwipe: SwipeOption = SwipeOption.ARCHIVE
     var stripUnicode: Boolean = false
     var historyInNotifications: Boolean = false
+    var bundleNotifications: Boolean = false
     var dismissNotificationAfterReply: Boolean = false
     var smartReplies: Boolean = true
     var smartReplyTimeout: Boolean = false
@@ -159,6 +160,7 @@ object Settings {
         this.legacySwipeDelete = sharedPrefs.getBoolean(context.getString(R.string.pref_swipe_delete), false)
         this.stripUnicode = sharedPrefs.getBoolean(context.getString(R.string.pref_strip_unicode), false)
         this.historyInNotifications = sharedPrefs.getBoolean(context.getString(R.string.pref_history_in_notifications), true)
+        this.bundleNotifications = sharedPrefs.getBoolean(context.getString(R.string.pref_bundle_notifications), false)
         this.dismissNotificationAfterReply = sharedPrefs.getBoolean(context.getString(R.string.pref_dismiss_notifications_on_reply_android_p), false)
         this.smartReplies = sharedPrefs.getBoolean(context.getString(R.string.pref_smart_reply), true)
         this.smartReplyTimeout = sharedPrefs.getBoolean(context.getString(R.string.pref_smart_reply_timeout), false)

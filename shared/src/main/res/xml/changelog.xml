@@ -17,6 +17,14 @@
 <changelog>
 
     <version
+        name="1.1.0"
+        description="January 17th, 2020">
+        <text>Updates to notifications:</text>
+        <text>Added an option to bundle notifications</text>
+        <text>Fixed bug where new notifications would show the first unseen message text</text>
+    </version>
+
+    <version
         name="1.0.0"
         description="January 13th, 2020">
         <text>Restarted version number for new package name</text>

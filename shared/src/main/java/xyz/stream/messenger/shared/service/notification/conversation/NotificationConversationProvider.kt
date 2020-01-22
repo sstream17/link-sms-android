@@ -122,7 +122,7 @@ class NotificationConversationProvider(private val service: Context, private val
             .setPriority(if (Settings.headsUp) Notification.PRIORITY_MAX else Notification.PRIORITY_DEFAULT)
             .setCategory(Notification.CATEGORY_MESSAGE)
             .setGroupSummary(false)
-            .setGroup(NotificationConstants.GROUP_KEY_MESSAGES)
+            .setGroup(if (Settings.bundleNotifications) NotificationConstants.GROUP_KEY_MESSAGES else "${NotificationConstants.GROUP_KEY_MESSAGES}-${conversation.id}")
             .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
             .addPerson(conversation)
 
@@ -172,7 +172,7 @@ class NotificationConversationProvider(private val service: Context, private val
     }
 
     private fun buildMessagingStyle(conversation: NotificationConversation): NotificationCompat.MessagingStyle? {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N || !Settings.historyInNotifications) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             return null
         }
 
@@ -251,7 +251,9 @@ class NotificationConversationProvider(private val service: Context, private val
                 m.setData(message.mimeType, Uri.parse(message.data))
             }
 
-            messagingStyle.addMessage(m)
+            if (Settings.historyInNotifications || !message.seen) {
+                messagingStyle.addMessage(m)
+            }
         }
 
         return messagingStyle
