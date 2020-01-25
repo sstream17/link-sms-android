@@ -328,7 +328,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                     imageData = null
                 }
                 .setPositiveButton(android.R.string.ok) {_, _ ->
-                    
+
                 }
 
         builder.show()

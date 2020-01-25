@@ -112,6 +112,7 @@ class ComposeSendHelper(private val activity: ComposeActivity) {
 
         if (shouldScheduledMessage) {
             open.putExtra(MessengerActivityExtras.EXTRA_SHOULD_SCHEDULE_MESSAGE, true)
+            open.putExtra(MessengerActivityExtras.EXTRA_SHOULD_OPEN_KEYBOARD, false)
         }
 
         activity.startActivity(open)
