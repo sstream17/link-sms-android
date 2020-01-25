@@ -26,10 +26,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.format.DateFormat
 import android.util.Log
-import android.view.*
-import androidx.appcompat.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -38,22 +40,19 @@ import com.bumptech.glide.request.RequestOptions
 import com.sgottard.sofa.ContentFragment
 import xyz.klinker.giphy.Giphy
 import xyz.klinker.messenger.BuildConfig
-
 import xyz.klinker.messenger.R
-import xyz.klinker.messenger.activity.MessengerActivity
 import xyz.klinker.messenger.activity.MessengerTvActivity
 import xyz.klinker.messenger.activity.compose.ShareData
-import xyz.klinker.messenger.activity.main.MainSearchHelper
 import xyz.klinker.messenger.api.implementation.Account
 import xyz.klinker.messenger.fragment.message.attach.AttachmentInitializer
 import xyz.klinker.messenger.fragment.message.attach.AttachmentListener
 import xyz.klinker.messenger.fragment.message.attach.AttachmentManager
-import xyz.klinker.messenger.fragment.message.send.MessageCounterCalculator
 import xyz.klinker.messenger.fragment.message.load.MessageListLoader
-import xyz.klinker.messenger.fragment.message.send.PermissionHelper
-import xyz.klinker.messenger.fragment.message.send.SendMessageManager
 import xyz.klinker.messenger.fragment.message.load.ViewInitializerDeferred
 import xyz.klinker.messenger.fragment.message.load.ViewInitializerNonDeferred
+import xyz.klinker.messenger.fragment.message.send.MessageCounterCalculator
+import xyz.klinker.messenger.fragment.message.send.PermissionHelper
+import xyz.klinker.messenger.fragment.message.send.SendMessageManager
 import xyz.klinker.messenger.shared.data.DataSource
 import xyz.klinker.messenger.shared.data.MimeType
 import xyz.klinker.messenger.shared.data.MmsSettings
@@ -304,13 +303,33 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     private fun displayScheduleDialog(message: ScheduledMessage){
         val layout = LayoutInflater.from(fragmentActivity).inflate(R.layout.dialog_scheduled_message, null, false)
+        val date = layout.findViewById<EditText>(R.id.schedule_date)
+        val time = layout.findViewById<EditText>(R.id.schedule_time)
         val repeat = layout.findViewById<Spinner>(R.id.repeat_interval)
+
+        val currentTime = Date()
+        date.setText(DateFormat.format("MMM dd, yyyy", currentTime))
+        time.setText(DateFormat.format("HH:mm", currentTime))
+
+        date.setOnClickListener {
+            displayDateDialog(message)
+        }
+
+        time.setOnClickListener {
+            displayTimeDialog(message)
+        }
 
         repeat.adapter = ArrayAdapter.createFromResource(fragmentActivity!!, R.array.scheduled_message_repeat, android.R.layout.simple_spinner_dropdown_item)
 
         val builder = AlertDialog.Builder(fragmentActivity!!)
                 .setView(layout)
-                .setCancelable(true)
+                .setCancelable(false)
+                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                    imageData = null
+                }
+                .setPositiveButton(android.R.string.ok) {_, _ ->
+                    
+                }
 
         builder.show()
     }

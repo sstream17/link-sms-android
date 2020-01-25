@@ -17,18 +17,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            android:focusable="false" />
+            android:text="@string/scheduled_date" />
 
         <EditText
+            android:id="@+id/schedule_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="datetime" />
+            android:focusable="false"
+            android:inputType="date" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scheduled_time" />
+
+        <EditText
+            android:id="@+id/schedule_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="time" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scheduled_repeat" />
 
         <Spinner
             android:id="@+id/repeat_interval"
