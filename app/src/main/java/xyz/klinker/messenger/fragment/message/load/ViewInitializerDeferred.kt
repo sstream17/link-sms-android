@@ -2,11 +2,10 @@ package xyz.klinker.messenger.fragment.message.load
 
 import android.content.Context
 import android.os.Build
-import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentActivity
 import xyz.klinker.messenger.R
 import xyz.klinker.messenger.activity.BubbleActivity
@@ -75,7 +74,8 @@ class ViewInitializerDeferred(private val fragment: MessageListFragment) {
         }
 
         if (fragment.argManager.shouldScheduleMessage) {
-            Toast.makeText(activity, "Scheduling", Toast.LENGTH_LONG).show()
+            fragment.startSchedulingMessage()
+            fragment.activity?.intent?.putExtra(MessengerActivityExtras.EXTRA_SHOULD_SCHEDULE_MESSAGE, false)
         }
     }
 }
