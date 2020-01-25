@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import xyz.klinker.messenger.R
 import xyz.klinker.messenger.activity.BubbleActivity
@@ -71,6 +72,10 @@ class ViewInitializerDeferred(private val fragment: MessageListFragment) {
             (activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?)
                     ?.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
             fragment.activity?.intent?.putExtra(MessengerActivityExtras.EXTRA_SHOULD_OPEN_KEYBOARD, false)
+        }
+
+        if (fragment.argManager.shouldScheduleMessage) {
+            Toast.makeText(activity, "Scheduling", Toast.LENGTH_LONG).show()
         }
     }
 }

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Parcelable
 import xyz.klinker.messenger.R
 import xyz.klinker.messenger.api.implementation.firebase.AnalyticsHelper
+import xyz.klinker.messenger.shared.MessengerActivityExtras
 import xyz.klinker.messenger.shared.data.MimeType
 import xyz.klinker.messenger.shared.service.MessengerChooserTargetService
 import xyz.klinker.messenger.shared.util.FileUtils
@@ -19,6 +20,8 @@ class ComposeIntentHandler(private val activity: ComposeActivity) {
 
     fun handle(intent: Intent) {
         if (intent.action == null) {
+            val shouldSchedule = intent.getBooleanExtra(MessengerActivityExtras.EXTRA_SHOULD_SCHEDULE_MESSAGE, false)
+            activity.sender.shouldScheduledMessage = shouldSchedule
             return
         }
 

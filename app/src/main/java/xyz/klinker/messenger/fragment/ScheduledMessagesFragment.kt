@@ -47,11 +47,13 @@ import xyz.klinker.giphy.Giphy
 import xyz.klinker.messenger.BuildConfig
 import xyz.klinker.messenger.R
 import xyz.klinker.messenger.activity.MessengerActivity
+import xyz.klinker.messenger.activity.compose.ComposeActivity
 import xyz.klinker.messenger.activity.compose.ShareData
 import xyz.klinker.messenger.adapter.ScheduledMessagesAdapter
 import xyz.klinker.messenger.api.implementation.Account
 import xyz.klinker.messenger.fragment.bottom_sheet.EditScheduledMessageFragment
 import xyz.klinker.messenger.fragment.message.attach.AttachmentListener
+import xyz.klinker.messenger.shared.MessengerActivityExtras
 import xyz.klinker.messenger.shared.data.*
 import xyz.klinker.messenger.shared.data.model.ScheduledMessage
 import xyz.klinker.messenger.shared.service.jobs.ScheduledMessageJob
@@ -117,7 +119,11 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         list.layoutManager = LinearLayoutManager(fragmentActivity)
-        fab.setOnClickListener { startSchedulingMessage() }
+        fab.setOnClickListener {
+            val intent = Intent(context, ComposeActivity::class.java)
+            intent.putExtra(MessengerActivityExtras.EXTRA_SHOULD_SCHEDULE_MESSAGE, true)
+            startActivity(intent)
+        }
 
         val messengerActivity = fragmentActivity
         if (messengerActivity is MessengerActivity) {
