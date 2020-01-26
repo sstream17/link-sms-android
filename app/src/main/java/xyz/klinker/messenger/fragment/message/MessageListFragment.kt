@@ -342,9 +342,9 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         val alertDialog = builder.create()
         alertDialog.show()
         val color = if (Settings.useGlobalThemeColor) {
-            Settings.mainColorSet.color
+            Settings.mainColorSet.colorAccent
         } else {
-            argManager.color
+            argManager.colorAccent
         }
 
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(color)
