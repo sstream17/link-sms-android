@@ -101,6 +101,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     private var imageData: ShareData? = null
     private var messageInProcess: ScheduledMessage? = null
+    private var scheduledMessageDate: Date? = null
 
     // samsung messed up the date picker in some languages on Lollipop 5.0 and 5.1. Ugh.
     // fixes this issue: http://stackoverflow.com/a/34853067
@@ -303,22 +304,27 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         }
     }
 
+    private fun updateTimeInputs(newDate: Date, date: TextView, time: TextView){
+        date.text = DateFormat.format("MMM dd, yyyy", newDate)
+        val timeFormat = if (DateFormat.is24HourFormat(fragmentActivity)) "HH:mm" else "hh:mm a"
+        time.text = DateFormat.format(timeFormat, newDate)
+    }
+
     private fun displayScheduleDialog(message: ScheduledMessage){
         val layout = LayoutInflater.from(fragmentActivity).inflate(R.layout.dialog_scheduled_message, null, false)
         val date = layout.findViewById<TextView>(R.id.schedule_date)
         val time = layout.findViewById<TextView>(R.id.schedule_time)
         val repeat = layout.findViewById<Spinner>(R.id.repeat_interval)
 
-        val currentTime = Date()
-        date.text = DateFormat.format("MMM dd, yyyy", currentTime)
-        time.text = DateFormat.format("HH:mm", currentTime)
+        scheduledMessageDate = Date()
+        updateTimeInputs(scheduledMessageDate!!, date, time)
 
         date.setOnClickListener {
-            displayDateDialog(message)
+            displayDateDialog(scheduledMessageDate!!, date, time)
         }
 
         time.setOnClickListener {
-            displayTimeDialog(message)
+            displayTimeDialog(scheduledMessageDate!!, date, time)
         }
 
         repeat.adapter = ArrayAdapter.createFromResource(fragmentActivity!!, R.array.scheduled_message_repeat, android.R.layout.simple_spinner_dropdown_item)
@@ -330,6 +336,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                     imageData = null
                 }
                 .setPositiveButton(android.R.string.ok) {_, _ ->
+                    message.timestamp = scheduledMessageDate?.time ?: TimeUtils.now
                 }
 
         val alertDialog = builder.create()
@@ -344,7 +351,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
     }
 
-    private fun displayDateDialog(message: ScheduledMessage) {
+    private fun displayDateDialog(scheduledMessageDate: Date, date: TextView, time: TextView) {
         var context: Context? = contextToFixDatePickerCrash
 
         if (context == null) {
@@ -357,9 +364,8 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
         val calendar = Calendar.getInstance()
         DatePickerDialog(context, { _, year, month, day ->
-            message.timestamp = GregorianCalendar(year, month, day)
-                    .timeInMillis
-            displayTimeDialog(message)
+            scheduledMessageDate.time = GregorianCalendar(year, month, day).timeInMillis
+            updateTimeInputs(scheduledMessageDate, date, time)
         },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -367,156 +373,26 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                 .show()
     }
 
-    private fun displayTimeDialog(message: ScheduledMessage) {
+    private fun displayTimeDialog(scheduledMessageDate: Date, date: TextView, time: TextView) {
         if (fragmentActivity == null) {
             return
         }
 
         val calendar = Calendar.getInstance()
         TimePickerDialog(fragmentActivity, { _, hourOfDay, minute ->
-            message.timestamp = message.timestamp + 1000 * 60 * 60 * hourOfDay
-            message.timestamp = message.timestamp + 1000 * 60 * minute
+            scheduledMessageDate.time = scheduledMessageDate.time + 1000 * 60 * 60 * hourOfDay
+            scheduledMessageDate.time = scheduledMessageDate.time + 1000 * 60 * minute
 
-            if (message.timestamp > TimeUtils.now) {
-                displayMessageDialog(message)
-            } else {
-                Toast.makeText(fragmentActivity, R.string.scheduled_message_in_future,
-                        Toast.LENGTH_SHORT).show()
-                displayDateDialog(message)
+            if (scheduledMessageDate.time < TimeUtils.now) {
+                scheduledMessageDate.time = TimeUtils.now
             }
+
+            updateTimeInputs(scheduledMessageDate, date, time)
         },
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE),
                 DateFormat.is24HourFormat(fragmentActivity))
                 .show()
-    }
-
-    private fun displayMessageDialog(message: ScheduledMessage) {
-
-        val layout = LayoutInflater.from(fragmentActivity).inflate(R.layout.dialog_scheduled_message_content, null, false)
-        val editText = layout.findViewById<EditText>(R.id.edit_text)
-        val repeat = layout.findViewById<Spinner>(R.id.repeat_interval)
-        val image = layout.findViewById<ImageView>(R.id.image)
-
-        repeat.adapter = ArrayAdapter.createFromResource(fragmentActivity!!, R.array.scheduled_message_repeat, android.R.layout.simple_spinner_dropdown_item)
-
-        if (imageData != null) {
-            image.visibility = View.VISIBLE
-            if (imageData!!.mimeType == MimeType.IMAGE_GIF) {
-                Glide.with(fragmentActivity!!)
-                        .asGif()
-                        .load(imageData!!.data)
-                        .into(image)
-            } else {
-                Glide.with(fragmentActivity!!)
-                        .load(imageData!!.data)
-                        .apply(RequestOptions().centerCrop())
-                        .into(image)
-            }
-        }
-
-        if (message.data != null && message.data!!.isNotEmpty()) {
-            editText.setText(message.data)
-            editText.setSelection(message.data!!.length)
-        }
-
-        editText.post {
-            editText.requestFocus()
-            (fragmentActivity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)?.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-        }
-
-        val builder = AlertDialog.Builder(fragmentActivity!!)
-                .setView(layout)
-                .setCancelable(false)
-                .setPositiveButton(R.string.save) { _, _ ->
-                    if (editText.text.isNotEmpty() || image != null) {
-                        message.repeat = repeat.selectedItemPosition
-
-                        val messages = mutableListOf<ScheduledMessage>()
-
-                        if (editText.text.isNotEmpty()) {
-                            messages.add(ScheduledMessage().apply {
-                                this.id = DataSource.generateId()
-                                this.repeat = message.repeat
-                                this.timestamp = message.timestamp
-                                this.title = message.title
-                                this.to = message.to
-                                this.data = editText.text.toString()
-                                this.mimeType = MimeType.TEXT_PLAIN
-                            })
-                        }
-
-                        if (imageData != null) {
-                            messages.add(ScheduledMessage().apply {
-                                this.id = DataSource.generateId()
-                                this.repeat = message.repeat
-                                this.timestamp = message.timestamp
-                                this.title = message.title
-                                this.to = message.to
-                                this.data = imageData!!.data
-                                this.mimeType = imageData!!.mimeType
-                            })
-                        }
-
-                        saveMessages(messages)
-                        imageData = null
-
-                        (fragmentActivity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)
-                                ?.hideSoftInputFromWindow(editText.windowToken, 0)
-                    } else {
-                        displayMessageDialog(message)
-                    }
-                }.setNegativeButton(android.R.string.cancel) { _, _ ->
-                    imageData = null
-                    (fragmentActivity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)
-                            ?.hideSoftInputFromWindow(editText.windowToken, 0)
-                }
-
-        if (!Account.exists() || Account.primary) {
-            if (imageData == null) {
-                builder.setNeutralButton(R.string.attach_image) { _, _ ->
-                    if (editText.text.isNotEmpty()) {
-                        message.data = editText.text.toString()
-                    } else {
-                        message.data = null
-                    }
-
-                    (fragmentActivity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)
-                            ?.hideSoftInputFromWindow(editText.windowToken, 0)
-
-                    AlertDialog.Builder(fragmentActivity!!)
-                            .setItems(R.array.scheduled_message_attachment_options) { _, position ->
-                                messageInProcess = message
-
-                                when (position) {
-                                    0 -> {
-                                        val intent = Intent()
-                                        intent.type = "image/*"
-                                        intent.action = Intent.ACTION_GET_CONTENT
-                                        fragmentActivity?.startActivityForResult(Intent.createChooser(intent, "Select Picture"), AttachmentListener.RESULT_GALLERY_PICKER_REQUEST)
-                                    }
-                                    1 -> {
-                                        Giphy.Builder(fragmentActivity, BuildConfig.GIPHY_API_KEY)
-                                                .maxFileSize(MmsSettings.maxImageSize)
-                                                .start()
-                                    }
-                                }
-                            }.show()
-                }
-            } else {
-                builder.setNeutralButton(R.string.remove_image_short) { _, _ ->
-                    if (editText.text.isNotEmpty()) {
-                        message.data = editText.text.toString()
-                    } else {
-                        message.data = null
-                    }
-
-                    displayMessageDialog(message)
-                }
-            }
-        }
-
-        builder.show()
     }
 
     private fun saveMessages(messages: List<ScheduledMessage>) {
