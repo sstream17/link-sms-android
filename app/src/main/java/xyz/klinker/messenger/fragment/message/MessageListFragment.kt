@@ -20,6 +20,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
@@ -56,6 +57,7 @@ import xyz.klinker.messenger.fragment.message.send.SendMessageManager
 import xyz.klinker.messenger.shared.data.DataSource
 import xyz.klinker.messenger.shared.data.MimeType
 import xyz.klinker.messenger.shared.data.MmsSettings
+import xyz.klinker.messenger.shared.data.Settings
 import xyz.klinker.messenger.shared.data.model.ScheduledMessage
 import xyz.klinker.messenger.shared.receiver.MessageListUpdatedReceiver
 import xyz.klinker.messenger.shared.service.notification.NotificationConstants
@@ -303,13 +305,13 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     private fun displayScheduleDialog(message: ScheduledMessage){
         val layout = LayoutInflater.from(fragmentActivity).inflate(R.layout.dialog_scheduled_message, null, false)
-        val date = layout.findViewById<EditText>(R.id.schedule_date)
-        val time = layout.findViewById<EditText>(R.id.schedule_time)
+        val date = layout.findViewById<TextView>(R.id.schedule_date)
+        val time = layout.findViewById<TextView>(R.id.schedule_time)
         val repeat = layout.findViewById<Spinner>(R.id.repeat_interval)
 
         val currentTime = Date()
-        date.setText(DateFormat.format("MMM dd, yyyy", currentTime))
-        time.setText(DateFormat.format("HH:mm", currentTime))
+        date.text = DateFormat.format("MMM dd, yyyy", currentTime)
+        time.text = DateFormat.format("HH:mm", currentTime)
 
         date.setOnClickListener {
             displayDateDialog(message)
@@ -328,10 +330,18 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                     imageData = null
                 }
                 .setPositiveButton(android.R.string.ok) {_, _ ->
-
                 }
 
-        builder.show()
+        val alertDialog = builder.create()
+        alertDialog.show()
+        val color = if (Settings.useGlobalThemeColor) {
+            Settings.mainColorSet.color
+        } else {
+            argManager.color
+        }
+        
+        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(color)
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
     }
 
     private fun displayDateDialog(message: ScheduledMessage) {
