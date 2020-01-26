@@ -36,15 +36,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.sgottard.sofa.ContentFragment
-import xyz.klinker.giphy.Giphy
-import xyz.klinker.messenger.BuildConfig
 import xyz.klinker.messenger.R
 import xyz.klinker.messenger.activity.MessengerTvActivity
 import xyz.klinker.messenger.activity.compose.ShareData
-import xyz.klinker.messenger.api.implementation.Account
 import xyz.klinker.messenger.fragment.message.attach.AttachmentInitializer
 import xyz.klinker.messenger.fragment.message.attach.AttachmentListener
 import xyz.klinker.messenger.fragment.message.attach.AttachmentManager
@@ -55,8 +50,6 @@ import xyz.klinker.messenger.fragment.message.send.MessageCounterCalculator
 import xyz.klinker.messenger.fragment.message.send.PermissionHelper
 import xyz.klinker.messenger.fragment.message.send.SendMessageManager
 import xyz.klinker.messenger.shared.data.DataSource
-import xyz.klinker.messenger.shared.data.MimeType
-import xyz.klinker.messenger.shared.data.MmsSettings
 import xyz.klinker.messenger.shared.data.Settings
 import xyz.klinker.messenger.shared.data.model.ScheduledMessage
 import xyz.klinker.messenger.shared.receiver.MessageListUpdatedReceiver
@@ -100,8 +93,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     private var extraMarginLeft = 0
 
     private var imageData: ShareData? = null
-    private var messageInProcess: ScheduledMessage? = null
-    private var scheduledMessageDate: Date? = null
+    private var scheduledMessageCalendar: Calendar? = null
 
     // samsung messed up the date picker in some languages on Lollipop 5.0 and 5.1. Ugh.
     // fixes this issue: http://stackoverflow.com/a/34853067
@@ -304,7 +296,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         }
     }
 
-    private fun updateTimeInputs(newDate: Date, date: TextView, time: TextView){
+    private fun updateTimeInputs(newDate: Calendar, date: TextView, time: TextView){
         date.text = DateFormat.format("MMM dd, yyyy", newDate)
         val timeFormat = if (DateFormat.is24HourFormat(fragmentActivity)) "HH:mm" else "hh:mm a"
         time.text = DateFormat.format(timeFormat, newDate)
@@ -316,18 +308,24 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         val time = layout.findViewById<TextView>(R.id.schedule_time)
         val repeat = layout.findViewById<Spinner>(R.id.repeat_interval)
 
-        scheduledMessageDate = Date()
-        updateTimeInputs(scheduledMessageDate!!, date, time)
+        scheduledMessageCalendar = Calendar.getInstance()
+        updateTimeInputs(scheduledMessageCalendar!!, date, time)
 
         date.setOnClickListener {
-            displayDateDialog(scheduledMessageDate!!, date, time)
+            displayDateDialog(scheduledMessageCalendar!!, date, time)
         }
 
         time.setOnClickListener {
-            displayTimeDialog(scheduledMessageDate!!, date, time)
+            displayTimeDialog(scheduledMessageCalendar!!, date, time)
         }
 
         repeat.adapter = ArrayAdapter.createFromResource(fragmentActivity!!, R.array.scheduled_message_repeat, android.R.layout.simple_spinner_dropdown_item)
+
+        val color = if (Settings.useGlobalThemeColor) {
+            Settings.mainColorSet.colorAccent
+        } else {
+            argManager.colorAccent
+        }
 
         val builder = AlertDialog.Builder(fragmentActivity!!)
                 .setView(layout)
@@ -336,22 +334,18 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                     imageData = null
                 }
                 .setPositiveButton(android.R.string.ok) {_, _ ->
-                    message.timestamp = scheduledMessageDate?.time ?: TimeUtils.now
+                    message.timestamp = scheduledMessageCalendar?.timeInMillis ?: TimeUtils.now
+                    showScheduledTime(message)
                 }
 
         val alertDialog = builder.create()
         alertDialog.show()
-        val color = if (Settings.useGlobalThemeColor) {
-            Settings.mainColorSet.colorAccent
-        } else {
-            argManager.colorAccent
-        }
 
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(color)
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
     }
 
-    private fun displayDateDialog(scheduledMessageDate: Date, date: TextView, time: TextView) {
+    private fun displayDateDialog(scheduledMessageDate: Calendar, date: TextView, time: TextView) {
         var context: Context? = contextToFixDatePickerCrash
 
         if (context == null) {
@@ -362,29 +356,32 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             return
         }
 
-        val calendar = Calendar.getInstance()
-        DatePickerDialog(context, { _, year, month, day ->
-            scheduledMessageDate.time = GregorianCalendar(year, month, day).timeInMillis
+        val datePicker = DatePickerDialog(context)
+        datePicker.setOnDateSetListener { _, year, month, day ->
+            val originalDate = scheduledMessageDate.clone() as Calendar
+            TimeUtils.zeroCalendarDay(originalDate)
+            val calendarDate = GregorianCalendar(year, month, day).timeInMillis
+            val offset = scheduledMessageDate.timeInMillis - originalDate.timeInMillis
+            scheduledMessageDate.timeInMillis = calendarDate + offset
             updateTimeInputs(scheduledMessageDate, date, time)
-        },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH))
-                .show()
+        }
+        datePicker.datePicker.minDate = TimeUtils.now
+        datePicker.show()
     }
 
-    private fun displayTimeDialog(scheduledMessageDate: Date, date: TextView, time: TextView) {
+    private fun displayTimeDialog(scheduledMessageDate: Calendar, date: TextView, time: TextView) {
         if (fragmentActivity == null) {
             return
         }
 
         val calendar = Calendar.getInstance()
         TimePickerDialog(fragmentActivity, { _, hourOfDay, minute ->
-            scheduledMessageDate.time = scheduledMessageDate.time + 1000 * 60 * 60 * hourOfDay
-            scheduledMessageDate.time = scheduledMessageDate.time + 1000 * 60 * minute
+            TimeUtils.zeroCalendarDay(scheduledMessageDate)
+            scheduledMessageDate.timeInMillis = scheduledMessageDate.timeInMillis + 1000 * 60 * 60 * hourOfDay
+            scheduledMessageDate.timeInMillis = scheduledMessageDate.timeInMillis + 1000 * 60 * minute
 
-            if (scheduledMessageDate.time < TimeUtils.now) {
-                scheduledMessageDate.time = TimeUtils.now
+            if (scheduledMessageDate.timeInMillis < TimeUtils.now) {
+                scheduledMessageDate.timeInMillis = TimeUtils.now
             }
 
             updateTimeInputs(scheduledMessageDate, date, time)
@@ -393,6 +390,16 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                 calendar.get(Calendar.MINUTE),
                 DateFormat.is24HourFormat(fragmentActivity))
                 .show()
+    }
+
+    private fun showScheduledTime(message: ScheduledMessage) {
+        val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+        val dateTime = fragmentActivity?.findViewById<TextView>(R.id.scheduled_date_time)
+        dateTime?.text = context?.let { TimeUtils.formatConversationTimestamp(it, message.timestamp) }
+
+        if (info != null) {
+            info.visibility = View.VISIBLE
+        }
     }
 
     private fun saveMessages(messages: List<ScheduledMessage>) {
