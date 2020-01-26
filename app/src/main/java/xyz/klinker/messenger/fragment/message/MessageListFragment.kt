@@ -339,7 +339,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         } else {
             argManager.color
         }
-        
+
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(color)
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
     }
