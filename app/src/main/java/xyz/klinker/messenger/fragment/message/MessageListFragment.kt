@@ -356,8 +356,8 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             return
         }
 
-        val datePicker = DatePickerDialog(context)
-        datePicker.setOnDateSetListener { _, year, month, day ->
+        val datePickerDialog = DatePickerDialog(context)
+        datePickerDialog.setOnDateSetListener { _, year, month, day ->
             val originalDate = scheduledMessageDate.clone() as Calendar
             TimeUtils.zeroCalendarDay(originalDate)
             val calendarDate = GregorianCalendar(year, month, day).timeInMillis
@@ -365,8 +365,8 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             scheduledMessageDate.timeInMillis = calendarDate + offset
             updateTimeInputs(scheduledMessageDate, date, time)
         }
-        datePicker.datePicker.minDate = TimeUtils.now
-        datePicker.show()
+        datePickerDialog.datePicker.minDate = TimeUtils.now
+        datePickerDialog.show()
     }
 
     private fun displayTimeDialog(scheduledMessageDate: Calendar, date: TextView, time: TextView) {
@@ -395,7 +395,11 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     private fun showScheduledTime(message: ScheduledMessage) {
         val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
         val dateTime = fragmentActivity?.findViewById<TextView>(R.id.scheduled_date_time)
-        dateTime?.text = context?.let { TimeUtils.formatConversationTimestamp(it, message.timestamp) }
+        dateTime?.text = if (DateFormat.is24HourFormat(fragmentActivity)) {
+            DateFormat.format("MM/dd/yy HH:mm", message.timestamp)
+        } else {
+            DateFormat.format("MM/dd/yy hh:mm a", message.timestamp)
+        }
 
         if (info != null) {
             info.visibility = View.VISIBLE
