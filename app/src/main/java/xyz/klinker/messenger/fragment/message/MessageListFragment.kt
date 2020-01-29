@@ -36,6 +36,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sgottard.sofa.ContentFragment
 import xyz.klinker.messenger.R
 import xyz.klinker.messenger.activity.MessengerTvActivity
@@ -50,6 +51,7 @@ import xyz.klinker.messenger.fragment.message.send.MessageCounterCalculator
 import xyz.klinker.messenger.fragment.message.send.PermissionHelper
 import xyz.klinker.messenger.fragment.message.send.SendMessageManager
 import xyz.klinker.messenger.shared.data.DataSource
+import xyz.klinker.messenger.shared.data.MimeType
 import xyz.klinker.messenger.shared.data.Settings
 import xyz.klinker.messenger.shared.data.model.ScheduledMessage
 import xyz.klinker.messenger.shared.receiver.MessageListUpdatedReceiver
@@ -299,7 +301,11 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     private fun updateTimeInputs(newDate: Calendar, date: TextView, time: TextView){
         date.text = DateFormat.format("MMM dd, yyyy", newDate)
         val timeFormat = if (DateFormat.is24HourFormat(fragmentActivity)) "HH:mm" else "hh:mm a"
-        time.text = DateFormat.format(timeFormat, newDate)
+        time.text = if (newDate.timeInMillis < TimeUtils.now + 10 * TimeUtils.SECOND) {
+            "Now"
+        } else {
+            DateFormat.format(timeFormat, newDate)
+        }
     }
 
     private fun displayScheduleDialog(message: ScheduledMessage){
@@ -334,8 +340,12 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                     imageData = null
                 }
                 .setPositiveButton(android.R.string.ok) {_, _ ->
+                    message.repeat = repeat.selectedItemPosition
                     message.timestamp = scheduledMessageCalendar?.timeInMillis ?: TimeUtils.now
-                    showScheduledTime(message)
+                    if (message.timestamp > TimeUtils.now) {
+                        sendManager.enableMessageScheduling(message)
+                        showScheduledTime(message)
+                    }
                 }
 
         val alertDialog = builder.create()
@@ -405,11 +415,4 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             info.visibility = View.VISIBLE
         }
     }
-
-    private fun saveMessages(messages: List<ScheduledMessage>) {
-        Thread {
-            messages.forEach { DataSource.insertScheduledMessage(fragmentActivity!!, it) }
-        }.start()
-    }
-
 }

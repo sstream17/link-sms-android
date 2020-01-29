@@ -23,6 +23,7 @@ import xyz.klinker.messenger.shared.data.DataSource
 import xyz.klinker.messenger.shared.data.MimeType
 import xyz.klinker.messenger.shared.data.Settings
 import xyz.klinker.messenger.shared.data.model.Message
+import xyz.klinker.messenger.shared.data.model.ScheduledMessage
 import xyz.klinker.messenger.shared.data.pojo.KeyboardLayout
 import xyz.klinker.messenger.shared.service.NewMessagesCheckService
 import xyz.klinker.messenger.shared.util.*
@@ -343,6 +344,39 @@ class SendMessageManager(private val fragment: MessageListFragment) {
             this.fragment.loadMessages(true)
             this.fragment.notificationManager.dismissOnMessageSent()
         }
+    }
+
+    fun enableMessageScheduling(message: ScheduledMessage) {
+        send.setOnClickListener { sendScheduledMessage(message) }
+    }
+
+    fun disableMessageScheduling() {
+        send.setOnClickListener { requestPermissionThenSend() }
+    }
+
+    private fun sendScheduledMessage(message: ScheduledMessage) {
+        val messages = mutableListOf<ScheduledMessage>()
+
+        if (messageEntry.text.isNotEmpty()) {
+            messages.add(ScheduledMessage().apply {
+                this.id = DataSource.generateId()
+                this.repeat = message.repeat
+                this.timestamp = message.timestamp
+                this.title = message.title
+                this.to = message.to
+                this.data = messageEntry.text.toString()
+                this.mimeType = MimeType.TEXT_PLAIN
+            })
+        }
+
+        saveMessages(messages)
+        disableMessageScheduling()
+    }
+
+    private fun saveMessages(messages: List<ScheduledMessage>) {
+        Thread {
+            messages.forEach { DataSource.insertScheduledMessage(activity!!, it) }
+        }.start()
     }
 
     private data class MediaMessage(val uri: Uri, val mimeType: String)
