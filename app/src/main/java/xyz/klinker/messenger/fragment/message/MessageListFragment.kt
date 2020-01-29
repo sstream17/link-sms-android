@@ -16,6 +16,7 @@
 
 package xyz.klinker.messenger.fragment.message
 
+import android.animation.ValueAnimator
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
@@ -57,9 +58,7 @@ import xyz.klinker.messenger.shared.data.model.ScheduledMessage
 import xyz.klinker.messenger.shared.receiver.MessageListUpdatedReceiver
 import xyz.klinker.messenger.shared.service.notification.NotificationConstants
 import xyz.klinker.messenger.shared.shared_interfaces.IMessageListFragment
-import xyz.klinker.messenger.shared.util.AnimationUtils
-import xyz.klinker.messenger.shared.util.CursorUtil
-import xyz.klinker.messenger.shared.util.TimeUtils
+import xyz.klinker.messenger.shared.util.*
 import xyz.klinker.messenger.utils.multi_select.MessageMultiSelectDelegate
 import java.util.*
 
@@ -403,16 +402,37 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     }
 
     private fun showScheduledTime(message: ScheduledMessage) {
-        val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+        Handler().postDelayed({
+
+            Thread { try {
+                val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+
+                if (info != null) {
+                    activity?.runOnUiThread {
+                        val params = info.layoutParams
+                        val animator = ValueAnimator.ofInt(0, DensityUtil.toDp(activity, 40))
+
+                        info.requestLayout()
+                        info.visibility = View.VISIBLE
+
+
+                        animator.addUpdateListener { valueAnimator ->
+                            val value = valueAnimator.animatedValue as Int
+                            params.height = value
+                            info.layoutParams = params
+                        }
+
+                        animator.duration = 200
+                        animator.start()
+                    }
+                }
+            } catch (e: Throwable) {} }.start()
+        }, 500)
         val dateTime = fragmentActivity?.findViewById<TextView>(R.id.scheduled_date_time)
         dateTime?.text = if (DateFormat.is24HourFormat(fragmentActivity)) {
             DateFormat.format("MM/dd/yy HH:mm", message.timestamp)
         } else {
             DateFormat.format("MM/dd/yy hh:mm a", message.timestamp)
-        }
-
-        if (info != null) {
-            info.visibility = View.VISIBLE
         }
     }
 }
