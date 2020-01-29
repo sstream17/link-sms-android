@@ -369,10 +369,12 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                 this.timestamp = message.timestamp
                 this.title = message.title
                 this.to = message.to
-                this.data = messageEntry.text.toString()
+                this.data = messageEntry.text.toString().trim { it <= ' ' }
                 this.mimeType = MimeType.TEXT_PLAIN
             })
         }
+
+        messageEntry.text = null
 
         saveMessages(messages)
         disableMessageScheduling()
