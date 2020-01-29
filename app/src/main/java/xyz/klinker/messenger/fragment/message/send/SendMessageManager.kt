@@ -355,6 +355,11 @@ class SendMessageManager(private val fragment: MessageListFragment) {
     }
 
     private fun sendScheduledMessage(message: ScheduledMessage) {
+        val activity = activity ?: return
+        val conversation = DataSource.getConversation(activity, argManager.conversationId)
+        message.to = conversation?.phoneNumbers
+        message.title = conversation?.title
+
         val messages = mutableListOf<ScheduledMessage>()
 
         if (messageEntry.text.isNotEmpty()) {
