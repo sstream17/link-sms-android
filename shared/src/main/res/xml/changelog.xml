@@ -17,6 +17,12 @@
 <changelog>
 
     <version
+        name="1.1.1"
+        description="February 2nd, 2020">
+        <text>Added "Mark as Read" to options for multiple selected conversations</text>
+    </version>
+
+    <version
         name="1.1.0"
         description="January 17th, 2020">
         <text>Updates to notifications:</text>
