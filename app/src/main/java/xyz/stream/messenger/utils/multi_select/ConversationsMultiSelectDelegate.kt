@@ -165,6 +165,16 @@ class ConversationsMultiSelectDelegate(private val fragment: ConversationListFra
 
                     fragment.recyclerManager.loadConversations()
                 }
+                R.id.menu_mark_as_read -> {
+                    handled = true
+
+                    for (conversation in selectedConversations) {
+                        conversation.read = true
+                        source.readConversation(activity!!, conversation.id, true)
+                    }
+
+                    fragment.recyclerManager.loadConversations()
+                }
                 R.id.menu_mark_as_unread -> {
                     handled = true
 

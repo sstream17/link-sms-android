@@ -29,6 +29,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_mark_as_read"
+        android:title="@string/menu_mark_as_read"
+        android:icon="@drawable/ic_unread"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_mark_as_unread"
         android:title="@string/menu_mark_as_unread"
         android:icon="@drawable/ic_unread"
