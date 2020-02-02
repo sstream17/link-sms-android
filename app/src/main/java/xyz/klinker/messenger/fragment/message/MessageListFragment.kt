@@ -16,6 +16,8 @@
 
 package xyz.klinker.messenger.fragment.message
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -434,5 +436,31 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         } else {
             DateFormat.format("MM/dd/yy hh:mm a", message.timestamp)
         }
+    }
+
+    fun hideScheduledTime() {
+        Handler().postDelayed({
+
+            Thread { try {
+                val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+
+                if (info != null) {
+                    activity?.runOnUiThread {
+                        val animator = ValueAnimator.ofInt(info.height, 0)
+
+                        animator.addListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                super.onAnimationEnd(animation)
+                                info.removeAllViews()
+                                info.visibility = View.GONE
+                            }
+                        })
+
+                        animator.duration = 200
+                        animator.start()
+                    }
+                }
+            } catch (e: Throwable) {} }.start()
+        }, 500)
     }
 }

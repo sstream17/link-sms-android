@@ -37,6 +37,8 @@ class SendMessageManager(private val fragment: MessageListFragment) {
         get() = fragment.argManager
     private val attachManager
         get() = fragment.attachManager
+    private val attachInitializer
+        get () = fragment.attachInitializer
     private val messageLoader
         get() = fragment.messageLoader
 
@@ -351,6 +353,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
     }
 
     fun disableMessageScheduling() {
+        fragment.hideScheduledTime()
         send.setOnClickListener { requestPermissionThenSend() }
     }
 
@@ -377,7 +380,9 @@ class SendMessageManager(private val fragment: MessageListFragment) {
         messageEntry.text = null
 
         saveMessages(messages)
+        attachInitializer.initAttachHolder()
         disableMessageScheduling()
+        attachInitializer.openScheduledMessages()
     }
 
     private fun saveMessages(messages: List<ScheduledMessage>) {
