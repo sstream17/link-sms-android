@@ -352,6 +352,8 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                 .setView(layout)
                 .setCancelable(false)
                 .setNegativeButton(cancelText) { _, _ ->
+                    sendManager.disableMessageScheduling()
+                    hideScheduledTime()
                     imageData = null
                 }
                 .setPositiveButton(android.R.string.ok) {_, _ ->
