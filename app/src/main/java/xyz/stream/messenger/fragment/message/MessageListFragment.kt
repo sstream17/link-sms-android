@@ -294,6 +294,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     fun startSchedulingMessage() {
         val message = ScheduledMessage()
+        message.timestamp = TimeUtils.now
         displayScheduleDialog(message)
     }
 
@@ -314,13 +315,14 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         }
     }
 
-    private fun displayScheduleDialog(message: ScheduledMessage){
+    private fun displayScheduleDialog(message: ScheduledMessage, isEdit: Boolean = false){
         val layout = LayoutInflater.from(fragmentActivity).inflate(R.layout.dialog_scheduled_message, null, false)
         val date = layout.findViewById<TextView>(R.id.schedule_date)
         val time = layout.findViewById<TextView>(R.id.schedule_time)
         val repeat = layout.findViewById<Spinner>(R.id.repeat_interval)
 
         scheduledMessageCalendar = Calendar.getInstance()
+        scheduledMessageCalendar?.timeInMillis = message.timestamp
         updateTimeInputs(scheduledMessageCalendar!!, date, time)
 
         date.setOnClickListener {
@@ -339,10 +341,17 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             argManager.colorAccent
         }
 
+        val cancelText = if (isEdit) {
+            R.string.delete
+        }
+        else {
+            android.R.string.cancel
+        }
+
         val builder = AlertDialog.Builder(fragmentActivity!!)
                 .setView(layout)
                 .setCancelable(false)
-                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                .setNegativeButton(cancelText) { _, _ ->
                     imageData = null
                 }
                 .setPositiveButton(android.R.string.ok) {_, _ ->
@@ -350,7 +359,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                     message.timestamp = scheduledMessageCalendar?.timeInMillis ?: TimeUtils.now
                     if (message.timestamp > TimeUtils.now) {
                         sendManager.enableMessageScheduling(message)
-                        showScheduledTime(message)
+                        showScheduledTime(message, isEdit)
                     }
                 }
 
@@ -408,39 +417,46 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                 .show()
     }
 
-    private fun showScheduledTime(message: ScheduledMessage) {
-        Handler().postDelayed({
+    private fun showScheduledTime(message: ScheduledMessage, isEdit: Boolean = false) {
 
-            Thread { try {
-                val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+        if (!isEdit) {
+            Handler().postDelayed({
 
-                if (info != null) {
-                    activity?.runOnUiThread {
-                        val params = info.layoutParams
-                        val animator = ValueAnimator.ofInt(0, DensityUtil.toDp(activity, 40))
+                Thread { try {
+                    val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
 
-                        info.requestLayout()
-                        info.visibility = View.VISIBLE
+                    if (info != null) {
+                        activity?.runOnUiThread {
+                            val params = info.layoutParams
+                            val animator = ValueAnimator.ofInt(0, DensityUtil.toDp(activity, 40))
+
+                            info.requestLayout()
+                            info.visibility = View.VISIBLE
 
 
-                        animator.addUpdateListener { valueAnimator ->
-                            val value = valueAnimator.animatedValue as Int
-                            params.height = value
-                            info.layoutParams = params
+                            animator.addUpdateListener { valueAnimator ->
+                                val value = valueAnimator.animatedValue as Int
+                                params.height = value
+                                info.layoutParams = params
+                            }
+
+                            animator.duration = 200
+                            animator.start()
                         }
-
-                        animator.duration = 200
-                        animator.start()
                     }
-                }
-            } catch (e: Throwable) {} }.start()
-        }, 500)
+                } catch (e: Throwable) {} }.start()
+            }, 500)
+        }
+
         val dateTime = fragmentActivity?.findViewById<TextView>(R.id.scheduled_date_time)
         dateTime?.text = if (DateFormat.is24HourFormat(fragmentActivity)) {
             DateFormat.format("MM/dd/yy HH:mm", message.timestamp)
         } else {
             DateFormat.format("MM/dd/yy hh:mm a", message.timestamp)
         }
+
+        val editButton = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info_button)
+        editButton?.setOnClickListener { displayScheduleDialog(message, isEdit = true) }
     }
 
     fun hideScheduledTime() {
