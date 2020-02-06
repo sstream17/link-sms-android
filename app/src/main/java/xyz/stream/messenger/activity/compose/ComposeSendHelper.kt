@@ -20,6 +20,7 @@ import xyz.stream.messenger.shared.util.TimeUtils
 class ComposeSendHelper(private val activity: ComposeActivity) {
 
     internal val fab: FloatingActionButton by lazy { activity.findViewById<View>(R.id.fab) as FloatingActionButton }
+    internal var shouldScheduledMessage: Boolean = false
 
     fun setupViews() {
         fab.backgroundTintList = ColorStateList.valueOf(Settings.mainColorSet.colorAccent)
@@ -107,6 +108,11 @@ class ComposeSendHelper(private val activity: ComposeActivity) {
         if (activity.contactsProvider.getRecipients().size == 1) {
             val name = activity.contactsProvider.getRecipients()[0].entry.displayName
             open.putExtra(MessengerActivityExtras.EXTRA_CONVERSATION_NAME, name)
+        }
+
+        if (shouldScheduledMessage) {
+            open.putExtra(MessengerActivityExtras.EXTRA_SHOULD_SCHEDULE_MESSAGE, true)
+            open.putExtra(MessengerActivityExtras.EXTRA_SHOULD_OPEN_KEYBOARD, false)
         }
 
         activity.startActivity(open)

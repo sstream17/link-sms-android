@@ -47,11 +47,13 @@ import xyz.klinker.giphy.Giphy
 import xyz.stream.messenger.BuildConfig
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
+import xyz.stream.messenger.activity.compose.ComposeActivity
 import xyz.stream.messenger.activity.compose.ShareData
 import xyz.stream.messenger.adapter.ScheduledMessagesAdapter
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.fragment.bottom_sheet.EditScheduledMessageFragment
 import xyz.stream.messenger.fragment.message.attach.AttachmentListener
+import xyz.stream.messenger.shared.MessengerActivityExtras
 import xyz.stream.messenger.shared.data.*
 import xyz.stream.messenger.shared.data.model.ScheduledMessage
 import xyz.stream.messenger.shared.service.jobs.ScheduledMessageJob
@@ -117,7 +119,11 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         list.layoutManager = LinearLayoutManager(fragmentActivity)
-        fab.setOnClickListener { startSchedulingMessage() }
+        fab.setOnClickListener {
+            val intent = Intent(context, ComposeActivity::class.java)
+            intent.putExtra(MessengerActivityExtras.EXTRA_SHOULD_SCHEDULE_MESSAGE, true)
+            startActivity(intent)
+        }
 
         val messengerActivity = fragmentActivity
         if (messengerActivity is MessengerActivity) {
@@ -453,7 +459,7 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
                                         activity?.startActivityForResult(Intent.createChooser(intent, "Select Picture"), AttachmentListener.RESULT_GALLERY_PICKER_REQUEST)
                                     }
                                     1 -> {
-                                        Giphy.Builder(activity, xyz.stream.messenger.BuildConfig.GIPHY_API_KEY)
+                                        Giphy.Builder(activity, BuildConfig.GIPHY_API_KEY)
                                                 .maxFileSize(MmsSettings.maxImageSize)
                                                 .start()
                                     }

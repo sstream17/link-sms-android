@@ -212,6 +212,10 @@ class AttachmentInitializer(private val fragment: MessageListFragment) {
         }
     }
 
+    fun openScheduledMessages() {
+        scheduledMessages.performClick()
+    }
+
     private fun viewScheduledMessages() {
         prepareAttachHolder(-1)
 

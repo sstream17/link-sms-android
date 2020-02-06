@@ -16,21 +16,36 @@
 
 package xyz.stream.messenger.fragment.message
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
-import android.view.*
-import androidx.appcompat.app.AlertDialog
+import android.text.format.DateFormat
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sgottard.sofa.ContentFragment
 
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.activity.MessengerTvActivity
+import xyz.stream.messenger.activity.compose.ShareData
 import xyz.stream.messenger.activity.main.MainSearchHelper
 import xyz.stream.messenger.fragment.message.attach.AttachmentInitializer
 import xyz.stream.messenger.fragment.message.attach.AttachmentListener
@@ -42,12 +57,17 @@ import xyz.stream.messenger.fragment.message.send.SendMessageManager
 import xyz.stream.messenger.fragment.message.load.ViewInitializerDeferred
 import xyz.stream.messenger.fragment.message.load.ViewInitializerNonDeferred
 import xyz.stream.messenger.shared.data.DataSource
+import xyz.stream.messenger.shared.data.Settings
+import xyz.stream.messenger.shared.data.model.ScheduledMessage
 import xyz.stream.messenger.shared.receiver.MessageListUpdatedReceiver
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.shared_interfaces.IMessageListFragment
 import xyz.stream.messenger.shared.util.AnimationUtils
 import xyz.stream.messenger.shared.util.CursorUtil
+import xyz.stream.messenger.shared.util.DensityUtil
+import xyz.stream.messenger.shared.util.TimeUtils
 import xyz.stream.messenger.utils.multi_select.MessageMultiSelectDelegate
+import java.util.*
 
 /**
  * Fragment for displaying messages for a certain conversation.
@@ -79,6 +99,37 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     private var extraMarginTop = 0
     private var extraMarginLeft = 0
+
+    private var imageData: ShareData? = null
+    private var scheduledMessageCalendar: Calendar? = null
+
+    // samsung messed up the date picker in some languages on Lollipop 5.0 and 5.1. Ugh.
+    // fixes this issue: http://stackoverflow.com/a/34853067
+    private val contextToFixDatePickerCrash: ContextWrapper
+        get() = object : ContextWrapper(activity!!) {
+            private var wrappedResources: Resources? = null
+            override fun getResources(): Resources {
+                val r = super.getResources()
+                if (wrappedResources == null) {
+                    wrappedResources = object : Resources(r.assets, r.displayMetrics, r.configuration) {
+                        @Throws(Resources.NotFoundException::class)
+                        override fun getString(id: Int, vararg formatArgs: Any): String {
+                            return try {
+                                super.getString(id, *formatArgs)
+                            } catch (ifce: IllegalFormatConversionException) {
+                                Log.e("DatePickerDialogFix", "IllegalFormatConversionException Fixed!", ifce)
+                                var template = super.getString(id)
+                                template = template.replace(("%" + ifce.conversion).toRegex(), "%s")
+                                String.format(configuration.locale, template, *formatArgs)
+                            }
+
+                        }
+                    }
+                }
+
+                return wrappedResources!!
+            }
+        }
 
     override val conversationId: Long
         get() = argManager.conversationId
@@ -241,6 +292,11 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     }
 
+    fun startSchedulingMessage() {
+        val message = ScheduledMessage()
+        displayScheduleDialog(message)
+    }
+
     private fun dismissDetailsChoiceDialog() {
         if (detailsChoiceDialog != null && detailsChoiceDialog!!.isShowing) {
             detailsChoiceDialog!!.dismiss()
@@ -248,4 +304,168 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         }
     }
 
+    private fun updateTimeInputs(newDate: Calendar, date: TextView, time: TextView){
+        date.text = DateFormat.format("MMM dd, yyyy", newDate)
+        val timeFormat = if (DateFormat.is24HourFormat(fragmentActivity)) "HH:mm" else "hh:mm a"
+        time.text = if (newDate.timeInMillis < TimeUtils.now + 10 * TimeUtils.SECOND) {
+            "Now"
+        } else {
+            DateFormat.format(timeFormat, newDate)
+        }
+    }
+
+    private fun displayScheduleDialog(message: ScheduledMessage){
+        val layout = LayoutInflater.from(fragmentActivity).inflate(R.layout.dialog_scheduled_message, null, false)
+        val date = layout.findViewById<TextView>(R.id.schedule_date)
+        val time = layout.findViewById<TextView>(R.id.schedule_time)
+        val repeat = layout.findViewById<Spinner>(R.id.repeat_interval)
+
+        scheduledMessageCalendar = Calendar.getInstance()
+        updateTimeInputs(scheduledMessageCalendar!!, date, time)
+
+        date.setOnClickListener {
+            displayDateDialog(scheduledMessageCalendar!!, date, time)
+        }
+
+        time.setOnClickListener {
+            displayTimeDialog(scheduledMessageCalendar!!, date, time)
+        }
+
+        repeat.adapter = ArrayAdapter.createFromResource(fragmentActivity!!, R.array.scheduled_message_repeat, android.R.layout.simple_spinner_dropdown_item)
+
+        val color = if (Settings.useGlobalThemeColor) {
+            Settings.mainColorSet.colorAccent
+        } else {
+            argManager.colorAccent
+        }
+
+        val builder = AlertDialog.Builder(fragmentActivity!!)
+                .setView(layout)
+                .setCancelable(false)
+                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                    imageData = null
+                }
+                .setPositiveButton(android.R.string.ok) {_, _ ->
+                    message.repeat = repeat.selectedItemPosition
+                    message.timestamp = scheduledMessageCalendar?.timeInMillis ?: TimeUtils.now
+                    if (message.timestamp > TimeUtils.now) {
+                        sendManager.enableMessageScheduling(message)
+                        showScheduledTime(message)
+                    }
+                }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(color)
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
+    }
+
+    private fun displayDateDialog(scheduledMessageDate: Calendar, date: TextView, time: TextView) {
+        var context: Context? = contextToFixDatePickerCrash
+
+        if (context == null) {
+            context = fragmentActivity
+        }
+
+        if (context == null) {
+            return
+        }
+
+        val datePickerDialog = DatePickerDialog(context)
+        datePickerDialog.setOnDateSetListener { _, year, month, day ->
+            val originalDate = scheduledMessageDate.clone() as Calendar
+            TimeUtils.zeroCalendarDay(originalDate)
+            val calendarDate = GregorianCalendar(year, month, day).timeInMillis
+            val offset = scheduledMessageDate.timeInMillis - originalDate.timeInMillis
+            scheduledMessageDate.timeInMillis = calendarDate + offset
+            updateTimeInputs(scheduledMessageDate, date, time)
+        }
+        datePickerDialog.datePicker.minDate = TimeUtils.now
+        datePickerDialog.show()
+    }
+
+    private fun displayTimeDialog(scheduledMessageDate: Calendar, date: TextView, time: TextView) {
+        if (fragmentActivity == null) {
+            return
+        }
+
+        val calendar = Calendar.getInstance()
+        TimePickerDialog(fragmentActivity, { _, hourOfDay, minute ->
+            TimeUtils.zeroCalendarDay(scheduledMessageDate)
+            scheduledMessageDate.timeInMillis = scheduledMessageDate.timeInMillis + 1000 * 60 * 60 * hourOfDay
+            scheduledMessageDate.timeInMillis = scheduledMessageDate.timeInMillis + 1000 * 60 * minute
+
+            if (scheduledMessageDate.timeInMillis < TimeUtils.now) {
+                scheduledMessageDate.timeInMillis = TimeUtils.now
+            }
+
+            updateTimeInputs(scheduledMessageDate, date, time)
+        },
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                DateFormat.is24HourFormat(fragmentActivity))
+                .show()
+    }
+
+    private fun showScheduledTime(message: ScheduledMessage) {
+        Handler().postDelayed({
+
+            Thread { try {
+                val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+
+                if (info != null) {
+                    activity?.runOnUiThread {
+                        val params = info.layoutParams
+                        val animator = ValueAnimator.ofInt(0, DensityUtil.toDp(activity, 40))
+
+                        info.requestLayout()
+                        info.visibility = View.VISIBLE
+
+
+                        animator.addUpdateListener { valueAnimator ->
+                            val value = valueAnimator.animatedValue as Int
+                            params.height = value
+                            info.layoutParams = params
+                        }
+
+                        animator.duration = 200
+                        animator.start()
+                    }
+                }
+            } catch (e: Throwable) {} }.start()
+        }, 500)
+        val dateTime = fragmentActivity?.findViewById<TextView>(R.id.scheduled_date_time)
+        dateTime?.text = if (DateFormat.is24HourFormat(fragmentActivity)) {
+            DateFormat.format("MM/dd/yy HH:mm", message.timestamp)
+        } else {
+            DateFormat.format("MM/dd/yy hh:mm a", message.timestamp)
+        }
+    }
+
+    fun hideScheduledTime() {
+        Handler().postDelayed({
+
+            Thread { try {
+                val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+
+                if (info != null) {
+                    activity?.runOnUiThread {
+                        val animator = ValueAnimator.ofInt(info.height, 0)
+
+                        animator.addListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                super.onAnimationEnd(animation)
+                                info.removeAllViews()
+                                info.visibility = View.GONE
+                            }
+                        })
+
+                        animator.duration = 200
+                        animator.start()
+                    }
+                }
+            } catch (e: Throwable) {} }.start()
+        }, 500)
+    }
 }

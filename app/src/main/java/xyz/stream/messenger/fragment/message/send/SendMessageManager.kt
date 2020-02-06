@@ -23,6 +23,7 @@ import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.MimeType
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.Message
+import xyz.stream.messenger.shared.data.model.ScheduledMessage
 import xyz.stream.messenger.shared.data.pojo.KeyboardLayout
 import xyz.stream.messenger.shared.service.NewMessagesCheckService
 import xyz.stream.messenger.shared.util.*
@@ -36,6 +37,8 @@ class SendMessageManager(private val fragment: MessageListFragment) {
         get() = fragment.argManager
     private val attachManager
         get() = fragment.attachManager
+    private val attachInitializer
+        get () = fragment.attachInitializer
     private val messageLoader
         get() = fragment.messageLoader
 
@@ -343,6 +346,51 @@ class SendMessageManager(private val fragment: MessageListFragment) {
             this.fragment.loadMessages(true)
             this.fragment.notificationManager.dismissOnMessageSent()
         }
+    }
+
+    fun enableMessageScheduling(message: ScheduledMessage) {
+        send.setOnClickListener { sendScheduledMessage(message) }
+    }
+
+    fun disableMessageScheduling() {
+        send.setOnClickListener { requestPermissionThenSend() }
+    }
+
+    private fun sendScheduledMessage(message: ScheduledMessage) {
+        val activity = activity ?: return
+        val conversation = DataSource.getConversation(activity, argManager.conversationId)
+        message.to = conversation?.phoneNumbers
+        message.title = conversation?.title
+
+        val messages = mutableListOf<ScheduledMessage>()
+
+        if (messageEntry.text.isNotEmpty()) {
+            messages.add(ScheduledMessage().apply {
+                this.id = DataSource.generateId()
+                this.repeat = message.repeat
+                this.timestamp = message.timestamp
+                this.title = message.title
+                this.to = message.to
+                this.data = messageEntry.text.toString().trim { it <= ' ' }
+                this.mimeType = MimeType.TEXT_PLAIN
+            })
+        }
+
+        messageEntry.text = null
+
+        fragment.hideScheduledTime()
+        saveMessages(messages)
+        attachInitializer.initAttachHolder()
+        disableMessageScheduling()
+        Handler().postDelayed({
+            attachInitializer.openScheduledMessages()
+        }, 500)
+    }
+
+    private fun saveMessages(messages: List<ScheduledMessage>) {
+        Thread {
+            messages.forEach { DataSource.insertScheduledMessage(activity!!, it) }
+        }.start()
     }
 
     private data class MediaMessage(val uri: Uri, val mimeType: String)
