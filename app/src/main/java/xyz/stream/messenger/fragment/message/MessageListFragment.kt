@@ -469,7 +469,14 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
                 if (info != null) {
                     activity?.runOnUiThread {
+                        val params = info.layoutParams
                         val animator = ValueAnimator.ofInt(info.height, 0)
+
+                        animator.addUpdateListener { valueAnimator ->
+                            val value = valueAnimator.animatedValue as Int
+                            params.height = value
+                            info.layoutParams = params
+                        }
 
                         animator.addListener(object : AnimatorListenerAdapter() {
                             override fun onAnimationEnd(animation: Animator) {
