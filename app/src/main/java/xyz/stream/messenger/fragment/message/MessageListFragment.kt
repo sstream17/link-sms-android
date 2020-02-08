@@ -39,14 +39,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sgottard.sofa.ContentFragment
 
 import xyz.stream.messenger.R
-import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.activity.MessengerTvActivity
 import xyz.stream.messenger.activity.compose.ShareData
-import xyz.stream.messenger.activity.main.MainSearchHelper
 import xyz.stream.messenger.fragment.message.attach.AttachmentInitializer
 import xyz.stream.messenger.fragment.message.attach.AttachmentListener
 import xyz.stream.messenger.fragment.message.attach.AttachmentManager
@@ -100,6 +97,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     private var extraMarginTop = 0
     private var extraMarginLeft = 0
 
+    private var scheduledMessage: ScheduledMessage = ScheduledMessage()
     private var imageData: ShareData? = null
     private var scheduledMessageCalendar: Calendar? = null
 
@@ -224,7 +222,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             updatedReceiver = null
         }
 
-        draftManager.createDrafts()
+        draftManager.createDrafts(scheduledMessage = scheduledMessage)
         multiSelect.clearActionMode()
     }
 
@@ -293,9 +291,9 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     }
 
     fun startSchedulingMessage(scheduleImmediately: Boolean = false) {
-        val message = ScheduledMessage()
-        message.timestamp = TimeUtils.now
-        displayScheduleDialog(message, scheduleImmediately = scheduleImmediately)
+        scheduledMessage = ScheduledMessage()
+        scheduledMessage.timestamp = TimeUtils.now
+        displayScheduleDialog(scheduledMessage, scheduleImmediately = scheduleImmediately)
     }
 
     private fun dismissDetailsChoiceDialog() {
@@ -424,7 +422,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                 .show()
     }
 
-    private fun showScheduledTime(message: ScheduledMessage, isEdit: Boolean = false) {
+    fun showScheduledTime(message: ScheduledMessage, isEdit: Boolean = false) {
 
         if (!isEdit) {
             Handler().postDelayed({

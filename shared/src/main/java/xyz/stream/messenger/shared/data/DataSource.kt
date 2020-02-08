@@ -2577,17 +2577,18 @@ object DataSource {
     /**
      * Inserts a draft into the database with the given parameters.
      */
-    @JvmOverloads fun insertDraft(context: Context?, conversationId: Long, data: String, mimeType: String, useApi: Boolean = true): Long {
+    @JvmOverloads fun insertDraft(context: Context?, conversationId: Long, data: String, mimeType: String, useApi: Boolean = true, scheduledMessage: ScheduledMessage = ScheduledMessage()): Long {
         if (context == null) {
             return -1L
         }
 
-        val values = ContentValues(4)
+        val values = ContentValues(5)
         val id = generateId()
         values.put(Draft.COLUMN_ID, id)
         values.put(Draft.COLUMN_CONVERSATION_ID, conversationId)
         values.put(Draft.COLUMN_DATA, data)
         values.put(Draft.COLUMN_MIME_TYPE, mimeType)
+        values.put(Draft.COLUMN_SCHEDULED_TIME, scheduledMessage.timestamp)
 
         if (useApi) {
             ApiUtils.addDraft(accountId(context), id, conversationId, data, mimeType, encryptor(context))
