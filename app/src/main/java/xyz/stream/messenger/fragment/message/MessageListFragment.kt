@@ -292,10 +292,10 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     }
 
-    fun startSchedulingMessage() {
+    fun startSchedulingMessage(scheduleImmediately: Boolean = false) {
         val message = ScheduledMessage()
         message.timestamp = TimeUtils.now
-        displayScheduleDialog(message)
+        displayScheduleDialog(message, scheduleImmediately = scheduleImmediately)
     }
 
     private fun dismissDetailsChoiceDialog() {
@@ -315,7 +315,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         }
     }
 
-    private fun displayScheduleDialog(message: ScheduledMessage, isEdit: Boolean = false){
+    private fun displayScheduleDialog(message: ScheduledMessage, isEdit: Boolean = false, scheduleImmediately: Boolean = false){
         val layout = LayoutInflater.from(fragmentActivity).inflate(R.layout.dialog_scheduled_message, null, false)
         val date = layout.findViewById<TextView>(R.id.schedule_date)
         val time = layout.findViewById<TextView>(R.id.schedule_time)
@@ -357,11 +357,16 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                     imageData = null
                 }
                 .setPositiveButton(android.R.string.ok) {_, _ ->
-                    message.repeat = repeat.selectedItemPosition
-                    message.timestamp = scheduledMessageCalendar?.timeInMillis ?: TimeUtils.now
-                    if (message.timestamp > TimeUtils.now) {
-                        sendManager.enableMessageScheduling(message)
-                        showScheduledTime(message, isEdit)
+                    if (scheduleImmediately) {
+                        sendManager.sendScheduledMessage(message)
+                    }
+                    else {
+                        message.repeat = repeat.selectedItemPosition
+                        message.timestamp = scheduledMessageCalendar?.timeInMillis ?: TimeUtils.now
+                        if (message.timestamp > TimeUtils.now) {
+                            sendManager.enableMessageScheduling(message)
+                            showScheduledTime(message, isEdit)
+                        }
                     }
                 }
 
@@ -481,7 +486,6 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                         animator.addListener(object : AnimatorListenerAdapter() {
                             override fun onAnimationEnd(animation: Animator) {
                                 super.onAnimationEnd(animation)
-                                info.removeAllViews()
                                 info.visibility = View.GONE
                             }
                         })

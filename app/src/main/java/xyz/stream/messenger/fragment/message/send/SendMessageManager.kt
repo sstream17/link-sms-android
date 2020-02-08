@@ -125,12 +125,14 @@ class SendMessageManager(private val fragment: MessageListFragment) {
             val signature = sig != null && !sig.isEmpty()
             val delayedSending = Settings.delayedSendingTimeout != 0L
 
+            val scheduleImmediately = !messageEntry.text.toString().isNullOrBlank()
+
             when {
                 signature && delayedSending -> {
                     AlertDialog.Builder(activity!!)
                             .setItems(R.array.send_button_signature_delay) { _, position ->
                                 when (position) {
-                                    0 -> scheduleMessage()
+                                    0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
                                     1 -> sendMessageOnFragmentClosed()
                                     2 -> requestPermissionThenSend(true)
                                 }
@@ -140,7 +142,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                     AlertDialog.Builder(activity!!)
                             .setItems(R.array.send_button_no_signature_delay) { _, position ->
                                 when (position) {
-                                    0 -> scheduleMessage()
+                                    0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
                                     1 -> sendMessageOnFragmentClosed()
                                 }
                             }.show()
@@ -149,7 +151,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                     AlertDialog.Builder(activity!!)
                             .setItems(R.array.send_button_signature_no_delay) { _, position ->
                                 when (position) {
-                                    0 -> scheduleMessage()
+                                    0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
                                     1 -> requestPermissionThenSend(true)
                                 }
                             }.show()
@@ -157,7 +159,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                 else -> {
                     AlertDialog.Builder(activity!!)
                             .setMessage(R.string.send_as_scheduled_message_question)
-                            .setPositiveButton(android.R.string.yes) { _, _ -> scheduleMessage() }
+                            .setPositiveButton(android.R.string.yes) { _, _ -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately) }
                             .setNegativeButton(android.R.string.no) { _, _ -> }
                             .show()
                 }
@@ -356,7 +358,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
         send.setOnClickListener { requestPermissionThenSend() }
     }
 
-    private fun sendScheduledMessage(message: ScheduledMessage) {
+    fun sendScheduledMessage(message: ScheduledMessage) {
         val activity = activity ?: return
         val conversation = DataSource.getConversation(activity, argManager.conversationId)
         message.to = conversation?.phoneNumbers
