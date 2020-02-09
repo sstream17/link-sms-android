@@ -17,10 +17,9 @@
 package xyz.stream.messenger.shared.data.model
 
 import android.database.Cursor
-
 import xyz.stream.messenger.api.entity.DraftBody
-import xyz.stream.messenger.shared.data.DatabaseSQLiteHelper
 import xyz.stream.messenger.encryption.EncryptionUtils
+import xyz.stream.messenger.shared.data.model.ScheduledMessage.Companion.REPEAT_NEVER
 
 /**
  * Table for holding drafts for a conversation.
@@ -32,6 +31,7 @@ class Draft : DatabaseTable {
     var data: String? = null
     var mimeType: String? = null
     var scheduledTimestamp: Long = 0
+    var scheduledRepeat: Int = REPEAT_NEVER
 
     constructor()
     constructor(body: DraftBody) {
@@ -53,6 +53,7 @@ class Draft : DatabaseTable {
                 COLUMN_DATA -> this.data = cursor.getString(i)
                 COLUMN_MIME_TYPE -> this.mimeType = cursor.getString(i)
                 COLUMN_SCHEDULED_TIME -> this.scheduledTimestamp = cursor.getLong(i)
+                COLUMN_SCHEDULED_REPEAT -> this.scheduledRepeat = cursor.getInt(i)
             }
         }
     }
@@ -78,7 +79,8 @@ class Draft : DatabaseTable {
         const val COLUMN_CONVERSATION_ID = "conversation_id"
         const val COLUMN_DATA = "data"
         const val COLUMN_MIME_TYPE = "mime_type"
-        const val COLUMN_SCHEDULED_TIME = "scheduled_time"
+        const val COLUMN_SCHEDULED_TIME = "scheduled_timestamp"
+        const val COLUMN_SCHEDULED_REPEAT = "scheduled_repeat"
 
         private const val DATABASE_CREATE = "create table if not exists " +
                 TABLE + " (" +
@@ -86,7 +88,8 @@ class Draft : DatabaseTable {
                 COLUMN_CONVERSATION_ID + " integer not null, " +
                 COLUMN_DATA + " text not null, " +
                 COLUMN_MIME_TYPE + " text not null, " +
-                COLUMN_SCHEDULED_TIME + " integer not null" +
+                COLUMN_SCHEDULED_TIME + " integer not null, " +
+                COLUMN_SCHEDULED_REPEAT + " integer not null" +
                 ");"
 
         private val INDEXES = arrayOf("create index if not exists conversation_id_draft_index on " + TABLE +

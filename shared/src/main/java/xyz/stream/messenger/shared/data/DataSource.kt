@@ -37,8 +37,6 @@ import java.util.Date
 import xyz.stream.messenger.shared.R
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.api.implementation.ApiUtils
-import xyz.stream.messenger.api.implementation.BinaryUtils
-import xyz.stream.messenger.encryption.EncryptionUtils
 import xyz.stream.messenger.shared.data.model.*
 import xyz.stream.messenger.shared.receiver.ConversationListUpdatedReceiver
 import xyz.stream.messenger.shared.service.NewMessagesCheckService
@@ -2582,13 +2580,14 @@ object DataSource {
             return -1L
         }
 
-        val values = ContentValues(5)
+        val values = ContentValues(6)
         val id = generateId()
         values.put(Draft.COLUMN_ID, id)
         values.put(Draft.COLUMN_CONVERSATION_ID, conversationId)
         values.put(Draft.COLUMN_DATA, data)
         values.put(Draft.COLUMN_MIME_TYPE, mimeType)
         values.put(Draft.COLUMN_SCHEDULED_TIME, scheduledMessage.timestamp)
+        values.put(Draft.COLUMN_SCHEDULED_REPEAT, scheduledMessage.repeat)
 
         if (useApi) {
             ApiUtils.addDraft(accountId(context), id, conversationId, data, mimeType, encryptor(context))

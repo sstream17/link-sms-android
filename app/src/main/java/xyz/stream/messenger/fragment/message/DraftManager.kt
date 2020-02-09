@@ -76,6 +76,7 @@ class DraftManager(private val fragment: MessageListFragment) {
                         val message = ScheduledMessage()
                         message.timestamp = draft.scheduledTimestamp
                         if (message.timestamp > TimeUtils.now) {
+                            message.repeat = draft.scheduledRepeat
                             fragment.showScheduledTime(message)
                             fragment.sendManager.enableMessageScheduling(message)
                         }
