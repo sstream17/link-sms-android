@@ -454,11 +454,26 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         }
 
         val dateTime = fragmentActivity?.findViewById<TextView>(R.id.scheduled_date_time)
-        dateTime?.text = if (DateFormat.is24HourFormat(fragmentActivity)) {
+        val time = if (DateFormat.is24HourFormat(fragmentActivity)) {
             DateFormat.format("MM/dd/yy HH:mm", message.timestamp)
         } else {
             DateFormat.format("MM/dd/yy hh:mm a", message.timestamp)
         }
+
+        var repeat = when (message.repeat) {
+            ScheduledMessage.REPEAT_DAILY -> getString(R.string.scheduled_repeat_daily)
+            ScheduledMessage.REPEAT_WEEKLY -> getString(R.string.scheduled_repeat_weekly)
+            ScheduledMessage.REPEAT_MONTHLY -> getString(R.string.scheduled_repeat_monthly)
+            ScheduledMessage.REPEAT_YEARLY -> getString(R.string.scheduled_repeat_yearly)
+            else -> ""
+        }
+
+        if (!repeat.isBlank()) {
+            repeat = " ($repeat)"
+        }
+
+        val text = getString(R.string.scheduled_time_formatted, time, repeat)
+        dateTime?.text = text
 
         val editButton = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info_button)
         editButton?.setOnClickListener { displayScheduleDialog(message, isEdit = true) }

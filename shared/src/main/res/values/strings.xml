@@ -641,6 +641,7 @@
     <string name="scheduled_date">Date</string>
     <string name="scheduled_time">Time</string>
     <string name="scheduled_repeat">Repeat</string>
+    <string name="scheduled_time_formatted">%s%s</string>
 
     <!-- Encryption -->
     <string name="encrypting_and_uploading">Encrypting and uploading…</string>
