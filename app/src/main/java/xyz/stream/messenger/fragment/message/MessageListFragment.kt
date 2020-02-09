@@ -332,6 +332,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         }
 
         repeat.adapter = ArrayAdapter.createFromResource(fragmentActivity!!, R.array.scheduled_message_repeat, android.R.layout.simple_spinner_dropdown_item)
+        repeat.setSelection(message.repeat)
 
         val color = if (Settings.useGlobalThemeColor) {
             Settings.mainColorSet.colorAccent
