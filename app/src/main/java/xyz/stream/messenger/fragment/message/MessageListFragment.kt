@@ -339,6 +339,13 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             argManager.colorAccent
         }
 
+        val okText = if (scheduleImmediately) {
+            R.string.schedule
+        }
+        else {
+            android.R.string.ok
+        }
+
         val cancelText = if (isEdit) {
             R.string.delete
         }
@@ -354,7 +361,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
                     hideScheduledTime()
                     imageData = null
                 }
-                .setPositiveButton(android.R.string.ok) {_, _ ->
+                .setPositiveButton(okText) {_, _ ->
                     if (scheduleImmediately) {
                         sendManager.sendScheduledMessage(message)
                     }
