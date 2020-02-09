@@ -383,6 +383,25 @@ class SendMessageManager(private val fragment: MessageListFragment) {
             })
         }
 
+        val uris = ArrayList<MediaMessage>()
+        attachManager.currentlyAttached.mapTo(uris) { MediaMessage(it.mediaUri, it.mimeType) }
+        
+        uris.forEach {
+            val m = ScheduledMessage()
+            m.timestamp = message.timestamp
+            m.data = it.uri.toString()
+            m.mimeType = it.mimeType
+            m.to = message.to
+            m.title = message.title
+            m.repeat = message.repeat
+
+            if (m.id != 0L) {
+                m.id = 0
+            }
+
+            messages.add(m)
+        }
+
         messageEntry.text = null
 
         fragment.hideScheduledTime()
@@ -391,6 +410,9 @@ class SendMessageManager(private val fragment: MessageListFragment) {
         disableMessageScheduling()
         Handler().postDelayed({
             attachInitializer.openScheduledMessages()
+            if (uris.isNotEmpty()) {
+                attachManager.clearAttachedData()
+            }
         }, 500)
     }
 
