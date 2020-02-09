@@ -23,6 +23,7 @@ import xyz.stream.messenger.shared.data.model.ScheduledMessage
 import xyz.stream.messenger.fragment.ScheduledMessagesFragment
 import xyz.stream.messenger.shared.data.FeatureFlags
 import xyz.stream.messenger.shared.service.jobs.ScheduledMessageJob
+import xyz.stream.messenger.shared.util.ScheduledMessageUtils
 import xyz.stream.messenger.shared.util.TimeUtils
 
 @Suppress("DEPRECATION")
@@ -37,35 +38,8 @@ class EditScheduledMessageFragment : TabletOptimizedBottomSheetDialogFragment() 
     private lateinit var messageText: EditText
     private lateinit var repeat: Spinner
 
-    // samsung messed up the date picker in some languages on Lollipop 5.0 and 5.1. Ugh.
-    // fixes this issue: http://stackoverflow.com/a/34853067
     private val contextToFixDatePickerCrash: ContextWrapper
-        get() = object : ContextWrapper(activity) {
-
-            private var wrappedResources: Resources? = null
-
-            override fun getResources(): Resources {
-                val r = super.getResources()
-                if (wrappedResources == null) {
-                    wrappedResources = object : Resources(r.assets, r.displayMetrics, r.configuration) {
-                        @Throws(Resources.NotFoundException::class)
-                        override fun getString(id: Int, vararg formatArgs: Any): String {
-                            return try {
-                                super.getString(id, *formatArgs)
-                            } catch (ifce: IllegalFormatConversionException) {
-                                Log.e("DatePickerDialogFix", "IllegalFormatConversionException Fixed!", ifce)
-                                var template = super.getString(id)
-                                template = template.replace(("%" + ifce.conversion).toRegex(), "%s")
-                                String.format(configuration.locale, template, *formatArgs)
-                            }
-
-                        }
-                    }
-                }
-
-                return wrappedResources!!
-            }
-        }
+        get() = ScheduledMessageUtils.getContextToFixDatePickerCrash(activity!!)
 
     override fun createLayout(inflater: LayoutInflater): View {
         val contentView = inflater.inflate(R.layout.bottom_sheet_edit_scheduled_message, null, false)

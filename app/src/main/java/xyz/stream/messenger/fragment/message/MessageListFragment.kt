@@ -59,10 +59,7 @@ import xyz.stream.messenger.shared.data.model.ScheduledMessage
 import xyz.stream.messenger.shared.receiver.MessageListUpdatedReceiver
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.shared_interfaces.IMessageListFragment
-import xyz.stream.messenger.shared.util.AnimationUtils
-import xyz.stream.messenger.shared.util.CursorUtil
-import xyz.stream.messenger.shared.util.DensityUtil
-import xyz.stream.messenger.shared.util.TimeUtils
+import xyz.stream.messenger.shared.util.*
 import xyz.stream.messenger.utils.multi_select.MessageMultiSelectDelegate
 import java.util.*
 
@@ -101,33 +98,8 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     private var imageData: ShareData? = null
     private var scheduledMessageCalendar: Calendar? = null
 
-    // samsung messed up the date picker in some languages on Lollipop 5.0 and 5.1. Ugh.
-    // fixes this issue: http://stackoverflow.com/a/34853067
     private val contextToFixDatePickerCrash: ContextWrapper
-        get() = object : ContextWrapper(activity!!) {
-            private var wrappedResources: Resources? = null
-            override fun getResources(): Resources {
-                val r = super.getResources()
-                if (wrappedResources == null) {
-                    wrappedResources = object : Resources(r.assets, r.displayMetrics, r.configuration) {
-                        @Throws(Resources.NotFoundException::class)
-                        override fun getString(id: Int, vararg formatArgs: Any): String {
-                            return try {
-                                super.getString(id, *formatArgs)
-                            } catch (ifce: IllegalFormatConversionException) {
-                                Log.e("DatePickerDialogFix", "IllegalFormatConversionException Fixed!", ifce)
-                                var template = super.getString(id)
-                                template = template.replace(("%" + ifce.conversion).toRegex(), "%s")
-                                String.format(configuration.locale, template, *formatArgs)
-                            }
-
-                        }
-                    }
-                }
-
-                return wrappedResources!!
-            }
-        }
+        get() = ScheduledMessageUtils.getContextToFixDatePickerCrash(activity!!)
 
     override val conversationId: Long
         get() = argManager.conversationId
