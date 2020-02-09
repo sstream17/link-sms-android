@@ -296,11 +296,11 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         updateTimeInputs(scheduledMessageCalendar!!, date, time)
 
         date.setOnClickListener {
-            displayDateDialog(scheduledMessageCalendar!!, date, time)
+            ScheduledMessageUtils.displayDateDialog(fragmentActivity!!, scheduledMessageCalendar!!, date, time)
         }
 
         time.setOnClickListener {
-            displayTimeDialog(scheduledMessageCalendar!!, date, time)
+            ScheduledMessageUtils.displayTimeDialog(fragmentActivity!!, scheduledMessageCalendar!!, date, time)
         }
 
         repeat.adapter = ArrayAdapter.createFromResource(fragmentActivity!!, R.array.scheduled_message_repeat, android.R.layout.simple_spinner_dropdown_item)
@@ -353,53 +353,6 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(color)
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
-    }
-
-    private fun displayDateDialog(scheduledMessageDate: Calendar, date: TextView, time: TextView) {
-        var context: Context? = contextToFixDatePickerCrash
-
-        if (context == null) {
-            context = fragmentActivity
-        }
-
-        if (context == null) {
-            return
-        }
-
-        val datePickerDialog = DatePickerDialog(context)
-        datePickerDialog.setOnDateSetListener { _, year, month, day ->
-            val originalDate = scheduledMessageDate.clone() as Calendar
-            TimeUtils.zeroCalendarDay(originalDate)
-            val calendarDate = GregorianCalendar(year, month, day).timeInMillis
-            val offset = scheduledMessageDate.timeInMillis - originalDate.timeInMillis
-            scheduledMessageDate.timeInMillis = calendarDate + offset
-            updateTimeInputs(scheduledMessageDate, date, time)
-        }
-        datePickerDialog.datePicker.minDate = TimeUtils.now
-        datePickerDialog.show()
-    }
-
-    private fun displayTimeDialog(scheduledMessageDate: Calendar, date: TextView, time: TextView) {
-        if (fragmentActivity == null) {
-            return
-        }
-
-        val calendar = Calendar.getInstance()
-        TimePickerDialog(fragmentActivity, { _, hourOfDay, minute ->
-            TimeUtils.zeroCalendarDay(scheduledMessageDate)
-            scheduledMessageDate.timeInMillis = scheduledMessageDate.timeInMillis + 1000 * 60 * 60 * hourOfDay
-            scheduledMessageDate.timeInMillis = scheduledMessageDate.timeInMillis + 1000 * 60 * minute
-
-            if (scheduledMessageDate.timeInMillis < TimeUtils.now) {
-                scheduledMessageDate.timeInMillis = TimeUtils.now
-            }
-
-            updateTimeInputs(scheduledMessageDate, date, time)
-        },
-                calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE),
-                DateFormat.is24HourFormat(fragmentActivity))
-                .show()
     }
 
     fun showScheduledTime(message: ScheduledMessage, isEdit: Boolean = false) {
