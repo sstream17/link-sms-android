@@ -122,10 +122,10 @@ class SendMessageManager(private val fragment: MessageListFragment) {
 
         send.setOnLongClickListener {
             val sig = Settings.signature
-            val signature = sig != null && !sig.isEmpty()
+            val signature = sig != null && sig.isNotEmpty()
             val delayedSending = Settings.delayedSendingTimeout != 0L
 
-            val scheduleImmediately = !messageEntry.text.toString().isNullOrBlank()
+            val scheduleImmediately = !messageEntry.text.toString().isBlank()
 
             when {
                 signature && delayedSending -> {
