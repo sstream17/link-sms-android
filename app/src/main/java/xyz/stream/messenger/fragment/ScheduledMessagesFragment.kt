@@ -246,67 +246,6 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
         }
     }
 
-    private fun startSchedulingMessage() {
-        val message = ScheduledMessage()
-        displayNameDialog(message)
-    }
-
-    private fun displayNameDialog(message: ScheduledMessage) {
-        val layout = LayoutInflater.from(fragmentActivity)
-                .inflate(R.layout.dialog_recipient_edit_text, null, false)
-        val editText = layout.findViewById<View>(R.id.edit_text) as RecipientEditTextView
-        editText.setHint(R.string.scheduled_to_hint)
-        editText.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-        val adapter = BaseRecipientAdapter(BaseRecipientAdapter.QUERY_TYPE_PHONE, fragmentActivity!!)
-        adapter.isShowMobileOnly = Settings.mobileOnly
-        editText.setAdapter(adapter)
-
-        editText.post {
-            editText.requestFocus()
-            (activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)?.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-        }
-
-        val dialog = AlertDialog.Builder(fragmentActivity!!)
-                .setView(layout)
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    when {
-                        editText.recipients.isNotEmpty() -> {
-                            val to = StringBuilder()
-                            val title = StringBuilder()
-
-                            for (chip in editText.recipients) {
-                                to.append(PhoneNumberUtils.clearFormatting(chip.entry.destination))
-                                title.append(chip.entry.displayName)
-                                to.append(", ")
-                                title.append(", ")
-                            }
-
-                            message.to = to.toString()
-                            message.title = title.toString()
-
-                            message.to = message.to!!.substring(0, message.to!!.length - 2)
-                            message.title = message.title!!.substring(0, message.title!!.length - 2)
-                        }
-                        editText.text.isNotEmpty() -> {
-                            message.to = PhoneNumberUtils.clearFormatting(editText
-                                    .text.toString())
-                            message.title = message.to
-                        }
-                        else -> {
-                            displayNameDialog(message)
-                            return@setPositiveButton
-                        }
-                    }
-
-                    dismissKeyboard(editText)
-                    displayDateDialog(message)
-                }
-                .setNegativeButton(android.R.string.cancel, null)
-                .show()
-
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-    }
-
     private fun displayDateDialog(message: ScheduledMessage) {
         var context: Context? = contextToFixDatePickerCrash
 
@@ -488,18 +427,6 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
             messages.forEach { DataSource.insertScheduledMessage(fragmentActivity!!, it) }
             loadMessages()
         }.start()
-    }
-
-    private fun dismissKeyboard(editText: EditText?) {
-        if (editText == null) {
-            return
-        }
-
-        try {
-            val imm = fragmentActivity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(editText.windowToken, 0)
-        } catch (e: Exception) {
-        }
     }
 
     companion object {
