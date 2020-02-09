@@ -96,9 +96,6 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     private var imageData: ShareData? = null
     private var scheduledMessageCalendar: Calendar? = null
 
-    private val contextToFixDatePickerCrash: ContextWrapper
-        get() = ScheduledMessageUtils.getContextToFixDatePickerCrash(activity!!)
-
     override val conversationId: Long
         get() = argManager.conversationId
 

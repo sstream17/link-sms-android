@@ -15,7 +15,7 @@ object ScheduledMessageUtils {
 
     // samsung messed up the date picker in some languages on Lollipop 5.0 and 5.1. Ugh.
     // fixes this issue: http://stackoverflow.com/a/34853067
-    fun getContextToFixDatePickerCrash(activity: Activity): ContextWrapper {
+    private fun getContextToFixDatePickerCrash(activity: Activity): ContextWrapper {
         return object : ContextWrapper(activity!!) {
             private var wrappedResources: Resources? = null
             override fun getResources(): Resources {
