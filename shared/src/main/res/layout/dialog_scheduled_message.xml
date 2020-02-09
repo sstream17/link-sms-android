@@ -41,7 +41,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="?selectableItemBackground"
-            android:drawableEnd="@drawable/ic_collapse"
             android:textColor="@color/primaryText"
             android:textIsSelectable="false"
             android:textSize="16sp" />
@@ -58,7 +57,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="?selectableItemBackground"
-            android:drawableEnd="@drawable/ic_collapse"
             android:textColor="@color/primaryText"
             android:textIsSelectable="false"
             android:textSize="16sp" />
