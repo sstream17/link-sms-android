@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 
-import java.text.DateFormat
+import android.text.format.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.GregorianCalendar
@@ -31,22 +31,18 @@ class EditScheduledMessageFragment : TabletOptimizedBottomSheetDialogFragment() 
 
     private var fragment: ScheduledMessagesFragment? = null
     private var scheduledMessage: ScheduledMessage? = null
-
-    private lateinit var format: DateFormat
+    private var scheduledMessageCalendar: Calendar? = null
 
     private lateinit var sendDate: TextView
+    private lateinit var sendTime: TextView
     private lateinit var messageText: EditText
     private lateinit var repeat: Spinner
-
-    private val contextToFixDatePickerCrash: ContextWrapper
-        get() = ScheduledMessageUtils.getContextToFixDatePickerCrash(activity!!)
 
     override fun createLayout(inflater: LayoutInflater): View {
         val contentView = inflater.inflate(R.layout.bottom_sheet_edit_scheduled_message, null, false)
 
-        format = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT)
-
-        sendDate = contentView.findViewById<TextView>(R.id.send_time)
+        sendDate = contentView.findViewById<TextView>(R.id.send_date)
+        sendTime = contentView.findViewById<TextView>(R.id.send_time)
         messageText = contentView.findViewById<EditText>(R.id.message)
         repeat = contentView.findViewById<Spinner>(R.id.repeat_interval)
         val name = contentView.findViewById<TextView>(R.id.contact_name)
@@ -56,7 +52,9 @@ class EditScheduledMessageFragment : TabletOptimizedBottomSheetDialogFragment() 
 
         if (scheduledMessage != null) {
             messageText.setText(scheduledMessage!!.data)
-            sendDate.text = format.format(scheduledMessage!!.timestamp)
+            sendDate.text = DateFormat.format("MM/dd/yy", scheduledMessage!!.timestamp)
+            val timeFormat = if (DateFormat.is24HourFormat(activity!!)) "HH:mm" else "hh:mm a"
+            sendTime.text = DateFormat.format(timeFormat, scheduledMessage!!.timestamp)
             name.text = scheduledMessage!!.title
             messageText.setSelection(messageText.text.length)
 
@@ -67,7 +65,11 @@ class EditScheduledMessageFragment : TabletOptimizedBottomSheetDialogFragment() 
         save.setOnClickListener { save() }
         delete.setOnClickListener { delete() }
         send.setOnClickListener { send() }
-        sendDate.setOnClickListener { displayDateDialog() }
+
+        scheduledMessageCalendar = Calendar.getInstance()
+        scheduledMessageCalendar?.timeInMillis = scheduledMessage!!.timestamp
+        sendDate.setOnClickListener { ScheduledMessageUtils.displayDateDialog(activity!!, scheduledMessageCalendar!!, sendDate, sendTime) }
+        sendTime.setOnClickListener { ScheduledMessageUtils.displayTimeDialog(activity!!, scheduledMessageCalendar!!, sendDate, sendTime) }
 
         return contentView
     }
@@ -87,6 +89,7 @@ class EditScheduledMessageFragment : TabletOptimizedBottomSheetDialogFragment() 
             return
         }
 
+        scheduledMessage!!.timestamp = scheduledMessageCalendar!!.timeInMillis
         scheduledMessage!!.data = messageText.text.toString()
         scheduledMessage!!.repeat = repeat.selectedItemPosition
         DataSource.updateScheduledMessage(activity, scheduledMessage!!)
@@ -109,40 +112,5 @@ class EditScheduledMessageFragment : TabletOptimizedBottomSheetDialogFragment() 
         save()
 
         ScheduledMessageJob.scheduleNextRun(fragment!!.activity!!)
-    }
-
-    private fun displayDateDialog() {
-        val context = contextToFixDatePickerCrash
-
-        val calendar = Calendar.getInstance()
-        DatePickerDialog(context, { _, year, month, day ->
-            scheduledMessage!!.timestamp = GregorianCalendar(year, month, day)
-                    .timeInMillis
-            displayTimeDialog()
-        },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH))
-                .show()
-    }
-
-    private fun displayTimeDialog() {
-        val calendar = Calendar.getInstance()
-        TimePickerDialog(activity, { _, hourOfDay, minute ->
-            scheduledMessage!!.timestamp += (1000 * 60 * 60 * hourOfDay).toLong()
-            scheduledMessage!!.timestamp += (1000 * 60 * minute).toLong()
-
-            if (scheduledMessage!!.timestamp < TimeUtils.now) {
-                Toast.makeText(activity, R.string.scheduled_message_in_future,
-                        Toast.LENGTH_SHORT).show()
-                displayDateDialog()
-            } else {
-                sendDate.text = format.format(scheduledMessage!!.timestamp)
-            }
-        },
-                calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE),
-                android.text.format.DateFormat.is24HourFormat(activity))
-                .show()
     }
 }

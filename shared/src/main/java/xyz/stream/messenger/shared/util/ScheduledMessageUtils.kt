@@ -57,7 +57,7 @@ object ScheduledMessageUtils {
             scheduledMessageDate.timeInMillis = calendarDate + offset
             updateTimeInputs(fragmentActivity, scheduledMessageDate, date, time)
         }
-        
+
         val datePickerDialog = DatePickerDialog(
                 context,
                 listener,
