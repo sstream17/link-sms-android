@@ -1,30 +1,17 @@
 package xyz.stream.messenger.fragment.bottom_sheet
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.res.Resources
-import android.util.Log
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
-
-import android.text.format.DateFormat
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.GregorianCalendar
-import java.util.IllegalFormatConversionException
-
 import xyz.stream.messenger.R
+import xyz.stream.messenger.fragment.ScheduledMessagesFragment
 import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.model.ScheduledMessage
-import xyz.stream.messenger.fragment.ScheduledMessagesFragment
-import xyz.stream.messenger.shared.data.FeatureFlags
 import xyz.stream.messenger.shared.service.jobs.ScheduledMessageJob
 import xyz.stream.messenger.shared.util.ScheduledMessageUtils
 import xyz.stream.messenger.shared.util.TimeUtils
+import java.util.*
 
 @Suppress("DEPRECATION")
 class EditScheduledMessageFragment : TabletOptimizedBottomSheetDialogFragment() {

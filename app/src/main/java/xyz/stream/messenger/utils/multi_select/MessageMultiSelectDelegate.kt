@@ -5,12 +5,14 @@ import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Handler
-import android.util.Log
+import android.speech.tts.TextToSpeech
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
-import android.view.Menu
-import android.view.MenuItem
 import com.bignerdranch.android.multiselector.SelectableHolder
 import xyz.stream.messenger.R
 import xyz.stream.messenger.adapter.message.MessageListAdapter
@@ -23,9 +25,6 @@ import xyz.stream.messenger.shared.data.model.Message
 import xyz.stream.messenger.shared.util.ActivityUtils
 import xyz.stream.messenger.shared.util.ColorUtils
 import java.util.*
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.speech.tts.TextToSpeech
 
 
 @Suppress("DEPRECATION")
@@ -159,7 +158,7 @@ class MessageMultiSelectDelegate(private val fragment: MessageListFragment) : Mu
                 item.itemId == R.id.menu_copy_message -> {
                     handled = true
                     val message = DataSource.getMessage(activity!!, selectedIds[0])
-                    val text = MessageMultiSelectDelegate.getMessageContent(message)
+                    val text = getMessageContent(message)
 
                     val fragment = CopyMessageTextFragment(text!!)
                     fragment.show(activity!!.supportFragmentManager, "")
@@ -194,7 +193,7 @@ class MessageMultiSelectDelegate(private val fragment: MessageListFragment) : Mu
                     handled = true
 
                     val message = DataSource.getMessage(activity!!, selectedIds[0])
-                    val text = MessageMultiSelectDelegate.getMessageContent(message)
+                    val text = getMessageContent(message)
 
                     tts = TextToSpeech(activity, TextToSpeech.OnInitListener { status ->
                         if (status != TextToSpeech.ERROR) {
