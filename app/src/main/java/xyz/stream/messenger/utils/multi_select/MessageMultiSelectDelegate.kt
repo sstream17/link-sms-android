@@ -1,6 +1,7 @@
 package xyz.stream.messenger.utils.multi_select
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Handler
@@ -175,10 +176,19 @@ class MessageMultiSelectDelegate(private val fragment: MessageListFragment) : Mu
                 }
                 item.itemId == R.id.menu_message_details -> {
                     handled = true
-                    AlertDialog.Builder(activity!!)
+                    val builder = AlertDialog.Builder(activity!!)
                             .setMessage(DataSource.getMessageDetails(activity!!, selectedIds[0]))
                             .setPositiveButton(android.R.string.ok, null)
-                            .show()
+
+                    val color = if (Settings.useGlobalThemeColor) {
+                        Settings.mainColorSet.colorAccent
+                    } else {
+                        fragment.argManager.colorAccent
+                    }
+
+                    val dialog = builder.create()
+                    dialog.show()
+                    dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
                 }
                 item.itemId == R.id.menu_speak_message -> {
                     handled = true
