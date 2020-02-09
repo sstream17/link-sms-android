@@ -1,6 +1,7 @@
 package xyz.stream.messenger.fragment.message.send
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.net.Uri
@@ -157,11 +158,15 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                             }.show()
                 }
                 else -> {
-                    AlertDialog.Builder(activity!!)
+                    val builder = AlertDialog.Builder(activity!!)
                             .setMessage(R.string.send_as_scheduled_message_question)
                             .setPositiveButton(android.R.string.yes) { _, _ -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately) }
                             .setNegativeButton(android.R.string.no) { _, _ -> }
-                            .show()
+
+                    val alertDialog = builder.create()
+                    alertDialog.show()
+                    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(accent)
+                    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(accent)
                 }
             }
 
