@@ -17,13 +17,19 @@
 <changelog>
 
     <version
-        name="1.1.1"
+        name="0.2.0"
+        description="February 9th, 2020">
+        <text>Updated scheduled messages to provide a more consistent user experience throughout the app</text>
+    </version>
+
+    <version
+        name="0.1.1"
         description="February 2nd, 2020">
         <text>Added "Mark as Read" to options for multiple selected conversations</text>
     </version>
 
     <version
-        name="1.1.0"
+        name="0.1.0"
         description="January 17th, 2020">
         <text>Updates to notifications:</text>
         <text>Added an option to bundle notifications</text>
@@ -31,7 +37,7 @@
     </version>
 
     <version
-        name="1.0.0"
+        name="0.0.1"
         description="January 13th, 2020">
         <text>Restarted version number for new package name</text>
     </version>
