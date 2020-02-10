@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Parcelable
 import xyz.stream.messenger.R
 import xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper
+import xyz.stream.messenger.shared.MessengerActivityExtras
 import xyz.stream.messenger.shared.data.MimeType
 import xyz.stream.messenger.shared.service.MessengerChooserTargetService
 import xyz.stream.messenger.shared.util.FileUtils
@@ -19,6 +20,8 @@ class ComposeIntentHandler(private val activity: ComposeActivity) {
 
     fun handle(intent: Intent) {
         if (intent.action == null) {
+            val shouldSchedule = intent.getBooleanExtra(MessengerActivityExtras.EXTRA_SHOULD_SCHEDULE_MESSAGE, false)
+            activity.sender.shouldScheduledMessage = shouldSchedule
             return
         }
 
@@ -31,7 +34,7 @@ class ComposeIntentHandler(private val activity: ComposeActivity) {
                 intent.action == Intent.ACTION_SEND_MULTIPLE -> shareMultipleImages(intent)
             }
         } catch (e: Exception) {
-            xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.caughtForceClose(activity, "caught when sharing to compose activity", e)
+            AnalyticsHelper.caughtForceClose(activity, "caught when sharing to compose activity", e)
         }
     }
 

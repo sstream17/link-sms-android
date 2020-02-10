@@ -32,7 +32,7 @@ class GiphySearchView(context: Context, private val listener: ImageSelectedListe
             listener.onImageSelected(uri, MimeType.IMAGE_GIF)
         }
 
-        giphy.initializeView(xyz.stream.messenger.BuildConfig.GIPHY_API_KEY, MmsSettings.maxImageSize, useStickers)
+        giphy.initializeView(BuildConfig.GIPHY_API_KEY, MmsSettings.maxImageSize, useStickers)
     }
 
 }

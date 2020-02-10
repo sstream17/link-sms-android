@@ -18,12 +18,34 @@
         android:textStyle="bold" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/scheduled_date" />
+
+    <TextView
+        android:id="@+id/send_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:background="?selectableItemBackground"
+        android:textColor="@color/primaryText"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scheduled_time" />
+
+    <TextView
         android:id="@+id/send_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
         android:background="?selectableItemBackground"
-        android:textColor="@color/secondaryText"
+        android:textColor="@color/primaryText"
         android:textSize="14sp" />
 
     <EditText

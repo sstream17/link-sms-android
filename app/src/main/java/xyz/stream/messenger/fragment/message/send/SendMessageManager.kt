@@ -1,6 +1,7 @@
 package xyz.stream.messenger.fragment.message.send
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.net.Uri
@@ -23,6 +24,7 @@ import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.MimeType
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.Message
+import xyz.stream.messenger.shared.data.model.ScheduledMessage
 import xyz.stream.messenger.shared.data.pojo.KeyboardLayout
 import xyz.stream.messenger.shared.service.NewMessagesCheckService
 import xyz.stream.messenger.shared.util.*
@@ -36,6 +38,8 @@ class SendMessageManager(private val fragment: MessageListFragment) {
         get() = fragment.argManager
     private val attachManager
         get() = fragment.attachManager
+    private val attachInitializer
+        get () = fragment.attachInitializer
     private val messageLoader
         get() = fragment.messageLoader
 
@@ -119,15 +123,17 @@ class SendMessageManager(private val fragment: MessageListFragment) {
 
         send.setOnLongClickListener {
             val sig = Settings.signature
-            val signature = sig != null && !sig.isEmpty()
+            val signature = sig != null && sig.isNotEmpty()
             val delayedSending = Settings.delayedSendingTimeout != 0L
+
+            val scheduleImmediately = !messageEntry.text.toString().isBlank()
 
             when {
                 signature && delayedSending -> {
                     AlertDialog.Builder(activity!!)
                             .setItems(R.array.send_button_signature_delay) { _, position ->
                                 when (position) {
-                                    0 -> scheduleMessage()
+                                    0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
                                     1 -> sendMessageOnFragmentClosed()
                                     2 -> requestPermissionThenSend(true)
                                 }
@@ -137,7 +143,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                     AlertDialog.Builder(activity!!)
                             .setItems(R.array.send_button_no_signature_delay) { _, position ->
                                 when (position) {
-                                    0 -> scheduleMessage()
+                                    0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
                                     1 -> sendMessageOnFragmentClosed()
                                 }
                             }.show()
@@ -146,17 +152,21 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                     AlertDialog.Builder(activity!!)
                             .setItems(R.array.send_button_signature_no_delay) { _, position ->
                                 when (position) {
-                                    0 -> scheduleMessage()
+                                    0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
                                     1 -> requestPermissionThenSend(true)
                                 }
                             }.show()
                 }
                 else -> {
-                    AlertDialog.Builder(activity!!)
+                    val builder = AlertDialog.Builder(activity!!)
                             .setMessage(R.string.send_as_scheduled_message_question)
-                            .setPositiveButton(android.R.string.yes) { _, _ -> scheduleMessage() }
+                            .setPositiveButton(android.R.string.yes) { _, _ -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately) }
                             .setNegativeButton(android.R.string.no) { _, _ -> }
-                            .show()
+
+                    val alertDialog = builder.create()
+                    alertDialog.show()
+                    alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(accent)
+                    alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(accent)
                 }
             }
 
@@ -343,6 +353,73 @@ class SendMessageManager(private val fragment: MessageListFragment) {
             this.fragment.loadMessages(true)
             this.fragment.notificationManager.dismissOnMessageSent()
         }
+    }
+
+    fun enableMessageScheduling(message: ScheduledMessage) {
+        send.setOnClickListener { sendScheduledMessage(message) }
+    }
+
+    fun disableMessageScheduling() {
+        send.setOnClickListener { requestPermissionThenSend() }
+    }
+
+    fun sendScheduledMessage(message: ScheduledMessage) {
+        val activity = activity ?: return
+        val conversation = DataSource.getConversation(activity, argManager.conversationId)
+        message.to = conversation?.phoneNumbers
+        message.title = conversation?.title
+
+        val messages = mutableListOf<ScheduledMessage>()
+
+        if (messageEntry.text.isNotEmpty()) {
+            messages.add(ScheduledMessage().apply {
+                this.id = DataSource.generateId()
+                this.repeat = message.repeat
+                this.timestamp = message.timestamp
+                this.title = message.title
+                this.to = message.to
+                this.data = messageEntry.text.toString().trim { it <= ' ' }
+                this.mimeType = MimeType.TEXT_PLAIN
+            })
+        }
+
+        val uris = ArrayList<MediaMessage>()
+        attachManager.currentlyAttached.mapTo(uris) { MediaMessage(it.mediaUri, it.mimeType) }
+        
+        uris.forEach {
+            val m = ScheduledMessage()
+            m.timestamp = message.timestamp
+            m.data = it.uri.toString()
+            m.mimeType = it.mimeType
+            m.to = message.to
+            m.title = message.title
+            m.repeat = message.repeat
+
+            if (m.id != 0L) {
+                m.id = 0
+            }
+
+            messages.add(m)
+        }
+
+        messageEntry.text = null
+
+        fragment.hideScheduledTime()
+        saveMessages(messages)
+        attachInitializer.initAttachHolder()
+        disableMessageScheduling()
+        Handler().postDelayed({
+            attachInitializer.openScheduledMessages()
+            if (uris.isNotEmpty()) {
+                attachManager.clearAttachedData()
+            }
+        }, 500)
+    }
+
+    private fun saveMessages(messages: List<ScheduledMessage>) {
+        Thread {
+            messages.forEach { DataSource.insertScheduledMessage(activity!!, it) }
+        }.start()
     }
 
     private data class MediaMessage(val uri: Uri, val mimeType: String)

@@ -16,38 +16,50 @@
 
 package xyz.stream.messenger.fragment.message
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.*
-import androidx.appcompat.app.AlertDialog
+import android.text.format.DateFormat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.Spinner
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.sgottard.sofa.ContentFragment
-
 import xyz.stream.messenger.R
-import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.activity.MessengerTvActivity
-import xyz.stream.messenger.activity.main.MainSearchHelper
+import xyz.stream.messenger.activity.compose.ShareData
 import xyz.stream.messenger.fragment.message.attach.AttachmentInitializer
 import xyz.stream.messenger.fragment.message.attach.AttachmentListener
 import xyz.stream.messenger.fragment.message.attach.AttachmentManager
-import xyz.stream.messenger.fragment.message.send.MessageCounterCalculator
 import xyz.stream.messenger.fragment.message.load.MessageListLoader
-import xyz.stream.messenger.fragment.message.send.PermissionHelper
-import xyz.stream.messenger.fragment.message.send.SendMessageManager
 import xyz.stream.messenger.fragment.message.load.ViewInitializerDeferred
 import xyz.stream.messenger.fragment.message.load.ViewInitializerNonDeferred
+import xyz.stream.messenger.fragment.message.send.MessageCounterCalculator
+import xyz.stream.messenger.fragment.message.send.PermissionHelper
+import xyz.stream.messenger.fragment.message.send.SendMessageManager
 import xyz.stream.messenger.shared.data.DataSource
+import xyz.stream.messenger.shared.data.Settings
+import xyz.stream.messenger.shared.data.model.ScheduledMessage
 import xyz.stream.messenger.shared.receiver.MessageListUpdatedReceiver
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.shared_interfaces.IMessageListFragment
-import xyz.stream.messenger.shared.util.AnimationUtils
-import xyz.stream.messenger.shared.util.CursorUtil
+import xyz.stream.messenger.shared.util.*
 import xyz.stream.messenger.utils.multi_select.MessageMultiSelectDelegate
+import java.util.*
 
 /**
  * Fragment for displaying messages for a certain conversation.
@@ -79,6 +91,10 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     private var extraMarginTop = 0
     private var extraMarginLeft = 0
+
+    private var scheduledMessage: ScheduledMessage = ScheduledMessage()
+    private var imageData: ShareData? = null
+    private var scheduledMessageCalendar: Calendar? = null
 
     override val conversationId: Long
         get() = argManager.conversationId
@@ -173,7 +189,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             updatedReceiver = null
         }
 
-        draftManager.createDrafts()
+        draftManager.createDrafts(scheduledMessage = scheduledMessage)
         multiSelect.clearActionMode()
     }
 
@@ -241,6 +257,12 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
 
     }
 
+    fun startSchedulingMessage(scheduleImmediately: Boolean = false) {
+        scheduledMessage = ScheduledMessage()
+        scheduledMessage.timestamp = TimeUtils.now
+        displayScheduleDialog(scheduledMessage, scheduleImmediately = scheduleImmediately)
+    }
+
     private fun dismissDetailsChoiceDialog() {
         if (detailsChoiceDialog != null && detailsChoiceDialog!!.isShowing) {
             detailsChoiceDialog!!.dismiss()
@@ -248,4 +270,172 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
         }
     }
 
+    private fun updateTimeInputs(newDate: Calendar, date: TextView, time: TextView){
+        date.text = DateFormat.format("MMM dd, yyyy", newDate)
+        val timeFormat = if (DateFormat.is24HourFormat(fragmentActivity)) "HH:mm" else "hh:mm a"
+        time.text = if (newDate.timeInMillis < TimeUtils.now + 10 * TimeUtils.SECOND) {
+            "Now"
+        } else {
+            DateFormat.format(timeFormat, newDate)
+        }
+    }
+
+    private fun displayScheduleDialog(message: ScheduledMessage, isEdit: Boolean = false, scheduleImmediately: Boolean = false){
+        val layout = LayoutInflater.from(fragmentActivity).inflate(R.layout.dialog_scheduled_message, null, false)
+        val date = layout.findViewById<TextView>(R.id.schedule_date)
+        val time = layout.findViewById<TextView>(R.id.schedule_time)
+        val repeat = layout.findViewById<Spinner>(R.id.repeat_interval)
+
+        scheduledMessageCalendar = Calendar.getInstance()
+        scheduledMessageCalendar?.timeInMillis = message.timestamp
+        updateTimeInputs(scheduledMessageCalendar!!, date, time)
+
+        date.setOnClickListener {
+            ScheduledMessageUtils.displayDateDialog(fragmentActivity!!, scheduledMessageCalendar!!, date, time)
+        }
+
+        time.setOnClickListener {
+            ScheduledMessageUtils.displayTimeDialog(fragmentActivity!!, scheduledMessageCalendar!!, date, time)
+        }
+
+        repeat.adapter = ArrayAdapter.createFromResource(fragmentActivity!!, R.array.scheduled_message_repeat, android.R.layout.simple_spinner_dropdown_item)
+        repeat.setSelection(message.repeat)
+
+        val color = if (Settings.useGlobalThemeColor) {
+            Settings.mainColorSet.colorAccent
+        } else {
+            argManager.colorAccent
+        }
+
+        val okText = if (scheduleImmediately) {
+            R.string.schedule
+        }
+        else {
+            android.R.string.ok
+        }
+
+        val cancelText = if (isEdit) {
+            R.string.delete
+        }
+        else {
+            android.R.string.cancel
+        }
+
+        val builder = AlertDialog.Builder(fragmentActivity!!)
+                .setView(layout)
+                .setCancelable(false)
+                .setNegativeButton(cancelText) { _, _ ->
+                    sendManager.disableMessageScheduling()
+                    hideScheduledTime()
+                    imageData = null
+                }
+                .setPositiveButton(okText) {_, _ ->
+                    if (scheduleImmediately) {
+                        sendManager.sendScheduledMessage(message)
+                    }
+                    else {
+                        message.repeat = repeat.selectedItemPosition
+                        message.timestamp = scheduledMessageCalendar?.timeInMillis ?: TimeUtils.now
+                        if (message.timestamp > TimeUtils.now) {
+                            sendManager.enableMessageScheduling(message)
+                            showScheduledTime(message, isEdit)
+                        }
+                    }
+                }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(color)
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
+    }
+
+    fun showScheduledTime(message: ScheduledMessage, isEdit: Boolean = false) {
+
+        if (!isEdit) {
+            Handler().postDelayed({
+
+                Thread { try {
+                    val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+
+                    if (info != null) {
+                        activity?.runOnUiThread {
+                            val params = info.layoutParams
+                            val animator = ValueAnimator.ofInt(0, DensityUtil.toDp(activity, 40))
+
+                            info.requestLayout()
+                            info.visibility = View.VISIBLE
+
+
+                            animator.addUpdateListener { valueAnimator ->
+                                val value = valueAnimator.animatedValue as Int
+                                params.height = value
+                                info.layoutParams = params
+                            }
+
+                            animator.duration = 200
+                            animator.start()
+                        }
+                    }
+                } catch (e: Throwable) {} }.start()
+            }, 500)
+        }
+
+        val dateTime = fragmentActivity?.findViewById<TextView>(R.id.scheduled_date_time)
+        val time = if (DateFormat.is24HourFormat(fragmentActivity)) {
+            DateFormat.format("MM/dd/yy HH:mm", message.timestamp)
+        } else {
+            DateFormat.format("MM/dd/yy hh:mm a", message.timestamp)
+        }
+
+        var repeat = when (message.repeat) {
+            ScheduledMessage.REPEAT_DAILY -> getString(R.string.scheduled_repeat_daily)
+            ScheduledMessage.REPEAT_WEEKLY -> getString(R.string.scheduled_repeat_weekly)
+            ScheduledMessage.REPEAT_MONTHLY -> getString(R.string.scheduled_repeat_monthly)
+            ScheduledMessage.REPEAT_YEARLY -> getString(R.string.scheduled_repeat_yearly)
+            else -> ""
+        }
+
+        if (!repeat.isBlank()) {
+            repeat = " ($repeat)"
+        }
+
+        val text = getString(R.string.scheduled_time_formatted, time, repeat)
+        dateTime?.text = text
+
+        val editButton = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info_button)
+        editButton?.setOnClickListener { displayScheduleDialog(message, isEdit = true) }
+    }
+
+    fun hideScheduledTime() {
+        Handler().postDelayed({
+
+            Thread { try {
+                val info = fragmentActivity?.findViewById<LinearLayout>(R.id.scheduled_message_info)
+
+                if (info != null) {
+                    activity?.runOnUiThread {
+                        val params = info.layoutParams
+                        val animator = ValueAnimator.ofInt(info.height, 0)
+
+                        animator.addUpdateListener { valueAnimator ->
+                            val value = valueAnimator.animatedValue as Int
+                            params.height = value
+                            info.layoutParams = params
+                        }
+
+                        animator.addListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                super.onAnimationEnd(animation)
+                                info.visibility = View.GONE
+                            }
+                        })
+
+                        animator.duration = 200
+                        animator.start()
+                    }
+                }
+            } catch (e: Throwable) {} }.start()
+        }, 500)
+    }
 }

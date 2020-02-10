@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Handler
-import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,16 +16,15 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.afollestad.materialcamera.MaterialCamera
 import xyz.stream.messenger.R
 import xyz.stream.messenger.fragment.ScheduledMessagesFragment
-import xyz.stream.messenger.fragment.camera.Camera2BasicFragment
 import xyz.stream.messenger.fragment.camera.FotoapparatFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.fragment.message.send.PermissionHelper
 import xyz.stream.messenger.shared.data.DataSource
-import xyz.stream.messenger.shared.data.FeatureFlags
 import xyz.stream.messenger.shared.data.MmsSettings
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
@@ -36,7 +34,6 @@ import xyz.stream.messenger.shared.util.SmsMmsUtils
 import xyz.stream.messenger.shared.util.TvUtils
 import xyz.stream.messenger.shared.util.listener.TextSelectedListener
 import xyz.stream.messenger.view.*
-import java.lang.Exception
 
 @Suppress("DEPRECATION")
 class AttachmentInitializer(private val fragment: MessageListFragment) {
@@ -210,6 +207,10 @@ class AttachmentInitializer(private val fragment: MessageListFragment) {
             attachContact.imageTintList = list
             applyTemplate.imageTintList = list
         }
+    }
+
+    fun openScheduledMessages() {
+        scheduledMessages.performClick()
     }
 
     private fun viewScheduledMessages() {
