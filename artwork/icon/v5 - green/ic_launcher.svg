@@ -1,62 +1,103 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>pulse/ic_launcher</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <rect id="path-1" x="2" y="2" width="44" height="44" rx="22"></rect>
-        <rect id="path-3" x="0" y="0" width="48" height="48"></rect>
-        <linearGradient x1="4.89336993%" y1="1.92464193%" x2="63.8139205%" y2="66.4743134%" id="linearGradient-5">
-            <stop stop-color="#EEEEEE" offset="0%"></stop>
-            <stop stop-color="#D8D8D8" stop-opacity="0" offset="100%"></stop>
-        </linearGradient>
-        <rect id="path-6" x="0" y="0" width="42.8421053" height="41.6842105"></rect>
-        <path d="M4.9787356,17.0323678 L1.37231969,20.6723037 L1.37231969,15.0323678 L1.37231969,2.24289408 C1.37231969,1.13832458 2.26775019,0.242894078 3.37231969,0.242894078 L19.785575,0.242894078 C20.8901445,0.242894078 21.785575,1.13832458 21.785575,2.24289408 L21.785575,15.0323678 C21.785575,16.1369373 20.8901445,17.0323678 19.785575,17.0323678 L4.9787356,17.0323678 Z" id="path-8"></path>
-        <filter x="-34.3%" y="-34.3%" width="178.4%" height="178.3%" filterUnits="objectBoundingBox" id="filter-9">
-            <feOffset dx="1" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0.00784313725   0 0 0 0 0.141176471   0 0 0 0 0.384313725  0 0 0 0.75 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
-        </filter>
-        <rect id="path-10" x="2" y="2" width="44" height="44" rx="22"></rect>
-    </defs>
-    <g id="ic_launcher" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="mask" fill="#FFFFFF" xlink:href="#path-1"></use>
-        <g id="ic_launcher_background" mask="url(#mask-2)">
-            <mask id="mask-4" fill="white">
-                <use xlink:href="#path-3"></use>
-            </mask>
-            <use id="dark-background" fill="#1665C0" fill-rule="evenodd" transform="translate(24.000000, 24.000000) scale(1, -1) translate(-24.000000, -24.000000) " xlink:href="#path-3"></use>
-            <polygon id="light-background" fill="#1775D2" fill-rule="evenodd" mask="url(#mask-4)" transform="translate(24.000000, 24.000000) scale(1, -1) translate(-24.000000, -24.000000) " points="0 0 48 48 48 0"></polygon>
-            <polygon id="light-line" fill="#247FDA" fill-rule="evenodd" mask="url(#mask-4)" transform="translate(24.000000, 24.000000) scale(1, -1) translate(-24.000000, -24.000000) " points="0 0 48 48 48 47.5624457 0.444777406 0"></polygon>
-            <polygon id="dark-line" fill="#135EB3" fill-rule="evenodd" mask="url(#mask-4)" transform="translate(24.000000, 24.000000) scale(1, -1) translate(-24.000000, -24.000000) " points="0 0 48 48 47.5608046 48 0 0.442226531"></polygon>
-        </g>
-        <g id="ic_launcher_foreground" mask="url(#mask-2)">
-            <g transform="translate(12.500000, 13.500000)">
-                <g id="shadow" stroke-width="1" fill-rule="evenodd">
-                    <mask id="mask-7" fill="white">
-                        <use xlink:href="#path-6"></use>
-                    </mask>
-                    <use id="Mask" fill="url(#linearGradient-5)" xlink:href="#path-6"></use>
-                    <polygon fill-opacity="0.1" fill="#000000" mask="url(#mask-7)" points="1.15789474 19.9145133 22.8628112 41.6842105 42.8421053 41.6842105 42.8421053 22.6915484 20.4926783 0 5.9757694 9.34593764"></polygon>
-                </g>
-                <g id="message-bubble">
-                    <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-8"></use>
-                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-8"></use>
-                </g>
-                <g id="lines" stroke-width="1" fill-rule="evenodd" transform="translate(5.532164, 2.017802)">
-                    <rect id="bottom" fill="#B7B7B7" x="0" y="8.72638397" width="14.4093567" height="2.14883711"></rect>
-                    <rect id="middle" fill="#B7B7B7" x="0.00257389448" y="5.65661653" width="14.4093567" height="2.14883711"></rect>
-                    <rect id="top" fill="#B7B7B7" x="0" y="2.58684909" width="14.4093567" height="2.14883711"></rect>
-                    <polygon id="line-clip" fill="#FFFFFF" points="0 13.8947368 15.0526316 0 15.0526316 13.4670958"></polygon>
-                </g>
-            </g>
-        </g>
-        <mask id="mask-11" fill="white">
-            <use xlink:href="#path-10"></use>
-        </mask>
-        <rect stroke-opacity="0.1" stroke="#FFFFFF" stroke-width="0.3" x="2.15" y="2.15" width="43.7" height="43.7" rx="21.85"></rect>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.st1{filter:url(#Adobe_OpacityMaskFilter);}
+	.st2{mask:url(#mask-2_1_);}
+	.st3{fill-rule:evenodd;clip-rule:evenodd;fill:#33EF7E;}
+	.st4{filter:url(#Adobe_OpacityMaskFilter_1_);}
+	.st5{mask:url(#mask-2_2_);}
+	.st6{fill-rule:evenodd;clip-rule:evenodd;fill:url(#path-6_3_);}
+	.st7{filter:url(#Adobe_OpacityMaskFilter_2_);}
+	.st8{mask:url(#mask-7_1_);fill-rule:evenodd;clip-rule:evenodd;fill-opacity:0.1;}
+	.st9{filter:url(#filter-9);}
+	.st10{fill-rule:evenodd;clip-rule:evenodd;}
+	.st11{fill-rule:evenodd;clip-rule:evenodd;fill:#B7B7B7;}
+	.st12{fill:none;stroke:#FFFFFF;stroke-width:0.3;stroke-opacity:0.1;}
+</style>
+<filter  filterUnits="objectBoundingBox" height="178.3%" id="filter-9" width="178.4%" x="-34.3%" y="-34.3%">
+	<feOffset  dx="1" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+	<feGaussianBlur  in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2.5"></feGaussianBlur>
+	
+		<feColorMatrix  in="shadowBlurOuter1" type="matrix" values="0 0 0 0 0   0 0.53 0 0 0  0 0 0 0 0  0 0 0 0.75 0">
+		</feColorMatrix>
+</filter>
+<title>pulse/ic_launcher</title>
+<desc>Created with Sketch.</desc>
+<g id="ic_launcher">
+	<g id="mask">
+		<path id="path-1_1_" class="st0" d="M24,2L24,2c12.2,0,22,9.8,22,22l0,0c0,12.2-9.8,22-22,22l0,0C11.8,46,2,36.2,2,24l0,0
+			C2,11.8,11.8,2,24,2z"/>
+	</g>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+			<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48" id="mask-2_1_">
+		<g class="st1">
+			<path id="path-1_2_" class="st0" d="M24,2L24,2c12.2,0,22,9.8,22,22l0,0c0,12.2-9.8,22-22,22l0,0C11.8,46,2,36.2,2,24l0,0
+				C2,11.8,11.8,2,24,2z"/>
+		</g>
+	</mask>
+	<g id="ic_launcher_background" class="st2">
+		<g id="dark-background" transform="translate(24.000000, 24.000000) scale(1, -1) translate(-24.000000, -24.000000) ">
+			<rect id="path-3_1_" class="st3" width="48" height="48"/>
+		</g>
+	</g>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="6.9" y="6.7" width="48.5" height="48.4">
+			<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="6.9" y="6.7" width="48.5" height="48.4" id="mask-2_2_">
+		<g class="st4">
+			<path id="path-1_3_" class="st0" d="M24,2L24,2c12.2,0,22,9.8,22,22l0,0c0,12.2-9.8,22-22,22l0,0C11.8,46,2,36.2,2,24l0,0
+				C2,11.8,11.8,2,24,2z"/>
+		</g>
+	</mask>
+	<g id="ic_launcher_foreground" class="st5">
+		<g transform="translate(12.500000, 13.500000)">
+			<g id="shadow">
+				<g id="Mask">
+					
+						<linearGradient id="path-6_3_" gradientUnits="userSpaceOnUse" x1="-286.8854" y1="398.5866" x2="-286.2962" y2="397.9411" gradientTransform="matrix(42.8421 0 0 -41.6842 12293.1582 16615.3164)">
+						<stop  offset="0" style="stop-color:#EEEEEE"/>
+						<stop  offset="1" style="stop-color:#D8D8D8;stop-opacity:0"/>
+					</linearGradient>
+					<rect id="path-6_1_" class="st6" width="42.8" height="41.7"/>
+				</g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_2_" filterUnits="userSpaceOnUse" x="1.2" y="0" width="41.7" height="41.7">
+						<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="1.2" y="0" width="41.7" height="41.7" id="mask-7_1_">
+					<g class="st7">
+						<rect id="path-6_2_" class="st0" width="42.8" height="41.7"/>
+					</g>
+				</mask>
+				<polygon class="st8" points="1.2,19.9 22.9,41.7 42.8,41.7 42.8,22.7 20.5,0 6,9.3 				"/>
+			</g>
+			<g id="message-bubble">
+				<g class="st9">
+					<path id="path-8_2_" class="st10" d="M5,17l-3.6,3.6V15V2.2c0-1.1,0.9-2,2-2h16.4c1.1,0,2,0.9,2,2V15c0,1.1-0.9,2-2,2H5z"/>
+				</g>
+				<g>
+					<path id="path-8_1_" class="st0" d="M5,17l-3.6,3.6V15V2.2c0-1.1,0.9-2,2-2h16.4c1.1,0,2,0.9,2,2V15c0,1.1-0.9,2-2,2H5z"/>
+				</g>
+			</g>
+			<g id="lines" transform="translate(5.532164, 2.017802)">
+				<rect id="bottom" x="0" y="8.7" class="st11" width="14.4" height="2.1"/>
+				<rect id="middle" x="0" y="5.7" class="st11" width="14.4" height="2.1"/>
+				<rect id="top" x="0" y="2.6" class="st11" width="14.4" height="2.1"/>
+				<polygon id="line-clip" class="st0" points="0,13.9 15.1,0 15.1,13.5 				"/>
+			</g>
+		</g>
+	</g>
+	<path class="st12" d="M24,2.2L24,2.2c12.1,0,21.9,9.8,21.9,21.9v0c0,12.1-9.8,21.9-21.9,21.9h0C11.9,45.9,2.2,36.1,2.2,24v0
+		C2.2,11.9,11.9,2.2,24,2.2z"/>
+</g>
 </svg>
