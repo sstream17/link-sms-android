@@ -16,14 +16,10 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Main App Colors -->
-    <!--<color name="pulseColorPrimary">#428AFF</color>-->
-    <!--<color name="pulseColorPrimaryDark">#3778ED</color>-->
-    <!--<color name="pulseColorPrimaryLight">#82B9FF</color>-->
-    <color name="pulseColorPrimary">#1775D2</color>
-    <color name="pulseColorPrimaryDark">#1665C0</color>
-    <color name="pulseColorPrimaryLight">#63A3FF</color>
-    <color name="pulseColorAccent">#FF6E40</color>
+    <color name="pulseColorPrimary">#33EF7E</color>
+    <color name="pulseColorPrimaryDark">#008700</color>
+    <color name="pulseColorPrimaryLight">#87f4a7</color>
+    <color name="pulseColorAccent">#33A4EF</color>
 
     <!-- Material Design Colors -->
     <color name="materialRed">#F44336</color>
