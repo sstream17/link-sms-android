@@ -37,7 +37,7 @@
                         <use xlink:href="#path-6"></use>
                     </mask>
                     <use id="Mask" fill="url(#linearGradient-5)" xlink:href="#path-6"></use>
-                    <polygon fill-opacity="0.1" fill="#000000" mask="url(#mask-7)" points="1.15789474 19.9145133 22.8628112 41.6842105 42.8421053 41.6842105 42.8421053 22.6915484 20.4926783 0 5.9757694 9.34593764"></polygon>
+                    <polygon fill-opacity="0.1" fill="#000000" mask="url(#mask-7)" points="2 16.8 24 38.8 42.8421053 41.6842105 42.49 22.3 20.4926783 0.3 5.9757694 9.34593764"></polygon>
                 </g>
                 <g id="message-bubble">
                     <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-17"></use>
