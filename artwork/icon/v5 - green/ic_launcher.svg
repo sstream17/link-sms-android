@@ -52,6 +52,5 @@
         <mask id="mask-11" fill="white">
             <use xlink:href="#path-10"></use>
         </mask>
-        <rect stroke-opacity="0.1" stroke="#FFFFFF" stroke-width="0.3" x="2.15" y="2.15" width="43.7" height="43.7" rx="21.85"></rect>
     </g>
 </svg>
