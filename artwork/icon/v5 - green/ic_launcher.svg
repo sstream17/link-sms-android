@@ -43,11 +43,9 @@
                     <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-17"></use>
                     <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-17"></use>
                 </g>
-                <g id="lines" stroke-width="1" fill-rule="evenodd" transform="translate(5.532164, 2.017802)">
-                    <rect id="bottom" fill="#B7B7B7" x="0" y="8.72638397" width="14.4093567" height="2.14883711"></rect>
-                    <rect id="middle" fill="#B7B7B7" x="0.00257389448" y="5.65661653" width="14.4093567" height="2.14883711"></rect>
-                    <rect id="top" fill="#B7B7B7" x="0" y="2.58684909" width="14.4093567" height="2.14883711"></rect>
-                    <polygon id="line-clip" fill="#FFFFFF" points="0 13.8947368 15.0526316 0 15.0526316 13.4670958"></polygon>
+                <g id="lines" stroke-width="1" fill-rule="evenodd" transform="translate(5.44, 1.36)">
+                    <rect id="bottom" fill="#00BB4F" x="0" y="8.16" width="8.16" height="2.72" rx="1.36"></rect>
+                    <rect id="top" fill="#00BB4F" x="0" y="4.08" width="12.24" height="2.72" rx="1.36"></rect>
                 </g>
             </g>
         </g>
