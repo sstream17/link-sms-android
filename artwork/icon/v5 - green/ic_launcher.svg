@@ -10,8 +10,8 @@
             <stop stop-color="#EEEEEE" offset="0%"></stop>
             <stop stop-color="#D8D8D8" stop-opacity="0" offset="100%"></stop>
         </linearGradient>
-        <rect id="path-6" x="0" y="0" width="42.8421053" height="41.6842105"></rect>
-        <path d="M4.9787356,17.0323678 L1.37231969,20.6723037 L1.37231969,15.0323678 L1.37231969,2.24289408 C1.37231969,1.13832458 2.26775019,0.242894078 3.37231969,0.242894078 L19.785575,0.242894078 C20.8901445,0.242894078 21.785575,1.13832458 21.785575,2.24289408 L21.785575,15.0323678 C21.785575,16.1369373 20.8901445,17.0323678 19.785575,17.0323678 L4.9787356,17.0323678 Z" id="path-8"></path>
+        <rect id="path-6" x="-2.72" y="-0.24" width="42.8421053" height="41.6842105"></rect>
+        <path d="M1.36,4.08 L1.36,14.96 C1.36,16.46120887 2.57879113,17.68 4.08,17.68 L19.04,17.68 C20.54120887,17.68 21.76,16.46120887 21.76,14.96 L21.76,2.72 C21.76,1.21879113 20.54120887,0 19.04,0 L-1.81333333,0 C-2.18863555,0 -2.4933333,0.304697783 -2.4933333,0.68 C-2.4933333,0.9 -1.85,1.3 -1.8133333,1.36 Z" id="path-17"></path>
         <filter x="-34.3%" y="-34.3%" width="178.4%" height="178.3%" filterUnits="objectBoundingBox" id="filter-9">
             <feOffset dx="1" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
             <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
@@ -40,8 +40,8 @@
                     <polygon fill-opacity="0.1" fill="#000000" mask="url(#mask-7)" points="1.15789474 19.9145133 22.8628112 41.6842105 42.8421053 41.6842105 42.8421053 22.6915484 20.4926783 0 5.9757694 9.34593764"></polygon>
                 </g>
                 <g id="message-bubble">
-                    <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-8"></use>
-                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-8"></use>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-17"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-17"></use>
                 </g>
                 <g id="lines" stroke-width="1" fill-rule="evenodd" transform="translate(5.532164, 2.017802)">
                     <rect id="bottom" fill="#B7B7B7" x="0" y="8.72638397" width="14.4093567" height="2.14883711"></rect>
