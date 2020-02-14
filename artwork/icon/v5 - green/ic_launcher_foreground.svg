@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <rect id="path-1" x="2" y="2" width="44" height="44" rx="22"></rect>
+        <rect id="path-3" x="0" y="0" width="48" height="48"></rect>
+        <linearGradient x1="4.89336993%" y1="1.92464193%" x2="63.8139205%" y2="66.4743134%" id="linearGradient-5">
+            <stop stop-color="#EEEEEE" offset="0%"></stop>
+            <stop stop-color="#D8D8D8" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-6" x="-2.72" y="-0.24" width="42.8421053" height="41.6842105"></rect>
+        <path d="M1.36,4.08 L1.36,14.96 C1.36,16.46120887 2.57879113,17.68 4.08,17.68 L19.04,17.68 C20.54120887,17.68 21.76,16.46120887 21.76,14.96 L21.76,2.72 C21.76,1.21879113 20.54120887,0 19.04,0 L-1.81333333,0 C-2.18863555,0 -2.4933333,0.304697783 -2.4933333,0.68 C-2.4933333,0.9 -1.85,1.3 -1.8133333,1.36 Z" id="path-17"></path>
+        <filter x="-34.3%" y="-34.3%" width="178.4%" height="178.3%" filterUnits="objectBoundingBox" id="filter-9">
+            <feOffset dx="1" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0.53 0 0 0   0 0 0 0 0  0 0 0 0.75 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-10" x="2" y="2" width="44" height="44" rx="22"></rect>
+    </defs>
+    <g id="ic_launcher" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+
+        <g id="ic_launcher_foreground" mask="url(#mask-2)">
+            <g transform="translate(12.500000, 13.500000)">
+                <g id="shadow" stroke-width="1" fill-rule="evenodd">
+                    <mask id="mask-7" fill="white">
+                        <use xlink:href="#path-6"></use>
+                    </mask>
+                    <use id="Mask" fill="url(#linearGradient-5)" xlink:href="#path-6"></use>
+                </g>
+                <g id="message-bubble">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-17"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-17"></use>
+                </g>
+                <g id="lines" stroke-width="1" fill-rule="evenodd" transform="translate(5.44, 1.36)">
+                    <rect id="bottom" fill="#00BB4F" x="0" y="8.16" width="8.16" height="2.72" rx="1.36"></rect>
+                    <rect id="top" fill="#00BB4F" x="0" y="4.08" width="12.24" height="2.72" rx="1.36"></rect>
+                </g>
+            </g>
+        </g>
+        <mask id="mask-11" fill="white">
+            <use xlink:href="#path-10"></use>
+        </mask>
+    </g>
+</svg>
