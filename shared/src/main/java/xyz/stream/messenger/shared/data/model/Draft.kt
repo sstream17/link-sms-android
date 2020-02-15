@@ -88,8 +88,8 @@ class Draft : DatabaseTable {
                 COLUMN_CONVERSATION_ID + " integer not null, " +
                 COLUMN_DATA + " text not null, " +
                 COLUMN_MIME_TYPE + " text not null, " +
-                COLUMN_SCHEDULED_TIME + " integer not null, " +
-                COLUMN_SCHEDULED_REPEAT + " integer not null" +
+                COLUMN_SCHEDULED_TIME + " integer not null default 0, " +
+                COLUMN_SCHEDULED_REPEAT + " integer not null default 0" +
                 ");"
 
         private val INDEXES = arrayOf("create index if not exists conversation_id_draft_index on " + TABLE +
