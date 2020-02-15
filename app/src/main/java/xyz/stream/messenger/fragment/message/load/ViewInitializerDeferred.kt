@@ -2,10 +2,10 @@ package xyz.stream.messenger.fragment.message.load
 
 import android.content.Context
 import android.os.Build
-import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentActivity
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.BubbleActivity
@@ -71,6 +71,11 @@ class ViewInitializerDeferred(private val fragment: MessageListFragment) {
             (activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?)
                     ?.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
             fragment.activity?.intent?.putExtra(MessengerActivityExtras.EXTRA_SHOULD_OPEN_KEYBOARD, false)
+        }
+
+        if (fragment.argManager.shouldScheduleMessage) {
+            fragment.startSchedulingMessage()
+            fragment.activity?.intent?.putExtra(MessengerActivityExtras.EXTRA_SHOULD_SCHEDULE_MESSAGE, false)
         }
     }
 }

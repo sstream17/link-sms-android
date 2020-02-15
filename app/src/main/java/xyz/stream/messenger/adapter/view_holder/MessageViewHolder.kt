@@ -17,11 +17,8 @@
 package xyz.stream.messenger.adapter.view_holder
 
 import android.animation.ValueAnimator
-import android.content.ActivityNotFoundException
-import android.content.ClipData
-import android.content.ClipboardManager
+import android.content.*
 import android.content.Context.CLIPBOARD_SERVICE
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
 import androidx.appcompat.app.AlertDialog
@@ -166,14 +163,15 @@ class MessageViewHolder(private val fragment: MessageListFragment?, itemView: Vi
 
     private fun showMessageDetails() {
         val source = DataSource
-        AlertDialog.Builder(itemView.context)
+        val builder = AlertDialog.Builder(itemView.context)
                 .setMessage(source.getMessageDetails(itemView.context, messageId))
                 .setPositiveButton(android.R.string.ok, null)
-                .show()
+
+        setDialogButtonColor(builder, accentColor)
     }
 
     private fun deleteMessage() {
-        AlertDialog.Builder(itemView.context)
+        val builder = AlertDialog.Builder(itemView.context)
                 .setTitle(R.string.delete_message)
                 .setPositiveButton(R.string.ok) { _, _ ->
                     val m = DataSource.getMessage(itemView.context, messageId)
@@ -189,7 +187,9 @@ class MessageViewHolder(private val fragment: MessageListFragment?, itemView: Vi
                                 adapterPosition)
                     }
                 }
-                .setNegativeButton(R.string.no, null).show()
+                .setNegativeButton(R.string.no, null)
+
+        setDialogButtonColor(builder, accentColor)
     }
 
     private fun copyMessageText() {
@@ -369,5 +369,13 @@ class MessageViewHolder(private val fragment: MessageListFragment?, itemView: Vi
         view.isHapticFeedbackEnabled = false
 
         false
+    }
+
+    private fun setDialogButtonColor(builder: AlertDialog.Builder, color: Int) {
+        val dialog = builder.create()
+        dialog.show()
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(color)
+        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(color)
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(color)
     }
 }

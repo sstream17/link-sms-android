@@ -17,9 +17,7 @@
 package xyz.stream.messenger.shared.data.model
 
 import android.database.Cursor
-
 import xyz.stream.messenger.api.entity.ScheduledMessageBody
-import xyz.stream.messenger.shared.data.DatabaseSQLiteHelper
 import xyz.stream.messenger.encryption.EncryptionUtils
 
 /**
@@ -36,7 +34,7 @@ class ScheduledMessage : DatabaseTable {
     var repeat: Int = REPEAT_NEVER
 
     constructor()
-    constructor(body: xyz.stream.messenger.api.entity.ScheduledMessageBody) {
+    constructor(body: ScheduledMessageBody) {
         this.id = body.deviceId
         this.title = body.title
         this.to = body.to
@@ -64,14 +62,14 @@ class ScheduledMessage : DatabaseTable {
         }
     }
 
-    override fun encrypt(utils: xyz.stream.messenger.encryption.EncryptionUtils) {
+    override fun encrypt(utils: EncryptionUtils) {
         this.title = utils.encrypt(this.title)
         this.to = utils.encrypt(this.to)
         this.data = utils.encrypt(this.data)
         this.mimeType = utils.encrypt(this.mimeType)
     }
 
-    override fun decrypt(utils: xyz.stream.messenger.encryption.EncryptionUtils) {
+    override fun decrypt(utils: EncryptionUtils) {
         try {
             this.title = utils.decrypt(this.title)
             this.to = utils.decrypt(this.to)
