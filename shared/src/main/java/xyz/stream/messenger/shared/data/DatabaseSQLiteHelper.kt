@@ -171,6 +171,15 @@ class DatabaseSQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
                 e.printStackTrace()
             }
         }
+
+        if (oldVersion < 19) {
+            try {
+                db.execSQL("ALTER TABLE draft ADD COLUMN scheduled_timestamp integer not null DEFAULT 0")
+                db.execSQL("ALTER TABLE draft ADD COLUMN scheduled_repeat integer not null DEFAULT 0")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     fun onDrop(db: SQLiteDatabase) {
@@ -182,7 +191,7 @@ class DatabaseSQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
     companion object {
 
         private const val DATABASE_NAME = "messenger.db"
-        private const val DATABASE_VERSION = 18
+        private const val DATABASE_VERSION = 19
 
     }
 
