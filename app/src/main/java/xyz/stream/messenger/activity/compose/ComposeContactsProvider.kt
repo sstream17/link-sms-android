@@ -21,9 +21,12 @@ import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.Conversation
 import xyz.stream.messenger.shared.data.model.ImageContact
-import xyz.stream.messenger.shared.util.*
+import xyz.stream.messenger.shared.util.ColorUtils
+import xyz.stream.messenger.shared.util.ContactUtils
+import xyz.stream.messenger.shared.util.PermissionsUtils
+import xyz.stream.messenger.shared.util.PhoneNumberUtils
 import xyz.stream.messenger.shared.util.listener.ContactClickedListener
-import java.util.ArrayList
+import java.util.*
 
 @Suppress("DEPRECATION")
 class ComposeContactsProvider(private val activity: ComposeActivity) : ContactClickedListener {
@@ -72,7 +75,8 @@ class ComposeContactsProvider(private val activity: ComposeActivity) : ContactCl
             }
         }
 
-        if (!ColorUtils.isColorDark(Settings.mainColorSet.color)) {
+
+        if (!Settings.isCurrentlyDarkTheme(activity)) {
             contactEntry.setTextColor(ColorStateList.valueOf(activity.resources.getColor(R.color.lightToolbarTextColor)))
             contactEntry.setHintTextColor(ColorStateList.valueOf(activity.resources.getColor(R.color.lightToolbarTextColor)))
         }
