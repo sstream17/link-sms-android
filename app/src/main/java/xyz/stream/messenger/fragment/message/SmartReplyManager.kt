@@ -1,26 +1,21 @@
 package xyz.stream.messenger.fragment.message
 
 import android.animation.ValueAnimator
-import android.content.res.ColorStateList
 import android.os.Handler
-import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.google.firebase.ml.naturallanguage.smartreply.SmartReplySuggestion
 import xyz.stream.messenger.R
-import xyz.stream.messenger.activity.SettingsActivity
 import xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper
 import xyz.stream.messenger.fragment.message.send.SendMessageManager
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.util.DensityUtil
-import java.lang.Exception
 
 class SmartReplyManager(private val fragment: MessageListFragment) {
 
@@ -51,7 +46,7 @@ class SmartReplyManager(private val fragment: MessageListFragment) {
                         tv.text = suggestion.text
 
                         layout.setOnClickListener {
-                            xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.sendSmartReply(activity)
+                            AnalyticsHelper.sendSmartReply(activity)
 
                             messageEntry.setText(suggestion.text)
                             messageEntry.setSelection(suggestion.text.length)

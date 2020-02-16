@@ -65,7 +65,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:clipChildren="false">
 
             <com.l4digital.fastscroll.FastScrollRecyclerView
                 android:id="@+id/message_list"
@@ -73,24 +74,27 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/message_list_padding"
                 android:layout_marginEnd="@dimen/message_list_padding"
+                android:layout_marginBottom="-56dp"
+                android:layout_above="@id/smart_reply_container"
                 android:alpha="@integer/message_list_fastscroll_handle_alpha"
                 android:clipToPadding="false"
-                android:paddingBottom="12dp"
+                android:paddingBottom="68dp"
                 app:bubbleSize="small" />
 
+            <LinearLayout
+                android:id="@+id/smart_reply_container"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="end"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+            </LinearLayout>
+
         </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/smart_reply_container"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="end"
-            android:layout_marginEnd="12dp"
-            android:layout_marginStart="12dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-        </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/reply_bar_card"
