@@ -89,7 +89,7 @@ class ConversationItemBinder(private val activity: Activity) {
         holder.imageLetter?.text = conversation.title?.substring(0, 1)?.toUpperCase()
 
         val colorToInspect = if (Settings.useGlobalThemeColor) Settings.mainColorSet.color else conversation.colors.color
-        holder.groupIcon?.imageTintList = ColorStateList.valueOf(if (ColorUtils.isColorDark(colorToInspect)) Color.WHITE else lightToolbarTextColor)
+        holder.imageLetter?.setTextColor(if (ColorUtils.isColorDark(colorToInspect)) Color.WHITE else lightToolbarTextColor)
 
         if (holder.groupIcon?.visibility != View.GONE) {
             holder.groupIcon?.visibility = View.GONE
