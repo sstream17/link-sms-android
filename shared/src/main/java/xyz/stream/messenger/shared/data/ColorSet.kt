@@ -123,11 +123,21 @@ class ColorSet {
             return indigoSet!!
         }
 
+        private var pulseBlueSet: ColorSet? = null
+        fun PULSE_BLUE(context: Context): ColorSet {
+            if (pulseBlueSet == null) {
+                pulseBlueSet = ColorSet(context, R.color.pulseOriginalColorPrimary, R.color.pulseOriginalColorPrimaryDark,
+                        R.color.pulseOriginalColorPrimaryLight, R.color.pulseOriginalColorAccent)
+            }
+
+            return pulseBlueSet!!
+        }
+
         private var blueSet: ColorSet? = null
         fun BLUE(context: Context): ColorSet {
             if (blueSet == null) {
                 blueSet = ColorSet(context, R.color.materialBlue, R.color.materialBlueDark,
-                        R.color.materialBlueLight, R.color.materialDeepOrangeAccent)
+                        R.color.materialBlueLight, R.color.materialBlueGreyDark)
             }
 
             return blueSet!!

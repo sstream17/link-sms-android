@@ -21,6 +21,12 @@
     <color name="pulseColorPrimaryLight">#78FFAF</color>
     <color name="pulseColorAccent">#33A4EF</color>
 
+    <!-- Pulse Colors -->
+    <color name="pulseOriginalColorPrimary">#1775D2</color>
+    <color name="pulseOriginalColorPrimaryDark">#1665C0</color>
+    <color name="pulseOriginalColorPrimaryLight">#63A3FF</color>
+    <color name="pulseOriginalColorAccent">#FF6E40</color>
+
     <!-- Material Design Colors -->
     <color name="materialRed">#F44336</color>
     <color name="materialRedDark">#DC2828</color>
