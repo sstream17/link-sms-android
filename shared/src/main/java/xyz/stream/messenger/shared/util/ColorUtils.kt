@@ -466,7 +466,11 @@ object ColorUtils {
     }
 
     fun isColorDark(color: Int): Boolean {
+        if (AndroidVersionUtil.isAndroidN) {
+            return Color.luminance(color) < 0.179
+        }
+
         val darkness = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255
-        return darkness >= 0.30
+        return darkness >= 0.35
     }
 }
