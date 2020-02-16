@@ -46,6 +46,7 @@ import xyz.stream.messenger.shared.activity.AbstractSettingsActivity
 import xyz.stream.messenger.shared.data.ColorSet
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import kotlin.math.pow
 
 /**
  * Helper class for working with colors.
@@ -466,11 +467,21 @@ object ColorUtils {
     }
 
     fun isColorDark(color: Int): Boolean {
-        if (AndroidVersionUtil.isAndroidN) {
-            return Color.luminance(color) < 0.179
-        }
+        val red = getSRGB(Color.red(color))
+        val green = getSRGB(Color.green(color))
+        val blue = getSRGB(Color.blue(color))
+        val luminance = (0.2126 * red + 0.7152 * green + 0.0722 * blue)
+        val ratio = 1.05 / (luminance + 0.05)
+        return ratio  > 4.5
+    }
 
-        val darkness = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255
-        return darkness >= 0.35
+    private fun getSRGB(component: Int): Double {
+        val sRGB = component.toDouble() / 255
+        return if (sRGB <= 0.03928) {
+            sRGB / 12.92
+        }
+        else {
+            ((sRGB + 0.055) / 1.055).pow(2.4)
+        }
     }
 }
