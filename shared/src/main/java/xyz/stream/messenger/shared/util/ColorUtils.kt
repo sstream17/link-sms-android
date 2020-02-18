@@ -465,13 +465,20 @@ object ColorUtils {
         animator.start()
     }
 
+    // Meets WCAG 2.0 Success Criterion 1.4.3
+    // https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
     fun isColorDark(color: Int): Boolean {
         val red = getSRGB(Color.red(color))
         val green = getSRGB(Color.green(color))
         val blue = getSRGB(Color.blue(color))
+
+        // Compute the relative luminance of the color
+        // https://www.w3.org/TR/WCAG20/#relativeluminancedef
         val luminance = (0.2126 * red + 0.7152 * green + 0.0722 * blue)
-        val ratio = 1.05 / (luminance + 0.05)
-        return ratio  > 4.5
+
+        // Determine darkness based on the contrast ratio 4.5:1
+        // https://www.w3.org/TR/WCAG20/#contrast-ratiodef
+        return luminance  < 0.233
     }
 
     private fun getSRGB(component: Int): Double {
