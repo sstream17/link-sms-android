@@ -17,6 +17,15 @@
 <changelog>
 
     <version
+        name="0.2.1"
+        description="February 18th, 2020">
+        <text>New setting to allow you to block or mute messages from senders not in your contact list, to help prevent spam</text>
+        <text>If you receive a spam message as a group conversation, you can now "blacklist all" phone numbers involved in the conversation</text>
+        <text>Bug fixes for Android Auto</text>
+        <text>Other various bug fixes</text>
+    </version>
+
+    <version
         name="0.2.0"
         description="February 9th, 2020">
         <text>Updated scheduled messages to provide a more consistent user experience throughout the app</text>
