@@ -544,7 +544,7 @@ Med ditt konto kommer Pulse automatiskt säkerhetskopiera alla meddelanden som d
     <string name="set_passcode">Spara lösenord</string>
     <string name="confirm_fingerprint">Bekräfta fingeravtryck för att fortsätta. Placera fingret på fingertryckssensorn nu.</string>
     <string name="confirm_passcode">Bekräfta lösenordet för att fortsätta.</string>
-    <string name="confirm_pulse_password">Bekräfta Pulse kontoinformation för att fortsätta.</string>
+    <string name="confirm_link_password">Bekräfta Pulse kontoinformation för att fortsätta.</string>
     <string name="type_passcode">Skapa ett lösenord.</string>
     <string name="incorrect_passcode">Ogiltigt lösenord.</string>
     <string name="verify">Bekräfta</string>
@@ -582,7 +582,7 @@ Med ditt konto kommer Pulse automatiskt säkerhetskopiera alla meddelanden som d
     <string name="rate_it_title">Toppbetyg hjälper långt</string>
     <string name="rate_it_summary"><b>5-stjärniga betyg</b> är extremt hjälpsamma för att locka fler användare och synlighet på Play Store. Om du vill att appen ska <i>fortsätta utvecklas</i>, hjälp mig gärna!</string>
     <string name="rate_it_not_ready">Inte redo att ge ett betyg? Inga problem. Backa ur den här dialogrutan så kommer jag aldrig fråga igen.</string>
-    <string name="love_pulse_question">Gillar Pulse?</string>
+    <string name="love_link_question">Gillar Pulse?</string>
     <string name="give_a_rating">Funderar du på att betygsätta eller dela med dig till dina vänner!\n\n
 Din 5 stjärniga recension värmer mitt hjärta :)</string>
     <!-- Times -->
@@ -630,7 +630,7 @@ dig i 2 dagar. Om detta är ett fel kontakta mig via epost.
     <string name="trial_description">Inga av konkurrenterna kan mäta sig med Pulse <b>oändliga plattformsstöd</b> ihop med dess <b>låga pris</b>. Meddelanden synkroniseras mellan alla dina enheter, omedelbart och sömlöst.</string>
     <string name="purchase_description">Prova online-versionen i <b>sju dagar</b> innan du avgör hur du vill stödja appen:\n\n<b>$10.99</b> för livstidsmedlemskap\n<b>$5.99</b> per år\n<b>$1.99</b> var tredje månad\n<b>$0.99</b> per månad</string>
     <string name="start_free_trial">Påbörja din gratis prövotid!</string>
-    <string name="create_your_pulse_account">Skapa ett Pulse-konto!</string>
+    <string name="create_your_link_account">Skapa ett Pulse-konto!</string>
     <string name="try_it">Prova nu!</string>
     <string name="select_purchase">Välj köp</string>
     <string name="have_an_account">Har du ett konto?\nLogga in</string>

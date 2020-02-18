@@ -581,7 +581,7 @@ mensagens em um novo dispositivo, tudo que você tem que fazer é acessar a sua 
     <string name="set_passcode">Salvar Senha</string>
     <string name="confirm_fingerprint">Confirmar a impressão digital para continuar. Toque o sensor agora.</string>
     <string name="confirm_passcode">Confirme a senha para continuar.</string>
-    <string name="confirm_pulse_password">Confirme as suas credenciais Pulse para continuar.</string>
+    <string name="confirm_link_password">Confirme as suas credenciais Pulse para continuar.</string>
     <string name="type_passcode">Crie uma senha.</string>
     <string name="incorrect_passcode">Senha incorreta.</string>
     <string name="verify">Confirme</string>
@@ -623,7 +623,7 @@ https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="rate_it_summary"><b>Avaliações com 5 estrelas</b> são de grande ajuda para o crescimento do app
 e para a visibilidade na Play Store. Se você quer quer ver o app <i>continuar a planar</i>, me ajude!</string>
     <string name="rate_it_not_ready">Não está pronto para avaliar? Sem problemas. Saia desta tela e nunca mais pediremos de novo.</string>
-    <string name="love_pulse_question">Adora o Pulse?</string>
+    <string name="love_link_question">Adora o Pulse?</string>
     <string name="give_a_rating">Considere  nos avaliar ou compartilhe com seus amigos!\n\n
 Sua avaliação com 5 estrelas aquece o meu coração :)</string>
     <!-- Times -->
@@ -670,7 +670,7 @@ Envie mensagens pela web, computador, tablet, smartwatch e mesmo de sua TV.</str
     <string name="trial_description">A competição não alcança <b>o amplo suporte a plataformas</b> do Pulse e seu <b>preço baixo</b>. As mensagens são sincronizadas entre todos os seus dispositivos, instantaneamente e com perfeição.</string>
     <string name="purchase_description">Experimente a versão on-line por <b>sete dias</b> e decida o melhor plano:\n\n<b>$10.99</b> Vitalício\n  <b>$5.99</b> Anual\n  <b>$1.99</b> Trimestral\n  <b>$0.99</b> Mensal</string>
     <string name="start_free_trial">Comece a testar gratuitamente!</string>
-    <string name="create_your_pulse_account">Crie uma conta Pulse!</string>
+    <string name="create_your_link_account">Crie uma conta Pulse!</string>
     <string name="try_it">Teste agora!</string>
     <string name="select_purchase">Selecionar Plano</string>
     <string name="have_an_account">Já tem uma conta?\nAcesse</string>

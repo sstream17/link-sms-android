@@ -16,10 +16,10 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <color name="pulseColorPrimary">#33EF7E</color>
-    <color name="pulseColorPrimaryDark">#00BB4F</color>
-    <color name="pulseColorPrimaryLight">#78FFAF</color>
-    <color name="pulseColorAccent">#33A4EF</color>
+    <color name="linkColorPrimary">#33EF7E</color>
+    <color name="linkColorPrimaryDark">#00BB4F</color>
+    <color name="linkColorPrimaryLight">#78FFAF</color>
+    <color name="linkColorAccent">#33A4EF</color>
 
     <!-- Pulse Colors -->
     <color name="pulseOriginalColorPrimary">#1775D2</color>

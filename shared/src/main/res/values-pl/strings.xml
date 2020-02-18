@@ -555,7 +555,7 @@ Posiadając konto, Pulse automatycznie tworzy kopię zapasową wiadomości któr
     <string name="set_passcode">Zapisz kod dostępu</string>
     <string name="confirm_fingerprint">Potwierdź odciskiem palca, aby kontynuować. Dotknij czytnika teraz.</string>
     <string name="confirm_passcode">Potwierdź kod, aby kontynuować.</string>
-    <string name="confirm_pulse_password">Potwierdź uprawnienia Pulse, aby kontynuować.</string>
+    <string name="confirm_link_password">Potwierdź uprawnienia Pulse, aby kontynuować.</string>
     <string name="type_passcode">Utwórz kod dostępu.</string>
     <string name="incorrect_passcode">Niepoprawny kod dostępu.</string>
     <string name="verify">Sprawdź</string>
@@ -597,7 +597,7 @@ Możesz dostosować te opcje za pomocą przycisku poniżej i przeczytać więcej
     <string name="rate_it_summary"><b>Oceny 5-gwiazdkowe</b> są niezwykle pomocne dla rozwoju aplikacji
 i widoczności w Sklepie Play. Jeśli chcesz, aby aplikacja <i>dalej wznosiła się w rankingu</i>, pomóż mi!</string>
     <string name="rate_it_not_ready">Nie jesteś gotowy, aby ocenić? Nie ma problemu. Wycofaj się z tego okna dialogowego, nigdy więcej się nie pojawi.</string>
-    <string name="love_pulse_question">Lubisz Pulse?</string>
+    <string name="love_link_question">Lubisz Pulse?</string>
     <string name="give_a_rating">Rozważ ocenienie aplikacji lub podziel się nią ze znajomymi!/n/n
 Twoja 5-cio gwiazdkowa ocena rozgrzeje moje serce :)</string>
     <!-- Times -->
@@ -644,7 +644,7 @@ Wysyłaj wiadomości z przeglądarki internetowej, komputera, tabletu, smart zeg
     <string name="trial_description">Żadna konkurencyjna aplikacja nie może nawet zbliżyć się do Pulse w <b>nieskończonej ilości obsługiwanych platform</b> połączonej z <b>niską ceną</b>. Wiadomości synchronizowane są pomiędzy wszystkimi urządzeniami, natychmiast i bez problemów.</string>
     <string name="purchase_description">Wypróbuj wersję online przez <b>siedem dni</b>, a następnie zdecyduj, w jaki sposób chcesz wesprzeć aplikację:\n\n<b>10,99 USD</b> za dożywotnie członkostwo\n<b>5,99 USD</b> rocznie\n<b>1,99 USD</b> co trzy miesiące\n<b>0,99 USD</b> miesięcznie</string>
     <string name="start_free_trial">Rozpocznij bezpłatny okres próbny!</string>
-    <string name="create_your_pulse_account">Utwórz konto Pulse!</string>
+    <string name="create_your_link_account">Utwórz konto Pulse!</string>
     <string name="try_it">Wypróbuj teraz!</string>
     <string name="select_purchase">Wybierz zakup</string>
     <string name="have_an_account">Masz już konto?\nZaloguj się</string>

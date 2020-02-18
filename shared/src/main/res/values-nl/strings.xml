@@ -541,7 +541,7 @@ Dankzij jouw account zal Pulse een back-up maken van al je berichten die je ontv
     <string name="set_passcode">Wachtwoord opslaan</string>
     <string name="confirm_fingerprint">Bevestig vingerafdruk om door te gaan. Scan je vinger nu.</string>
     <string name="confirm_passcode">Bevestig wachtwoord om door te gaan.</string>
-    <string name="confirm_pulse_password">Bevestig je Pulse account-details om door te gaan.</string>
+    <string name="confirm_link_password">Bevestig je Pulse account-details om door te gaan.</string>
     <string name="type_passcode">Maak een wachtwoord aan.</string>
     <string name="incorrect_passcode">Fout wachtwoord.</string>
     <string name="verify">Verifiëren</string>
@@ -583,7 +583,7 @@ https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="rate_it_summary"><b>5-sterren beoordelingen</b> helpen enorm veel aan de populariteit van de app
 en de weergave in de Play Store. Als je de app wil zien groeien, help me hiermee!</string>
     <string name="rate_it_not_ready">Nog niet klaar om jouw beoordeling achter te laten? Sluit dit venster en we vragen je er niet meer achter.</string>
-    <string name="love_pulse_question">Hou je van Pulse?</string>
+    <string name="love_link_question">Hou je van Pulse?</string>
     <string name="give_a_rating">Overweeg om een waardering te plaatsen of te delen met vrienden!\n\nJouw 5-sterren reviews verwarmen mijn hart.</string>
     <!-- Times -->
     <string name="one_second">Eén second</string>
@@ -629,7 +629,7 @@ Verstuur berichten via het web, desktop pc, je tablet, je smartwatch en zelfs je
     <string name="trial_description">Geen enkele andere app kan tippen aan de <b>eindeloze functies</b> van Pulse. Synchroniseer berichten tussen al jouw toestellen.</string>
     <string name="purchase_description">Geef de online versie een kans. Gedurende <b>7 dagen</b> kan je alles uittesten. Daarna kan je beslissen om te app vrij te schakelen:\n\n<b>$10.99</b> voor een levenslange toegang\n<b>$5.99</b> per jaar\n<b>$1.99</b> per 3 maand\n<b>$0.99</b> per maand</string>
     <string name="start_free_trial">Start jouw trial!</string>
-    <string name="create_your_pulse_account">Creëer een Pulse account!</string>
+    <string name="create_your_link_account">Creëer een Pulse account!</string>
     <string name="try_it">Probeer nu!</string>
     <string name="select_purchase">Selecteer kopen</string>
     <string name="have_an_account">Heb je een account?\nInloggen</string>

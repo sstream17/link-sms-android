@@ -112,7 +112,7 @@ open class InitialLoadActivity : AppCompatActivity(), ProgressUpdateListener {
 
             // not a tablet
             // supports a default SMS app (previous is not null)
-            // Pulse is not currently the default
+            // Link is not currently the default
 
             if (promptedForDefaultSMS && !AndroidVersionUtil.isAndroidQ) {
                 // display a warning here, before asking for the permission.
@@ -134,7 +134,7 @@ open class InitialLoadActivity : AppCompatActivity(), ProgressUpdateListener {
 
                 // interestingly enough, setting the app as the default SMS app, immediately when it is install
                 // automatically provides it all of the main permissions.
-                // Google must know, if there are no permissions granted and the user allows Pulse to be
+                // Google must know, if there are no permissions granted and the user allows Link to be
                 // the default SMS app, the app should automatically receive the required permissions.
                 // This was unexpected, but nicer than requesting the permissions individually
                 PermissionsUtils.setDefaultSmsApp(this)

@@ -587,7 +587,7 @@
     <string name="set_passcode">保存密码</string>
     <string name="confirm_fingerprint">确认指纹以继续。现在请触摸指纹传感器。</string>
     <string name="confirm_passcode">确认密码以继续。</string>
-    <string name="confirm_pulse_password">确认Pulse帐户凭据以继续。</string>
+    <string name="confirm_link_password">确认Pulse帐户凭据以继续。</string>
     <string name="type_passcode">创建一个密码。</string>
     <string name="incorrect_passcode">密码错误。</string>
     <string name="verify">校验</string>
@@ -629,7 +629,7 @@ https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="rate_it_title">最高评分大有帮助</string>
     <string name="rate_it_summary"><b>顶级评级</b>对应用程序的增长非常重要！如果您希望看到应用程序<i>继续飙升</i>，请花一秒钟时间帮助我。</string>
     <string name="rate_it_not_ready"><b>未准备对其进行评级？</b>没问题。按下手机的后退按钮，我将不再询问。</string>
-    <string name="love_pulse_question">喜欢 Pulse 吗？</string>
+    <string name="love_link_question">喜欢 Pulse 吗？</string>
     <string name="give_a_rating">考虑一下打个分、分享给你的朋友们吧！我将万分感谢您的5分，笔芯。</string>
     <!-- Times -->
     <string name="one_second">1秒</string>
@@ -678,7 +678,7 @@ https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="trial_description">任何竞争对手都无法达到Pulse的<b>全平台支持</b>及其<b>低价</b>。 消息可在您的所有设备之间即时无缝地同步。</string>
     <string name="purchase_description">尝试在线版本，持续7天，然后决定如何支持该应用程序：\n\n终身会员<b>10.99美元</b>\n每年<b>5.99美元</b>\n每三个月<b>1.99美元 </b>\n每月<b>0.99美元</b></string>
     <string name="start_free_trial">开始您的免费试用！</string>
-    <string name="create_your_pulse_account">创建 Pulse 账户！</string>
+    <string name="create_your_link_account">创建 Pulse 账户！</string>
     <string name="try_it">试试吧！</string>
     <string name="select_purchase">选择方案</string>
     <string name="have_an_account">已有账户？\n登陆</string>

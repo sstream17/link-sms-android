@@ -574,7 +574,7 @@ Alıcı %1$s?</string>
     <string name="set_passcode">Güvenlik Kodu kaydet</string>
     <string name="confirm_fingerprint">Devam etmek için parmak izini doğrulayın. Sensöre dokunun.</string>
     <string name="confirm_passcode">Devam etmek için güvenlik kodunu doğrulayın</string>
-    <string name="confirm_pulse_password">Devam etmek için Pulse hesap kimliğinizi doğrulayın.</string>
+    <string name="confirm_link_password">Devam etmek için Pulse hesap kimliğinizi doğrulayın.</string>
     <string name="type_passcode">Bir güvenlik kodu oluşturun</string>
     <string name="incorrect_passcode">Güvenlik kodu yanlış</string>
     <string name="verify">Doğrula</string>
@@ -615,7 +615,7 @@ https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="rate_it_title">Yüksek değerlendirmeler çok yararlıdır</string>
     <string name="rate_it_summary"><b>5-yıldızlı değerlendirmeler</b> uygulamanın Play Store\'da büyümesine ve görünür olmasına oldukça yardımcı olur. Uygulamanın <i>hızla yükseldiğini</i> görmek istiyorsanız, bana yardımcı olun!</string>
     <string name="rate_it_not_ready">Değerlendirme yapmaya hazır değil misiniz? Bu pencereyi kapatın, tekrar sormayacağım.</string>
-    <string name="love_pulse_question">Pulse\'u sevdin mi?</string>
+    <string name="love_link_question">Pulse\'u sevdin mi?</string>
     <string name="give_a_rating">Bir değerlendirme yapmayı veya arkadaşlarınızla paylaşmayı düşünün!\n\n
 5 yıldızlı değerlendirmeler kalbimi ısıttır :)</string>
     <!-- Times -->
@@ -663,7 +663,7 @@ Web\'den, masaüstü bilgisayardan, tabletinizden, saatinizden ve hatta TV\'nizd
     <string name="trial_description">Hiçbir rakip, Pulse\'un <b>düşük fiyatı</b> ve <b>sonsuz platform desteği</b> ile rekabet edemez. Mesajlar, tüm cihazlarınız arasında anında ve sorunsuz bir şekilde senkronize edilir.</string>
     <string name="purchase_description">Çevrimiçi sürümü <b>yedi gün</b> süresince deneyin, ardından uygulamayı nasıl desteklemek istediğinize karar verin:\n\n<b>$10.99</b> ömür boyu üyelik\n<b>$5.99</b> yıllık\n<b>$1.99</b> üç aylık\n<b>$0.99</b> aylık</string>
     <string name="start_free_trial">Ücretsiz deneme sürümünü başlat!</string>
-    <string name="create_your_pulse_account">Bir Pulse hesabı oluştur!</string>
+    <string name="create_your_link_account">Bir Pulse hesabı oluştur!</string>
     <string name="try_it">Deneyin!</string>
     <string name="select_purchase">Satın Al\'ı Seçin</string>
     <string name="have_an_account">Hasabınız var mı?\nOturum açın</string>

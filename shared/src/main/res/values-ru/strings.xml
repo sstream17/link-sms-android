@@ -515,7 +515,7 @@
     <string name="verifying_password">Проверяем пароль...</string>
     <!-- Rate it -->
     <string name="rate_it">Оценить!</string>
-    <string name="love_pulse_question">Понравился Pulse?</string>
+    <string name="love_link_question">Понравился Pulse?</string>
     <string name="give_a_rating">Оцените приложение или поделитесь им с вашими друзьями!\n\nВаша оценка на 5 звезд согреет моё сердце :)</string>
     <!-- Times -->
     <string name="one_second">1 секунда</string>

@@ -606,7 +606,7 @@ pro %1$s?</string>
     <string name="set_passcode">Uložit kód</string>
     <string name="confirm_fingerprint">Potvrďte otisk prstu pro pokračování. Dotkněte se senzoru.</string>
     <string name="confirm_passcode">Potvrďte heslo pro pokračování.</string>
-    <string name="confirm_pulse_password">Potvrďte přihlašovací údaje Pulse účtu pro pokračování.</string>
+    <string name="confirm_link_password">Potvrďte přihlašovací údaje Pulse účtu pro pokračování.</string>
     <string name="type_passcode">Vytvořit kód.</string>
     <string name="incorrect_passcode">Nesprávný kód.</string>
     <string name="verify">Ověřit</string>
@@ -649,7 +649,7 @@ https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="rate_it_summary"><b>pěti hvězdičkové</b> hodnocení velmi pomohou růstu aplikace
 a její viditelnosti v Obchodě Play. Pokud chcete této vidět tuto aplikaci <i>pokračovat stoupat</i>, tak mi pomožte!</string>
     <string name="rate_it_not_ready">Nejste připraveni hodnotit? Není problém. Opusťte toto okno a už se nezeptám.</string>
-    <string name="love_pulse_question">Milujete Pulse?</string>
+    <string name="love_link_question">Milujete Pulse?</string>
     <string name="give_a_rating">Zvažte ohodnocení nebo sdílení s přáteli!\n\n
 Pětihvězdičková ohodnocení mě zahřejí z srdce :)</string>
     <!-- Times -->
@@ -698,7 +698,7 @@ Posílejte zprávy z webu, z počítače, z tabletu, hodinek a dokonce i z telev
     <string name="trial_description">Žádná konkurence nemůže nabídnout <b>doživotní podporu platformy</b> a <b>nízkou cenu</b> tak, jako Pulse. Zprávy se mezi všemi zařízeními synchronizují okamžitě a bez námahy.</string>
     <string name="purchase_description">Vyzkoušejte online verzi po dobu <b>sedmi dní</b>, pak se rozhodněte, jak chcete aplikaci podpořit:\n\n<b>$10.99</b> za doživotní členství\n<b>$5.99</b> za rok\n<b>$1.99</b> čtvrtletně\n<b>$0.99</b> za měsíc</string>
     <string name="start_free_trial">Začněte používat bezplatnou zkušební verzi!</string>
-    <string name="create_your_pulse_account">Vytvořte si účet Pulse!</string>
+    <string name="create_your_link_account">Vytvořte si účet Pulse!</string>
     <string name="try_it">Vyzkoušejte!</string>
     <string name="select_purchase">Vyberte nákup</string>
     <string name="have_an_account">Máte účet?\nPřihlašte se</string>

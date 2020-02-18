@@ -25,9 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:text="@string/love_pulse_question"
+        android:text="@string/love_link_question"
         android:textColor="@android:color/white"
-        android:background="@color/pulseColorPrimary"
+        android:background="@color/linkColorPrimary"
         android:textSize="19sp" />
 
     <LinearLayout

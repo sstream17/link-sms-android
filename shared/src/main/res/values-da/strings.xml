@@ -443,7 +443,7 @@ Brug standard kanaler for at tilpasse de samtaler, du ikke har lavet individuell
     <string name="verifying_password">Bekræfter adgangskode...</string>
     <!-- Rate it -->
     <string name="rate_it">Bedøm!</string>
-    <string name="love_pulse_question">Elsker du Pulse?</string>
+    <string name="love_link_question">Elsker du Pulse?</string>
     <string name="give_a_rating">Overvej at give en bedømmelse eller del med dine venner!\n\n
 Din 5-stjernede bedømmelse vil varme mit hjerte :)</string>
     <!-- Times -->

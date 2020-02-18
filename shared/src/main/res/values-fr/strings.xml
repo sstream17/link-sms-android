@@ -579,7 +579,7 @@ Avec votre compte, Pulse sauvegarde automatiquement tous les messages que vous e
     <string name="set_passcode">Sauvegarder le mot de passe</string>
     <string name="confirm_fingerprint">Confirmer l\'empreinte pour continuer. Toucher le capteur d\'empreinte maintenant.</string>
     <string name="confirm_passcode">Confirmer le mot de passe pour continuer.</string>
-    <string name="confirm_pulse_password">Confirmer les identifiants du compte Pulse pour continuer.</string>
+    <string name="confirm_link_password">Confirmer les identifiants du compte Pulse pour continuer.</string>
     <string name="type_passcode">Créer un mot de passe.</string>
     <string name="incorrect_passcode">Mot de passe erroné.</string>
     <string name="verify">Vérifier</string>
@@ -621,7 +621,7 @@ Utilisez le canal par défaut pour personnaliser les conversations auxquelles vo
     <string name="rate_it_title">Les commentaires positifs aident beaucoup</string>
     <string name="rate_it_summary">Noter <b>5 étoiles</b> aide beaucoup à faire connaître cette application sur le Play Store. Si vous voulez <i>la voir grandir</i>, n\'hésitez pas a contribuer !</string>
     <string name="rate_it_not_ready"><b>Pas prêt à nous noter ?</b> Pas de soucis. Quittez la fenêtre et je ne vous le demanderai plus jamais.</string>
-    <string name="love_pulse_question">Vous aimez Pulse ?</string>
+    <string name="love_link_question">Vous aimez Pulse ?</string>
     <string name="give_a_rating">Merci de noter l\'application ou de la partager avec vos amis !\n\n
 Votre avis à 5 étoiles me fera le plus grand plaisir :)</string>
     <!-- Times -->
@@ -669,7 +669,7 @@ Envoyez des messages depuis internet, un ordinateur de bureau, votre tablette, e
     <string name="trial_description">Aucune concurrence ne peut atteindre le <b>support d\'un nombre illimité de plateforme</b> de Pulse associé à son <b>prix bas</b>. Vos messages sont synchronisés entre tous vos appareils, instantanément et en toute transparence.</string>
     <string name="purchase_description">Essayez la version en ligne, pour <b>sept jours</b>, puis choisissez comment vous souhaitez supporter l\'application :\n\n<b>10.99€</b> pour une adhésion à vie\n<b>5.99€</b> par an\n<b>1.99€</b> par trimestre\n<b>0.99€</b> par mois</string>
     <string name="start_free_trial">Commencer votre période d\'essai !</string>
-    <string name="create_your_pulse_account">Créer un compte Pulse !</string>
+    <string name="create_your_link_account">Créer un compte Pulse !</string>
     <string name="try_it">Essayez-le !</string>
     <string name="select_purchase">Sélectionner l\'achat</string>
     <string name="have_an_account">Déjà un compte ?\nSe connecter</string>

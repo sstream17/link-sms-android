@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:background="@drawable/status_bar"
-        android:backgroundTint="@color/pulseColorPrimaryDark"
+        android:backgroundTint="@color/linkColorPrimaryDark"
         android:backgroundTintMode="multiply"
         android:fitsSystemWindows="true"
         android:orientation="horizontal"
