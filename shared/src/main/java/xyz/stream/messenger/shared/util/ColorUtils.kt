@@ -24,6 +24,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.ActionBar
@@ -231,12 +232,18 @@ object ColorUtils {
      * @param color    the color of the new cursor.
      */
     fun setCursorDrawableColor(editText: EditText, color: Int) {
-        var color = color
-        if (Settings.useGlobalThemeColor) {
-            color = Settings.mainColorSet.colorAccent
+        val cursorColor = if (Settings.useGlobalThemeColor) {
+            Settings.mainColorSet.colorAccent
+        } else {
+            color
         }
 
         try {
+            if (AndroidVersionUtil.isAndroidQ) {
+                editText.textCursorDrawable?.colorFilter = PorterDuffColorFilter(cursorColor, PorterDuff.Mode.SRC_IN)
+                return
+            }
+
             val fCursorDrawableRes = TextView::class.java.getDeclaredField("mCursorDrawableRes")
             fCursorDrawableRes.isAccessible = true
             val mCursorDrawableRes = fCursorDrawableRes.getInt(editText)
@@ -249,13 +256,12 @@ object ColorUtils {
             val drawables = arrayOfNulls<Drawable>(2)
             drawables[0] = editText.context.getDrawable(mCursorDrawableRes)
             drawables[1] = editText.context.getDrawable(mCursorDrawableRes)
-            drawables[0]?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-            drawables[1]?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+            drawables[0]?.setColorFilter(cursorColor, PorterDuff.Mode.SRC_IN)
+            drawables[1]?.setColorFilter(cursorColor, PorterDuff.Mode.SRC_IN)
             fCursorDrawable.set(editor, drawables)
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
         }
-
     }
 
     /**
@@ -268,16 +274,21 @@ object ColorUtils {
      * The color to set for the text handles
      */
     fun colorTextSelectionHandles(view: TextView, color: Int) {
-        if (AndroidVersionUtil.isAndroidP) {
-            return
-        }
-
-        var color = color
-        if (Settings.useGlobalThemeColor) {
-            color = Settings.mainColorSet.colorAccent
+        val handleColor = if (Settings.useGlobalThemeColor) {
+            Settings.mainColorSet.colorAccent
+        } else {
+            color
         }
 
         try {
+            if (AndroidVersionUtil.isAndroidQ) {
+                val colorFilter = PorterDuffColorFilter(handleColor, PorterDuff.Mode.SRC_IN)
+                view.textSelectHandle?.colorFilter = colorFilter
+                view.textSelectHandleLeft?.colorFilter = colorFilter
+                view.textSelectHandleRight?.colorFilter = colorFilter
+                return
+            }
+
             val editorField = TextView::class.java.getDeclaredField("mEditor")
             if (!editorField.isAccessible) {
                 editorField.isAccessible = true
@@ -308,13 +319,12 @@ object ColorUtils {
 
                 if (handleDrawable != null) {
                     val drawable = handleDrawable.mutate()
-                    drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                    drawable.setColorFilter(handleColor, PorterDuff.Mode.SRC_IN)
                     handleField.set(editor, drawable)
                 }
             }
         } catch (e: Exception) {
         }
-
     }
 
     /**
