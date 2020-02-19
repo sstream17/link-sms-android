@@ -15,9 +15,9 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="app_name">Pulse</string>
-    <string name="app_name_long">Pulse (SMS/Tablet Messenger)</string>
-    <string name="app_title">Pulse</string>
+    <string name="app_name">Link</string>
+    <string name="app_name_long">Link SMS Messenger</string>
+    <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Нове повідомлення</string>
     <string name="shortcut_compose_long">Почати нову розмову!</string>
@@ -94,8 +94,8 @@
     <string name="conversations">Розмови</string>
     <string name="messages">Повідомлення</string>
     <!-- Invite Friends Screen -->
-    <string name="invite_friends_title">Подобається Pulse?</string>
-    <string name="invite_friends_summary">Ми вже полюбили Pulse і з нетерпінням чекаємо інших! Ми намагаємося надати його якнайбільшій кількості користувачів і продовжуємо постійно вдосконалювати цей продукт. Запросивши своїх друзів спробувати Ви допоможете нам! 
+    <string name="invite_friends_title">Подобається Link?</string>
+    <string name="invite_friends_summary">Ми вже полюбили Link і з нетерпінням чекаємо інших! Ми намагаємося надати його якнайбільшій кількості користувачів і продовжуємо постійно вдосконалювати цей продукт. Запросивши своїх друзів спробувати Ви допоможете нам!
 Виберіть нижче, друзів, яким Ви хочете відправити цю програму, і надішліть їм SMS з коротким описом і посиланням для завантаження!</string>
     <string name="invite_friends_sms">Я використовую новий додаток для текстових повідомлень і я думаю, що 
 він вам теж сподобається! Плюс це безкоштовно, так що можете також його завантажити: 
@@ -168,9 +168,9 @@ http://messenger.klinkerapps.com</string>
     <string name="onboarding_title_2">Доступно скрізь</string>
     <string name="onboarding_title_3">Потужні персональні налаштування</string>
     <string name="onboarding_content_1">Згладжені та зручні макети представлення з потужним дизайном і бездоганною інтеграцією. 
-Pulse ставить ваші розмови на попередній план.</string>
+Link ставить ваші розмови на попередній план.</string>
     <string name="onboarding_content_2">Повідомлення з планшета, комп\'ютера, годинника або будь-яких інших підключених пристроїв.</string>
-    <string name="onboarding_content_3">Прикріплення, вимкнення звуку, теми та інші налаштування сповіщень для будь-яких контактів, з якими Ви спілкуєтеся. Зробіть Pulse Вашим.</string>
+    <string name="onboarding_content_3">Прикріплення, вимкнення звуку, теми та інші налаштування сповіщень для будь-яких контактів, з якими Ви спілкуєтеся. Зробіть Link Вашим.</string>
     <string name="message_anywhere_onboarding_title_1">Спілкування будь-де</string>
     <string name="message_anywhere_onboarding_title_2">Підписка або разовий платіж</string>
     <string name="message_anywhere_onboarding_title_3">"Тиждень пробної версії "</string>
@@ -225,7 +225,7 @@ Pulse ставить ваші розмови на попередній план.
     <string name="issues">Вирішення проблем</string>
     <string name="issues_summary">Він також служить в якості довідника з можливостей</string>
     <string name="google_plus">Google+</string>
-    <string name="google_plus_summary">Pulse бета-спільноти</string>
+    <string name="google_plus_summary">Link бета-спільноти</string>
     <string name="email">Email</string>
     <string name="email_summary">luke@klinkerapps.com</string>
     <string name="twitter">Twitter</string>
@@ -342,7 +342,7 @@ Pulse ставить ваші розмови на попередній план.
     <string name="user_agent_profile_tag">Тег-ім\'я профілю агента користувача</string>
     <!-- Advanced Features Settings -->
     <string name="signature">Підпис</string>
-    <string name="signature_summary">Примітка: надіслані підписи не будуть відображатися в списку повідомлень Pulse. Підписи будуть показані тільки одержувачу в повідомленні.</string>
+    <string name="signature_summary">Примітка: надіслані підписи не будуть відображатися в списку повідомлень Link. Підписи будуть показані тільки одержувачу в повідомленні.</string>
     <string name="cleanup_old_messages">Очищення давніх повідомлень</string>
     <string name="delayed_sending">Затримка відправки</string>
     <string name="quick_compose">Швидко створити</string>
@@ -383,9 +383,9 @@ Pulse ставить ваші розмови на попередній план.
     <string name="dashclock_description">Непрочитані SMS/MMS</string>
     <string name="default_text">За замовчуванням</string>
     <string name="did_you_know">Ви знали?</string>
-    <string name="use_from_anywhere">Pulse може бути використаний з будь-якого пристрою, підключеного до Інтернету - 
+    <string name="use_from_anywhere">Link може бути використаний з будь-якого пристрою, підключеного до Інтернету -
 спробуй його сьогодні!</string>
-    <string name="use_from_anywhere_short">Pulse може бути використаний на будь-якому з ваших пристроїв!</string>
+    <string name="use_from_anywhere_short">Link може бути використаний на будь-якому з ваших пристроїв!</string>
     <string name="learn_more">Вивчайте більше</string>
     <string name="dismiss">Відхилити</string>
     <string name="renew">Відновити</string>

@@ -15,9 +15,9 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="app_name">Pulse</string>
-    <string name="app_name_long">Pulse (чат и SMS)</string>
-    <string name="app_title">Pulse</string>
+    <string name="app_name">Link</string>
+    <string name="app_name_long">Link (чат и SMS)</string>
+    <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Новое сообщение</string>
     <string name="shortcut_compose_long">Начните новый диалог!</string>
@@ -100,7 +100,7 @@
     </plurals>
     <string name="undo">Отменить</string>
     <string name="enter_search">Найти...</string>
-    <string name="text_anywhere_description">Знаете ли Вы:  Pulse - это больше, чем просто мобильное приложение. Вы можете пользоваться Pulse на <b>любом</b> устройстве!</string>
+    <string name="text_anywhere_description">Знаете ли Вы:  Link - это больше, чем просто мобильное приложение. Вы можете пользоваться Link на <b>любом</b> устройстве!</string>
     <string name="convo_list_try_it">Попробуйте!</string>
     <string name="convo_list_not_now">Позже</string>
     <string name="no_private_messages_description">Настройте личные беседы из меню настроек!</string>
@@ -110,7 +110,7 @@
     <string name="conversations">Диалоги</string>
     <string name="messages">Сообщения</string>
     <!-- Invite Friends Screen -->
-    <string name="invite_friends_title">Понравился Pulse?</string>
+    <string name="invite_friends_title">Понравился Link?</string>
     <string name="invite_friends_summary">И нам тоже, и остальным понравится! Распространяя это приложение, вы помогаете его развитию. Приглашайте своих друзей! \n\nВыберите контакты из списка ниже, с которыми вы бы хотели поделиться, и мы отправим им SMS  с коротким описанием и ссылку для загрузки!</string>
     <string name="invite_friends_sms">Я начал использовать новое приложение для переписки и думаю, что оно тебе бы понравилось! К тому же оно бесплатное. Можешь загрузить его тут: http://messenger.klinkerapps.com</string>
     <!-- Message List Screen -->
@@ -200,7 +200,7 @@
     <string name="onboarding_title_3">Продвинутая персонализация</string>
     <string name="onboarding_content_1">Плавные переходы, продуманный дизайн и интеграция между множеством устройств.</string>
     <string name="onboarding_content_2">Переписывайтесь на своём планшете, умных часах или любом другом устройстве.</string>
-    <string name="onboarding_content_3">Закрепляйте, приглушайте, раскрашивайте и настраивайте уведомления для любого диалога. Сделайте Pulse своим.</string>
+    <string name="onboarding_content_3">Закрепляйте, приглушайте, раскрашивайте и настраивайте уведомления для любого диалога. Сделайте Link своим.</string>
     <string name="message_anywhere_onboarding_title_1">Переписывайте где угодно</string>
     <string name="message_anywhere_onboarding_title_2">Подписка или единоразовый платёж</string>
     <string name="message_anywhere_onboarding_title_3">Пробный период 7 дней</string>
@@ -287,7 +287,7 @@
     <string name="issues">Трекер задач</string>
     <string name="issues_summary">Также может служить в качестве плана разработки</string>
     <string name="google_plus">Google+</string>
-    <string name="google_plus_summary">Бета-сообщество Pulse</string>
+    <string name="google_plus_summary">Бета-сообщество Link</string>
     <string name="email">Email</string>
     <string name="email_summary">luke@klinkerapps.com</string>
     <string name="twitter">Twitter</string>
@@ -434,7 +434,7 @@
     <string name="emoji_style_android_o">Google\'s Android O</string>
     <string name="settings_phone_number">Телефонный номер</string>
     <string name="disable_battery_optimization">Отключить оптимизацию батареи</string>
-    <string name="disable_battery_optimization_summary">Если сообщения не поступают с вашего телефона в Интернет, попробуйте отключить оптимизацию батареи для Pulse.</string>
+    <string name="disable_battery_optimization_summary">Если сообщения не поступают с вашего телефона в Интернет, попробуйте отключить оптимизацию батареи для Link.</string>
     <!-- MMS Configuration Settings -->
     <string name="max_mms_size">Максимальный размер изображения</string>
     <string name="max_mms_size_summary">Не устанавливайте это значение выше, чем позволяет ваш оператор</string>
@@ -451,7 +451,7 @@
     <string name="user_agent_profile_tag">Тэг профиля в системе</string>
     <!-- Advanced Features Settings -->
     <string name="signature">Подпись</string>
-    <string name="signature_summary">Подпись не будет отображаться в списке сообщений Pulse, её увидит только получатель сообщения.</string>
+    <string name="signature_summary">Подпись не будет отображаться в списке сообщений Link, её увидит только получатель сообщения.</string>
     <string name="cleanup_old_messages">Удалить старые сообщения</string>
     <string name="cleanup_old_messages_summary">Это выполняется один раз в день для удаления любых сообщений, которые были старше вашего выбранного периода времени</string>
     <string name="cleanup_old_messages_now_summary">Запуск удаления любых сообщений в этом разговоре старше выбранного периода времени</string>
@@ -494,8 +494,8 @@
     <string name="dashclock_description">Информация о непрочитанных SMS/MMS</string>
     <string name="default_text">Стандартный</string>
     <string name="did_you_know">Знаете ли вы?</string>
-    <string name="use_from_anywhere">Pulse может быть использован на любом подключенном устройстве - попробуйте уже сегодня!</string>
-    <string name="use_from_anywhere_short">Pulse можно использовать на любом вашем устройстве!</string>
+    <string name="use_from_anywhere">Link может быть использован на любом подключенном устройстве - попробуйте уже сегодня!</string>
+    <string name="use_from_anywhere_short">Link можно использовать на любом вашем устройстве!</string>
     <string name="learn_more">Узнать больше</string>
     <string name="dismiss">Отклонить</string>
     <string name="renew">Обновить</string>
@@ -511,11 +511,11 @@
     <string name="default_channel">Стандартный канал</string>
     <string name="off">Не включать</string>
     <string name="on">Включать</string>
-    <string name="share_promo">Привет! Мне очень понравилось переписываться через Pulse! Попробуй и ты, по это ссылке: https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+    <string name="share_promo">Привет! Мне очень понравилось переписываться через Link! Попробуй и ты, по это ссылке: https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
     <string name="verifying_password">Проверяем пароль...</string>
     <!-- Rate it -->
     <string name="rate_it">Оценить!</string>
-    <string name="love_link_question">Понравился Pulse?</string>
+    <string name="love_link_question">Понравился Link?</string>
     <string name="give_a_rating">Оцените приложение или поделитесь им с вашими друзьями!\n\nВаша оценка на 5 звезд согреет моё сердце :)</string>
     <!-- Times -->
     <string name="one_second">1 секунда</string>
@@ -552,7 +552,7 @@
     <string name="monthly_purchase_summary">Просто попробовать? Нет проблем.</string>
     <string name="change_subscription_message">Хотите улучшить? Отлично! После того как вы сделаете свой выбор на следующей странице, перейдите в Play Store  и отмените старую подписку.</string>
     <string name="beautiful_powerful_instant">Красивый, мощный, мгновенный.</string>
-    <string name="optimized_for_all_your_devices">Pulse оптимизирован под <b>любые</b> ваши устройства.
+    <string name="optimized_for_all_your_devices">Link оптимизирован под <b>любые</b> ваши устройства.
 Отправляйте текстовые сообщения через: web-приложение, ПК, планшет, умные часы и даже ТВ.</string>
     <string name="true_imessage_competitor">Первый <b>настоящий</b> конкурент iMessage на Android.</string>
     <string name="try_it">Попробуйте!</string>
