@@ -46,6 +46,7 @@ import xyz.stream.messenger.shared.activity.AbstractSettingsActivity
 import xyz.stream.messenger.shared.data.ColorSet
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import kotlin.math.pow
 
 /**
  * Helper class for working with colors.
@@ -96,32 +97,35 @@ object ColorUtils {
      * @param color    the color to change to.
      * @param activity the activity to find the views in.
      */
-    fun adjustStatusBarColor(color: Int, activity: Activity?) {
-        var color = color
+    fun adjustStatusBarColor(toolbarColor: Int, statusBarColor: Int, activity: Activity?) {
+        var statusBarColor = statusBarColor
+        var toolbarColor = toolbarColor
         if (activity == null) {
             return
         }
 
         if (Settings.useGlobalThemeColor) {
-            color = Settings.mainColorSet.colorDark
+            statusBarColor = Settings.mainColorSet.colorDark
+            toolbarColor = Settings.mainColorSet.color
         }
 
-        color = ActivityUtils.possiblyOverrideColorSelection(activity, color)
+        statusBarColor = ActivityUtils.possiblyOverrideColorSelection(activity, statusBarColor)
+        toolbarColor = ActivityUtils.possiblyOverrideColorSelection(activity, toolbarColor)
 
         if (!activity.resources.getBoolean(R.bool.pin_drawer)) {
             val drawerLayout = activity
                     .findViewById<View>(R.id.drawer_layout) as DrawerLayout?
 
-            drawerLayout?.setStatusBarBackgroundColor(color)
+            drawerLayout?.setStatusBarBackgroundColor(statusBarColor)
         } else {
             val status = activity.findViewById<View>(R.id.status_bar)
 
             if (status != null) {
-                status.backgroundTintList = ColorStateList.valueOf(color)
+                status.backgroundTintList = ColorStateList.valueOf(statusBarColor)
             }
         }
 
-        ActivityUtils.setUpLightStatusBar(activity, color)
+        ActivityUtils.setUpLightStatusBar(activity, toolbarColor)
     }
 
     /**
@@ -453,20 +457,34 @@ object ColorUtils {
         animator.start()
     }
 
-    fun animateStatusBarColor(activity: Activity, originalColor: Int, newColor: Int) {
+    fun animateStatusBarColor(activity: Activity, originalColor: Int, newColor: Int, finalToolbarColor: Int = newColor) {
         val animator = ValueAnimator.ofArgb(originalColor, newColor)
         animator.duration = 200
         animator.addUpdateListener { valueAnimator ->
             val color = valueAnimator.animatedValue as Int
             if (activity.window != null) {
-                ActivityUtils.setStatusBarColor(activity, color)
+                ActivityUtils.setStatusBarColor(activity, color, finalToolbarColor)
             }
         }
         animator.start()
     }
 
     fun isColorDark(color: Int): Boolean {
-        val darkness = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255
-        return darkness >= 0.30
+        val red = getSRGB(Color.red(color))
+        val green = getSRGB(Color.green(color))
+        val blue = getSRGB(Color.blue(color))
+
+        // Compute the relative luminance of the background color
+        // https://www.w3.org/TR/WCAG20/#relativeluminancedef
+        val luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+        // Determine color based on the contrast ratio
+        // https://www.w3.org/TR/WCAG20/#contrast-ratiodef
+        return luminance < 0.35
+    }
+
+    private fun getSRGB(value: Int): Double {
+        val component = value.toDouble() / 255.0
+        return if (component <= 0.03928) component / 12.92 else ((component + 0.055) / 1.055).pow(2.4)
     }
 }
