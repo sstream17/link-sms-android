@@ -1311,7 +1311,6 @@ object ApiUtils {
         }
     }
 
-
     /**
      * Update the delayed sending setting.
      */
@@ -1321,13 +1320,21 @@ object ApiUtils {
         }
     }
 
-
     /**
      * Update the cleanup old messages setting.
      */
     fun updateCleanupOldMessages(accountId: String?, cleanup: String?) {
         if (accountId != null) {
             updateSetting(accountId, "cleanup_old_messages", "string", cleanup)
+        }
+    }
+
+    /**
+     * Update the cleanup old messages setting.
+     */
+    fun updateUnknownNumberReception(accountId: String?, reception: String?) {
+        if (accountId != null) {
+            updateSetting(accountId, "unknown_number_reception", "string", reception)
         }
     }
 
