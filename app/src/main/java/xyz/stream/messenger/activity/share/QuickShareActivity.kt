@@ -73,7 +73,7 @@ class QuickSharePage(val activity: QuickShareActivity) : TutorialPage(activity) 
         findViewById<View>(R.id.top_background).setBackgroundColor(Settings.mainColorSet.color)
         ColorUtils.setCursorDrawableColor(messageEntry, Settings.mainColorSet.colorAccent)
         KeyboardLayoutHelper.applyLayout(messageEntry, KeyboardLayout.SEND)
-        prepareContactEntry()
+        prepareContactEntry(Settings.mainColorSet.color)
 
         val sendButton = findViewById<View>(R.id.tutorial_next_button)
         sendButton.setOnClickListener {
@@ -160,12 +160,19 @@ class QuickSharePage(val activity: QuickShareActivity) : TutorialPage(activity) 
         } }
     }
 
-    private fun prepareContactEntry() {
+    private fun prepareContactEntry(backgroundColor: Int) {
         val adapter = BaseRecipientAdapter(BaseRecipientAdapter.QUERY_TYPE_PHONE, context)
         adapter.isShowMobileOnly = Settings.mobileOnly
 
         contactEntry.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+        if (!ColorUtils.isColorDark(backgroundColor)) {
+            contactEntry.setTextColor(ColorStateList.valueOf(activity.resources.getColor(R.color.lightBackgroundTextColor)))
+            contactEntry.setHintTextColor(ColorStateList.valueOf(activity.resources.getColor(R.color.lightToolbarTextColor)))
+        }
+
         contactEntry.highlightColor = Settings.mainColorSet.colorAccent
+        ColorUtils.setCursorDrawableColor(contactEntry, Settings.mainColorSet.colorAccent)
+        ColorUtils.colorTextSelectionHandles(contactEntry, Settings.mainColorSet.colorAccent)
         contactEntry.setAdapter(adapter)
     }
 }
