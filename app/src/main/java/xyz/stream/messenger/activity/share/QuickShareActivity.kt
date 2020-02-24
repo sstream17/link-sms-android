@@ -71,8 +71,7 @@ class QuickSharePage(val activity: QuickShareActivity) : TutorialPage(activity) 
         }
 
         findViewById<View>(R.id.top_background).setBackgroundColor(Settings.mainColorSet.color)
-        ColorUtils.setCursorDrawableColor(messageEntry, Settings.mainColorSet.colorAccent)
-        KeyboardLayoutHelper.applyLayout(messageEntry, KeyboardLayout.SEND)
+        prepareMessageEntry()
         prepareContactEntry(Settings.mainColorSet.color)
 
         val sendButton = findViewById<View>(R.id.tutorial_next_button)
@@ -158,6 +157,13 @@ class QuickSharePage(val activity: QuickShareActivity) : TutorialPage(activity) 
             messageEntry.requestFocus()
             messageEntry.setSelection(messageEntry.text.length)
         } }
+    }
+    
+    private fun prepareMessageEntry() {
+        KeyboardLayoutHelper.applyLayout(messageEntry, KeyboardLayout.SEND)
+        messageEntry.highlightColor = Settings.mainColorSet.colorAccent
+        ColorUtils.setCursorDrawableColor(messageEntry, Settings.mainColorSet.colorAccent)
+        ColorUtils.colorTextSelectionHandles(messageEntry, Settings.mainColorSet.colorAccent)
     }
 
     private fun prepareContactEntry(backgroundColor: Int) {
