@@ -70,6 +70,7 @@ class MessengerApplication : xyz.stream.messenger.api.implementation.firebase.Fi
 
                     DynamicShortcutUtils(this@MessengerApplication).buildDynamicShortcuts(conversations)
                 } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }.start()
         }
