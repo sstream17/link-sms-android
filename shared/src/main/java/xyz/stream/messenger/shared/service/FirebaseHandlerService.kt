@@ -115,6 +115,7 @@ class FirebaseHandlerService : IntentService("FirebaseHandlerService") {
                     "archive_conversation" -> archiveConversation(json, context)
                     "seen_conversations" -> seenConversations(context)
                     "added_draft" -> addDraft(json, context, encryptionUtils)
+                    "replaced_drafts" -> replacedDrafts(json, context, encryptionUtils)
                     "removed_drafts" -> removeDrafts(json, context)
                     "added_blacklist" -> addBlacklist(json, context, encryptionUtils)
                     "removed_blacklist" -> removeBlacklist(json, context)
@@ -668,8 +669,21 @@ class FirebaseHandlerService : IntentService("FirebaseHandlerService") {
             draft.data = encryptionUtils!!.decrypt(json.getString("data"))
             draft.mimeType = encryptionUtils.decrypt(json.getString("mime_type"))
 
-            DataSource.insertDraft(context, draft, false)
+            DataSource.insertDraft(context, draft.conversationId, draft.data!!, draft.mimeType!!, useApi = false, useSnippetApi = Account.primary)
             Log.v(TAG, "added draft")
+        }
+
+        @Throws(JSONException::class)
+        private fun replacedDrafts(json: JSONObject, context: Context, encryptionUtils: EncryptionUtils?) {
+            val draft = Draft()
+            draft.id = getLong(json, "id")
+            draft.conversationId = getLong(json, "conversation_id")
+            draft.data = encryptionUtils!!.decrypt(json.getString("data"))
+            draft.mimeType = encryptionUtils.decrypt(json.getString("mime_type"))
+
+            DataSource.deleteDrafts(context, draft.conversationId, false)
+            DataSource.insertDraft(context, draft.conversationId, draft.data!!, draft.mimeType!!, useApi = false, useSnippetApi = Account.primary)
+            Log.v(TAG, "replaced drafts")
         }
 
         @Throws(JSONException::class)
@@ -678,7 +692,7 @@ class FirebaseHandlerService : IntentService("FirebaseHandlerService") {
             val deviceId = json.getString("android_device")
 
             if (deviceId == null || deviceId != Account.deviceId) {
-                DataSource.deleteDrafts(context, id, false)
+                DataSource.deleteDrafts(context, id, useApi = false, useSnippetApi = Account.primary)
                 Log.v(TAG, "removed drafts")
             }
         }
