@@ -26,12 +26,12 @@ buildscript {
 
     ext.buildInfo = [
             'id'                : 'xyz.stream.messenger',
-            'name'              : '0.2.2',
+            'name'              : '0.2.3',
             'number'            : System.getenv("BUILD_NUMBER") as Integer ?: Calendar.getInstance().get(Calendar.DAY_OF_YEAR),
     ]
 
     ext.versions = [
-            'gradlePlugin'      : '3.6.0',
+            'gradlePlugin'      : '3.6.1',
             'targetSdk'         : 29,
             'minSdk'            : 21,
 
