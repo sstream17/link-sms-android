@@ -78,6 +78,13 @@
     <string name="menu_pin_conversation">Pin/Unpin Conversation</string>
     <string name="menu_mute_conversation">Mute/Unmute Conversation</string>
 
+    <!-- Bottom Navigation Items -->
+    <string name="menu_inbox">Inbox</string>
+    <string name="menu_unread">Unread</string>
+    <string name="menu_private">Private</string>
+    <string name="menu_archived">Archived</string>
+    <string name="menu_scheduled">Scheduled</string>
+
     <!-- Empty Screen -->
     <string name="no_messages">No messages</string>
     <string name="no_messages_summary">Start a new conversation or just enjoy your day!</string>
