@@ -17,28 +17,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/drawer_conversation"
+        android:id="@+id/navigation_conversation"
         android:checked="true"
         android:icon="@drawable/ic_inbox_small"
         android:title="@string/menu_inbox" />
 
     <item
-        android:id="@+id/drawer_unread"
+        android:id="@+id/navigation_unread"
         android:icon="@drawable/ic_unread"
         android:title="@string/menu_unread" />
 
     <item
-        android:id="@+id/drawer_private"
+        android:id="@+id/navigation_private"
         android:icon="@drawable/ic_lock"
         android:title="@string/menu_private" />
 
     <item
-        android:id="@+id/drawer_archived"
+        android:id="@+id/navigation_archived"
         android:icon="@drawable/ic_archive"
         android:title="@string/menu_archived" />
 
     <item
-        android:id="@+id/drawer_schedule"
+        android:id="@+id/navigation_schedule"
         android:icon="@drawable/ic_schedule"
         android:title="@string/menu_scheduled" />
 
