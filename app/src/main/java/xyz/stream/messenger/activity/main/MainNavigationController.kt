@@ -49,33 +49,6 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     }
 
     fun initDrawer() {
-        activity.insetController.overrideDrawerInsets()
-        navigationView.postDelayed({
-            try {
-                if (Account.exists()) {
-                    (activity.findViewById<View>(R.id.drawer_header_my_name) as TextView).text = Account.myName
-                }
-
-                (activity.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView).text =
-                        PhoneNumberUtils.format(PhoneNumberUtils.getMyPhoneNumber(activity))
-
-                if (!ColorUtils.isColorDark(Settings.mainColorSet.colorDark)) {
-                    (activity.findViewById<View>(R.id.drawer_header_my_name) as TextView)
-                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
-                    (activity.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView)
-                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
-                }
-
-                // change the text to
-                if (!Account.exists()) {
-                    navigationView.menu.findItem(R.id.drawer_account).setTitle(R.string.menu_device_texting)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            activity.snoozeController.initSnooze()
-        }, 300)
     }
 
     fun initToolbarTitleClick() {
