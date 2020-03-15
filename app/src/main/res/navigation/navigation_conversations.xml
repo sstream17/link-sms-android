@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_inbox">
+
+    <fragment
+        android:id="@+id/navigation_inbox"
+        android:name="xyz.stream.messenger.fragment.conversation.ConversationListFragment"
+        android:label="@string/menu_inbox"
+        tools:layout="@layout/fragment_conversation_list" />
+
+    <fragment
+        android:id="@+id/navigation_unread"
+        android:name="xyz.stream.messenger.fragment.UnreadConversationListFragment"
+        android:label="@string/menu_unread"
+        tools:layout="@layout/fragment_conversation_list" />
+
+    <fragment
+        android:id="@+id/navigation_private"
+        android:name="xyz.stream.messenger.fragment.PrivateConversationListFragment"
+        android:label="@string/menu_private"
+        tools:layout="@layout/fragment_conversation_list" />
+
+    <fragment
+        android:id="@+id/navigation_archived"
+        android:name="xyz.stream.messenger.fragment.ArchivedConversationListFragment"
+        android:label="@string/menu_archived"
+        tools:layout="@layout/fragment_conversation_list" />
+
+    <fragment
+        android:id="@+id/navigation_scheduled"
+        android:name="xyz.stream.messenger.fragment.ScheduledMessagesFragment"
+        android:label="@string/menu_scheduled"
+        tools:layout="@layout/fragment_schedule_messages" />
+</navigation>

@@ -17,7 +17,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_conversation"
+        android:id="@+id/navigation_inbox"
         android:checked="true"
         android:icon="@drawable/ic_inbox_small"
         android:title="@string/menu_inbox" />
@@ -38,7 +38,7 @@
         android:title="@string/menu_archived" />
 
     <item
-        android:id="@+id/navigation_schedule"
+        android:id="@+id/navigation_scheduled"
         android:icon="@drawable/ic_schedule"
         android:title="@string/menu_scheduled" />
 
