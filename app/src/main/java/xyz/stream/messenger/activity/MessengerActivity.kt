@@ -33,6 +33,9 @@ import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 import xyz.stream.messenger.shared.util.UpdateUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
@@ -58,19 +61,22 @@ class MessengerActivity : AppCompatActivity() {
     private val permissionHelper = MainPermissionHelper(this)
     private val resultHandler = MainResultHandler(this)
 
-    val drawerItemHelper: DrawerItemHelper by lazy { DrawerItemHelper(findViewById(R.id.navigation_view)) }
-
     val toolbar: WhitableToolbar by lazy { findViewById<View>(R.id.toolbar) as WhitableToolbar }
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
     private val content: View by lazy { findViewById<View>(android.R.id.content) }
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         UpdateUtils(this).checkForUpdate()
 
-        setContentView(R.layout.activity_messenger)
+        setContentView(R.layout.activity_main)
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.setGraph(R.navigation.navigation_conversations)
+        navView.setupWithNavController(navController)
 
         initToolbar()
         fab.setOnClickListener { startActivity(Intent(applicationContext, ComposeActivity::class.java)) }
@@ -79,9 +85,7 @@ class MessengerActivity : AppCompatActivity() {
         colorController.configureNavigationBarColor()
         intentHandler.dismissIfFromNotification()
         intentHandler.restoreNavigationSelection(savedInstanceState)
-        navController.conversationActionDelegate.displayConversations(savedInstanceState)
         intentHandler.displayPrivateFromNotification()
-        navController.initToolbarTitleClick()
         accountController.startIntroOrLogin(savedInstanceState)
         permissionHelper.requestDefaultSmsApp()
         insetController.applyWindowStatusFlags()
@@ -92,7 +96,6 @@ class MessengerActivity : AppCompatActivity() {
             AnimationUtils.toolbarSize = toolbar.height
         }
 
-        drawerItemHelper.prepareDrawer()
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
             findViewById<View?>(xyz.stream.messenger.shared.R.id.nav_bar_divider)?.visibility = View.GONE

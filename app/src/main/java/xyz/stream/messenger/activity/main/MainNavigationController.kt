@@ -11,6 +11,8 @@ import android.view.WindowInsets
 import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -26,13 +28,12 @@ import xyz.stream.messenger.shared.util.StringUtils
 import xyz.stream.messenger.shared.util.listener.BackPressedListener
 
 @Suppress("DEPRECATION")
-class MainNavigationController(private val activity: MessengerActivity)
-    : NavigationView.OnNavigationItemSelectedListener {
+class MainNavigationController(private val activity: MessengerActivity) : NavController(activity) {
 
     val conversationActionDelegate = MainNavigationConversationListActionDelegate(activity)
     val messageActionDelegate = MainNavigationMessageListActionDelegate(activity)
 
-    val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_view) as NavigationView }
+    val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_conversations) as NavigationView }
     val drawerLayout: DrawerLayout? by lazy { activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout? }
 
     var conversationListFragment: ConversationListFragment? = null
@@ -49,7 +50,6 @@ class MainNavigationController(private val activity: MessengerActivity)
 
     fun initDrawer() {
         activity.insetController.overrideDrawerInsets()
-        navigationView.setNavigationItemSelectedListener(this)
         navigationView.postDelayed({
             try {
                 if (Account.exists()) {
@@ -182,12 +182,7 @@ class MainNavigationController(private val activity: MessengerActivity)
             }
 
             else -> {
-                val folder = activity.drawerItemHelper.findFolder(id)
-                return if (folder != null) {
-                    conversationActionDelegate.displayFolder(folder)
-                } else {
-                    true
-                }
+                return true
             }
         }
     }
@@ -202,30 +197,6 @@ class MainNavigationController(private val activity: MessengerActivity)
     }
 
     fun onNavigationItemSelected(itemId: Int) {
-        val item = navigationView.menu.findItem(itemId)
-        if (item != null) {
-            onNavigationItemSelected(item)
-        }
-    }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        closeDrawer()
-        selectedNavigationItemId = item.itemId
-
-        if (item.isChecked || ApiDownloadService.IS_RUNNING) {
-            return true
-        }
-
-        if (item.isCheckable) {
-            item.isChecked = true
-        }
-
-        if (item.itemId == R.id.drawer_conversation) {
-            activity.setTitle(R.string.app_title)
-        } else if (item.isCheckable) {
-            activity.title = StringUtils.titleize(item.title.toString())
-        }
-
-        return drawerItemClicked(item.itemId)
     }
 }
