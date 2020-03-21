@@ -20,28 +20,28 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
 import xyz.stream.messenger.activity.main.*
-import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.view.WhitableToolbar
-import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
-import xyz.stream.messenger.shared.util.UpdateUtils
-import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
+import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import xyz.stream.messenger.shared.databinding.ActivityMainBinding
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.util.*
+import xyz.stream.messenger.shared.view.WhitableToolbar
+import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 
 /**
@@ -56,6 +56,7 @@ class MessengerActivity : AppCompatActivity() {
     val searchHelper = MainSearchHelper(this)
     val snoozeController = SnoozeController(this)
     val insetController = MainInsetController(this)
+    private val binding: ActivityMainBinding by contentView(R.layout.activity_main)
     private val colorController = MainColorController(this)
     private val startDelegate = MainOnStartDelegate(this)
     private val permissionHelper = MainPermissionHelper(this)
@@ -71,12 +72,20 @@ class MessengerActivity : AppCompatActivity() {
 
         UpdateUtils(this).checkForUpdate()
 
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        binding.apply {
+            val navController = Navigation.findNavController(this@MessengerActivity, R.id.nav_host)
+            navView.setupWithNavController(navController)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        navController.setGraph(R.navigation.navigation_conversations)
-        navView.setupWithNavController(navController)
+            // Hide bottom nav on screens which don't require it
+            lifecycleScope.launchWhenResumed {
+                navController.addOnDestinationChangedListener { _, destination, _ ->
+                    when (destination.id) {
+                        R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> navView.show()
+                        else -> navView.hide()
+                    }
+                }
+            }
+        }
 
         initToolbar()
         fab.setOnClickListener { startActivity(Intent(applicationContext, ComposeActivity::class.java)) }
