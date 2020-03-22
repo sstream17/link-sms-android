@@ -19,27 +19,27 @@
     <item
         android:id="@+id/navigation_inbox"
         android:checked="true"
-        android:icon="@drawable/ic_inbox_small"
+        android:icon="@drawable/asl_inbox"
         android:title="@string/menu_inbox" />
 
     <item
         android:id="@+id/navigation_unread"
-        android:icon="@drawable/ic_unread"
+        android:icon="@drawable/asl_unread"
         android:title="@string/menu_unread" />
 
     <item
         android:id="@+id/navigation_private"
-        android:icon="@drawable/ic_lock"
+        android:icon="@drawable/asl_lock"
         android:title="@string/menu_private" />
 
     <item
         android:id="@+id/navigation_archived"
-        android:icon="@drawable/ic_archive"
+        android:icon="@drawable/asl_archive"
         android:title="@string/menu_archived" />
 
     <item
         android:id="@+id/navigation_scheduled"
-        android:icon="@drawable/ic_schedule"
+        android:icon="@drawable/asl_schedule"
         android:title="@string/menu_scheduled" />
 
 </menu>
