@@ -152,12 +152,13 @@
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:background="@drawable/conversation_list_item_background"
-            app:paddingLeftSystemWindowInsets="@{true}"
-            app:paddingRightSystemWindowInsets="@{true}"
+            android:visibility="gone"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navigation_conversations"
             app:paddingBottomSystemWindowInsets="@{true}"
-            app:menu="@menu/bottom_navigation_conversations"/>
+            app:paddingLeftSystemWindowInsets="@{true}"
+            app:paddingRightSystemWindowInsets="@{true}" />
 
     </LinearLayout>
 
