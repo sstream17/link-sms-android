@@ -120,28 +120,6 @@
         </activity>
 
         <activity
-            android:name=".activity.MainActivity"
-            android:configChanges="keyboardHidden"
-            android:launchMode="singleTop"
-            android:theme="@style/LinkTheme.MessengerActivity"
-            android:resizeableActivity="true"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
-
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.APP_MESSAGING" />
-                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />-->
-
-        </activity>
-
-        <activity
             android:name=".activity.BubbleActivity"
             android:theme="@style/LinkTheme.MessengerActivity"
             android:allowEmbedded="true"

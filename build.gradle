@@ -45,6 +45,7 @@ buildscript {
             'androidXExif'      : '1.1.0',
             'androidXTester'    : '1.1.0',
             'androidXEspresso'  : '3.1.0',
+            'navigation'        : '2.2.0-beta01',
 
             'firebaseCore'      : '17.2.1',
             'firebaseMessaging' : '20.1.0',
@@ -67,6 +68,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.gradlePlugin}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.navigation}"
         classpath 'com.google.gms:google-services:4.3.3'
         classpath 'io.fabric.tools:gradle:1.31.2'
     }
