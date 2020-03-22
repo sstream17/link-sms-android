@@ -98,7 +98,6 @@ class MessengerActivity : AppCompatActivity() {
         intentHandler.displayPrivateFromNotification()
         accountController.startIntroOrLogin(savedInstanceState)
         permissionHelper.requestDefaultSmsApp()
-        insetController.applyWindowStatusFlags()
 
         val content = findViewById<View>(R.id.content)
         content.post {
@@ -151,7 +150,6 @@ class MessengerActivity : AppCompatActivity() {
 
     public override fun onResume() {
         super.onResume()
-        insetController.onResume()
 
         val messageListFragment = navController.findMessageListFragment()
         if (messageListFragment != null) {
@@ -165,8 +163,7 @@ class MessengerActivity : AppCompatActivity() {
         if (navController.conversationListFragment != null) {
             navController.conversationListFragment!!.swipeHelper.dismissSnackbars()
         }
-
-        insetController.onPause()
+        
         NotificationConstants.CONVERSATION_ID_OPEN = 0L
     }
 
