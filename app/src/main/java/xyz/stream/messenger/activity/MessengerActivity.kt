@@ -163,7 +163,7 @@ class MessengerActivity : AppCompatActivity() {
         if (navController.conversationListFragment != null) {
             navController.conversationListFragment!!.swipeHelper.dismissSnackbars()
         }
-        
+
         NotificationConstants.CONVERSATION_ID_OPEN = 0L
     }
 

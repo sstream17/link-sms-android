@@ -153,6 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:background="@drawable/conversation_list_item_background"
             app:paddingLeftSystemWindowInsets="@{true}"
             app:paddingRightSystemWindowInsets="@{true}"
             app:paddingBottomSystemWindowInsets="@{true}"
