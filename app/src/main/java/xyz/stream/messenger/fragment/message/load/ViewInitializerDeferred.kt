@@ -59,12 +59,6 @@ class ViewInitializerDeferred(private val fragment: MessageListFragment) {
         } catch (e: Exception) {
         }
 
-        toolbar.setOnClickListener {
-            if (activity is MessengerActivity) {
-                (activity as MessengerActivity).clickNavigationItem(R.id.drawer_view_contact)
-            }
-        }
-
         if (fragment.argManager.shouldOpenKeyboard || Build.MANUFACTURER.toLowerCase() == "blackberry") {
             // coming from the compose screen, or they have a physical keyboard (blackberry)
             messageEntry.requestFocus()

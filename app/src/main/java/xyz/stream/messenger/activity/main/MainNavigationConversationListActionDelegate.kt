@@ -3,11 +3,7 @@ package xyz.stream.messenger.activity.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.Fragment
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -22,9 +18,6 @@ import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.Folder
 import xyz.stream.messenger.shared.util.AnimationUtils
 import xyz.stream.messenger.shared.util.TimeUtils
-import java.util.concurrent.Executor
-import android.os.Looper
-
 
 
 class MainNavigationConversationListActionDelegate(private val activity: MessengerActivity) {
@@ -69,14 +62,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         val transaction = activity.supportFragmentManager.beginTransaction()
 
         if (navController.conversationListFragment != null) {
-            transaction.replace(R.id.conversation_list_container, navController.conversationListFragment!!)
-        }
-
-        val messageList = activity.supportFragmentManager
-                .findFragmentById(R.id.message_list_container)
-
-        if (messageList != null) {
-            transaction.remove(messageList)
+            transaction.replace(R.id.nav_host, navController.conversationListFragment!!)
         }
 
         try {

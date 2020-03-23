@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -94,7 +95,6 @@ class MessengerActivity : AppCompatActivity() {
         colorController.configureGlobalColors()
         colorController.configureNavigationBarColor()
         intentHandler.dismissIfFromNotification()
-        intentHandler.restoreNavigationSelection(savedInstanceState)
         intentHandler.displayPrivateFromNotification()
         accountController.startIntroOrLogin(savedInstanceState)
         permissionHelper.requestDefaultSmsApp()
@@ -116,13 +116,11 @@ class MessengerActivity : AppCompatActivity() {
 
         PromotionUtils(this).checkPromotions {
             MyAccountFragment.openTrialUpgradePreference = true
-            clickNavigationItem(R.id.drawer_account)
         }
 
         UnreadBadger(this).clearCount()
 
         colorController.colorActivity()
-        navController.initDrawer()
         intentHandler.displayAccount()
         intentHandler.handleShortcutIntent(intent)
         accountController.listenForFullRefreshes()
@@ -135,8 +133,6 @@ class MessengerActivity : AppCompatActivity() {
                 if (navController.isOtherFragmentConvoAndShowing()) {
                     navController.getShownConversationList()?.expandedItem?.itemView?.performClick()
                 }
-
-                clickNavigationItem(R.id.drawer_conversation)
             }
         } catch (e: Throwable) {
             e.printStackTrace()
@@ -194,13 +190,11 @@ class MessengerActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         try {
-            if (navController.closeDrawer()) {
-            } else if (searchHelper.closeSearch()) {
-            } else if (!navController.backPressed()) {
+            if (searchHelper.closeSearch()) {
+            } else {
                 super.onBackPressed()
             }
         } catch (e: Exception) {
-
         }
     }
 
@@ -235,7 +229,6 @@ class MessengerActivity : AppCompatActivity() {
 
     }
 
-    fun clickNavigationItem(itemId: Int) { navController.onNavigationItemSelected(itemId) }
     fun displayConversations() = navController.conversationActionDelegate.displayConversations()
 
     private fun initToolbar() {

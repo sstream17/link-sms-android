@@ -383,7 +383,6 @@ class MainNavigationMessageListActionDelegate(private val activity: MessengerAct
             val fragment = navController.getShownConversationList()
             val conversation = fragment!!.expandedItem!!.conversation
             fragment.expandedItem!!.itemView.performClick()
-            activity.clickNavigationItem(R.id.drawer_schedule)
 
             val messageListFragment = navController.findMessageListFragment()
             if (messageListFragment != null) {

@@ -68,5 +68,6 @@
         android:name="xyz.stream.messenger.fragment.ScheduledMessagesFragment"
         android:label="@string/menu_scheduled"
         tools:layout="@layout/fragment_schedule_messages" />
+
     <action android:id="@+id/action_global_message_list" app:destination="@id/message_list" />
 </navigation>

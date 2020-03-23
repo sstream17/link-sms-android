@@ -26,11 +26,7 @@ class PrivateConversationListFragment : ConversationListFragment() {
                 AlertDialog.Builder(fragmentActivity)
                         .setMessage(R.string.enable_passcode_disclaimer)
                         .setPositiveButton(android.R.string.ok, { _, _ -> })
-                        .setNegativeButton(R.string.menu_feature_settings) { _, _ ->
-                            if (fragmentActivity is MessengerActivity) {
-                                fragmentActivity.clickNavigationItem(R.id.drawer_feature_settings)
-                            }
-                        }.show()
+                        .show()
 
                 prefs.edit().putBoolean("private_conversation_security_disclainer", false).commit()
             }

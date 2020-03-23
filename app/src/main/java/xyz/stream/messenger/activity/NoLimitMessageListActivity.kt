@@ -3,13 +3,14 @@ package xyz.stream.messenger.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation.findNavController
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.main.MainColorController
 import xyz.stream.messenger.fragment.message.MessageInstanceManager
 import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.util.ActivityUtils
-import java.lang.Exception
 
 open class NoLimitMessageListActivity : AppCompatActivity() {
 
@@ -33,10 +34,8 @@ open class NoLimitMessageListActivity : AppCompatActivity() {
             return
         }
 
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.message_list_container, MessageInstanceManager.newInstance(conversation, -1, false))
-                .commit()
+        var view = findViewById<View>(android.R.id.content).rootView
+        findNavController(view).navigate(R.id.action_global_message_list, MessageInstanceManager.newInstance(conversation, -1, false).arguments)
 
         ActivityUtils.setStatusBarColor(this, conversation.colors.colorDark, conversation.colors.color)
         ActivityUtils.setTaskDescription(this, conversation.title!!, conversation.colors.color)

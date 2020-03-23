@@ -20,7 +20,7 @@ class MainResultHandler(private val activity: MessengerActivity) {
                 activity.navController.conversationActionDelegate.displayFragmentWithBackStack(PrivateConversationListFragment())
                 Settings.setValue(activity, activity.getString(R.string.pref_private_conversation_passcode_last_entry), TimeUtils.now)
             } else {
-                activity.navController.onNavigationItemSelected(R.id.drawer_conversation)
+                // TODO: Possibly return to Inbox fragment
             }
 
             return

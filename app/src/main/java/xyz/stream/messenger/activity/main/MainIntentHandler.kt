@@ -63,7 +63,6 @@ class MainIntentHandler(private val activity: MessengerActivity) {
     fun displayAccount() {
         if (activityIntent.getBooleanExtra(MessengerActivityExtras.EXTRA_START_MY_ACCOUNT, false)) {
             NotificationManagerCompat.from(activity).cancel(SubscriptionExpirationCheckJob.NOTIFICATION_ID)
-            navController.onNavigationItemSelected(R.id.drawer_account)
 
             activityIntent.removeExtra(MessengerActivityExtras.EXTRA_START_MY_ACCOUNT)
         }
@@ -100,13 +99,6 @@ class MainIntentHandler(private val activity: MessengerActivity) {
         }
 
         return outState
-    }
-
-    fun restoreNavigationSelection(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null && savedInstanceState.containsKey(MessengerActivityExtras.EXTRA_NAVIGATION_ITEM_ID)) {
-            val navItemId = savedInstanceState.getInt(MessengerActivityExtras.EXTRA_NAVIGATION_ITEM_ID)
-            navController.onNavigationItemSelected(navItemId)
-        }
     }
 
     fun dismissIfFromNotification() {

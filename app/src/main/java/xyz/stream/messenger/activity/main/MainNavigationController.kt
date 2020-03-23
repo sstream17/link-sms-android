@@ -48,72 +48,8 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         else -> conversationListFragment
     }
 
-    fun initDrawer() {
-    }
-
-    fun initToolbarTitleClick() {
-        activity.toolbar.setOnClickListener {
-            val otherFrag = otherFragment
-            val fragment = when {
-                conversationListFragment != null -> conversationListFragment
-                otherFrag is ConversationListFragment -> otherFrag
-                else -> return@setOnClickListener
-            }
-
-            fragment?.recyclerView?.smoothScrollToPosition(0)
-        }
-    }
-
-    fun openDrawer(): Boolean {
-        if (drawerLayout != null && !drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout!!.openDrawer(GravityCompat.START)
-            return true
-        }
-
-        return false
-    }
-
-    fun closeDrawer(): Boolean {
-        if (drawerLayout != null && drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout!!.closeDrawer(GravityCompat.START)
-            return true
-        }
-
-        return false
-    }
-
-    fun backPressed(): Boolean {
-        val fragments = activity.supportFragmentManager.fragments
-
-        fragments
-                .filter { it is BackPressedListener && (it as BackPressedListener).onBackPressed() }
-                .forEach { return true }
-
-        when {
-            conversationListFragment == null -> {
-                val messageListFragment = findMessageListFragment()
-                if (messageListFragment != null) {
-                    try {
-                        activity.supportFragmentManager.beginTransaction().remove(messageListFragment).commit()
-                    } catch (e: Exception) {
-                    }
-                }
-
-                conversationActionDelegate.displayConversations()
-                activity.fab.show()
-                drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                return true
-            }
-            inSettings -> {
-                onNavigationItemSelected(R.id.drawer_conversation)
-                return true
-            }
-            else -> return false
-        }
-    }
-
     fun findMessageListFragment(): MessageListFragment? =
-            activity.supportFragmentManager.findFragmentById(R.id.message_list_container) as? MessageListFragment
+            activity.supportFragmentManager.findFragmentById(R.id.nav_host) as? MessageListFragment
 
     fun drawerItemClicked(id: Int): Boolean {
         conversationListFragment?.swipeHelper?.dismissSnackbars()
@@ -161,15 +97,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     }
 
     fun optionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home -> {
-            openDrawer()
-            true
-        }
-        R.id.menu_search -> true
+        android.R.id.home, R.id.menu_search -> true
         else -> false
-    }
-
-    fun onNavigationItemSelected(itemId: Int) {
-
     }
 }
