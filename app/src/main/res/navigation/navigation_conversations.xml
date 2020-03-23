@@ -6,10 +6,44 @@
     app:startDestination="@+id/navigation_inbox">
 
     <fragment
+        android:id="@+id/message_list"
+        android:name="xyz.stream.messenger.fragment.message.MessageListFragment"
+        android:label="fragment_message_list"
+        tools:layout="@layout/fragment_message_list">
+        <argument
+            android:name="conversationId"
+            app:argType="long"/>
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="phoneNumbers"
+            app:argType="string" />
+        <argument
+            android:name="imageUri"
+            app:argType="string" />
+        <argument
+            android:name="color"
+            app:argType="integer" />
+        <argument
+            android:name="colorDark"
+            app:argType="integer" />
+        <argument
+            android:name="colorAccent"
+            app:argType="integer" />
+        <argument
+            android:name="isGroup"
+            app:argType="boolean" />
+        <argument
+            android:name="isArchived"
+            app:argType="boolean" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_inbox"
         android:name="xyz.stream.messenger.fragment.conversation.ConversationListFragment"
         android:label="@string/menu_inbox"
-        tools:layout="@layout/fragment_conversation_list" />
+        tools:layout="@layout/fragment_conversation_list"/>
 
     <fragment
         android:id="@+id/navigation_unread"
@@ -34,4 +68,5 @@
         android:name="xyz.stream.messenger.fragment.ScheduledMessagesFragment"
         android:label="@string/menu_scheduled"
         tools:layout="@layout/fragment_schedule_messages" />
+    <action android:id="@+id/action_global_message_list" app:destination="@id/message_list" />
 </navigation>

@@ -3,6 +3,7 @@ package xyz.stream.messenger.fragment.conversation
 import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import xyz.stream.messenger.R
 import xyz.stream.messenger.adapter.view_holder.ConversationViewHolder
 import xyz.stream.messenger.fragment.message.MessageListFragment
@@ -50,9 +51,7 @@ class MessageListManager(private val fragment: ConversationListFragment) {
 
         if (messageListFragment != null) {
             try {
-                activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.message_list_container, messageListFragment!!)
-                        .commit()
+                findNavController(fragment).navigate(R.id.action_global_message_list, messageListFragment!!.arguments)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
