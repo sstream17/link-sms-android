@@ -62,7 +62,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         val transaction = activity.supportFragmentManager.beginTransaction()
 
         if (navController.conversationListFragment != null) {
-            transaction.replace(R.id.nav_host, navController.conversationListFragment!!)
+            transaction.replace(R.id.recycler_view, navController.conversationListFragment!!)
         }
 
         try {
@@ -139,6 +139,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         return true
     }
 
+    // TODO: Replace with Navigation architecture
     internal fun displayFragmentWithBackStack(fragment: Fragment): Boolean {
         activity.searchHelper.closeSearch()
         activity.fab.hide()

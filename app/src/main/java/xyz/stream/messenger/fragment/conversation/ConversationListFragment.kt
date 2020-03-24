@@ -194,8 +194,9 @@ open class ConversationListFragment : Fragment(), SwipeToDeleteListener, Convers
     override val isFragmentAdded: Boolean
         get() = !isDetached
 
-    override val adapter: ConversationListAdapter?
+    override var adapter: ConversationListAdapter?
         get() = recyclerManager.adapter
+        set(adapter) { recyclerManager.adapter = adapter }
 
     override val expandedId: Long
         get() = if (isExpanded)  messageListManager.expandedConversation!!.conversation!!.id else 0
