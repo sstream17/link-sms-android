@@ -156,7 +156,7 @@ class MainInsetController(private val activity: MessengerActivity) {
         }
 
         val view = snackbar.view
-        val layoutParams = view.layoutParams as CoordinatorLayout.LayoutParams
+        val layoutParams = view.layoutParams as FrameLayout.LayoutParams
         layoutParams.bottomMargin = bottomInsetValue
         view.layoutParams = layoutParams
 
