@@ -48,6 +48,10 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         else -> conversationListFragment
     }
 
+    fun backPressed(): Boolean {
+        return false
+    }
+
     fun findMessageListFragment(): MessageListFragment? =
             activity.supportFragmentManager.findFragmentById(R.id.nav_host) as? MessageListFragment
 

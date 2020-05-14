@@ -191,10 +191,11 @@ class MessengerActivity : AppCompatActivity() {
     override fun onBackPressed() {
         try {
             if (searchHelper.closeSearch()) {
-            } else {
+            } else if (!navController.backPressed()) {
                 super.onBackPressed()
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
