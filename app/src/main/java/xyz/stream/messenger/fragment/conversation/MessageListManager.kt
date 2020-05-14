@@ -162,7 +162,7 @@ class MessageListManager(private val fragment: ConversationListFragment) {
             is PrivateConversationListFragment -> R.id.navigation_private
             is ArchivedConversationListFragment -> R.id.navigation_archived
             is ScheduledMessagesFragment -> R.id.navigation_scheduled
-            else -> R.id.navigation_conversations
+            else -> R.id.navigation_inbox
         }
     }
 
