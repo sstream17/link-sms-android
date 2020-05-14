@@ -46,13 +46,14 @@ import xyz.stream.messenger.shared.service.jobs.ScheduledMessageJob
 import xyz.stream.messenger.shared.util.ColorUtils
 import xyz.stream.messenger.shared.util.PhoneNumberUtils
 import xyz.stream.messenger.shared.util.SmsMmsUtils
+import xyz.stream.messenger.shared.util.listener.BackPressedListener
 import xyz.stream.messenger.shared.util.listener.ScheduledMessageClickListener
 
 @Suppress("DEPRECATION")
 /**
  * Fragment for displaying scheduled messages.
  */
-class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
+class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener, BackPressedListener {
 
     private val fragmentActivity: FragmentActivity? by lazy { activity }
 
@@ -168,6 +169,14 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
             fragment.setFragment(this)
             fragment.show(fragmentActivity?.supportFragmentManager!!, "")
         }
+    }
+
+    // always consume the back event and send us to the conversation list
+    override fun onBackPressed(): Boolean {
+        activity?.title = getString(R.string.app_title)
+        (activity as MessengerActivity).displayConversations()
+
+        return true
     }
 
     companion object {
