@@ -55,7 +55,23 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
                 .filter { it is BackPressedListener && (it as BackPressedListener).onBackPressed() }
                 .forEach { return true }
 
-        return false
+        when {
+            conversationListFragment == null -> {
+                val messageListFragment = findMessageListFragment()
+                if (messageListFragment != null) {
+                    try {
+                        activity.supportFragmentManager.beginTransaction().remove(messageListFragment).commit()
+                    } catch (e: Exception) {
+                    }
+                }
+
+                conversationActionDelegate.displayConversations()
+                activity.fab.show()
+                drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                return true
+            }
+            else -> return false
+        }
     }
 
     fun findMessageListFragment(): MessageListFragment? =
