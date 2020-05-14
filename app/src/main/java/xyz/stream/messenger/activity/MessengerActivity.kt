@@ -96,6 +96,7 @@ class MessengerActivity : AppCompatActivity() {
         colorController.configureNavigationBarColor()
         intentHandler.dismissIfFromNotification()
         intentHandler.displayPrivateFromNotification()
+        navController.conversationActionDelegate.displayConversations(savedInstanceState)
         accountController.startIntroOrLogin(savedInstanceState)
         permissionHelper.requestDefaultSmsApp()
 
