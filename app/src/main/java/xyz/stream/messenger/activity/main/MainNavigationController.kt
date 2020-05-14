@@ -49,6 +49,12 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     }
 
     fun backPressed(): Boolean {
+        val fragments = activity.supportFragmentManager.fragments.first().childFragmentManager.fragments
+
+        fragments
+                .filter { it is BackPressedListener && (it as BackPressedListener).onBackPressed() }
+                .forEach { return true }
+
         return false
     }
 

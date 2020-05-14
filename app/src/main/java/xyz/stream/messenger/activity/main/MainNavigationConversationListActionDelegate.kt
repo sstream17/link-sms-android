@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.activity.SettingsActivity
@@ -59,15 +60,8 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
 
         navController.otherFragment = null
 
-        val transaction = activity.supportFragmentManager.beginTransaction()
-
         if (navController.conversationListFragment != null) {
-            transaction.replace(R.id.recycler_view, navController.conversationListFragment!!)
-        }
-
-        try {
-            transaction.commit()
-        } catch (e: Exception) {
+            findNavController(activity.supportFragmentManager.primaryNavigationFragment!!).navigate(R.id.navigation_conversations)
         }
 
         return true
