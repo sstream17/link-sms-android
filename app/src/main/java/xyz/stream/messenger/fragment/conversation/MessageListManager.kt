@@ -2,10 +2,16 @@ package xyz.stream.messenger.fragment.conversation
 
 import android.os.Handler
 import android.util.Log
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import xyz.stream.messenger.R
+import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.adapter.view_holder.ConversationViewHolder
+import xyz.stream.messenger.fragment.ArchivedConversationListFragment
+import xyz.stream.messenger.fragment.PrivateConversationListFragment
+import xyz.stream.messenger.fragment.ScheduledMessagesFragment
+import xyz.stream.messenger.fragment.UnreadConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.fragment.message.MessageInstanceManager
 import xyz.stream.messenger.shared.MessengerActivityExtras
@@ -51,6 +57,8 @@ class MessageListManager(private val fragment: ConversationListFragment) {
 
         if (messageListFragment != null) {
             try {
+                val messengerActivity = activity as MessengerActivity
+                messengerActivity.navController.returnNavigationId = getReturnNavigationId(fragment)
                 findNavController(fragment).navigate(R.id.action_global_message_list, messageListFragment!!.arguments)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -146,6 +154,16 @@ class MessageListManager(private val fragment: ConversationListFragment) {
                 clickConversationAtPosition(position)
             }
         }, 100)
+    }
+
+    private fun getReturnNavigationId(fragment: Fragment): Int {
+        return when (fragment) {
+            is UnreadConversationListFragment -> R.id.navigation_unread
+            is PrivateConversationListFragment -> R.id.navigation_private
+            is ArchivedConversationListFragment -> R.id.navigation_archived
+            is ScheduledMessagesFragment -> R.id.navigation_scheduled
+            else -> R.id.navigation_conversations
+        }
     }
 
 }

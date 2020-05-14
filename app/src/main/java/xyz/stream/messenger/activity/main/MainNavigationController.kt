@@ -4,27 +4,18 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowInsets
-import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
-import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
-import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.service.ApiDownloadService
-import xyz.stream.messenger.shared.util.ColorUtils
-import xyz.stream.messenger.shared.util.PhoneNumberUtils
-import xyz.stream.messenger.shared.util.StringUtils
 import xyz.stream.messenger.shared.util.listener.BackPressedListener
 
 @Suppress("DEPRECATION")
@@ -38,6 +29,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
+    var returnNavigationId: Int = R.id.conversation_list
     var inSettings = false
     var selectedNavigationItemId: Int = R.id.drawer_conversation
 
@@ -56,6 +48,10 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
                 .forEach { return true }
 
         when {
+            returnNavigationId != -1 -> {
+                findNavController(activity.supportFragmentManager.primaryNavigationFragment!!).navigate(returnNavigationId)
+                return true
+            }
             conversationListFragment == null -> {
                 val messageListFragment = findMessageListFragment()
                 if (messageListFragment != null) {
