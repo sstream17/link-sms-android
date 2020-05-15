@@ -61,7 +61,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         navController.otherFragment = null
 
         if (navController.conversationListFragment != null) {
-            findNavController(activity, R.id.nav_host).navigate(R.id.navigation_conversations)
+            findNavController(activity, R.id.nav_host).navigate(R.id.navigation_inbox, navController.conversationListFragment!!.arguments)
         }
 
         return true
