@@ -79,5 +79,8 @@
         <argument
             android:name="conversation_id"
             app:argType="long" />
+        <argument
+            android:name="message_id"
+            app:argType="long" />
     </activity>
 </navigation>
