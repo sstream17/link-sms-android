@@ -14,51 +14,56 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/empty_view"
         android:orientation="vertical"
-        android:background="@color/linkColorPrimaryLight"
-        android:gravity="center"
-        android:visibility="gone">
+        app:paddingTopSystemWindowInsets="@{true}">
 
-        <ImageView
-            android:layout_width="196dp"
-            android:layout_height="196dp"
-            android:src="@drawable/ic_inbox"
-            android:tint="@color/emptyIconTint"
-            android:contentDescription="@string/no_messages" />
+        <LinearLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/linkColorPrimaryLight"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <TextView
-            android:layout_width="196dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/emptyTextPrimary"
-            android:textSize="20sp"
-            android:text="@string/no_messages"
-            android:gravity="center_horizontal" />
+            <ImageView
+                android:layout_width="196dp"
+                android:layout_height="196dp"
+                android:contentDescription="@string/no_messages"
+                android:src="@drawable/ic_inbox"
+                android:tint="@color/emptyIconTint" />
 
-        <TextView
-            android:id="@+id/no_messages_description"
-            android:layout_width="172dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/emptyTextSecondary"
-            android:textSize="14sp"
-            android:text="@string/no_messages_summary"
-            android:gravity="center_horizontal" />
+            <TextView
+                android:layout_width="196dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@string/no_messages"
+                android:textColor="@color/emptyTextPrimary"
+                android:textSize="20sp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/no_messages_description"
+                android:layout_width="172dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/no_messages_summary"
+                android:textColor="@color/emptyTextSecondary"
+                android:textSize="14sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler_view"
-        android:scrollbars="vertical" />
+        </LinearLayout>
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+    </FrameLayout>
+</layout>
