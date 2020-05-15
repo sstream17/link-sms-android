@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.Navigation.findNavController
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.activity.SettingsActivity
@@ -61,7 +61,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         navController.otherFragment = null
 
         if (navController.conversationListFragment != null) {
-            findNavController(activity.supportFragmentManager.primaryNavigationFragment!!).navigate(R.id.navigation_conversations)
+            findNavController(activity, R.id.nav_host).navigate(R.id.navigation_conversations)
         }
 
         return true

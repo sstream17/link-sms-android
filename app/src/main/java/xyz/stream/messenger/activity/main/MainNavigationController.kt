@@ -9,7 +9,7 @@ import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.Navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -49,7 +49,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
         when {
             returnNavigationId != -1 -> {
-                findNavController(activity.supportFragmentManager.primaryNavigationFragment!!).navigate(returnNavigationId)
+                findNavController(activity, R.id.nav_host).navigate(returnNavigationId)
                 return true
             }
             conversationListFragment == null -> {
