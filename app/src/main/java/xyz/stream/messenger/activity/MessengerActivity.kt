@@ -75,7 +75,7 @@ class MessengerActivity : AppCompatActivity() {
 
         binding.apply {
             val navController = Navigation.findNavController(this@MessengerActivity, R.id.nav_host)
-            navController.setGraph(R.navigation.navigation_conversations)
+            navController.setGraph(R.navigation.navigation_conversations, intent.extras)
             navView.setupWithNavController(navController)
 
             // Hide bottom nav on screens which don't require it

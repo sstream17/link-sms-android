@@ -70,4 +70,14 @@
         tools:layout="@layout/fragment_schedule_messages" />
 
     <action android:id="@+id/action_global_message_list" app:destination="@id/message_list" />
+    
+    <activity
+        android:id="@+id/navigation_messenger_activity"
+        android:name="xyz.stream.messenger.activity.MessengerActivity"
+        android:label="@string/app_title"
+        tools:layout="@layout/activity_main">
+        <argument
+            android:name="conversation_id"
+            app:argType="long" />
+    </activity>
 </navigation>
