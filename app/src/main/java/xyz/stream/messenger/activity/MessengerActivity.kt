@@ -20,7 +20,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -35,6 +34,7 @@ import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
 import xyz.stream.messenger.activity.main.*
 import xyz.stream.messenger.fragment.PrivateConversationListFragment
+import xyz.stream.messenger.fragment.conversation.MessageListManager.Companion.ARG_CONVERSATION_TO_OPEN_ID
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
@@ -80,9 +80,14 @@ class MessengerActivity : AppCompatActivity() {
 
             // Hide bottom nav on screens which don't require it
             lifecycleScope.launchWhenResumed {
-                navController.addOnDestinationChangedListener { _, destination, _ ->
+                navController.addOnDestinationChangedListener { _, destination, args ->
                     when (destination.id) {
-                        R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> navView.show()
+                        R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> {
+                            val convoId = args?.getLong(ARG_CONVERSATION_TO_OPEN_ID) ?: -1L
+                            if (convoId == -1L || convoId == 0L) {
+                                navView.show()
+                            }
+                        }
                         else -> navView.hide()
                     }
                 }
