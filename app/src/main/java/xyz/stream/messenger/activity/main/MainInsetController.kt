@@ -1,12 +1,11 @@
 package xyz.stream.messenger.activity.main
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -17,10 +16,10 @@ import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.EdgeToEdgeKeyboardWorkaround
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.fragment.settings.MaterialPreferenceFragmentCompat
-import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.util.ActivityUtils
-import xyz.stream.messenger.shared.util.AndroidVersionUtil
 import xyz.stream.messenger.shared.util.DensityUtil
+import xyz.stream.messenger.shared.util.applySystemWindowInsetsPadding
+import xyz.stream.messenger.shared.view.WhitableToolbar
 
 class MainInsetController(private val activity: MessengerActivity) {
 
@@ -85,7 +84,7 @@ class MainInsetController(private val activity: MessengerActivity) {
 
         val recycler = fragment.recyclerView
         recycler.clipToPadding = false
-        recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, bottomInsetValue)
+        recycler.applySystemWindowInsetsPadding(applyTop = true)
 
         val snackbar = activity.snackbarContainer
         val layoutParams = snackbar.layoutParams as CoordinatorLayout.LayoutParams
@@ -100,7 +99,7 @@ class MainInsetController(private val activity: MessengerActivity) {
 
         val recycler = fragment.list
         recycler.clipToPadding = false
-        recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, bottomInsetValue)
+        recycler.applySystemWindowInsetsPadding(applyTop = true)
 
         // move fab above the nav bar
         val params = fragment.fab.layoutParams as FrameLayout.LayoutParams
@@ -137,7 +136,10 @@ class MainInsetController(private val activity: MessengerActivity) {
         }
 
         val sendbar = fragment.nonDeferredInitializer.replyBarCard.getChildAt(0)
-        sendbar.setPadding(sendbar.paddingLeft, sendbar.paddingTop, sendbar.paddingRight, DensityUtil.toDp(activity, 24) + bottomInsetValue) // 24 dp from initial layout...
+        sendbar.applySystemWindowInsetsPadding(applyBottom = true)
+
+        val toolbar = fragment.rootView!!.findViewById<WhitableToolbar>(R.id.toolbar)
+        toolbar.applySystemWindowInsetsPadding(applyTop = true)
     }
 
     fun modifyPreferenceFragmentElements(fragment: MaterialPreferenceFragmentCompat) {

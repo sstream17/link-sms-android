@@ -52,14 +52,14 @@ fun View.bindLayoutFullscreen(previousFullscreen: Boolean, fullscreen: Boolean) 
     requireAll = false
 )
 fun View.applySystemWindowInsetsPadding(
-    previousApplyLeft: Boolean,
-    previousApplyTop: Boolean,
-    previousApplyRight: Boolean,
-    previousApplyBottom: Boolean,
-    applyLeft: Boolean,
-    applyTop: Boolean,
-    applyRight: Boolean,
-    applyBottom: Boolean
+    previousApplyLeft: Boolean = false,
+    previousApplyTop: Boolean = false,
+    previousApplyRight: Boolean = false,
+    previousApplyBottom: Boolean = false,
+    applyLeft: Boolean = false,
+    applyTop: Boolean = false,
+    applyRight: Boolean = false,
+    applyBottom: Boolean = false
 ) {
     if (previousApplyLeft == applyLeft &&
         previousApplyTop == applyTop &&
@@ -92,14 +92,14 @@ fun View.applySystemWindowInsetsPadding(
     requireAll = false
 )
 fun View.applySystemWindowInsetsMargin(
-    previousApplyLeft: Boolean,
-    previousApplyTop: Boolean,
-    previousApplyRight: Boolean,
-    previousApplyBottom: Boolean,
-    applyLeft: Boolean,
-    applyTop: Boolean,
-    applyRight: Boolean,
-    applyBottom: Boolean
+    previousApplyLeft: Boolean = false,
+    previousApplyTop: Boolean = false,
+    previousApplyRight: Boolean = false,
+    previousApplyBottom: Boolean = false,
+    applyLeft: Boolean = false,
+    applyTop: Boolean = false,
+    applyRight: Boolean = false,
+    applyBottom: Boolean = false
 ) {
     if (previousApplyLeft == applyLeft &&
         previousApplyTop == applyTop &&
