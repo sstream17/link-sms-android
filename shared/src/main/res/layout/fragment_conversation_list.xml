@@ -14,56 +14,51 @@
   ~ limitations under the License.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/linkColorPrimaryLight"
+        android:gravity="center"
         android:orientation="vertical"
-        app:paddingTopSystemWindowInsets="@{true}">
+        android:visibility="gone">
 
-        <LinearLayout
-            android:id="@+id/empty_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/linkColorPrimaryLight"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
+        <ImageView
+            android:layout_width="196dp"
+            android:layout_height="196dp"
+            android:contentDescription="@string/no_messages"
+            android:src="@drawable/ic_inbox"
+            android:tint="@color/emptyIconTint" />
 
-            <ImageView
-                android:layout_width="196dp"
-                android:layout_height="196dp"
-                android:contentDescription="@string/no_messages"
-                android:src="@drawable/ic_inbox"
-                android:tint="@color/emptyIconTint" />
+        <TextView
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/no_messages"
+            android:textColor="@color/emptyTextPrimary"
+            android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="196dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center_horizontal"
-                android:text="@string/no_messages"
-                android:textColor="@color/emptyTextPrimary"
-                android:textSize="20sp" />
+        <TextView
+            android:id="@+id/no_messages_description"
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/no_messages_summary"
+            android:textColor="@color/emptyTextSecondary"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/no_messages_description"
-                android:layout_width="172dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/no_messages_summary"
-                android:textColor="@color/emptyTextSecondary"
-                android:textSize="14sp" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-    </FrameLayout>
-</layout>
+</FrameLayout>
