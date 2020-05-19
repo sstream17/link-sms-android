@@ -6,7 +6,7 @@
     app:startDestination="@+id/navigation_inbox">
 
     <fragment
-        android:id="@+id/message_list"
+        android:id="@+id/navigation_message_list"
         android:name="xyz.stream.messenger.fragment.message.MessageListFragment"
         android:label="fragment_message_list"
         tools:layout="@layout/fragment_message_list">
@@ -68,8 +68,6 @@
         android:name="xyz.stream.messenger.fragment.ScheduledMessagesFragment"
         android:label="@string/menu_scheduled"
         tools:layout="@layout/fragment_schedule_messages" />
-
-    <action android:id="@+id/action_global_message_list" app:destination="@id/message_list" />
     
     <activity
         android:id="@+id/navigation_messenger_activity"
