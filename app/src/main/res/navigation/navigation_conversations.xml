@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_message_list">
         <argument
             android:name="conversationId"
-            app:argType="long"/>
+            app:argType="long" />
         <argument
             android:name="title"
             app:argType="string" />
@@ -43,18 +43,12 @@
         android:id="@+id/navigation_inbox"
         android:name="xyz.stream.messenger.fragment.conversation.ConversationListFragment"
         android:label="@string/menu_inbox"
-        tools:layout="@layout/fragment_conversation_list"/>
+        tools:layout="@layout/fragment_conversation_list" />
 
     <fragment
         android:id="@+id/navigation_unread"
         android:name="xyz.stream.messenger.fragment.UnreadConversationListFragment"
         android:label="@string/menu_unread"
-        tools:layout="@layout/fragment_conversation_list" />
-
-    <fragment
-        android:id="@+id/navigation_private"
-        android:name="xyz.stream.messenger.fragment.PrivateConversationListFragment"
-        android:label="@string/menu_private"
         tools:layout="@layout/fragment_conversation_list" />
 
     <fragment
@@ -68,7 +62,43 @@
         android:name="xyz.stream.messenger.fragment.ScheduledMessagesFragment"
         android:label="@string/menu_scheduled"
         tools:layout="@layout/fragment_schedule_messages" />
-    
+
+    <fragment
+        android:id="@+id/navigation_private"
+        android:name="xyz.stream.messenger.fragment.PrivateConversationListFragment"
+        android:label="@string/menu_private"
+        tools:layout="@layout/fragment_conversation_list" />
+
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="xyz.stream.messenger.fragment.settings.AboutFragment"
+        android:label="fragment_about" />
+
+    <fragment
+        android:id="@+id/navigation_blacklist"
+        android:name="xyz.stream.messenger.fragment.BlacklistFragment"
+        android:label="fragment_blacklist" />
+
+    <fragment
+        android:id="@+id/navigation_folder"
+        android:name="xyz.stream.messenger.fragment.FolderConversationListFragment"
+        android:label="fragment_folder" />
+
+    <fragment
+        android:id="@+id/navigation_help_feedback"
+        android:name="xyz.stream.messenger.fragment.settings.HelpAndFeedbackFragment"
+        android:label="fragment_help_feedback" />
+
+    <fragment
+        android:id="@+id/navigation_invite"
+        android:name="xyz.stream.messenger.fragment.InviteFriendsFragment"
+        android:label="fragment_invite" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="xyz.stream.messenger.fragment.settings.MyAccountFragment"
+        android:label="fragment_account" />
+
     <activity
         android:id="@+id/navigation_messenger_activity"
         android:name="xyz.stream.messenger.activity.MessengerActivity"
