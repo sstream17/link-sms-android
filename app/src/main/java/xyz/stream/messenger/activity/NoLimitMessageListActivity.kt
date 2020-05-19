@@ -35,7 +35,7 @@ open class NoLimitMessageListActivity : AppCompatActivity() {
         }
 
         var view = findViewById<View>(android.R.id.content).rootView
-        findNavController(view).navigate(R.id.action_global_message_list, MessageInstanceManager.newInstance(conversation, -1, false).arguments)
+        findNavController(view).navigate(R.id.navigation_message_list, MessageInstanceManager.newInstance(conversation, -1, false).arguments)
 
         ActivityUtils.setStatusBarColor(this, conversation.colors.colorDark, conversation.colors.color)
         ActivityUtils.setTaskDescription(this, conversation.title!!, conversation.colors.color)
