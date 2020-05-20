@@ -82,10 +82,6 @@ class MainInsetController(private val activity: MessengerActivity) {
             return
         }
 
-        val recycler = fragment.recyclerView
-        recycler.clipToPadding = false
-        recycler.applySystemWindowInsetsPadding(applyTop = true)
-
         val snackbar = activity.snackbarContainer
         val layoutParams = snackbar.layoutParams as CoordinatorLayout.LayoutParams
         layoutParams.bottomMargin = bottomInsetValue

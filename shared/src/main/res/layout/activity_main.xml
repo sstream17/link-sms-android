@@ -146,6 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/compose_forward_margin"
             android:layout_marginEnd="@dimen/compose_forward_margin"
+            android:layout_marginBottom="@dimen/compose_forward_margin"
             app:marginTopSystemWindowInsets="@{true}">
 
             <LinearLayout
