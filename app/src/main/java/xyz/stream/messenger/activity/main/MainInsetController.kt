@@ -108,7 +108,14 @@ class MainInsetController(private val activity: MessengerActivity) {
 
         val recycler = fragment.list
         recycler.clipToPadding = false
-        recycler.applySystemWindowInsetsPadding(applyTop = true)
+        recycler.doOnPreDraw {
+            val searchbar = activity.findViewById<MaterialCardView>(R.id.searching_view)
+            val searchbarHeight = searchbar.measuredHeight + 2 * sixteenDp
+            val navbar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
+            val navbarHeight = navbar.measuredHeight
+            recycler.setPadding(recycler.paddingLeft, searchbarHeight, recycler.paddingRight, navbarHeight)
+            recycler.applySystemWindowInsetsPadding(applyTop = true)
+        }
 
         // move fab above the nav bar
         val params = fragment.fab.layoutParams as FrameLayout.LayoutParams
