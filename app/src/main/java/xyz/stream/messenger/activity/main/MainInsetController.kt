@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.doOnPreDraw
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -80,6 +82,17 @@ class MainInsetController(private val activity: MessengerActivity) {
     fun modifyConversationListElements(fragment: ConversationListFragment?) {
         if (!useEdgeToEdge() || fragment == null) {
             return
+        }
+
+        val recycler = fragment.recyclerView
+        recycler.clipToPadding = false
+        recycler.doOnPreDraw {
+            val searchbar = activity.findViewById<MaterialCardView>(R.id.searching_view)
+            val searchbarHeight = searchbar.measuredHeight + 2 * sixteenDp
+            val navbar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
+            val navbarHeight = navbar.measuredHeight
+            recycler.setPadding(recycler.paddingLeft, searchbarHeight, recycler.paddingRight, navbarHeight)
+            recycler.applySystemWindowInsetsPadding(applyTop = true)
         }
 
         val snackbar = activity.snackbarContainer

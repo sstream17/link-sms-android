@@ -17,7 +17,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -144,9 +144,11 @@
             android:id="@+id/searching_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="@dimen/compose_forward_margin"
             android:layout_marginEnd="@dimen/compose_forward_margin"
-            android:layout_marginBottom="@dimen/compose_forward_margin"
+            app:layout_anchor="@id/nav_host"
+            app:layout_anchorGravity="top"
             app:marginTopSystemWindowInsets="@{true}">
 
             <LinearLayout
@@ -182,8 +184,7 @@
             android:id="@+id/nav_host"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             app:defaultNavHost="true" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -191,13 +192,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/conversation_list_item_background"
-            android:visibility="gone"
+            android:layout_gravity="bottom"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_conversations"
             app:paddingBottomSystemWindowInsets="@{true}"
             app:paddingLeftSystemWindowInsets="@{true}"
             app:paddingRightSystemWindowInsets="@{true}" />
 
-    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
