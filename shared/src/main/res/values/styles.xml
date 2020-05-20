@@ -16,7 +16,7 @@
 
 <resources>
 
-    <style name="LinkTheme.NoActionBar" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+    <style name="LinkTheme.NoActionBar" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/linkColorPrimary</item>
         <item name="colorPrimaryDark">@color/linkColorPrimaryDark</item>
         <item name="colorAccent">@color/linkColorAccent</item>

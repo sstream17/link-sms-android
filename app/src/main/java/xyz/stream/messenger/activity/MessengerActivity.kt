@@ -85,10 +85,14 @@ class MessengerActivity : AppCompatActivity() {
                         R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> {
                             val convoId = args?.getLong(ARG_CONVERSATION_TO_OPEN_ID) ?: -1L
                             if (convoId == -1L || convoId == 0L) {
+                                searchingView.show()
                                 navView.show()
                             }
                         }
-                        else -> navView.hide()
+                        else -> {
+                            searchingView.hide()
+                            navView.hide()
+                        }
                     }
                 }
             }
