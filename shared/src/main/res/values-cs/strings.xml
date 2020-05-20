@@ -16,7 +16,7 @@
   -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">Link</string>
-    <string name="app_name_long">Puls SMS zprávy</string>
+    <string name="app_name_long">Link SMS zprávy</string>
     <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Nová zpráva</string>

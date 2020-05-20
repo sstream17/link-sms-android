@@ -112,7 +112,7 @@
         <item quantity="other">%1$d conversations moved to inbox</item>
     </plurals>
     <string name="undo">Undo</string>
-    <string name="enter_search">Search for…</string>
+    <string name="enter_search">Search messages</string>
     <string name="text_anywhere_description">Did you know: Link is way more than just a phone app.
         You can use Link to text from <b>any</b> device!</string>
     <string name="convo_list_try_it">Try it!</string>
