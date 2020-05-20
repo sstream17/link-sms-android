@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (c) 2019 Google Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -12,8 +11,7 @@
   or implied. See the License for the specific language governing permissions and limitations under
   the License.
   -->
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -144,9 +142,10 @@
             android:id="@+id/searching_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="@dimen/compose_forward_margin"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/compose_forward_margin"
+            app:cardElevation="2dp"
             app:layout_anchor="@id/nav_host"
             app:layout_anchorGravity="top"
             app:marginTopSystemWindowInsets="@{true}">
@@ -164,6 +163,7 @@
                     android:background="@null"
                     android:ellipsize="end"
                     android:gravity="start|center_vertical"
+                    android:hint="Search"
                     android:imeOptions="actionSearch|flagNoExtractUi"
                     android:inputType="text|textNoSuggestions"
                     android:layoutDirection="locale"
@@ -175,7 +175,6 @@
                     android:textColorHint="?android:attr/textColorSecondary"
                     android:textDirection="locale"
                     android:textSize="16sp"
-                    android:hint="Search"
                     android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustNothing" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -191,8 +190,8 @@
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/drawerBackground"
             android:layout_gravity="bottom"
+            android:background="@color/drawerBackground"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_conversations"
             app:paddingBottomSystemWindowInsets="@{true}"
