@@ -139,6 +139,7 @@
         </FrameLayout>
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -151,6 +152,7 @@
                 android:layout_marginStart="@dimen/compose_forward_margin"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/compose_forward_margin"
+                app:layout_scrollFlags="scroll|enterAlways"
                 app:strokeColor="@color/stroke"
                 app:strokeWidth="1dp"
                 app:cardElevation="0dp"
@@ -193,6 +195,7 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:defaultNavHost="true" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
