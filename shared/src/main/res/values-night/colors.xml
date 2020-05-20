@@ -28,6 +28,7 @@
     <color name="divider">#29353a</color>
     <color name="ripple">#22FFFFFF</color>
     <color name="code_block_color">#11FFFFFF</color>
+    <color name="stroke">#606060</color>
 
     <color name="emptyIconTint">@color/background</color>
     <color name="emptyTextPrimary">#E2374248</color>

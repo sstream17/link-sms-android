@@ -138,46 +138,55 @@
 
         </FrameLayout>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/searching_view"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/compose_forward_margin"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="@dimen/compose_forward_margin"
-            app:cardElevation="2dp"
-            app:layout_anchor="@id/nav_host"
-            app:layout_anchorGravity="top"
-            app:marginTopSystemWindowInsets="@{true}">
+            android:background="@android:color/transparent"
+            app:elevation="0dp">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/searching_view"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/compose_forward_margin"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/compose_forward_margin"
+                app:strokeColor="@color/stroke"
+                app:strokeWidth="1dp"
+                app:cardElevation="0dp"
+                app:layout_anchor="@id/nav_host"
+                app:layout_anchorGravity="top"
+                app:marginTopSystemWindowInsets="@{true}">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|start"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:ellipsize="end"
-                    android:gravity="start|center_vertical"
-                    android:hint="Search"
-                    android:imeOptions="actionSearch|flagNoExtractUi"
-                    android:inputType="text|textNoSuggestions"
-                    android:layoutDirection="locale"
-                    android:maxLines="1"
-                    android:privateImeOptions="nm"
-                    android:singleLine="true"
-                    android:textAlignment="viewStart"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textColorHint="?android:attr/textColorSecondary"
-                    android:textDirection="locale"
-                    android:textSize="16sp"
-                    android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustNothing" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|start"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:hint="Search"
+                        android:imeOptions="actionSearch|flagNoExtractUi"
+                        android:inputType="text|textNoSuggestions"
+                        android:layoutDirection="locale"
+                        android:maxLines="1"
+                        android:privateImeOptions="nm"
+                        android:singleLine="true"
+                        android:textAlignment="viewStart"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColorHint="?android:attr/textColorSecondary"
+                        android:textDirection="locale"
+                        android:textSize="16sp"
+                        android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustNothing" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <fragment
             android:id="@+id/nav_host"
