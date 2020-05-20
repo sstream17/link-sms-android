@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
@@ -89,10 +90,13 @@ class MainInsetController(private val activity: MessengerActivity) {
         recycler.doOnPreDraw {
             val searchbar = activity.findViewById<MaterialCardView>(R.id.searching_view)
             val searchbarHeight = searchbar.measuredHeight + 2 * sixteenDp
+            recycler.setPadding(recycler.paddingLeft, searchbarHeight, recycler.paddingRight, recycler.paddingBottom)
+            recycler.applySystemWindowInsetsPadding(applyTop = true)
             val navbar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
             val navbarHeight = navbar.measuredHeight
-            recycler.setPadding(recycler.paddingLeft, searchbarHeight, recycler.paddingRight, navbarHeight)
-            recycler.applySystemWindowInsetsPadding(applyTop = true)
+            val layoutParams = recycler.layoutParams as FrameLayout.LayoutParams
+            layoutParams.bottomMargin = navbarHeight
+            recycler.layoutParams = layoutParams
         }
 
         val snackbar = activity.snackbarContainer
