@@ -111,7 +111,7 @@
     <color name="colorToReplaceWhite">#F3F3F3</color>
 
     <!-- Theme Specific Colors -->
-    <color name="background">#F2F2F2</color>
+    <color name="background">@android:color/white</color>
     <color name="dark_background">#374248</color>
     <color name="quickReplyBackground">#FFFFFF</color>
     <color name="replyBarCard">#FFFFFF</color>

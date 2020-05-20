@@ -191,7 +191,7 @@
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/conversation_list_item_background"
+            android:background="@color/drawerBackground"
             android:layout_gravity="bottom"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_conversations"
