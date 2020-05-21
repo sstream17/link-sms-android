@@ -186,6 +186,36 @@
                         android:textDirection="locale"
                         android:textSize="16sp"
                         android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustNothing" />
+
+                    <FrameLayout
+                        android:id="@+id/account_image_holder"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="?selectableItemBackground"
+                        android:layout_marginEnd="16dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/account_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:civ_border_width="0dp" />
+
+                        <ImageView
+                            android:id="@+id/default_icon"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-1dp"
+                            android:src="@drawable/ic_person" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/account_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:civ_border_width="0dp" />
+
+                    </FrameLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>

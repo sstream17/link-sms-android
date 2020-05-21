@@ -2,12 +2,14 @@ package xyz.stream.messenger.activity.main
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.View
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
+import de.hdodenhof.circleimageview.CircleImageView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.shared.data.Settings
@@ -21,6 +23,8 @@ class MainColorController(private val activity: AppCompatActivity) {
     private val toolbar: Toolbar by lazy { activity.findViewById<View>(R.id.toolbar) as Toolbar }
     private val fab: FloatingActionButton by lazy { activity.findViewById<View>(R.id.fab) as FloatingActionButton }
     private val conversationListContainer: View by lazy { activity.findViewById<View>(R.id.conversation_list_container) }
+    private val accountColor: CircleImageView by lazy { activity.findViewById<View>(R.id.account_color) as CircleImageView }
+    private val defaultIcon: ImageView by lazy { activity.findViewById<View>(R.id.default_icon) as ImageView }
 
     fun colorActivity() {
         ColorUtils.checkBlackBackground(activity)
@@ -50,6 +54,16 @@ class MainColorController(private val activity: AppCompatActivity) {
             Settings.baseTheme == BaseTheme.BLACK -> ActivityUtils.setUpNavigationBarColor(activity, Color.BLACK, isMessengerActivity)
             Settings.isCurrentlyDarkTheme(activity) -> ActivityUtils.setUpNavigationBarColor(activity, -1223, isMessengerActivity) // random. the activity utils will handle the dark color
             else -> ActivityUtils.setUpNavigationBarColor(activity, Color.WHITE, isMessengerActivity)
+        }
+    }
+
+    fun configureProfilePictureColor() {
+        if (Settings.isCurrentlyDarkTheme(activity)) {
+            accountColor.setImageDrawable(ColorDrawable(Settings.mainColorSet.colorLight))
+            defaultIcon.imageTintList = ColorStateList.valueOf(activity.getColor(R.color.lightToolbarTextColor))
+        } else {
+            accountColor.setImageDrawable(ColorDrawable(Settings.mainColorSet.colorDark))
+            defaultIcon.imageTintList = ColorStateList.valueOf(Color.WHITE)
         }
     }
 }
