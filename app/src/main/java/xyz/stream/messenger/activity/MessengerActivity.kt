@@ -116,6 +116,10 @@ class MessengerActivity : AppCompatActivity() {
             AnimationUtils.toolbarSize = toolbar.height
         }
 
+        val accountImage = findViewById<FrameLayout>(R.id.account_image_holder)
+        accountImage.setOnClickListener {
+            navController.openMenu()
+        }
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
             findViewById<View?>(xyz.stream.messenger.shared.R.id.nav_bar_divider)?.visibility = View.GONE

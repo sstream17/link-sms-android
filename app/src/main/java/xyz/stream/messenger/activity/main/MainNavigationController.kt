@@ -6,6 +6,8 @@ import android.os.Build
 import androidx.core.content.ContextCompat
 import android.view.MenuItem
 import android.view.View
+import android.widget.FrameLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -26,6 +28,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
     val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_conversations) as NavigationView }
     val drawerLayout: DrawerLayout? by lazy { activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout? }
+    val accountImageHolder: FrameLayout by lazy { activity.findViewById<View>(R.id.account_image_holder) as FrameLayout}
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
@@ -121,5 +124,9 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     fun optionsItemSelected(item: MenuItem) = when (item.itemId) {
         android.R.id.home, R.id.menu_search -> true
         else -> false
+    }
+
+    fun openMenu() {
+
     }
 }
