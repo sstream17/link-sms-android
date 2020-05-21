@@ -44,33 +44,26 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     }
 
     fun backPressed(): Boolean {
-        val fragments = activity.supportFragmentManager.fragments.first().childFragmentManager.fragments
-
-        fragments
-                .filter { it is BackPressedListener && (it as BackPressedListener).onBackPressed() }
-                .forEach { return true }
-
-        when {
-            returnNavigationId != -1 -> {
-                findNavController(activity, R.id.nav_host).navigate(returnNavigationId)
-                returnNavigationId = -1
-                return true
+        val controller = findNavController(activity, R.id.nav_host)
+        return when (controller.currentDestination?.id) {
+            R.id.navigation_archived,
+            R.id.navigation_folder,
+            R.id.navigation_private,
+            R.id.navigation_scheduled,
+            R.id.navigation_unread -> {
+                controller.setGraph(R.navigation.navigation_conversations)
+                true
             }
-            conversationListFragment == null -> {
-                val messageListFragment = findMessageListFragment()
-                if (messageListFragment != null) {
-                    try {
-                        activity.supportFragmentManager.beginTransaction().remove(messageListFragment).commit()
-                    } catch (e: Exception) {
-                    }
+            R.id.navigation_message_list -> {
+                if (returnNavigationId != 1 && returnNavigationId != R.id.navigation_inbox){
+                    controller.navigate(returnNavigationId)
+                    returnNavigationId = -1
+                } else {
+                    controller.setGraph(R.navigation.navigation_conversations)
                 }
-
-                conversationActionDelegate.displayConversations()
-                activity.fab.show()
-                drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                return true
+                true
             }
-            else -> return false
+            else -> false
         }
     }
 
