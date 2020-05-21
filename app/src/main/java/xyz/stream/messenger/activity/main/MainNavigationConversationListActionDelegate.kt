@@ -67,13 +67,9 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         return true
     }
 
-    internal fun displayArchived(): Boolean {
-        return displayFragmentWithBackStack(ArchivedConversationListFragment())
-    }
-
     internal fun displayPrivate(): Boolean {
         val showPrivateConversations: () -> Unit = {
-            displayFragmentWithBackStack(PrivateConversationListFragment())
+            displayFragmentWithBackStack(PrivateConversationListFragment(), R.id.navigation_private)
         }
 
         val lastEntry = Settings.privateConversationsLastPasscodeEntry
@@ -86,24 +82,16 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         }
     }
 
-    internal fun displayUnread(): Boolean {
-        return displayFragmentWithBackStack(UnreadConversationListFragment())
-    }
-
     internal fun displayFolder(folder: Folder): Boolean {
-        return displayFragmentWithBackStack(FolderConversationListFragment.getInstance(folder))
-    }
-
-    internal fun displayScheduledMessages(): Boolean {
-        return displayFragmentWithBackStack(ScheduledMessagesFragment())
+        return displayFragmentWithBackStack(FolderConversationListFragment.getInstance(folder), R.id.navigation_folder)
     }
 
     internal fun displayBlacklist(): Boolean {
-        return displayFragmentWithBackStack(BlacklistFragment.newInstance())
+        return displayFragmentWithBackStack(BlacklistFragment.newInstance(), R.id.navigation_blacklist)
     }
 
     internal fun displayInviteFriends(): Boolean {
-        return displayFragmentWithBackStack(InviteFriendsFragment())
+        return displayFragmentWithBackStack(InviteFriendsFragment(), R.id.navigation_invite)
     }
 
     internal fun displaySettings(): Boolean {
@@ -117,15 +105,15 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
     }
 
     internal fun displayMyAccount(): Boolean {
-        return displayFragmentWithBackStack(MyAccountFragment())
+        return displayFragmentWithBackStack(MyAccountFragment(), R.id.navigation_account)
     }
 
     internal fun displayHelpAndFeedback(): Boolean {
-        return displayFragmentWithBackStack(HelpAndFeedbackFragment())
+        return displayFragmentWithBackStack(HelpAndFeedbackFragment(), R.id.navigation_help_feedback)
     }
 
     internal fun displayAbout(): Boolean {
-        return displayFragmentWithBackStack(AboutFragment())
+        return displayFragmentWithBackStack(AboutFragment(), R.id.navigation_about)
     }
 
     internal fun displayEditFolders(): Boolean {
@@ -133,26 +121,14 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         return true
     }
 
-    // TODO: Replace with Navigation architecture
-    internal fun displayFragmentWithBackStack(fragment: Fragment): Boolean {
+    internal fun displayFragmentWithBackStack(fragment: Fragment, id: Int): Boolean {
         activity.searchHelper.closeSearch()
         activity.fab.hide()
         activity.invalidateOptionsMenu()
         navController.inSettings = true
 
         navController.otherFragment = fragment
-        Handler().postDelayed({
-            try {
-                activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.conversation_list_container, fragment)
-                        .commit()
-            } catch (e: Exception) {
-                activity.finish()
-                activity.overridePendingTransition(0, 0)
-                activity.startActivity(Intent(activity, MessengerActivity::class.java))
-                activity.overridePendingTransition(0, 0)
-            }
-        }, 200)
+        findNavController(activity, R.id.nav_host).navigate(id)
 
         return true
     }

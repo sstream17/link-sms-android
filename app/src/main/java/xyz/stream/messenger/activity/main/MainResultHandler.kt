@@ -17,7 +17,7 @@ class MainResultHandler(private val activity: MessengerActivity) {
     fun handle(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == PasscodeVerificationActivity.REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                activity.navController.conversationActionDelegate.displayFragmentWithBackStack(PrivateConversationListFragment())
+                activity.navController.conversationActionDelegate.displayFragmentWithBackStack(PrivateConversationListFragment(), R.id.navigation_private)
                 Settings.setValue(activity, activity.getString(R.string.pref_private_conversation_passcode_last_entry), TimeUtils.now)
             } else {
                 // TODO: Possibly return to Inbox fragment

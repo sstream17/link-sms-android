@@ -3,11 +3,10 @@ package xyz.stream.messenger.activity.main
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.core.content.ContextCompat
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
-import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -32,7 +31,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
-    var returnNavigationId: Int = R.id.conversation_list
+    var returnNavigationId: Int = R.id.navigation_inbox
     var inSettings = false
     var selectedNavigationItemId: Int = R.id.drawer_conversation
 
@@ -52,6 +51,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
         when {
             returnNavigationId != -1 -> {
+                val name = activity.resources.getResourceName(returnNavigationId)
                 findNavController(activity, R.id.nav_host).navigate(returnNavigationId)
                 return true
             }
@@ -80,11 +80,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         conversationListFragment?.swipeHelper?.dismissSnackbars()
 
         when (id) {
-            R.id.drawer_conversation -> return conversationActionDelegate.displayConversations()
-            R.id.drawer_archived -> return conversationActionDelegate.displayArchived()
             R.id.drawer_private -> return conversationActionDelegate.displayPrivate()
-            R.id.drawer_unread -> return conversationActionDelegate.displayUnread()
-            R.id.drawer_schedule -> return conversationActionDelegate.displayScheduledMessages()
             R.id.drawer_mute_contacts -> return conversationActionDelegate.displayBlacklist()
             R.id.drawer_invite -> return conversationActionDelegate.displayInviteFriends()
             R.id.drawer_feature_settings -> return conversationActionDelegate.displayFeatureSettings()
@@ -124,9 +120,5 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     fun optionsItemSelected(item: MenuItem) = when (item.itemId) {
         android.R.id.home, R.id.menu_search -> true
         else -> false
-    }
-
-    fun openMenu() {
-
     }
 }

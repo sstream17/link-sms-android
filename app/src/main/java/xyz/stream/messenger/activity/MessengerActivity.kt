@@ -118,7 +118,7 @@ class MessengerActivity : AppCompatActivity() {
 
         val accountImage = findViewById<FrameLayout>(R.id.account_image_holder)
         accountImage.setOnClickListener {
-            navController.openMenu()
+            openOptionsMenu()
         }
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
@@ -216,18 +216,14 @@ class MessengerActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (!navController.inSettings) {
-            menuInflater.inflate(R.menu.activity_messenger, menu)
-
-            val item = menu.findItem(R.id.menu_search)
-            item.icon.setTintList(ColorStateList.valueOf(toolbar.textColor))
-            searchHelper.setup(item)
+            menuInflater.inflate(R.menu.navigation_drawer_conversations, menu)
         }
 
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return navController.optionsItemSelected(item)
+        return navController.drawerItemClicked(item.itemId)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
