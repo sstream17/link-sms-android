@@ -223,7 +223,7 @@ class MessengerActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return navController.drawerItemClicked(item.itemId)
+        return navController.optionsItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

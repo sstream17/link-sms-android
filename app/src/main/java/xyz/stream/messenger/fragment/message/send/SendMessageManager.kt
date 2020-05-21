@@ -174,11 +174,6 @@ class SendMessageManager(private val fragment: MessageListFragment) {
         }
     }
 
-    private fun scheduleMessage() {
-        (activity as? MessengerActivity)?.navController?.drawerItemClicked(R.id.menu_conversation_schedule)
-
-    }
-
     fun sendDelayedMessage() {
         if (sendProgress?.visibility == View.VISIBLE) {
             sendMessageOnFragmentClosed()

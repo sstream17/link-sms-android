@@ -27,7 +27,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
     val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_conversations) as NavigationView }
     val drawerLayout: DrawerLayout? by lazy { activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout? }
-    val accountImageHolder: FrameLayout by lazy { activity.findViewById<View>(R.id.account_image_holder) as FrameLayout}
+    val accountImageHolder: FrameLayout by lazy { activity.findViewById<View>(R.id.account_image_holder) as FrameLayout }
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
@@ -51,7 +51,6 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
         when {
             returnNavigationId != -1 -> {
-                val name = activity.resources.getResourceName(returnNavigationId)
                 findNavController(activity, R.id.nav_host).navigate(returnNavigationId)
                 return true
             }
@@ -80,15 +79,6 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         conversationListFragment?.swipeHelper?.dismissSnackbars()
 
         when (id) {
-            R.id.drawer_private -> return conversationActionDelegate.displayPrivate()
-            R.id.drawer_mute_contacts -> return conversationActionDelegate.displayBlacklist()
-            R.id.drawer_invite -> return conversationActionDelegate.displayInviteFriends()
-            R.id.drawer_feature_settings -> return conversationActionDelegate.displayFeatureSettings()
-            R.id.drawer_settings -> return conversationActionDelegate.displaySettings()
-            R.id.drawer_account -> return conversationActionDelegate.displayMyAccount()
-            R.id.drawer_help -> return conversationActionDelegate.displayHelpAndFeedback()
-            R.id.drawer_about -> return conversationActionDelegate.displayAbout()
-            R.id.drawer_edit_folders -> return conversationActionDelegate.displayEditFolders()
             R.id.menu_view_contact, R.id.drawer_view_contact -> return messageActionDelegate.viewContact()
             R.id.menu_view_media, R.id.drawer_view_media -> return messageActionDelegate.viewMedia()
             R.id.menu_delete_conversation, R.id.drawer_delete_conversation -> return messageActionDelegate.deleteConversation()
@@ -117,8 +107,20 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         }
     }
 
-    fun optionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home, R.id.menu_search -> true
-        else -> false
+    fun optionsItemSelected(item: MenuItem): Boolean {
+        conversationListFragment?.swipeHelper?.dismissSnackbars()
+
+        return when (item.itemId) {
+            R.id.drawer_private -> conversationActionDelegate.displayPrivate()
+            R.id.drawer_mute_contacts -> conversationActionDelegate.displayBlacklist()
+            R.id.drawer_invite -> conversationActionDelegate.displayInviteFriends()
+            R.id.drawer_feature_settings -> conversationActionDelegate.displayFeatureSettings()
+            R.id.drawer_settings -> conversationActionDelegate.displaySettings()
+            R.id.drawer_account -> conversationActionDelegate.displayMyAccount()
+            R.id.drawer_help -> conversationActionDelegate.displayHelpAndFeedback()
+            R.id.drawer_about -> conversationActionDelegate.displayAbout()
+            R.id.drawer_edit_folders -> conversationActionDelegate.displayEditFolders()
+            else -> false
+        }
     }
 }
