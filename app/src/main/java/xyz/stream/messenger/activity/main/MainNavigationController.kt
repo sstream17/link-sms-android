@@ -1,8 +1,10 @@
 package xyz.stream.messenger.activity.main
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Build
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
@@ -27,7 +29,6 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
     val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_conversations) as NavigationView }
     val drawerLayout: DrawerLayout? by lazy { activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout? }
-    val accountImageHolder: FrameLayout by lazy { activity.findViewById<View>(R.id.account_image_holder) as FrameLayout }
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
@@ -52,6 +53,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         when {
             returnNavigationId != -1 -> {
                 findNavController(activity, R.id.nav_host).navigate(returnNavigationId)
+                returnNavigationId = -1
                 return true
             }
             conversationListFragment == null -> {
@@ -122,5 +124,12 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
             R.id.drawer_edit_folders -> conversationActionDelegate.displayEditFolders()
             else -> false
         }
+    }
+
+    fun openMenu() {
+        val layout = LayoutInflater.from(activity).inflate(R.layout.dialog_scheduled_message, null, false)
+        AlertDialog.Builder(activity)
+                .setView(layout)
+                .show()
     }
 }

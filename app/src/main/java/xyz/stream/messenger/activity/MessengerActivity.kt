@@ -118,7 +118,7 @@ class MessengerActivity : AppCompatActivity() {
 
         val accountImage = findViewById<FrameLayout>(R.id.account_image_holder)
         accountImage.setOnClickListener {
-            openOptionsMenu()
+            navController.openMenu()
         }
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
