@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.navigation.NavigationView
 
 import xyz.stream.messenger.R
@@ -51,8 +52,7 @@ class PrivateConversationListFragment : ConversationListFragment() {
     // always consume the back event and send us to the conversation list
     override fun onBackPressed(): Boolean {
         if (!super.onBackPressed()) {
-            activity?.title = getString(R.string.app_title)
-            (activity as MessengerActivity).displayConversations()
+            findNavController().setGraph(R.navigation.navigation_conversations)
         }
 
         return true

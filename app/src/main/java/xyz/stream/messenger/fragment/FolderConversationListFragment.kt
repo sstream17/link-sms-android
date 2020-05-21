@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -33,8 +34,7 @@ class FolderConversationListFragment : ConversationListFragment() {
     // always consume the back event and send us to the conversation list
     override fun onBackPressed(): Boolean {
         if (!super.onBackPressed()) {
-            activity?.title = getString(R.string.app_title)
-            (activity as MessengerActivity).displayConversations()
+            findNavController().setGraph(R.navigation.navigation_conversations)
         }
 
         return true
