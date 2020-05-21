@@ -154,7 +154,10 @@ class MainInsetController(private val activity: MessengerActivity) {
         }
 
         val sendbar = fragment.nonDeferredInitializer.replyBarCard.getChildAt(0)
-        sendbar.applySystemWindowInsetsPadding(applyBottom = true)
+        sendbar.doOnPreDraw {
+            sendbar.setPadding(sendbar.paddingLeft, sendbar.paddingTop, sendbar.paddingRight, sendbar.measuredHeight)
+            sendbar.applySystemWindowInsetsPadding(applyBottom = true)
+        }
 
         val toolbar = fragment.rootView!!.findViewById<WhitableToolbar>(R.id.toolbar)
         toolbar.applySystemWindowInsetsPadding(applyTop = true)
