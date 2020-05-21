@@ -104,7 +104,7 @@ class MainAccountController(private val activity: MessengerActivity) {
         Handler().postDelayed({
             downloadReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                    findNavController(activity, R.id.nav_host).navigate(R.id.navigation_inbox)
+                    findNavController(activity, R.id.nav_host).setGraph(R.navigation.navigation_conversations)
                 }
             }
 
