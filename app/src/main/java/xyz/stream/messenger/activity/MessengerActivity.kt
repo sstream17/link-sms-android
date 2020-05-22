@@ -63,7 +63,6 @@ class MessengerActivity : AppCompatActivity() {
     private val permissionHelper = MainPermissionHelper(this)
     private val resultHandler = MainResultHandler(this)
 
-    val toolbar: WhitableToolbar by lazy { findViewById<View>(R.id.toolbar) as WhitableToolbar }
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
     private val content: View by lazy { findViewById<View>(android.R.id.content) }
@@ -113,7 +112,6 @@ class MessengerActivity : AppCompatActivity() {
         val content = findViewById<View>(R.id.content)
         content.post {
             AnimationUtils.conversationListSize = content.height
-            AnimationUtils.toolbarSize = toolbar.height
         }
 
         val accountImage = findViewById<FrameLayout>(R.id.account_image_holder)
@@ -244,7 +242,6 @@ class MessengerActivity : AppCompatActivity() {
     fun displayConversations() = navController.conversationActionDelegate.displayConversations()
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
         val actionBar = supportActionBar
 
         if (actionBar != null && !resources.getBoolean(R.bool.pin_drawer)) {

@@ -54,7 +54,6 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
             val content = activity.findViewById<View>(R.id.content)
             content.post {
                 AnimationUtils.conversationListSize = content.height
-                AnimationUtils.toolbarSize = activity.toolbar.height
             }
         }
 

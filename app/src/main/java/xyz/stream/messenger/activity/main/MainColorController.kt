@@ -20,7 +20,6 @@ import xyz.stream.messenger.shared.util.TimeUtils
 
 class MainColorController(private val activity: AppCompatActivity) {
 
-    private val toolbar: Toolbar by lazy { activity.findViewById<View>(R.id.toolbar) as Toolbar }
     private val fab: FloatingActionButton by lazy { activity.findViewById<View>(R.id.fab) as FloatingActionButton }
     private val conversationListContainer: View by lazy { activity.findViewById<View>(R.id.conversation_list_container) }
     private val accountColor: CircleImageView by lazy { activity.findViewById<View>(R.id.account_color) as CircleImageView }
@@ -40,7 +39,6 @@ class MainColorController(private val activity: AppCompatActivity) {
             activity.window.navigationBarColor = Color.BLACK
         }
 
-        toolbar.setBackgroundColor(Settings.mainColorSet.color)
         fab.backgroundTintList = ColorStateList.valueOf(Settings.mainColorSet.colorAccent)
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
