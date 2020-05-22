@@ -120,7 +120,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     }
 
     fun openMenu() {
-        val layout = LayoutInflater.from(activity).inflate(R.layout.dialog_scheduled_message, null, false)
+        val layout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
         AlertDialog.Builder(activity)
                 .setView(layout)
                 .show()
