@@ -107,7 +107,7 @@ class AttachmentInitializer(private val fragment: MessageListFragment) {
             val showingScheduled = try { getBoldedAttachHolderPosition() == -1 } catch (e: Exception) { false }
 
             if (visible && showingScheduled) {
-                activity?.onBackPressed() // dismiss
+                fragment.onBackPressed()
             } else if (visible && !showingScheduled) {
                 viewScheduledMessages() // show scheduled
             } else {

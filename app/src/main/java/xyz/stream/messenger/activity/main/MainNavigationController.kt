@@ -7,7 +7,6 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -19,7 +18,6 @@ import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
-import xyz.stream.messenger.shared.util.listener.BackPressedListener
 
 @Suppress("DEPRECATION")
 class MainNavigationController(private val activity: MessengerActivity) : NavController(activity) {
@@ -55,6 +53,11 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
                 true
             }
             R.id.navigation_message_list -> {
+                val fragments = activity.supportFragmentManager.fragments.first().childFragmentManager.fragments
+                fragments
+                        .filter { it is MessageListFragment && it.onBackPressed() }
+                        .forEach { return true }
+
                 if (returnNavigationId != 1 && returnNavigationId != R.id.navigation_inbox){
                     controller.navigate(returnNavigationId)
                     returnNavigationId = -1

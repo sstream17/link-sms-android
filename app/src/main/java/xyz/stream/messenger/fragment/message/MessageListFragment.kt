@@ -229,9 +229,9 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     fun onBackPressed(): Boolean {
         dismissDetailsChoiceDialog()
 
-        if (searchHelper.closeSearch()) {
+        /*if (searchHelper.closeSearch()) {
             return true
-        }
+        }*/
 
         if (attachManager.backPressed()) {
             return true

@@ -39,22 +39,12 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
 
         val (convoId, messageId) = intentHandler.displayConversation(savedInstanceState)
 
-        var updateConversationListSize = false
         if (messageId != -1L && convoId != -1L) {
             navController.conversationListFragment = ConversationListFragment.newInstance(convoId, messageId)
-            updateConversationListSize = true
         } else if (convoId != -1L && convoId != 0L) {
             navController.conversationListFragment = ConversationListFragment.newInstance(convoId)
-            updateConversationListSize = true
         } else {
             navController.conversationListFragment = ConversationListFragment.newInstance()
-        }
-
-        if (updateConversationListSize) {
-            val content = activity.findViewById<View>(R.id.content)
-            content.post {
-                AnimationUtils.conversationListSize = content.height
-            }
         }
 
         navController.otherFragment = null

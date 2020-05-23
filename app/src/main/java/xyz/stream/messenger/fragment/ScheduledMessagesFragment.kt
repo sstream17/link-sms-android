@@ -54,7 +54,7 @@ import xyz.stream.messenger.shared.util.listener.ScheduledMessageClickListener
 /**
  * Fragment for displaying scheduled messages.
  */
-class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener, BackPressedListener {
+class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
 
     private val fragmentActivity: FragmentActivity? by lazy { activity }
 
@@ -170,13 +170,6 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener, Bac
             fragment.setFragment(this)
             fragment.show(fragmentActivity?.supportFragmentManager!!, "")
         }
-    }
-
-    // always consume the back event and send us to the conversation list
-    override fun onBackPressed(): Boolean {
-        findNavController().setGraph(R.navigation.navigation_conversations)
-
-        return true
     }
 
     companion object {
