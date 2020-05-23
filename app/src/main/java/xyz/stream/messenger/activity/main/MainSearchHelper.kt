@@ -2,39 +2,35 @@ package xyz.stream.messenger.activity.main
 
 import android.view.MenuItem
 import android.view.View
+import com.google.android.material.card.MaterialCardView
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
 
 @Suppress("DEPRECATION")
-class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearchView.OnQueryTextListener, MaterialSearchView.SearchViewListener {
+class MainSearchHelper(private val activity: MessengerActivity) {
     
     private val navController
         get() = activity.navController
     
-    private val searchView: MaterialSearchView by lazy { activity.findViewById<View>(R.id.search_view) as MaterialSearchView }
+    private val searchView: MaterialCardView by lazy { activity.findViewById<View>(R.id.search_view) as MaterialCardView }
     private var searchFragment: SearchFragment? = null
     
     fun setup(item: MenuItem) {
-        searchView.setVoiceSearch(false)
         searchView.setBackgroundColor(activity.resources.getColor(R.color.drawerBackground))
-        searchView.setOnQueryTextListener(this)
-        searchView.setOnSearchViewListener(this)
-        
-        searchView.setMenuItem(item)
     }
     
     fun closeSearch(): Boolean {
-        if (searchView.isSearchOpen) {
+        /*if (searchView.isSearchOpen) {
             searchView.closeSearch()
             return true
-        }
+        }*/
         
         return false
     }
     
-    override fun onQueryTextSubmit(query: String): Boolean {
+    /*override fun onQueryTextSubmit(query: String): Boolean {
         ensureSearchFragment()
         searchFragment?.search(query)
         return true
@@ -77,7 +73,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
                 activity.displayConversations()
             }
         }
-    }
+    }*/
 
     private fun ensureSearchFragment() {
         if (searchFragment == null) {

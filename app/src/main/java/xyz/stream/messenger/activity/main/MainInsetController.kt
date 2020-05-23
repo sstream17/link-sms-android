@@ -7,7 +7,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.doOnPreDraw
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -87,14 +86,14 @@ class MainInsetController(private val activity: MessengerActivity) {
         val recycler = fragment.recyclerView
         recycler.clipToPadding = false
         recycler.doOnPreDraw {
-            val searchbar = activity.findViewById<MaterialCardView>(R.id.searching_view)
-            val searchbarHeight = searchbar.measuredHeight + sixteenDp
-            recycler.setPadding(recycler.paddingLeft, searchbarHeight, recycler.paddingRight, recycler.paddingBottom)
+            val searchBar = activity.searchBar
+            val searchBarHeight = searchBar.measuredHeight + sixteenDp
+            recycler.setPadding(recycler.paddingLeft, searchBarHeight, recycler.paddingRight, recycler.paddingBottom)
             recycler.applySystemWindowInsetsPadding(applyTop = true)
-            val navbar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
-            val navbarHeight = navbar.measuredHeight
+            val navBar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
+            val navBarHeight = navBar.measuredHeight
             val layoutParams = recycler.layoutParams as FrameLayout.LayoutParams
-            layoutParams.bottomMargin = navbarHeight
+            layoutParams.bottomMargin = navBarHeight
             recycler.layoutParams = layoutParams
         }
 
@@ -112,13 +111,13 @@ class MainInsetController(private val activity: MessengerActivity) {
         val recycler = fragment.list
         recycler.clipToPadding = false
         recycler.doOnPreDraw {
-            val searchbar = activity.findViewById<MaterialCardView>(R.id.searching_view)
-            val searchbarHeight = searchbar.measuredHeight + sixteenDp
-            recycler.setPadding(recycler.paddingLeft, searchbarHeight, recycler.paddingRight, recycler.paddingBottom)
+            val searchBar = activity.searchBar
+            val searchBarHeight = searchBar.measuredHeight + sixteenDp
+            recycler.setPadding(recycler.paddingLeft, searchBarHeight, recycler.paddingRight, recycler.paddingBottom)
             recycler.applySystemWindowInsetsPadding(applyTop = true)
-            val navbar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
-            val navbarHeight = navbar.measuredHeight
-            recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, navbarHeight)
+            val navBar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
+            val navBarHeight = navBar.measuredHeight
+            recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, navBarHeight)
             recycler.applySystemWindowInsetsPadding(applyTop = true)
         }
 

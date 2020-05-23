@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
@@ -64,8 +65,9 @@ class MessengerActivity : AppCompatActivity() {
 
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
+    val searchBar: MaterialCardView by lazy { findViewById<MaterialCardView>(R.id.search_view) }
     private val content: View by lazy { findViewById<View>(R.id.nav_host) }
-    private val searchBarLayout: PersistentSearchBarLayout by lazy {findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout}
+    private val searchBarLayout: PersistentSearchBarLayout by lazy { findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,12 +87,12 @@ class MessengerActivity : AppCompatActivity() {
                         R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> {
                             val convoId = args?.getLong(ARG_CONVERSATION_TO_OPEN_ID) ?: -1L
                             if (convoId == -1L || convoId == 0L) {
-                                searchingView.show()
+                                searchView.show()
                                 navView.show()
                             }
                         }
                         else -> {
-                            searchingView.hide()
+                            searchView.hide()
                             navView.hide()
                         }
                     }
