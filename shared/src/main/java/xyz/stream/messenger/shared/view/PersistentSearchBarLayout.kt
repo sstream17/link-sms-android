@@ -23,7 +23,6 @@ class PersistentSearchBarLayout : LinearLayout {
             return if (dependency is PersistentSearchBarLayout) {
                 true
             } else {
-                dependency
                 return super.layoutDependsOn(parent, child, dependency)
             }
         }

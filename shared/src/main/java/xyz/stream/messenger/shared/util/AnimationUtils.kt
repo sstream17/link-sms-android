@@ -166,29 +166,26 @@ object AnimationUtils {
      * @param activity the activity to find the views at.
      */
     fun expandActivityForConversation(activity: Activity) {
-        val toolbar = activity.findViewById<View>(R.id.app_bar_layout)
-        val fragmentContainer = activity.findViewById<View>(R.id.conversation_list_container)
+        val toolbar = activity.findViewById<View?>(R.id.app_bar_layout)
         val fab = activity.findViewById<View>(R.id.fab) as FloatingActionButton
 
         activity.findViewById<View?>(R.id.nav_bar_divider)?.visibility = View.GONE
 
-        toolbar.postDelayed({
+        toolbar?.postDelayed({
             if (Settings.baseTheme == BaseTheme.BLACK) {
-                activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(Color.BLACK)
+                activity.findViewById<View?>(R.id.nav_host)?.setBackgroundColor(Color.BLACK)
             } else {
-                activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(activity.resources.getColor(R.color.drawerBackground))
+                activity.findViewById<View?>(R.id.nav_host)?.setBackgroundColor(activity.resources.getColor(R.color.drawerBackground))
             }
         }, EXPAND_CONVERSATION_DURATION + 50L)
 
         val extraDistance = activity.resources
                 .getDimensionPixelSize(R.dimen.extra_expand_distance)
-        val toolbarTranslate = -1 * (toolbar.height + extraDistance)
+        val toolbarTranslate = -1 * (toolbar?.height ?: 0 + extraDistance)
         val fabTranslate = fab.height + extraDistance +
                 activity.resources.getDimensionPixelSize(R.dimen.fab_margin)
 
-        animateActivityWithConversation(toolbar, fragmentContainer, fab,
-                toolbarTranslate, 0, toolbarTranslate, fabTranslate,
-                FastOutLinearInInterpolator(), EXPAND_PERIPHERAL_DURATION)
+        animateActivityWithConversation(toolbar, toolbarTranslate, FastOutLinearInInterpolator(), EXPAND_PERIPHERAL_DURATION)
         fab.hide()
     }
 
@@ -210,7 +207,6 @@ object AnimationUtils {
         }
 
         val toolbar = activity.findViewById<View>(R.id.app_bar_layout)
-        val fragmentContainer = activity.findViewById<View>(R.id.conversation_list_container)
         val fab = activity.findViewById<View>(R.id.fab) as FloatingActionButton
 
 
@@ -221,9 +217,7 @@ object AnimationUtils {
             activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(activity.resources.getColor(R.color.background))
         }
 
-        animateActivityWithConversation(toolbar, fragmentContainer, fab, 0,
-                fragmentContainer.translationY.toInt(), 0, 0,
-                FastOutLinearInInterpolator(), CONTRACT_PERIPHERAL_DURATION)
+        animateActivityWithConversation(toolbar, 0, FastOutLinearInInterpolator(), CONTRACT_PERIPHERAL_DURATION)
         fab.show()
     }
 
@@ -231,49 +225,19 @@ object AnimationUtils {
      * Animates peripheral items on the screen to a given ending point.
      *
      * @param toolbar            the toolbar to animate.
-     * @param fragmentContainer  the fragment container to animate.
-     * @param fab                the floating action button to animate.
      * @param toolbarTranslate   the distance to translate the toolbar.
-     * @param containerStart     the play point of the container.
-     * @param containerTranslate the distance the container should translate.
-     * @param fabTranslate       the distance the fab should translate.
      * @param interpolator       the interpolator to use.
      */
-    private fun animateActivityWithConversation(toolbar: View, fragmentContainer: View,
-                                                fab: View, toolbarTranslate: Int,
-                                                containerStart: Int, containerTranslate: Int,
-                                                fabTranslate: Int,
-                                                interpolator: Interpolator, duration: Int) {
-        toolbar.animate().withLayer().translationY(toolbarTranslate.toFloat())
-                .setDuration(duration.toLong())
-                .setInterpolator(interpolator)
-                .setListener(null)
-
-        val containerParams = fragmentContainer.layoutParams as ViewGroup.MarginLayoutParams
-
-        val activity = fragmentContainer.context as Activity
-
-        if (conversationListSize == Integer.MIN_VALUE) {
-            toolbarSize = activity.findViewById<View>(R.id.toolbar).height
-            conversationListSize = activity.findViewById<View>(R.id.content).height
+    private fun animateActivityWithConversation(toolbar: View?,
+                                                toolbarTranslate: Int,
+                                                interpolator: Interpolator,
+                                                duration: Int) {
+        if (toolbar != null) {
+            toolbar.animate().withLayer().translationY(toolbarTranslate.toFloat())
+                    .setDuration(duration.toLong())
+                    .setInterpolator(interpolator)
+                    .setListener(null)
         }
-
-        val realScreenHeight = Resources.getSystem().displayMetrics.heightPixels
-        val percentDifferent = (realScreenHeight.toDouble() - AnimationUtils.conversationListSize.toDouble()) / realScreenHeight.toDouble()
-        val originalHeight = (if (Math.abs(percentDifferent) > .25)
-            realScreenHeight - StatusBarHelper.getStatusBarHeight(activity)
-        else
-            AnimationUtils.conversationListSize) - toolbarSize
-
-        val containerAnimator = ValueAnimator.ofInt(containerStart, containerTranslate)
-        containerAnimator.addUpdateListener { valueAnimator ->
-            fragmentContainer.translationY = (valueAnimator.animatedValue as Int).toFloat()
-            containerParams.height = originalHeight + -1 * valueAnimator.animatedValue as Int
-            fragmentContainer.requestLayout()
-        }
-        containerAnimator.interpolator = interpolator
-        containerAnimator.duration = duration.toLong()
-        containerAnimator.start()
     }
 
     /**

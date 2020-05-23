@@ -65,7 +65,7 @@ class MessengerActivity : AppCompatActivity() {
 
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
-    private val content: View by lazy { findViewById<View>(android.R.id.content) }
+    private val content: View by lazy { findViewById<View>(R.id.nav_host) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,7 +109,7 @@ class MessengerActivity : AppCompatActivity() {
         accountController.startIntroOrLogin(savedInstanceState)
         permissionHelper.requestDefaultSmsApp()
 
-        val content = findViewById<View>(R.id.content)
+        val content = findViewById<View>(R.id.nav_host)
         content.post {
             AnimationUtils.conversationListSize = content.height
         }
