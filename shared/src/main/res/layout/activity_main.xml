@@ -24,6 +24,7 @@
         tools:context=".MessengerActivity">
 
         <xyz.stream.messenger.shared.view.PersistentSearchBarLayout
+            android:id="@+id/search_bar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

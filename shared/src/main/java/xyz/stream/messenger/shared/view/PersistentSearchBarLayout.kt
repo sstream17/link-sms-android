@@ -37,6 +37,13 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         z = 1F
     }
 
+    fun invalidateScrollRanges() {
+        currentOffset = 0
+        totalScrollRange = INVALID_SCROLL_RANGE
+        downPreScrollRange = INVALID_SCROLL_RANGE
+        downScrollRange = INVALID_SCROLL_RANGE
+    }
+
     fun setTopBottomOffset(newOffset: Int, minOffset: Int, maxOffset: Int): Int {
         var newOffset = newOffset
         val curOffset: Int = currentOffset

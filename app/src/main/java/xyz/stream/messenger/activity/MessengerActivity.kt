@@ -18,7 +18,6 @@ package xyz.stream.messenger.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -41,7 +40,7 @@ import xyz.stream.messenger.shared.data.pojo.BaseTheme
 import xyz.stream.messenger.shared.databinding.ActivityMainBinding
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.util.*
-import xyz.stream.messenger.shared.view.WhitableToolbar
+import xyz.stream.messenger.shared.view.PersistentSearchBarLayout
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 
@@ -66,6 +65,7 @@ class MessengerActivity : AppCompatActivity() {
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
     private val content: View by lazy { findViewById<View>(R.id.nav_host) }
+    private val searchBarLayout: PersistentSearchBarLayout by lazy {findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +80,7 @@ class MessengerActivity : AppCompatActivity() {
             // Hide bottom nav on screens which don't require it
             lifecycleScope.launchWhenResumed {
                 navController.addOnDestinationChangedListener { _, destination, args ->
+                    searchBarLayout.invalidateScrollRanges()
                     when (destination.id) {
                         R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> {
                             val convoId = args?.getLong(ARG_CONVERSATION_TO_OPEN_ID) ?: -1L
