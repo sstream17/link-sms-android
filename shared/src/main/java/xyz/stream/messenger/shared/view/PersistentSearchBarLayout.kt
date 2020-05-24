@@ -243,7 +243,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
 
         override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout, child: PersistentSearchBarLayout, target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
             if (target is RecyclerView) {
-                if (!target.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
+                if (!target.canScrollVertically(dy)) {
                     return
                 }
             }
