@@ -39,6 +39,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
 
     init {
         z = 1F
+        inflate(context, R.layout.view_persistent_search_bar, this)
     }
 
     var isSearchOpen: Boolean = false
