@@ -7,15 +7,14 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
-import xyz.stream.messenger.shared.view.PersistentSearchBarLayout
 
 @Suppress("DEPRECATION")
-class MainSearchHelper(private val activity: MessengerActivity) : PersistentSearchBarLayout.OnQueryTextListener, PersistentSearchBarLayout.SearchViewListener {
+class MainSearchHelper(private val activity: MessengerActivity) {
     
     private val navController
         get() = activity.navController
     
-    private val searchView: PersistentSearchBarLayout by lazy { activity.findViewById<View>(R.id.search_view) as PersistentSearchBarLayout }
+    private val searchView: MaterialCardView by lazy { activity.findViewById<View>(R.id.search_view) as MaterialCardView }
     private var searchFragment: SearchFragment? = null
     
     fun setup(item: MenuItem) {
@@ -31,7 +30,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : PersistentSear
         return false
     }
     
-    override fun onQueryTextSubmit(query: String): Boolean {
+    /*override fun onQueryTextSubmit(query: String): Boolean {
         ensureSearchFragment()
         searchFragment?.search(query)
         return true
@@ -74,7 +73,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : PersistentSear
                 activity.displayConversations()
             }
         }
-    }
+    }*/
 
     private fun ensureSearchFragment() {
         if (searchFragment == null) {

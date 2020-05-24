@@ -65,8 +65,9 @@ class MessengerActivity : AppCompatActivity() {
 
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
-    val searchBar: PersistentSearchBarLayout by lazy { findViewById<View>(R.id.search_view) as PersistentSearchBarLayout }
+    val searchBar: MaterialCardView by lazy { findViewById<MaterialCardView>(R.id.search_view) }
     private val content: View by lazy { findViewById<View>(R.id.nav_host) }
+    private val searchBarLayout: PersistentSearchBarLayout by lazy { findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +82,7 @@ class MessengerActivity : AppCompatActivity() {
             // Hide bottom nav on screens which don't require it
             lifecycleScope.launchWhenResumed {
                 navController.addOnDestinationChangedListener { _, destination, args ->
-                    searchBar.invalidateScrollRanges()
+                    searchBarLayout.invalidateScrollRanges()
                     when (destination.id) {
                         R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> {
                             val convoId = args?.getLong(ARG_CONVERSATION_TO_OPEN_ID) ?: -1L

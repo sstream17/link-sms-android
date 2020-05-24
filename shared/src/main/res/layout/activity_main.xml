@@ -24,10 +24,86 @@
         tools:context=".MessengerActivity">
 
         <xyz.stream.messenger.shared.view.PersistentSearchBarLayout
-            android:id="@+id/search_view"
+            android:id="@+id/search_bar_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:marginTopSystemWindowInsets="@{true}" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/search_bar_column_margin"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/search_bar_column_margin"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="2dp"
+                app:layout_anchor="@id/nav_host"
+                app:layout_anchorGravity="top"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:marginTopSystemWindowInsets="@{true}">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <xyz.stream.messenger.shared.view.emoji.EmojiableEditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|start"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:hint="@string/enter_search"
+                        android:imeOptions="actionSearch|flagNoExtractUi"
+                        android:inputType="text|textNoSuggestions"
+                        android:layoutDirection="locale"
+                        android:maxLines="1"
+                        android:paddingStart="16dp"
+                        android:privateImeOptions="nm"
+                        android:singleLine="true"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/primaryText"
+                        android:textColorHint="@color/hintText"
+                        android:textDirection="locale"
+                        android:textSize="16sp"
+                        android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustNothing" />
+
+                    <FrameLayout
+                        android:id="@+id/account_image_holder"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:background="?selectableItemBackgroundBorderless">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/account_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:civ_border_width="0dp" />
+
+                        <ImageView
+                            android:id="@+id/default_icon"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-1dp"
+                            android:src="@drawable/ic_person" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/account_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:civ_border_width="0dp" />
+
+                    </FrameLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </xyz.stream.messenger.shared.view.PersistentSearchBarLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

@@ -25,7 +25,6 @@ import androidx.core.animation.doOnEnd
 import androidx.core.view.drawToBitmap
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
-import xyz.stream.messenger.shared.view.PersistentSearchBarLayout
 
 /**
  * Potentially animate showing a [BottomNavigationView].
@@ -108,7 +107,7 @@ fun BottomNavigationView.hide() {
 }
 
 /**
- * Potentially animate showing a [PersistentSearchBarLayout].
+ * Potentially animate showing a [MaterialCardView].
  *
  * Abruptly changing the visibility leads to a re-layout of main content, animating
  * `translationY` leaves a gap where the view was that content does not fill.
@@ -116,7 +115,7 @@ fun BottomNavigationView.hide() {
  * Instead, take a snapshot of the view, and animate this in, only changing the visibility (and
  * thus layout) when the animation completes.
  */
-fun PersistentSearchBarLayout.show() {
+fun MaterialCardView.show() {
     if (visibility == VISIBLE) return
 
     val parent = parent as ViewGroup
@@ -154,7 +153,7 @@ fun PersistentSearchBarLayout.show() {
 }
 
 /**
- * Potentially animate hiding a [PersistentSearchBarLayout].
+ * Potentially animate hiding a [MaterialCardView].
  *
  * Abruptly changing the visibility leads to a re-layout of main content, animating
  * `translationY` leaves a gap where the view was that content does not fill.
@@ -162,7 +161,7 @@ fun PersistentSearchBarLayout.show() {
  * Instead, take a snapshot, instantly hide the view (so content lays out to fill), then animate
  * out the snapshot.
  */
-fun PersistentSearchBarLayout.hide() {
+fun MaterialCardView.hide() {
     if (visibility == GONE) return
 
     val drawable = BitmapDrawable(context.resources, drawToBitmap())
