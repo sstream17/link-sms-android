@@ -1,6 +1,9 @@
 package xyz.stream.messenger.shared.view
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -29,6 +32,8 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
     private val searchContainer: LinearLayout by lazy { findViewById<View>(R.id.search_container) as LinearLayout }
 
     private var _isSearchOpen: Boolean = false
+    private var pastText: String = ""
+    private var onQueryTextListener: OnQueryTextListener? = null
     private var searchViewListener: SearchViewListener? = null
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
@@ -50,6 +55,33 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
                 openSearch()
             }
         }
+
+        searchText.setOnEditorActionListener { _, _, _ ->
+            onSubmitQuery()
+            true
+        }
+
+        searchText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int){
+                if (s != null) {
+                    onTextChanged(s)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    }
+
+    fun setOnQueryTextListener(listener: OnQueryTextListener) {
+        onQueryTextListener = listener
+    }
+
+    fun setSearchViewListener(listener: SearchViewListener) {
+        searchViewListener = listener
     }
 
     val isSearchOpen: Boolean
@@ -68,17 +100,25 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
 
         searchContainer.visibility = View.GONE
         searchText.clearFocus()
+        searchText.text = null
         searchViewListener?.onSearchClosed()
         _isSearchOpen = false
     }
 
-    fun setSearchViewListener(listener: SearchViewListener) {
-        searchViewListener = listener
+    private fun onTextChanged(newText: CharSequence) {
+        if (onQueryTextListener != null && !TextUtils.equals(newText, pastText)) {
+            onQueryTextListener!!.onQueryTextChange(newText.toString())
+        }
+        pastText = newText.toString()
     }
 
-    interface SearchViewListener {
-        fun onSearchOpened()
-        fun onSearchClosed()
+    private fun onSubmitQuery() {
+        val query = searchText.text
+        if (query != null && TextUtils.getTrimmedLength(query) > 0) {
+            if (onQueryTextListener == null || onQueryTextListener?.onQueryTextSubmit(query.toString()) == false) {
+                closeSearch()
+            }
+        }
     }
 
     fun invalidateScrollRanges() {
@@ -160,6 +200,16 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             i++
         }
         return max(0, range).also { totalScrollRange = it }
+    }
+
+    interface OnQueryTextListener {
+        fun onQueryTextSubmit(query: String): Boolean
+        fun onQueryTextChange(newText: String): Boolean
+    }
+
+    interface SearchViewListener {
+        fun onSearchOpened()
+        fun onSearchClosed()
     }
 
     class Behavior : CoordinatorLayout.Behavior<PersistentSearchBarLayout> {
