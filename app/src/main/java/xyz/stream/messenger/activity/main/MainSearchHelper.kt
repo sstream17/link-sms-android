@@ -10,27 +10,27 @@ import xyz.stream.messenger.shared.view.PersistentSearchBarLayout
 
 @Suppress("DEPRECATION")
 class MainSearchHelper(private val activity: MessengerActivity) : PersistentSearchBarLayout.OnQueryTextListener, PersistentSearchBarLayout.SearchViewListener {
-    
+
     private val navController
         get() = activity.navController
-    
+
     private val searchView: PersistentSearchBarLayout by lazy { activity.findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout }
     private var searchFragment: SearchFragment? = null
-    
+
     fun setup() {
         searchView.setOnQueryTextListener(this)
         searchView.setSearchViewListener(this)
     }
-    
+
     fun closeSearch(): Boolean {
         if (searchView.isSearchOpen) {
             searchView.closeSearch()
             return true
         }
-        
+
         return false
     }
-    
+
     override fun onQueryTextSubmit(query: String): Boolean {
         ensureSearchFragment()
         searchFragment?.search(query)
@@ -38,22 +38,10 @@ class MainSearchHelper(private val activity: MessengerActivity) : PersistentSear
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-        if (newText.isNotEmpty()) {
-            // display search fragment
-            ensureSearchFragment()
-            searchFragment!!.search(newText)
-            if (!searchFragment!!.isAdded) {
-                displaySearchFragment()
-            }
-        } else {
-            // display conversation fragment
-            ensureSearchFragment()
-            searchFragment?.search(null)
-
-            if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
-                activity.displayConversations()
-                activity.fab.hide()
-            }
+        ensureSearchFragment()
+        searchFragment!!.search(newText)
+        if (!searchFragment!!.isAdded) {
+            displaySearchFragment()
         }
 
         return true
