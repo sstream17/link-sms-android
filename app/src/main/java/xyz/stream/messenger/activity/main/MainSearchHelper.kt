@@ -1,24 +1,22 @@
 package xyz.stream.messenger.activity.main
 
-import android.view.MenuItem
 import android.view.View
-import com.google.android.material.card.MaterialCardView
-import com.miguelcatalan.materialsearchview.MaterialSearchView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
+import xyz.stream.messenger.shared.view.PersistentSearchBarLayout
 
 @Suppress("DEPRECATION")
-class MainSearchHelper(private val activity: MessengerActivity) {
+class MainSearchHelper(private val activity: MessengerActivity) : PersistentSearchBarLayout.SearchViewListener {
     
     private val navController
         get() = activity.navController
     
-    private val searchView: MaterialCardView by lazy { activity.findViewById<View>(R.id.search_view) as MaterialCardView }
+    private val searchView: PersistentSearchBarLayout by lazy { activity.findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout }
     private var searchFragment: SearchFragment? = null
     
-    fun setup(item: MenuItem) {
-        searchView.setBackgroundColor(activity.resources.getColor(R.color.drawerBackground))
+    fun setup() {
+        searchView.setSearchViewListener(this)
     }
     
     fun closeSearch(): Boolean {
@@ -56,14 +54,15 @@ class MainSearchHelper(private val activity: MessengerActivity) {
         }
 
         return true
-    }
+    }*/
 
-    override fun onSearchViewShown() {
+    override fun onSearchOpened() {
         activity.fab.hide()
         ensureSearchFragment()
+        displaySearchFragment()
     }
 
-    override fun onSearchViewClosed() {
+    override fun onSearchClosed() {
         ensureSearchFragment()
 
         if (!searchFragment!!.isSearching) {
@@ -73,7 +72,7 @@ class MainSearchHelper(private val activity: MessengerActivity) {
                 activity.displayConversations()
             }
         }
-    }*/
+    }
 
     private fun ensureSearchFragment() {
         if (searchFragment == null) {
@@ -87,7 +86,7 @@ class MainSearchHelper(private val activity: MessengerActivity) {
         if (searchFragment != null) {
             try {
                 activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.conversation_list_container, searchFragment!!)
+                        .replace(R.id.conversation_search_list, searchFragment!!)
                         .commit()
             } catch (e: Exception) {
             }

@@ -141,6 +141,7 @@ class MessengerActivity : AppCompatActivity() {
         intentHandler.handleShortcutIntent(intent)
         accountController.listenForFullRefreshes()
         accountController.refreshAccountToken()
+        searchHelper.setup()
 
         startDelegate.run()
 

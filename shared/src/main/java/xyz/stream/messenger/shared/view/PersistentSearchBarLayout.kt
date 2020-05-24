@@ -3,23 +3,33 @@ package xyz.stream.messenger.shared.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.math.MathUtils
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentContainerView
+import com.google.android.material.card.MaterialCardView
+import xyz.stream.messenger.shared.R
+import xyz.stream.messenger.shared.view.emoji.EmojiableEditText
 import kotlin.math.max
 
 class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavior {
 
     private var behavior: Behavior? = null
 
-    private val INVALID_SCROLL_RANGE = -1
-
     private var currentOffset = 0
     private var totalScrollRange = INVALID_SCROLL_RANGE
     private var downPreScrollRange = INVALID_SCROLL_RANGE
     private var downScrollRange = INVALID_SCROLL_RANGE
+
+    private val cardView: MaterialCardView by lazy { findViewById<View>(R.id.search_view) as MaterialCardView }
+    private val searchText: EmojiableEditText by lazy { findViewById<View>(R.id.search_text) as EmojiableEditText }
+    private val accountPictureLayout: FrameLayout by lazy { findViewById<View>(R.id.account_image_holder) as FrameLayout }
+    private val searchContainer: LinearLayout by lazy { findViewById<View>(R.id.search_container) as LinearLayout }
+
+    private var _isSearchOpen: Boolean = false
+    private var searchViewListener: SearchViewListener? = null
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         behavior = Behavior(context, attrs)
@@ -31,6 +41,46 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
 
     constructor(context: Context) : super(context) {
         behavior = Behavior()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        searchText.setOnFocusChangeListener { _, focused ->
+            if (focused) {
+                openSearch()
+            }
+            else {
+                closeSearch()
+            }
+        }
+    }
+
+    val isSearchOpen: Boolean
+        get() = _isSearchOpen
+
+    fun openSearch() {
+        if (isSearchOpen) return
+
+        searchContainer.visibility = View.VISIBLE
+        searchViewListener?.onSearchOpened()
+        _isSearchOpen = true
+    }
+
+    fun closeSearch() {
+        if (!isSearchOpen) return
+
+        searchContainer.visibility = View.GONE
+        searchViewListener?.onSearchClosed()
+        _isSearchOpen = false
+    }
+
+    fun setSearchViewListener(listener: SearchViewListener) {
+        searchViewListener = listener
+    }
+
+    interface SearchViewListener {
+        fun onSearchOpened()
+        fun onSearchClosed()
     }
 
     fun invalidateScrollRanges() {
@@ -162,5 +212,9 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             ViewCompat.offsetTopAndBottom(header, -consumed)
             return consumed
         }
+    }
+
+    companion object {
+        private const val INVALID_SCROLL_RANGE = -1
     }
 }
