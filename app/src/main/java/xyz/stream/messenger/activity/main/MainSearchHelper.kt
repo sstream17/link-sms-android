@@ -68,10 +68,6 @@ class MainSearchHelper(private val activity: MessengerActivity) : PersistentSear
 
         if (!searchFragment!!.isSearching) {
             activity.fab.show()
-
-            /*if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
-                activity.displayConversations()
-            }*/
         }
     }
 
