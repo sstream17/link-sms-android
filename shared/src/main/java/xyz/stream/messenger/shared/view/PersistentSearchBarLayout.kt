@@ -3,23 +3,27 @@ package xyz.stream.messenger.shared.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.Filter.FilterListener
 import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.math.MathUtils
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentContainerView
+import xyz.stream.messenger.shared.R
+import xyz.stream.messenger.shared.view.emoji.EmojiableEditText
 import kotlin.math.max
 
-class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavior {
+class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavior, FilterListener {
 
     private var behavior: Behavior? = null
 
     private val INVALID_SCROLL_RANGE = -1
-
     private var currentOffset = 0
     private var totalScrollRange = INVALID_SCROLL_RANGE
     private var downPreScrollRange = INVALID_SCROLL_RANGE
     private var downScrollRange = INVALID_SCROLL_RANGE
+
+    //private val searchTextView: EmojiableEditText by lazy { findViewById<View>(R.id.search_view) as EmojiableEditText }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         behavior = Behavior(context, attrs)
@@ -36,6 +40,8 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
     init {
         z = 1F
     }
+
+    var isSearchOpen: Boolean = false
 
     fun invalidateScrollRanges() {
         currentOffset = 0
@@ -166,5 +172,19 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             ViewCompat.offsetTopAndBottom(header, -consumed)
             return consumed
         }
+    }
+
+    override fun onFilterComplete(count: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    interface OnQueryTextListener {
+        fun onQueryTextSubmit(query: String): Boolean
+        fun onQueryTextChange(newText: String): Boolean
+    }
+
+    interface SearchViewListener {
+        fun onSearchViewShown()
+        fun onSearchViewClosed()
     }
 }
