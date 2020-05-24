@@ -23,6 +23,13 @@
         app:layoutFullscreen="@{true}"
         tools:context=".MessengerActivity">
 
+        <fragment
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true" />
+
         <xyz.stream.messenger.shared.view.PersistentSearchBarLayout
             android:id="@+id/search_bar_container"
             android:layout_width="match_parent"
@@ -34,8 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/search_bar_column_margin"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="@dimen/search_bar_column_margin"
+                android:layout_marginBottom="8dp"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 app:cardElevation="2dp"
                 app:layout_anchor="@id/nav_host"
@@ -76,8 +83,8 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="16dp"
                         android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:background="?selectableItemBackgroundBorderless">
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -123,13 +130,6 @@
             android:id="@+id/snackbar_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <fragment
-            android:id="@+id/nav_host"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"

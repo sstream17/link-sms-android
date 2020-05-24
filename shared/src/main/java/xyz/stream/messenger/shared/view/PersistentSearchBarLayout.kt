@@ -33,10 +33,6 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         behavior = Behavior()
     }
 
-    init {
-        z = 1F
-    }
-
     fun invalidateScrollRanges() {
         currentOffset = 0
         totalScrollRange = INVALID_SCROLL_RANGE
