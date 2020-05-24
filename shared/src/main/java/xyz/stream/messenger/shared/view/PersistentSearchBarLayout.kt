@@ -12,6 +12,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.math.MathUtils
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.card.MaterialCardView
 import xyz.stream.messenger.shared.R
@@ -66,7 +67,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int){
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s != null) {
                     onTextChanged(s)
                 }
@@ -160,10 +161,12 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         val z = childCount
         while (i < z) {
             val child = getChildAt(i)
-            val lp = child.layoutParams as LayoutParams
-            var childHeight = child.measuredHeight
-            childHeight += lp.topMargin + lp.bottomMargin
-            range += childHeight
+            if (child.isVisible) {
+                val lp = child.layoutParams as LayoutParams
+                var childHeight = child.measuredHeight
+                childHeight += lp.topMargin + lp.bottomMargin
+                range += childHeight
+            }
             i++
         }
         return max(0, range).also { downScrollRange = it }
@@ -179,10 +182,12 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             val childHeight: Int = child.measuredHeight
             if (range <= 0) {
                 val child = getChildAt(i)
-                val lp = child.layoutParams as LayoutParams
-                var childRange = lp.topMargin + lp.bottomMargin
-                childRange += childHeight
-                range += childRange
+                if (child.isVisible) {
+                    val lp = child.layoutParams as LayoutParams
+                    var childRange = lp.topMargin + lp.bottomMargin
+                    childRange += childHeight
+                    range += childRange
+                }
             } else {
                 break
             }
@@ -199,9 +204,11 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         val z = childCount
         while (i < z) {
             val child = getChildAt(i)
-            val lp = child.layoutParams as LayoutParams
-            val childHeight = child.measuredHeight
-            range += childHeight + lp.topMargin + lp.bottomMargin
+            if (child.isVisible) {
+                val lp = child.layoutParams as LayoutParams
+                val childHeight = child.measuredHeight
+                range += childHeight + lp.topMargin + lp.bottomMargin
+            }
             i++
         }
         return max(0, range).also { totalScrollRange = it }
