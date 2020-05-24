@@ -247,6 +247,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
                     return
                 }
             }
+
             if (dy != 0) {
                 val min: Int
                 val max: Int
