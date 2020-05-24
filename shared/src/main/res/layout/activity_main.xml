@@ -48,7 +48,7 @@
                     android:layout_height="48dp"
                     android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <xyz.stream.messenger.shared.view.emoji.EmojiableEditText
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical|start"
@@ -65,8 +65,8 @@
                         android:privateImeOptions="nm"
                         android:singleLine="true"
                         android:textAlignment="viewStart"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textColorHint="?android:attr/textColorSecondary"
+                        android:textColor="@color/primaryText"
+                        android:textColorHint="@color/hintText"
                         android:textDirection="locale"
                         android:textSize="16sp"
                         android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustNothing" />
