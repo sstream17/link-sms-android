@@ -196,6 +196,8 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
     }
 
     fun getTotalScrollRange(): Int {
+        if (isSearchOpen) return 0
+        
         if (totalScrollRange != INVALID_SCROLL_RANGE) {
             return totalScrollRange
         }
