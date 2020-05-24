@@ -20,10 +20,10 @@ class MainSearchHelper(private val activity: MessengerActivity) : PersistentSear
     }
     
     fun closeSearch(): Boolean {
-        /*if (searchView.isSearchOpen) {
+        if (searchView.isSearchOpen) {
             searchView.closeSearch()
             return true
-        }*/
+        }
         
         return false
     }

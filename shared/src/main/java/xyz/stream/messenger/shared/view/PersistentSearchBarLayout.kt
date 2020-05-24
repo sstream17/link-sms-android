@@ -49,9 +49,6 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             if (focused) {
                 openSearch()
             }
-            else {
-                closeSearch()
-            }
         }
     }
 
@@ -70,6 +67,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         if (!isSearchOpen) return
 
         searchContainer.visibility = View.GONE
+        searchText.clearFocus()
         searchViewListener?.onSearchClosed()
         _isSearchOpen = false
     }
