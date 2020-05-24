@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat.getColor
 import androidx.core.math.MathUtils
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentContainerView
@@ -90,6 +91,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
     fun openSearch() {
         if (isSearchOpen) return
 
+        setBackgroundColor(getColor(context, R.color.background))
         searchContainer.visibility = View.VISIBLE
         searchViewListener?.onSearchOpened()
         _isSearchOpen = true
@@ -98,11 +100,14 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
     fun closeSearch() {
         if (!isSearchOpen) return
 
+        setBackgroundColor(getColor(context, android.R.color.transparent))
         searchContainer.visibility = View.GONE
         searchText.clearFocus()
         searchText.text = null
         searchViewListener?.onSearchClosed()
         _isSearchOpen = false
+
+        invalidateScrollRanges()
     }
 
     private fun onTextChanged(newText: CharSequence) {
