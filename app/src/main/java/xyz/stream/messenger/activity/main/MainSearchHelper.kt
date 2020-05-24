@@ -58,6 +58,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : PersistentSear
         ensureSearchFragment()
 
         if (!searchFragment!!.isSearching) {
+            searchFragment!!.dismissKeyboard()
             activity.fab.show()
             activity.bottomNav.show()
         }

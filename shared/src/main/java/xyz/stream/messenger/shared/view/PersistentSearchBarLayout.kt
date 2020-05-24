@@ -6,8 +6,11 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.math.MathUtils
@@ -30,6 +33,8 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
     private var downScrollRange = INVALID_SCROLL_RANGE
 
     private val cardView: MaterialCardView by lazy { findViewById<View>(R.id.search_view) as MaterialCardView }
+    private val backButtonLayout: FrameLayout by lazy { findViewById<View>(R.id.search_back_holder) as FrameLayout }
+    private val backButton: ImageView by lazy { findViewById<View>(R.id.search_back_button) as ImageView }
     private val searchText: EmojiableEditText by lazy { findViewById<View>(R.id.search_text) as EmojiableEditText }
     private val accountPictureLayout: FrameLayout by lazy { findViewById<View>(R.id.account_image_holder) as FrameLayout }
     private val searchContainer: LinearLayout by lazy { findViewById<View>(R.id.search_container) as LinearLayout }
@@ -53,6 +58,48 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        initSearchText()
+        initBackButton()
+    }
+
+    fun setOnQueryTextListener(listener: OnQueryTextListener) {
+        onQueryTextListener = listener
+    }
+
+    fun setSearchViewListener(listener: SearchViewListener) {
+        searchViewListener = listener
+    }
+
+    val isSearchOpen: Boolean
+        get() = _isSearchOpen
+
+    fun openSearch() {
+        if (isSearchOpen) return
+
+        setBackgroundColor(getColor(context, R.color.background))
+        backButtonLayout.visibility = View.VISIBLE
+        searchContainer.visibility = View.VISIBLE
+        accountPictureLayout.visibility = View.GONE
+        searchViewListener?.onSearchOpened()
+        _isSearchOpen = true
+    }
+
+    fun closeSearch() {
+        if (!isSearchOpen) return
+
+        setBackgroundColor(getColor(context, android.R.color.transparent))
+        backButtonLayout.visibility = View.GONE
+        searchContainer.visibility = View.GONE
+        accountPictureLayout.visibility = View.VISIBLE
+        searchText.clearFocus()
+        searchText.text = null
+        searchViewListener?.onSearchClosed()
+        _isSearchOpen = false
+
+        invalidateScrollRanges()
+    }
+
+    private fun initSearchText() {
         searchText.setOnFocusChangeListener { _, focused ->
             if (focused) {
                 openSearch()
@@ -79,37 +126,10 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         })
     }
 
-    fun setOnQueryTextListener(listener: OnQueryTextListener) {
-        onQueryTextListener = listener
-    }
-
-    fun setSearchViewListener(listener: SearchViewListener) {
-        searchViewListener = listener
-    }
-
-    val isSearchOpen: Boolean
-        get() = _isSearchOpen
-
-    fun openSearch() {
-        if (isSearchOpen) return
-
-        setBackgroundColor(getColor(context, R.color.background))
-        searchContainer.visibility = View.VISIBLE
-        searchViewListener?.onSearchOpened()
-        _isSearchOpen = true
-    }
-
-    fun closeSearch() {
-        if (!isSearchOpen) return
-
-        setBackgroundColor(getColor(context, android.R.color.transparent))
-        searchContainer.visibility = View.GONE
-        searchText.clearFocus()
-        searchText.text = null
-        searchViewListener?.onSearchClosed()
-        _isSearchOpen = false
-
-        invalidateScrollRanges()
+    private fun initBackButton() {
+        backButton.setOnClickListener {
+            closeSearch()
+        }
     }
 
     private fun onTextChanged(newText: CharSequence) {

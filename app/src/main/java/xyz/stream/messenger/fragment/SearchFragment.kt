@@ -27,7 +27,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.miguelcatalan.materialsearchview.MaterialSearchView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.adapter.search.SearchAdapter
@@ -48,8 +47,6 @@ class SearchFragment : Fragment(), SearchListener {
 
     var list: RecyclerView? = null
     private val adapter: SearchAdapter by lazy { SearchAdapter(query, null, null, this, conversationColor) }
-
-    private val searchView: MaterialSearchView? by lazy { activity?.findViewById<View>(R.id.search_view) as MaterialSearchView? }
 
     val isSearching: Boolean
         get() = query != null && query!!.isNotEmpty()
@@ -128,9 +125,7 @@ class SearchFragment : Fragment(), SearchListener {
         dismissKeyboard()
     }
 
-    private fun dismissKeyboard() {
-        searchView?.clearFocus()
-
+    fun dismissKeyboard() {
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.hideSoftInputFromWindow(list?.windowToken, 0)
     }
