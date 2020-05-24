@@ -117,8 +117,9 @@ class MainInsetController(private val activity: MessengerActivity) {
             recycler.applySystemWindowInsetsPadding(applyTop = true)
             val navBar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
             val navBarHeight = navBar.measuredHeight
-            recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, navBarHeight)
-            recycler.applySystemWindowInsetsPadding(applyTop = true)
+            val layoutParams = recycler.layoutParams as FrameLayout.LayoutParams
+            layoutParams.bottomMargin = navBarHeight
+            recycler.layoutParams = layoutParams
         }
 
         // move fab above the nav bar
@@ -147,7 +148,7 @@ class MainInsetController(private val activity: MessengerActivity) {
         }
 
         recycler.clipToPadding = false
-        recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, bottomInsetValue)
+        recycler.applySystemWindowInsetsPadding(applyBottom = true)
     }
 
     fun modifyMessageListElements(fragment: MessageListFragment) {
