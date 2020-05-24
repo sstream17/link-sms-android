@@ -14,6 +14,7 @@ import androidx.core.math.MathUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentContainerView
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import xyz.stream.messenger.shared.R
 import xyz.stream.messenger.shared.view.emoji.EmojiableEditText
@@ -197,7 +198,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
 
     fun getTotalScrollRange(): Int {
         if (isSearchOpen) return 0
-        
+
         if (totalScrollRange != INVALID_SCROLL_RANGE) {
             return totalScrollRange
         }
@@ -241,6 +242,11 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         }
 
         override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout, child: PersistentSearchBarLayout, target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
+            if (target is RecyclerView) {
+                if (!target.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
+                    return
+                }
+            }
             if (dy != 0) {
                 val min: Int
                 val max: Int

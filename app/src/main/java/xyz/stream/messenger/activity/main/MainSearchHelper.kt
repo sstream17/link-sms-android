@@ -4,6 +4,8 @@ import android.view.View
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
+import xyz.stream.messenger.shared.util.hide
+import xyz.stream.messenger.shared.util.show
 import xyz.stream.messenger.shared.view.PersistentSearchBarLayout
 
 @Suppress("DEPRECATION")
@@ -59,6 +61,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : PersistentSear
 
     override fun onSearchOpened() {
         activity.fab.hide()
+        activity.bottomNav.hide()
         ensureSearchFragment()
         displaySearchFragment()
     }
@@ -68,6 +71,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : PersistentSear
 
         if (!searchFragment!!.isSearching) {
             activity.fab.show()
+            activity.bottomNav.show()
         }
     }
 

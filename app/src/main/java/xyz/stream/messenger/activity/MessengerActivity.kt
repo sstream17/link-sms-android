@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.R
@@ -66,6 +67,7 @@ class MessengerActivity : AppCompatActivity() {
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
     val searchBar: MaterialCardView by lazy { findViewById<MaterialCardView>(R.id.search_view) }
+    lateinit var bottomNav: BottomNavigationView
     private val content: View by lazy { findViewById<View>(R.id.nav_host) }
     private val searchBarLayout: PersistentSearchBarLayout by lazy { findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout }
 
@@ -78,6 +80,8 @@ class MessengerActivity : AppCompatActivity() {
             val navController = Navigation.findNavController(this@MessengerActivity, R.id.nav_host)
             navController.setGraph(R.navigation.navigation_conversations, intent.extras)
             navView.setupWithNavController(navController)
+
+            bottomNav = navView
 
             // Hide bottom nav on screens which don't require it
             lifecycleScope.launchWhenResumed {
