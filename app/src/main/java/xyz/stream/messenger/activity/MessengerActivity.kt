@@ -93,11 +93,13 @@ class MessengerActivity : AppCompatActivity() {
                             if (convoId == -1L || convoId == 0L) {
                                 searchView.show()
                                 navView.show()
+                                fab.show()
                             }
                         }
                         else -> {
                             searchView.hide()
                             navView.hide()
+                            fab.hide()
                         }
                     }
                 }
@@ -124,10 +126,6 @@ class MessengerActivity : AppCompatActivity() {
         val accountImage = findViewById<FrameLayout>(R.id.account_image_holder)
         accountImage.setOnClickListener {
             navController.openMenu()
-        }
-
-        if (Settings.baseTheme == BaseTheme.BLACK) {
-            findViewById<View?>(xyz.stream.messenger.shared.R.id.nav_bar_divider)?.visibility = View.GONE
         }
     }
 
