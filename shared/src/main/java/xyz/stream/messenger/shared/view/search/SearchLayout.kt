@@ -1,4 +1,4 @@
-package xyz.stream.messenger.shared.view
+package xyz.stream.messenger.shared.view.search
 
 import android.content.Context
 import android.text.Editable
@@ -6,7 +6,6 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat.getColor

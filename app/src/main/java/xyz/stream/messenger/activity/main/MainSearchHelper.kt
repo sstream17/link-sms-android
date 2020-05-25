@@ -6,7 +6,7 @@ import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
 import xyz.stream.messenger.shared.util.hide
 import xyz.stream.messenger.shared.util.show
-import xyz.stream.messenger.shared.view.SearchLayout
+import xyz.stream.messenger.shared.view.search.SearchLayout
 
 @Suppress("DEPRECATION")
 class MainSearchHelper(private val activity: MessengerActivity) : SearchLayout.OnQueryTextListener, SearchLayout.SearchViewListener {

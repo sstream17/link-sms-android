@@ -1,8 +1,6 @@
-package xyz.stream.messenger.shared.view
+package xyz.stream.messenger.shared.view.search
 
 import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -23,17 +21,17 @@ class PersistentSearchView : MaterialCardView, CoordinatorLayout.AttachedBehavio
 
     private var behavior: Behavior? = null
 
-    private var currentOffset = 0
+    internal var currentOffset = 0
     private var totalScrollRange = INVALID_SCROLL_RANGE
     private var downPreScrollRange = INVALID_SCROLL_RANGE
     private var downScrollRange = INVALID_SCROLL_RANGE
 
-    var isSearchOpen: Boolean = false
+    internal var isSearchOpen: Boolean = false
 
-    val backButtonLayout: FrameLayout by lazy { findViewById<View>(R.id.search_back_holder) as FrameLayout }
-    val backButton: ImageView by lazy { findViewById<View>(R.id.search_back_button) as ImageView }
-    val text: EmojiableEditText by lazy { findViewById<View>(R.id.search_text) as EmojiableEditText }
-    val accountPictureLayout: FrameLayout by lazy { findViewById<View>(R.id.account_image_holder) as FrameLayout }
+    internal val backButtonLayout: FrameLayout by lazy { findViewById<View>(R.id.search_back_holder) as FrameLayout }
+    internal val backButton: ImageView by lazy { findViewById<View>(R.id.search_back_button) as ImageView }
+    internal val text: EmojiableEditText by lazy { findViewById<View>(R.id.search_text) as EmojiableEditText }
+    internal val accountPictureLayout: FrameLayout by lazy { findViewById<View>(R.id.account_image_holder) as FrameLayout }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         behavior = Behavior(context, attrs)
@@ -55,14 +53,14 @@ class PersistentSearchView : MaterialCardView, CoordinatorLayout.AttachedBehavio
         return behavior!!
     }
 
-    fun invalidateScrollRanges() {
+    internal fun invalidateScrollRanges() {
         currentOffset = 0
         totalScrollRange = INVALID_SCROLL_RANGE
         downPreScrollRange = INVALID_SCROLL_RANGE
         downScrollRange = INVALID_SCROLL_RANGE
     }
 
-    fun setTopBottomOffset(newOffset: Int, minOffset: Int, maxOffset: Int): Int {
+    internal fun setTopBottomOffset(newOffset: Int, minOffset: Int, maxOffset: Int): Int {
         var newOffset = newOffset
         val curOffset: Int = currentOffset
         var consumed = 0
@@ -76,7 +74,7 @@ class PersistentSearchView : MaterialCardView, CoordinatorLayout.AttachedBehavio
         return consumed
     }
 
-    fun getDownNestedScrollRange(): Int {
+    internal fun getDownNestedScrollRange(): Int {
         if (downScrollRange != INVALID_SCROLL_RANGE) {
             return downScrollRange
         }
@@ -96,7 +94,7 @@ class PersistentSearchView : MaterialCardView, CoordinatorLayout.AttachedBehavio
         return max(0, range).also { downScrollRange = it }
     }
 
-    fun getDownNestedPreScrollRange(): Int {
+    internal fun getDownNestedPreScrollRange(): Int {
         if (downPreScrollRange != INVALID_SCROLL_RANGE) {
             return downPreScrollRange
         }
@@ -119,7 +117,7 @@ class PersistentSearchView : MaterialCardView, CoordinatorLayout.AttachedBehavio
         return max(0, range).also { downPreScrollRange = it }
     }
 
-    fun getTotalScrollRange(): Int {
+    internal fun getTotalScrollRange(): Int {
         if (isSearchOpen) return 0
 
         if (totalScrollRange != INVALID_SCROLL_RANGE) {

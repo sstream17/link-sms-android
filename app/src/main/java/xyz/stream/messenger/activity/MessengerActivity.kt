@@ -27,7 +27,6 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.R
@@ -41,8 +40,8 @@ import xyz.stream.messenger.shared.data.pojo.BaseTheme
 import xyz.stream.messenger.shared.databinding.ActivityMainBinding
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.util.*
-import xyz.stream.messenger.shared.view.PersistentSearchView
-import xyz.stream.messenger.shared.view.SearchLayout
+import xyz.stream.messenger.shared.view.search.PersistentSearchView
+import xyz.stream.messenger.shared.view.search.SearchLayout
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 
