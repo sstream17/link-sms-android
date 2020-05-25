@@ -6,15 +6,15 @@ import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
 import xyz.stream.messenger.shared.util.hide
 import xyz.stream.messenger.shared.util.show
-import xyz.stream.messenger.shared.view.PersistentSearchBarLayout
+import xyz.stream.messenger.shared.view.SearchLayout
 
 @Suppress("DEPRECATION")
-class MainSearchHelper(private val activity: MessengerActivity) : PersistentSearchBarLayout.OnQueryTextListener, PersistentSearchBarLayout.SearchViewListener {
+class MainSearchHelper(private val activity: MessengerActivity) : SearchLayout.OnQueryTextListener, SearchLayout.SearchViewListener {
 
     private val navController
         get() = activity.navController
 
-    private val searchView: PersistentSearchBarLayout by lazy { activity.findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout }
+    private val searchView: SearchLayout by lazy { activity.findViewById<View>(R.id.search_bar_container) as SearchLayout }
     private var searchFragment: SearchFragment? = null
 
     fun setup() {

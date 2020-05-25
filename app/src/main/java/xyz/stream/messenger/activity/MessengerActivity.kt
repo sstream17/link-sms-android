@@ -29,7 +29,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
@@ -42,7 +41,8 @@ import xyz.stream.messenger.shared.data.pojo.BaseTheme
 import xyz.stream.messenger.shared.databinding.ActivityMainBinding
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.util.*
-import xyz.stream.messenger.shared.view.PersistentSearchBarLayout
+import xyz.stream.messenger.shared.view.PersistentSearchView
+import xyz.stream.messenger.shared.view.SearchLayout
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 
@@ -66,10 +66,10 @@ class MessengerActivity : AppCompatActivity() {
 
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
-    val searchBar: MaterialCardView by lazy { findViewById<MaterialCardView>(R.id.search_view) }
+    val searchBar: PersistentSearchView by lazy { findViewById<PersistentSearchView>(R.id.search_view) }
     lateinit var bottomNav: BottomNavigationView
     private val content: View by lazy { findViewById<View>(R.id.nav_host) }
-    private val searchBarLayout: PersistentSearchBarLayout by lazy { findViewById<View>(R.id.search_bar_container) as PersistentSearchBarLayout }
+    private val searchLayout: SearchLayout by lazy { findViewById<View>(R.id.search_bar_container) as SearchLayout }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +86,7 @@ class MessengerActivity : AppCompatActivity() {
             // Hide bottom nav on screens which don't require it
             lifecycleScope.launchWhenResumed {
                 navController.addOnDestinationChangedListener { _, destination, args ->
-                    searchBarLayout.invalidateScrollRanges()
+                    searchLayout.invalidateScrollRanges()
                     when (destination.id) {
                         R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> {
                             val convoId = args?.getLong(ARG_CONVERSATION_TO_OPEN_ID) ?: -1L

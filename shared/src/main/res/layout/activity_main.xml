@@ -30,14 +30,14 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true" />
 
-        <xyz.stream.messenger.shared.view.PersistentSearchBarLayout
+        <xyz.stream.messenger.shared.view.SearchLayout
             android:id="@+id/search_bar_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
+            <xyz.stream.messenger.shared.view.PersistentSearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
 
                     </FrameLayout>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </xyz.stream.messenger.shared.view.PersistentSearchView>
 
             <LinearLayout
                 android:id="@+id/search_container"
@@ -154,7 +154,7 @@
                     android:background="@color/background" />
 
             </LinearLayout>
-        </xyz.stream.messenger.shared.view.PersistentSearchBarLayout>
+        </xyz.stream.messenger.shared.view.SearchLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

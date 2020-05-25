@@ -2,17 +2,13 @@ package xyz.stream.messenger.shared.view
 
 import android.content.Context
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat.getColor
 import androidx.core.math.MathUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
@@ -23,7 +19,7 @@ import xyz.stream.messenger.shared.R
 import xyz.stream.messenger.shared.view.emoji.EmojiableEditText
 import kotlin.math.max
 
-class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavior {
+class PersistentSearchView : MaterialCardView, CoordinatorLayout.AttachedBehavior {
 
     private var behavior: Behavior? = null
 
@@ -32,17 +28,12 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
     private var downPreScrollRange = INVALID_SCROLL_RANGE
     private var downScrollRange = INVALID_SCROLL_RANGE
 
-    private val cardView: MaterialCardView by lazy { findViewById<View>(R.id.search_view) as MaterialCardView }
-    private val backButtonLayout: FrameLayout by lazy { findViewById<View>(R.id.search_back_holder) as FrameLayout }
-    private val backButton: ImageView by lazy { findViewById<View>(R.id.search_back_button) as ImageView }
-    private val searchText: EmojiableEditText by lazy { findViewById<View>(R.id.search_text) as EmojiableEditText }
-    private val accountPictureLayout: FrameLayout by lazy { findViewById<View>(R.id.account_image_holder) as FrameLayout }
-    private val searchContainer: LinearLayout by lazy { findViewById<View>(R.id.search_container) as LinearLayout }
+    var isSearchOpen: Boolean = false
 
-    private var _isSearchOpen: Boolean = false
-    private var pastText: String = ""
-    private var onQueryTextListener: OnQueryTextListener? = null
-    private var searchViewListener: SearchViewListener? = null
+    val backButtonLayout: FrameLayout by lazy { findViewById<View>(R.id.search_back_holder) as FrameLayout }
+    val backButton: ImageView by lazy { findViewById<View>(R.id.search_back_button) as ImageView }
+    val text: EmojiableEditText by lazy { findViewById<View>(R.id.search_text) as EmojiableEditText }
+    val accountPictureLayout: FrameLayout by lazy { findViewById<View>(R.id.account_image_holder) as FrameLayout }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         behavior = Behavior(context, attrs)
@@ -56,98 +47,12 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         behavior = Behavior()
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        initSearchText()
-        initBackButton()
+    fun swapLeftRightPadding() {
+        text.setPadding(text.paddingRight, text.paddingTop, text.paddingLeft, text.paddingBottom)
     }
 
-    fun setOnQueryTextListener(listener: OnQueryTextListener) {
-        onQueryTextListener = listener
-    }
-
-    fun setSearchViewListener(listener: SearchViewListener) {
-        searchViewListener = listener
-    }
-
-    val isSearchOpen: Boolean
-        get() = _isSearchOpen
-
-    fun openSearch() {
-        if (isSearchOpen) return
-
-        setBackgroundColor(getColor(context, R.color.background))
-        backButtonLayout.visibility = View.VISIBLE
-        searchContainer.visibility = View.VISIBLE
-        accountPictureLayout.visibility = View.GONE
-        searchText.setPadding(searchText.paddingRight, searchText.paddingTop, searchText.paddingLeft, searchText.paddingBottom)
-        searchViewListener?.onSearchOpened()
-        _isSearchOpen = true
-    }
-
-    fun closeSearch() {
-        if (!isSearchOpen) return
-
-        setBackgroundColor(getColor(context, android.R.color.transparent))
-        backButtonLayout.visibility = View.GONE
-        searchContainer.visibility = View.GONE
-        accountPictureLayout.visibility = View.VISIBLE
-        searchText.setPadding(searchText.paddingRight, searchText.paddingTop, searchText.paddingLeft, searchText.paddingBottom)
-        searchText.clearFocus()
-        searchText.text = null
-        searchViewListener?.onSearchClosed()
-        _isSearchOpen = false
-
-        invalidateScrollRanges()
-    }
-
-    private fun initSearchText() {
-        searchText.setOnFocusChangeListener { _, focused ->
-            if (focused) {
-                openSearch()
-            }
-        }
-
-        searchText.setOnEditorActionListener { _, _, _ ->
-            onSubmitQuery()
-            true
-        }
-
-        searchText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s != null) {
-                    onTextChanged(s)
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
-    }
-
-    private fun initBackButton() {
-        backButton.setOnClickListener {
-            closeSearch()
-        }
-    }
-
-    private fun onTextChanged(newText: CharSequence) {
-        if (onQueryTextListener != null && !TextUtils.equals(newText, pastText)) {
-            onQueryTextListener!!.onQueryTextChange(newText.toString())
-        }
-        pastText = newText.toString()
-    }
-
-    private fun onSubmitQuery() {
-        val query = searchText.text
-        if (query != null && TextUtils.getTrimmedLength(query) > 0) {
-            if (onQueryTextListener == null || onQueryTextListener?.onQueryTextSubmit(query.toString()) == false) {
-                closeSearch()
-            }
-        }
+    override fun getBehavior(): CoordinatorLayout.Behavior<*> {
+        return behavior!!
     }
 
     fun invalidateScrollRanges() {
@@ -171,12 +76,8 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         return consumed
     }
 
-    override fun getBehavior(): CoordinatorLayout.Behavior<*> {
-        return behavior!!
-    }
-
     fun getDownNestedScrollRange(): Int {
-        if (downScrollRange != INVALID_SCROLL_RANGE) { // If we already have a valid value, return it
+        if (downScrollRange != INVALID_SCROLL_RANGE) {
             return downScrollRange
         }
         var range = 0
@@ -185,7 +86,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         while (i < z) {
             val child = getChildAt(i)
             if (child.isVisible) {
-                val lp = child.layoutParams as LayoutParams
+                val lp = child.layoutParams as LinearLayout.LayoutParams
                 var childHeight = child.measuredHeight
                 childHeight += lp.topMargin + lp.bottomMargin
                 range += childHeight
@@ -206,7 +107,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             if (range <= 0) {
                 val child = getChildAt(i)
                 if (child.isVisible) {
-                    val lp = child.layoutParams as LayoutParams
+                    val lp = child.layoutParams as LinearLayout.LayoutParams
                     var childRange = lp.topMargin + lp.bottomMargin
                     childRange += childHeight
                     range += childRange
@@ -230,7 +131,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         while (i < z) {
             val child = getChildAt(i)
             if (child.isVisible) {
-                val lp = child.layoutParams as LayoutParams
+                val lp = child.layoutParams as LinearLayout.LayoutParams
                 val childHeight = child.measuredHeight
                 range += childHeight + lp.topMargin + lp.bottomMargin
             }
@@ -239,31 +140,21 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         return max(0, range).also { totalScrollRange = it }
     }
 
-    interface OnQueryTextListener {
-        fun onQueryTextSubmit(query: String): Boolean
-        fun onQueryTextChange(newText: String): Boolean
-    }
-
-    interface SearchViewListener {
-        fun onSearchOpened()
-        fun onSearchClosed()
-    }
-
-    class Behavior : CoordinatorLayout.Behavior<PersistentSearchBarLayout> {
+    class Behavior : CoordinatorLayout.Behavior<PersistentSearchView> {
 
         constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
         constructor() : super()
 
-        override fun layoutDependsOn(parent: CoordinatorLayout, child: PersistentSearchBarLayout, dependency: View): Boolean {
+        override fun layoutDependsOn(parent: CoordinatorLayout, child: PersistentSearchView, dependency: View): Boolean {
             return dependency is FragmentContainerView
         }
 
-        override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout, child: PersistentSearchBarLayout, directTargetChild: View, target: View, axes: Int, type: Int): Boolean {
+        override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout, child: PersistentSearchView, directTargetChild: View, target: View, axes: Int, type: Int): Boolean {
             return axes == ViewCompat.SCROLL_AXIS_VERTICAL ||
                     super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, axes, type)
         }
 
-        override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout, child: PersistentSearchBarLayout, target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
+        override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout, child: PersistentSearchView, target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
             if (target is RecyclerView) {
                 if (!target.canScrollVertically(dy)) {
                     return
@@ -286,7 +177,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             }
         }
 
-        override fun onNestedScroll(coordinatorLayout: CoordinatorLayout, child: PersistentSearchBarLayout, target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, type: Int, consumed: IntArray) {
+        override fun onNestedScroll(coordinatorLayout: CoordinatorLayout, child: PersistentSearchView, target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, type: Int, consumed: IntArray) {
             if (dyUnconsumed < 0) {
                 // If the scrolling view is scrolling down but not consuming, it's probably be at
                 // the top of it's content
@@ -294,7 +185,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
             }
         }
 
-        private fun scroll(header: PersistentSearchBarLayout, dy: Int, minOffset: Int, maxOffset: Int): Int {
+        private fun scroll(header: PersistentSearchView, dy: Int, minOffset: Int, maxOffset: Int): Int {
             val consumed = header.setTopBottomOffset(
                     header.currentOffset - dy,
                     minOffset,
