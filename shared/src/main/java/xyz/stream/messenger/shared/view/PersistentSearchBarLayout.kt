@@ -80,6 +80,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         backButtonLayout.visibility = View.VISIBLE
         searchContainer.visibility = View.VISIBLE
         accountPictureLayout.visibility = View.GONE
+        searchText.setPadding(searchText.paddingRight, searchText.paddingTop, searchText.paddingLeft, searchText.paddingBottom)
         searchViewListener?.onSearchOpened()
         _isSearchOpen = true
     }
@@ -91,6 +92,7 @@ class PersistentSearchBarLayout : LinearLayout, CoordinatorLayout.AttachedBehavi
         backButtonLayout.visibility = View.GONE
         searchContainer.visibility = View.GONE
         accountPictureLayout.visibility = View.VISIBLE
+        searchText.setPadding(searchText.paddingRight, searchText.paddingTop, searchText.paddingLeft, searchText.paddingBottom)
         searchText.clearFocus()
         searchText.text = null
         searchViewListener?.onSearchClosed()
