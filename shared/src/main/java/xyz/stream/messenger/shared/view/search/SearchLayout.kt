@@ -102,7 +102,6 @@ class SearchLayout : LinearLayout, CoordinatorLayout.AttachedBehavior {
         searchView.backButtonLayout.visibility = View.VISIBLE
         searchContainer.visibility = View.VISIBLE
         searchView.accountPictureLayout.visibility = View.GONE
-        searchView.swapLeftRightPadding()
         searchViewListener?.onSearchOpened()
         _isSearchOpen = true
     }
@@ -114,7 +113,6 @@ class SearchLayout : LinearLayout, CoordinatorLayout.AttachedBehavior {
         searchView.backButtonLayout.visibility = View.GONE
         searchContainer.visibility = View.GONE
         searchView.accountPictureLayout.visibility = View.VISIBLE
-        searchView.swapLeftRightPadding()
         searchView.text.clearFocus()
         searchView.text.text = null
         searchViewListener?.onSearchClosed()
