@@ -34,7 +34,6 @@
             android:id="@+id/search_bar_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
             android:orientation="vertical">
 
             <xyz.stream.messenger.shared.view.search.PersistentSearchView
@@ -45,6 +44,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/search_bar_column_margin"
                 android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/searchBarBackground"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 app:cardElevation="2dp"
                 app:marginTopSystemWindowInsets="@{true}">
@@ -160,7 +160,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             app:layout_anchor="@id/nav_view"
-            app:layout_anchorGravity="top|end" >
+            app:layout_anchorGravity="top|end">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
@@ -187,7 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/drawerBackground"
+            android:background="@color/background"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_conversations"
             app:paddingBottomSystemWindowInsets="@{true}"
