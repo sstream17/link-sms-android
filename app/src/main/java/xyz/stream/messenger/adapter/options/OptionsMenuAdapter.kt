@@ -3,7 +3,6 @@ package xyz.stream.messenger.adapter.options
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.shared.data.pojo.OptionsSection
