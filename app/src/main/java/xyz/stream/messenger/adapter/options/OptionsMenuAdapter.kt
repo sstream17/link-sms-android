@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.shared.data.pojo.OptionsSection
+import xyz.stream.messenger.utils.FixedScrollLinearLayoutManager
 
 class OptionsMenuAdapter(private val sections: List<OptionsSection>): RecyclerView.Adapter<OptionsMenuAdapter.ViewHolder>(){
 
@@ -23,7 +24,8 @@ class OptionsMenuAdapter(private val sections: List<OptionsSection>): RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val section = sections[position]
-        val sectionLayoutManager = LinearLayoutManager(holder.recyclerView.context, RecyclerView.VERTICAL, false)
+        val sectionLayoutManager = FixedScrollLinearLayoutManager(holder.recyclerView.context)
+        sectionLayoutManager.setCanScroll(false)
         holder.recyclerView.apply {
             layoutManager = sectionLayoutManager
             adapter = OptionsItemAdapter(section.items)

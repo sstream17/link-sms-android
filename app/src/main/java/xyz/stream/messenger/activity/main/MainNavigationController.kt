@@ -22,6 +22,7 @@ import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
 import xyz.stream.messenger.shared.util.options.OptionsMenuDataFactory
+import xyz.stream.messenger.utils.FixedScrollLinearLayoutManager
 
 @Suppress("DEPRECATION")
 class MainNavigationController(private val activity: MessengerActivity) : NavController(activity) {
@@ -130,7 +131,10 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         val layout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
         val recyclerView = layout.findViewById<View>(R.id.recycler_view) as RecyclerView
         recyclerView.apply {
-            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            val noScrollLayoutManager = FixedScrollLinearLayoutManager(activity)
+            noScrollLayoutManager.setCanScroll(false)
+            layoutManager = noScrollLayoutManager
+            layoutManager
             adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions())
         }
         AlertDialog.Builder(activity)
