@@ -27,6 +27,7 @@ class OptionsMenuAdapter(private val sections: List<OptionsSection>): RecyclerVi
         val sectionLayoutManager = FixedScrollLinearLayoutManager(holder.recyclerView.context)
         sectionLayoutManager.setCanScroll(false)
         holder.recyclerView.apply {
+            setHasFixedSize(true)
             layoutManager = sectionLayoutManager
             adapter = OptionsItemAdapter(section.items)
             setRecycledViewPool(viewPool)

@@ -12,7 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
@@ -21,6 +21,7 @@ import xyz.stream.messenger.adapter.options.OptionsMenuAdapter
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
+import xyz.stream.messenger.shared.util.MiddleDividerItemDecoration
 import xyz.stream.messenger.shared.util.options.OptionsMenuDataFactory
 import xyz.stream.messenger.utils.FixedScrollLinearLayoutManager
 
@@ -63,7 +64,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
                         .filter { it is MessageListFragment && it.onBackPressed() }
                         .forEach { return true }
 
-                if (returnNavigationId != 1 && returnNavigationId != R.id.navigation_inbox){
+                if (returnNavigationId != 1 && returnNavigationId != R.id.navigation_inbox) {
                     controller.navigate(returnNavigationId)
                     returnNavigationId = -1
                 } else {
@@ -131,11 +132,12 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         val layout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
         val recyclerView = layout.findViewById<View>(R.id.recycler_view) as RecyclerView
         recyclerView.apply {
+            setHasFixedSize(true)
             val noScrollLayoutManager = FixedScrollLinearLayoutManager(activity)
             noScrollLayoutManager.setCanScroll(false)
             layoutManager = noScrollLayoutManager
-            layoutManager
             adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions())
+            addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
         AlertDialog.Builder(activity)
                 .setView(layout)
