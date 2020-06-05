@@ -40,6 +40,8 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     var inSettings = false
     var selectedNavigationItemId: Int = R.id.drawer_conversation
 
+    private var optionsMenu: AlertDialog? = null
+
     fun isConversationListExpanded() = conversationListFragment != null && conversationListFragment!!.isExpanded
     fun isOtherFragmentConvoAndShowing() = otherFragment != null && otherFragment is ConversationListFragment && (otherFragment as ConversationListFragment).isExpanded
     fun getShownConversationList() = when {
@@ -114,6 +116,8 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     fun optionsItemSelected(itemId: Int): Boolean {
         conversationListFragment?.swipeHelper?.dismissSnackbars()
 
+        closeMenu()
+
         return when (itemId) {
             R.id.drawer_private -> conversationActionDelegate.displayPrivate()
             R.id.drawer_mute_contacts -> conversationActionDelegate.displayBlacklist()
@@ -139,8 +143,16 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
             adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions(), ::optionsItemSelected)
             addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
-        AlertDialog.Builder(activity)
+
+        optionsMenu = AlertDialog.Builder(activity)
                 .setView(layout)
-                .show()
+                .create()
+        optionsMenu!!.show()
+    }
+
+    fun closeMenu() {
+        if (optionsMenu != null) {
+            optionsMenu!!.cancel()
+        }
     }
 }
