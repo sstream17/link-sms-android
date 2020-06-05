@@ -218,18 +218,6 @@ class MessengerActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        if (!navController.inSettings) {
-            menuInflater.inflate(R.menu.navigation_drawer_conversations, menu)
-        }
-
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return navController.optionsItemSelected(item)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
             Settings.forceUpdate(this)

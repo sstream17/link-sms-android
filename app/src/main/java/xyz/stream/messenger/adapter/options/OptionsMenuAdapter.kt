@@ -8,7 +8,7 @@ import xyz.stream.messenger.R
 import xyz.stream.messenger.shared.data.pojo.OptionsSection
 import xyz.stream.messenger.utils.FixedScrollLinearLayoutManager
 
-class OptionsMenuAdapter(private val sections: List<OptionsSection>): RecyclerView.Adapter<OptionsMenuAdapter.ViewHolder>(){
+class OptionsMenuAdapter(private val sections: List<OptionsSection>, private val optionsItemSelected: (id: Int) -> Boolean): RecyclerView.Adapter<OptionsMenuAdapter.ViewHolder>(){
 
     private val viewPool = RecyclerView.RecycledViewPool()
 
@@ -28,7 +28,7 @@ class OptionsMenuAdapter(private val sections: List<OptionsSection>): RecyclerVi
         holder.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = sectionLayoutManager
-            adapter = OptionsItemAdapter(section.items)
+            adapter = OptionsItemAdapter(section.items, optionsItemSelected)
             setRecycledViewPool(viewPool)
         }
     }

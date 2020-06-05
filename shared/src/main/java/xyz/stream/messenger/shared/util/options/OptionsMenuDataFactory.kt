@@ -19,6 +19,7 @@ object OptionsMenuDataFactory {
     object OptionsItemDataFactory {
         private val accountSectionLabels = arrayListOf(R.string.menu_account)
         private val accountSectionImages = arrayListOf(R.drawable.ic_devices)
+        private val accountSectionIds = arrayListOf(R.id.drawer_about)
 
         private val primarySectionLabels = arrayListOf(
                 R.string.menu_edit_folders_no_ellipse,
@@ -32,6 +33,12 @@ object OptionsMenuDataFactory {
                 R.drawable.ic_block_small,
                 R.drawable.ic_invite
         )
+        private val primarySectionIds = arrayListOf(
+                R.id.drawer_edit_folders,
+                R.id.drawer_private,
+                R.id.drawer_mute_contacts,
+                R.id.drawer_invite
+        )
 
         private val settingsSectionLabels = arrayListOf(
                 R.string.menu_settings,
@@ -43,11 +50,16 @@ object OptionsMenuDataFactory {
                 R.drawable.ic_help,
                 R.drawable.ic_about
         )
+        private val settingsSectionIds = arrayListOf(
+                R.id.drawer_settings,
+                R.id.drawer_help,
+                R.id.drawer_about
+        )
 
         fun getAccountSection(): List<OptionsItem> {
             val items = mutableListOf<OptionsItem>()
             for (i in 0 until accountSectionLabels.size) {
-                val item = OptionsItem(accountSectionLabels[i], accountSectionImages[i])
+                val item = OptionsItem(accountSectionLabels[i], accountSectionImages[i], accountSectionIds[i])
                 items.add(item)
             }
 
@@ -57,7 +69,7 @@ object OptionsMenuDataFactory {
         fun getPrimarySection(): List<OptionsItem> {
             val items = mutableListOf<OptionsItem>()
             for (i in 0 until primarySectionLabels.size) {
-                val item = OptionsItem(primarySectionLabels[i], primarySectionImages[i])
+                val item = OptionsItem(primarySectionLabels[i], primarySectionImages[i], primarySectionIds[i])
                 items.add(item)
             }
 
@@ -67,7 +79,7 @@ object OptionsMenuDataFactory {
         fun getSettingsSection(): List<OptionsItem> {
             val items = mutableListOf<OptionsItem>()
             for (i in 0 until settingsSectionLabels.size) {
-                val item = OptionsItem(settingsSectionLabels[i], settingsSectionImages[i])
+                val item = OptionsItem(settingsSectionLabels[i], settingsSectionImages[i], settingsSectionIds[i])
                 items.add(item)
             }
 

@@ -111,10 +111,10 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         }
     }
 
-    fun optionsItemSelected(item: MenuItem): Boolean {
+    fun optionsItemSelected(itemId: Int): Boolean {
         conversationListFragment?.swipeHelper?.dismissSnackbars()
 
-        return when (item.itemId) {
+        return when (itemId) {
             R.id.drawer_private -> conversationActionDelegate.displayPrivate()
             R.id.drawer_mute_contacts -> conversationActionDelegate.displayBlacklist()
             R.id.drawer_invite -> conversationActionDelegate.displayInviteFriends()
@@ -136,7 +136,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
             val noScrollLayoutManager = FixedScrollLinearLayoutManager(activity)
             noScrollLayoutManager.setCanScroll(false)
             layoutManager = noScrollLayoutManager
-            adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions())
+            adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions(), ::optionsItemSelected)
             addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
         AlertDialog.Builder(activity)
