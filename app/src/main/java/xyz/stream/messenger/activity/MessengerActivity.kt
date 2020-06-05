@@ -19,8 +19,6 @@ package xyz.stream.messenger.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -37,10 +35,10 @@ import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.conversation.MessageListManager.Companion.ARG_CONVERSATION_TO_OPEN_ID
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.data.pojo.BaseTheme
 import xyz.stream.messenger.shared.databinding.ActivityMainBinding
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.util.*
+import xyz.stream.messenger.shared.util.ActivityUtils.setStatusBarColor
 import xyz.stream.messenger.shared.view.search.PersistentSearchView
 import xyz.stream.messenger.shared.view.search.SearchLayout
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
@@ -236,6 +234,7 @@ class MessengerActivity : AppCompatActivity() {
     fun displayConversations() = navController.conversationActionDelegate.displayConversations()
 
     private fun initToolbar() {
+        setStatusBarColor(this, R.color.background)
         val actionBar = supportActionBar
 
         if (actionBar != null && !resources.getBoolean(R.bool.pin_drawer)) {
