@@ -12,12 +12,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
+import xyz.stream.messenger.adapter.options.OptionsMenuAdapter
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
+import xyz.stream.messenger.shared.util.options.OptionsMenuDataFactory
 
 @Suppress("DEPRECATION")
 class MainNavigationController(private val activity: MessengerActivity) : NavController(activity) {
@@ -124,6 +128,11 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
 
     fun openMenu() {
         val layout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
+        val recyclerView = layout.findViewById<View>(R.id.recycler_view) as RecyclerView
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions())
+        }
         AlertDialog.Builder(activity)
                 .setView(layout)
                 .show()
