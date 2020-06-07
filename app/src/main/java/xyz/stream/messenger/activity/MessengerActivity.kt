@@ -234,7 +234,7 @@ class MessengerActivity : AppCompatActivity() {
     fun displayConversations() = navController.conversationActionDelegate.displayConversations()
 
     private fun initToolbar() {
-        setStatusBarColor(this, R.color.background)
+        setStatusBarColor(this, resources.getColor(R.color.statusBarBackground))
         val actionBar = supportActionBar
 
         if (actionBar != null && !resources.getBoolean(R.bool.pin_drawer)) {

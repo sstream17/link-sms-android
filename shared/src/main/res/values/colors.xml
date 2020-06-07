@@ -112,6 +112,7 @@
 
     <!-- Theme Specific Colors -->
     <color name="background">@android:color/white</color>
+    <color name="statusBarBackground">#BFFFFFFF</color>
     <color name="dark_background">#374248</color>
     <color name="quickReplyBackground">#FFFFFF</color>
     <color name="replyBarCard">#FFFFFF</color>

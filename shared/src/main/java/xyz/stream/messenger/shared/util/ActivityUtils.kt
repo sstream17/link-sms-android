@@ -71,7 +71,7 @@ object ActivityUtils {
 
     @Suppress("NAME_SHADOWING")
     fun setStatusBarColor(activity: Activity?, color: Int, toolbarColor: Int = color) {
-        val color = if (activity == null) color else possiblyOverrideColorSelection(activity, color)
+        val color = if (activity == null) color else possiblyOverrideStatusBarColor(activity, color)
         val toolbarColor = if (Settings.applyPrimaryColorToToolbar) toolbarColor else color
 
         activity?.window?.statusBarColor = color
@@ -80,7 +80,7 @@ object ActivityUtils {
 
     @Suppress("NAME_SHADOWING")
     fun setUpLightStatusBar(activity: Activity?, color: Int) {
-        val color = if (activity == null) color else possiblyOverrideColorSelection(activity, color)
+        val color = if (activity == null) color else possiblyOverrideStatusBarColor(activity, color)
 
         if (!ColorUtils.isColorDark(color)) {
             activateLightStatusBar(activity, true)
@@ -165,6 +165,17 @@ object ActivityUtils {
             Settings.baseTheme == BaseTheme.BLACK -> Color.BLACK
             Settings.isCurrentlyDarkTheme(context) -> context.resources.getColor(R.color.drawerBackground)
             else -> Color.WHITE
+        }
+    }
+
+    fun possiblyOverrideStatusBarColor(context: Context, color: Int): Int {
+        if (Settings.applyPrimaryColorToToolbar) {
+            return color
+        }
+
+        return when (Settings.baseTheme) {
+            BaseTheme.BLACK -> Color.BLACK
+            else -> context.resources.getColor(R.color.statusBarBackground)
         }
     }
 

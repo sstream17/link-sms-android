@@ -17,6 +17,7 @@
 <resources>
 
     <color name="background">#202020</color>
+    <color name="statusBarBackground">#BF202020</color>
     <color name="quickReplyBackground">@color/background</color>
     <color name="replyBarCard">@color/drawerBackground</color>
     <color name="swipeBackground">#2c353a</color>
