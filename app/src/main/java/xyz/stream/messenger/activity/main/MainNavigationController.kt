@@ -21,6 +21,7 @@ import xyz.stream.messenger.adapter.options.OptionsMenuAdapter
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
+import xyz.stream.messenger.shared.util.ActivityUtils
 import xyz.stream.messenger.shared.util.MiddleDividerItemDecoration
 import xyz.stream.messenger.shared.util.options.OptionsMenuDataFactory
 import xyz.stream.messenger.utils.FixedScrollLinearLayoutManager
@@ -72,6 +73,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
                 } else {
                     controller.setGraph(R.navigation.navigation_conversations)
                 }
+                ActivityUtils.setStatusBarColor(activity, activity.getColor(R.color.statusBarBackground))
                 true
             }
             else -> false
