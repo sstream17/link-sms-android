@@ -19,7 +19,7 @@ object OptionsMenuDataFactory {
     object OptionsItemDataFactory {
         private val accountSectionLabels = arrayListOf(R.string.menu_account)
         private val accountSectionImages = arrayListOf(R.drawable.ic_devices)
-        private val accountSectionIds = arrayListOf(R.id.drawer_about)
+        private val accountSectionIds = arrayListOf(R.id.drawer_account)
 
         private val primarySectionLabels = arrayListOf(
                 R.string.menu_edit_folders_no_ellipse,
