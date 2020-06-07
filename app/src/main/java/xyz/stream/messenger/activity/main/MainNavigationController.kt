@@ -5,24 +5,26 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.adapter.options.OptionsMenuAdapter
+import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
+import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.util.ActivityUtils
 import xyz.stream.messenger.shared.util.MiddleDividerItemDecoration
+import xyz.stream.messenger.shared.util.PhoneNumberUtils
 import xyz.stream.messenger.shared.util.options.OptionsMenuDataFactory
 import xyz.stream.messenger.utils.FixedScrollLinearLayoutManager
 
@@ -32,8 +34,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     val conversationActionDelegate = MainNavigationConversationListActionDelegate(activity)
     val messageActionDelegate = MainNavigationMessageListActionDelegate(activity)
 
-    val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_conversations) as NavigationView }
-    val drawerLayout: DrawerLayout? by lazy { activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout? }
+    var optionsMenuLayout: View? = null
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
@@ -135,8 +136,15 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     }
 
     fun openMenu() {
-        val layout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
-        val recyclerView = layout.findViewById<View>(R.id.recycler_view) as RecyclerView
+        optionsMenu = MaterialAlertDialogBuilder(activity)
+                .setView(optionsMenuLayout)
+                .create()
+        optionsMenu!!.show()
+    }
+
+    fun initOptionsMenu() {
+        optionsMenuLayout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
+        val recyclerView = optionsMenuLayout!!.findViewById<View>(R.id.recycler_view) as RecyclerView
         recyclerView.apply {
             setHasFixedSize(true)
             val noScrollLayoutManager = FixedScrollLinearLayoutManager(activity)
@@ -146,10 +154,27 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
             addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
 
-        optionsMenu = MaterialAlertDialogBuilder(activity)
-                .setView(layout)
-                .create()
-        optionsMenu!!.show()
+        optionsMenuLayout!!.postDelayed({
+            try {
+                if (Account.exists()) {
+                    (activity.findViewById<View>(R.id.drawer_header_my_name) as TextView).text = Account.myName
+                }
+
+                (activity.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView).text =
+                        PhoneNumberUtils.format(PhoneNumberUtils.getMyPhoneNumber(activity))
+
+                if (Settings.isCurrentlyDarkTheme(activity)) {
+                    (activity.findViewById<View>(R.id.drawer_header_my_name) as TextView)
+                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
+                    (activity.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView)
+                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            activity.snoozeController.initSnooze()
+        }, 300)
     }
 
     fun closeMenu() {
