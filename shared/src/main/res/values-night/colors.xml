@@ -22,7 +22,7 @@
     <color name="replyBarCard">@color/drawerBackground</color>
     <color name="swipeBackground">#2c353a</color>
     <color name="drawerBackground">#202024</color>
-    <color name="searchBarBackground">#3B3B3B</color>
+    <color name="elevatedCardBackground">#3B3B3B</color>
     <color name="selectedBackground">#393E41</color>
     <color name="primaryText">#FFFFFFFF</color>
     <color name="secondaryText">#B2FFFFFF</color>
