@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/conversation_list_padding"
     android:layout_marginEnd="@dimen/conversation_list_padding"
-    android:background="@drawable/conversation_list_item_background"
     android:clickable="true">
 
     <TextView
@@ -26,7 +25,6 @@
         android:layout_height="24dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="16dp"
-        android:src="@drawable/ic_block"
         android:tint="@drawable/drawer_icon_selector" />
 
 </FrameLayout>
