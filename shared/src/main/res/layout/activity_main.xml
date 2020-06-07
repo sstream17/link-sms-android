@@ -45,7 +45,6 @@
                 android:layout_marginEnd="@dimen/search_bar_column_margin"
                 android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="@color/searchBarBackground"
-                app:cardCornerRadius="@dimen/card_corner_radius"
                 app:cardElevation="2dp"
                 app:marginTopSystemWindowInsets="@{true}">
 
