@@ -1,17 +1,13 @@
 package xyz.stream.messenger.fragment
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.navigation.NavigationView
-
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.R
-import xyz.stream.messenger.activity.MessengerActivity
-import xyz.stream.messenger.adapter.view_holder.ConversationViewHolder
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.shared.data.Settings
 
@@ -24,7 +20,7 @@ class PrivateConversationListFragment : ConversationListFragment() {
         if (fragmentActivity != null && Settings.privateConversationsPasscode.isNullOrBlank()) {
             val prefs = Settings.getSharedPrefs(fragmentActivity)
             if (prefs.getBoolean("private_conversation_security_disclainer", true)) {
-                AlertDialog.Builder(fragmentActivity)
+                MaterialAlertDialogBuilder(fragmentActivity)
                         .setMessage(R.string.enable_passcode_disclaimer)
                         .setPositiveButton(android.R.string.ok, { _, _ -> })
                         .show()

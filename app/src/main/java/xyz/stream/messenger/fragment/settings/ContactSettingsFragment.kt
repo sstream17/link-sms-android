@@ -16,7 +16,6 @@
 
 package xyz.stream.messenger.fragment.settings
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -26,13 +25,13 @@ import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
 import xyz.stream.messenger.activity.compose.ComposeConstants
 import xyz.stream.messenger.shared.activity.AbstractSettingsActivity
 import xyz.stream.messenger.shared.data.ColorSet
 import xyz.stream.messenger.shared.data.DataSource
-import xyz.stream.messenger.shared.data.FeatureFlags
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.Conversation
 import xyz.stream.messenger.shared.util.*
@@ -228,7 +227,7 @@ class ContactSettingsFragment : MaterialPreferenceFragment() {
                     val names = folders.map { StringUtils.titleize(it.name!!) }.toMutableList()
                     names.add(0, noFolderText)
 
-                    AlertDialog.Builder(activity)
+                    MaterialAlertDialogBuilder(activity)
                             .setSingleChoiceItems(names.toTypedArray(), currentIndex + 1) { dialog, clickedIndex ->
                                 if (clickedIndex == 0) {
                                     conversation.folderId = -1

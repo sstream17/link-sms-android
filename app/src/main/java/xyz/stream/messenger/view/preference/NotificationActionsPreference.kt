@@ -1,12 +1,12 @@
 package xyz.stream.messenger.view.preference
 
-import android.app.AlertDialog
 import android.content.Context
 import android.preference.Preference
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.R
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.api.implementation.ApiUtils
@@ -37,7 +37,7 @@ class NotificationActionsPreference : Preference, Preference.OnPreferenceClickLi
         prepareContactEntry(actionTwo, prefActions[1])
         prepareContactEntry(actionThree, prefActions[2])
 
-        AlertDialog.Builder(context)
+        MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.notification_actions)
                 .setView(layout)
                 .setNegativeButton(R.string.cancel) { _, _ -> }

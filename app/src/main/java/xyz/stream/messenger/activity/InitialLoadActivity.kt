@@ -17,7 +17,6 @@
 package xyz.stream.messenger.activity
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -33,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.klinker.android.send_message.Utils
 import xyz.stream.messenger.R
 import xyz.stream.messenger.api.implementation.Account
@@ -118,7 +118,7 @@ open class InitialLoadActivity : AppCompatActivity(), ProgressUpdateListener {
                 // display a warning here, before asking for the permission.
                 // The warning lets the user know that this is now required by Google.
                 // After the warning, prompt the user again
-                AlertDialog.Builder(this)
+                MaterialAlertDialogBuilder(this)
                         .setMessage(R.string.google_requires_default_sms)
                         .setNegativeButton(R.string.google_requires_default_sms_policy) { _, _ ->
                             promptedForDefaultSMS = false

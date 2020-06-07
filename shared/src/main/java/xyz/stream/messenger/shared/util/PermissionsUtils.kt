@@ -18,7 +18,6 @@ package xyz.stream.messenger.shared.util
 
 import android.Manifest
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -26,7 +25,7 @@ import android.net.Uri
 import android.provider.Telephony
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.shared.R
 
 /**
@@ -61,7 +60,7 @@ object PermissionsUtils {
                 DualSimUtils.init(activity)
                 true
             } else {
-                AlertDialog.Builder(activity)
+                MaterialAlertDialogBuilder(activity)
                         .setMessage(R.string.permissions_needed)
                         .setPositiveButton(android.R.string.ok) { dialogInterface, i -> startMainPermissionRequest(activity) }
                         .show()
@@ -103,7 +102,7 @@ object PermissionsUtils {
 
         if (AndroidVersionUtil.isAndroidQ) {
             // Android Q has not been working with the normal ACTION_CHANGE_DEFAULT prompt, and I have no clue why....
-            AlertDialog.Builder(context)
+            MaterialAlertDialogBuilder(context)
                     .setMessage(R.string.google_requires_default_sms)
                     .setNegativeButton(R.string.google_requires_default_sms_policy) { _, _ ->
                         val policy = Intent(Intent.ACTION_VIEW, Uri.parse("https://android-developers.googleblog.com/2018/10/providing-safe-and-secure-experience.html"))

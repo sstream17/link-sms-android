@@ -16,16 +16,17 @@
 
 package xyz.stream.messenger.fragment.settings
 
-import android.app.AlertDialog
 import android.os.Build
 import android.os.Bundle
-import android.preference.*
+import android.preference.Preference
+import android.preference.PreferenceGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.MultiAutoCompleteTextView
 import com.android.ex.chips.BaseRecipientAdapter
 import com.android.ex.chips.RecipientEditTextView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.R
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.api.implementation.ApiUtils
@@ -33,7 +34,6 @@ import xyz.stream.messenger.service.DrivingModeQuickSettingTile
 import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.AutoReply
-import xyz.stream.messenger.shared.util.AndroidVersionUtil
 
 /**
  * Fragment for modifying contact preferences. This includes pinning, changing colors, changing
@@ -133,7 +133,7 @@ class AutoReplySettingsFragment : MaterialPreferenceFragment() {
     }
 
     private fun createNewAutoReply() {
-        AlertDialog.Builder(activity)
+        MaterialAlertDialogBuilder(activity)
                 .setMessage(R.string.which_auto_reply_type)
                 .setPositiveButton(R.string.keyword) { _, _ -> showKeywordCreator() }
                 .setNegativeButton(R.string.contact) { _, _ -> showContactCreator() }
@@ -147,7 +147,7 @@ class AutoReplySettingsFragment : MaterialPreferenceFragment() {
         val responseEditText = layout.findViewById<View>(R.id.response) as EditText
         responseEditText.setHint(R.string.response)
 
-        AlertDialog.Builder(activity)
+        MaterialAlertDialogBuilder(activity)
                 .setView(layout)
                 .setPositiveButton(R.string.save) { _, _ ->
                     if (patternEditText.text.isEmpty() || responseEditText.text.isBlank()) {
@@ -178,7 +178,7 @@ class AutoReplySettingsFragment : MaterialPreferenceFragment() {
         contactEditText.setAdapter(adapter)
         contactEditText.maxChips = 1
 
-        AlertDialog.Builder(activity)
+        MaterialAlertDialogBuilder(activity)
                 .setView(layout)
                 .setPositiveButton(R.string.save) { _, _ ->
                     if (contactEditText.recipients.isEmpty() || responseEditText.text.isBlank()) {
@@ -213,7 +213,7 @@ class AutoReplySettingsFragment : MaterialPreferenceFragment() {
         pref.summary = "${getStringFromAutoReplyType(reply)}: ${reply.pattern}"
 
         pref.setOnPreferenceClickListener {
-            AlertDialog.Builder(activity)
+            MaterialAlertDialogBuilder(activity)
                     .setMessage(R.string.delete_auto_reply)
                     .setPositiveButton(R.string.api_yes) { _, _ ->
                         DataSource.deleteAutoReply(activity, reply.id, true)

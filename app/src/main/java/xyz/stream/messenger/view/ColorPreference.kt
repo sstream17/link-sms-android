@@ -17,7 +17,6 @@
 package xyz.stream.messenger.view
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.res.TypedArray
@@ -30,6 +29,8 @@ import android.view.View
 import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.ScrollView
+import androidx.appcompat.app.AlertDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 import com.larswerkman.lobsterpicker.LobsterPicker
 import com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
@@ -126,7 +127,7 @@ class ColorPreference : Preference {
 
         grid.adapter = adapter
 
-        this.dialog = AlertDialog.Builder(context).setView(dialog)
+        this.dialog = MaterialAlertDialogBuilder(context).setView(dialog)
                 .setPositiveButton(android.R.string.ok) { _, _ -> setColor(picker.color) }
                 .setNegativeButton(android.R.string.cancel, null)
                 .setNeutralButton(R.string.hex) { _, _ -> showHex() }

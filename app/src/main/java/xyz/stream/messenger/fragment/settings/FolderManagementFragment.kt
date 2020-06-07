@@ -1,6 +1,5 @@
 package xyz.stream.messenger.fragment.settings
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.preference.Preference
 import android.preference.PreferenceGroup
@@ -9,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 import xyz.stream.messenger.R
 import xyz.stream.messenger.adapter.ConversationsForFolderAdapter
@@ -59,7 +59,7 @@ class FolderManagementFragment : MaterialPreferenceFragment() {
         val editText = layout.findViewById<View>(R.id.edit_text) as EditText
         editText.setHint(R.string.folder_name)
 
-        AlertDialog.Builder(activity)
+        MaterialAlertDialogBuilder(activity)
                 .setView(layout)
                 .setPositiveButton(R.string.create) { _, _ ->
                     val title = editText.text.toString()
@@ -102,7 +102,7 @@ class FolderManagementFragment : MaterialPreferenceFragment() {
             }
         }.start()
 
-        AlertDialog.Builder(activity)
+        MaterialAlertDialogBuilder(activity)
                 .setView(layout)
                 .setPositiveButton(R.string.save) { _, _ ->
                     val title = editText.text.toString()

@@ -1,12 +1,11 @@
 package xyz.stream.messenger.activity.main
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Build
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -14,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -146,7 +146,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
             addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
 
-        optionsMenu = AlertDialog.Builder(activity)
+        optionsMenu = MaterialAlertDialogBuilder(activity)
                 .setView(layout)
                 .create()
         optionsMenu!!.show()
