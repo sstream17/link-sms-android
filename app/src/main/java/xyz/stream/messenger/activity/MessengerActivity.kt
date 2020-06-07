@@ -137,6 +137,7 @@ class MessengerActivity : AppCompatActivity() {
         UnreadBadger(this).clearCount()
 
         colorController.colorActivity()
+        navController.initOptionsMenu()
         intentHandler.displayAccount()
         intentHandler.handleShortcutIntent(intent)
         accountController.listenForFullRefreshes()

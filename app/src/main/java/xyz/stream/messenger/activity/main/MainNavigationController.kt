@@ -51,6 +51,73 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         else -> conversationListFragment
     }
 
+    fun initOptionsMenu() {
+        optionsMenuLayout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
+        val recyclerView = optionsMenuLayout!!.findViewById<View>(R.id.recycler_view) as RecyclerView
+        recyclerView.apply {
+            setHasFixedSize(true)
+            val noScrollLayoutManager = FixedScrollLinearLayoutManager(activity)
+            noScrollLayoutManager.setCanScroll(false)
+            layoutManager = noScrollLayoutManager
+            adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions(), ::optionsItemSelected)
+            addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+        }
+
+        optionsMenuLayout!!.postDelayed({
+            try {
+                if (Account.exists()) {
+                    (optionsMenuLayout!!.findViewById<View>(R.id.drawer_header_my_name) as TextView).text = Account.myName
+                }
+
+                (optionsMenuLayout!!.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView).text =
+                        PhoneNumberUtils.format(PhoneNumberUtils.getMyPhoneNumber(activity))
+
+                if (!Settings.isCurrentlyDarkTheme(activity)) {
+                    (optionsMenuLayout!!.findViewById<View>(R.id.drawer_header_my_name) as TextView)
+                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
+                    (optionsMenuLayout!!.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView)
+                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            activity.snoozeController.initSnooze(optionsMenuLayout!!)
+        }, 300)
+    }
+
+    fun optionsItemSelected(itemId: Int): Boolean {
+        conversationListFragment?.swipeHelper?.dismissSnackbars()
+
+        closeMenu()
+
+        return when (itemId) {
+            R.id.drawer_private -> conversationActionDelegate.displayPrivate()
+            R.id.drawer_mute_contacts -> conversationActionDelegate.displayBlacklist()
+            R.id.drawer_invite -> conversationActionDelegate.displayInviteFriends()
+            R.id.drawer_feature_settings -> conversationActionDelegate.displayFeatureSettings()
+            R.id.drawer_settings -> conversationActionDelegate.displaySettings()
+            R.id.drawer_account -> conversationActionDelegate.displayMyAccount()
+            R.id.drawer_help -> conversationActionDelegate.displayHelpAndFeedback()
+            R.id.drawer_about -> conversationActionDelegate.displayAbout()
+            R.id.drawer_edit_folders -> conversationActionDelegate.displayEditFolders()
+            else -> false
+        }
+    }
+
+    fun openMenu() {
+        optionsMenu = MaterialAlertDialogBuilder(activity)
+                .setView(optionsMenuLayout)
+                .create()
+        optionsMenu!!.show()
+    }
+
+    fun closeMenu() {
+        if (optionsMenu != null) {
+            optionsMenu!!.cancel()
+        }
+    }
+
     fun backPressed(): Boolean {
         val controller = findNavController(activity, R.id.nav_host)
         return when (controller.currentDestination?.id) {
@@ -113,73 +180,6 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
             else -> {
                 return true
             }
-        }
-    }
-
-    fun optionsItemSelected(itemId: Int): Boolean {
-        conversationListFragment?.swipeHelper?.dismissSnackbars()
-
-        closeMenu()
-
-        return when (itemId) {
-            R.id.drawer_private -> conversationActionDelegate.displayPrivate()
-            R.id.drawer_mute_contacts -> conversationActionDelegate.displayBlacklist()
-            R.id.drawer_invite -> conversationActionDelegate.displayInviteFriends()
-            R.id.drawer_feature_settings -> conversationActionDelegate.displayFeatureSettings()
-            R.id.drawer_settings -> conversationActionDelegate.displaySettings()
-            R.id.drawer_account -> conversationActionDelegate.displayMyAccount()
-            R.id.drawer_help -> conversationActionDelegate.displayHelpAndFeedback()
-            R.id.drawer_about -> conversationActionDelegate.displayAbout()
-            R.id.drawer_edit_folders -> conversationActionDelegate.displayEditFolders()
-            else -> false
-        }
-    }
-
-    fun openMenu() {
-        optionsMenu = MaterialAlertDialogBuilder(activity)
-                .setView(optionsMenuLayout)
-                .create()
-        optionsMenu!!.show()
-    }
-
-    fun initOptionsMenu() {
-        optionsMenuLayout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
-        val recyclerView = optionsMenuLayout!!.findViewById<View>(R.id.recycler_view) as RecyclerView
-        recyclerView.apply {
-            setHasFixedSize(true)
-            val noScrollLayoutManager = FixedScrollLinearLayoutManager(activity)
-            noScrollLayoutManager.setCanScroll(false)
-            layoutManager = noScrollLayoutManager
-            adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions(), ::optionsItemSelected)
-            addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-        }
-
-        optionsMenuLayout!!.postDelayed({
-            try {
-                if (Account.exists()) {
-                    (activity.findViewById<View>(R.id.drawer_header_my_name) as TextView).text = Account.myName
-                }
-
-                (activity.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView).text =
-                        PhoneNumberUtils.format(PhoneNumberUtils.getMyPhoneNumber(activity))
-
-                if (Settings.isCurrentlyDarkTheme(activity)) {
-                    (activity.findViewById<View>(R.id.drawer_header_my_name) as TextView)
-                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
-                    (activity.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView)
-                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            activity.snoozeController.initSnooze()
-        }, 300)
-    }
-
-    fun closeMenu() {
-        if (optionsMenu != null) {
-            optionsMenu!!.cancel()
         }
     }
 }

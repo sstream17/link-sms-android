@@ -24,7 +24,7 @@ class MainOnStartDelegate(private val activity: MessengerActivity) {
                 showTextAnywherePromotion()
             }
 
-            activity.snoozeController.updateSnoozeIcon()
+            activity.snoozeController.updateSnoozeIcon(navController.optionsMenuLayout)
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                 dismissAllActiveNotifications()
