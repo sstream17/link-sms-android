@@ -109,7 +109,7 @@ class MessengerActivity : AppCompatActivity() {
 
         colorController.configureGlobalColors()
         colorController.configureNavigationBarColor()
-        colorController.configureProfilePictureColor()
+        colorController.configureProfilePictureColor(null)
         intentHandler.dismissIfFromNotification()
         intentHandler.displayPrivateFromNotification()
         navController.conversationActionDelegate.displayConversations(savedInstanceState)

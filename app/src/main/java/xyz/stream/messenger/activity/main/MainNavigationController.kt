@@ -43,6 +43,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     var selectedNavigationItemId: Int = R.id.drawer_conversation
 
     private var optionsMenu: AlertDialog? = null
+    private val colorController = MainColorController(activity)
 
     fun isConversationListExpanded() = conversationListFragment != null && conversationListFragment!!.isExpanded
     fun isOtherFragmentConvoAndShowing() = otherFragment != null && otherFragment is ConversationListFragment && (otherFragment as ConversationListFragment).isExpanded
@@ -62,6 +63,8 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
             adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions(), ::optionsItemSelected)
             addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
+
+        colorController.configureProfilePictureColor(optionsMenuLayout)
 
         optionsMenuLayout!!.postDelayed({
             try {

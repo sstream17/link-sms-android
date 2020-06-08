@@ -55,7 +55,9 @@ class MainColorController(private val activity: AppCompatActivity) {
         }
     }
 
-    fun configureProfilePictureColor() {
+    fun configureProfilePictureColor(view: View?) {
+        val accountColor = if (view != null) view.findViewById(R.id.account_color) as CircleImageView else accountColor
+        val defaultIcon = if (view != null) view.findViewById(R.id.default_icon) as ImageView else defaultIcon
         if (Settings.isCurrentlyDarkTheme(activity)) {
             accountColor.setImageDrawable(ColorDrawable(Settings.mainColorSet.colorLight))
             defaultIcon.imageTintList = ColorStateList.valueOf(activity.getColor(R.color.lightToolbarTextColor))
