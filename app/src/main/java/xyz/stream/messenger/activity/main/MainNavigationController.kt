@@ -106,6 +106,7 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
     }
 
     fun openMenu() {
+        initOptionsMenu()
         optionsMenu = MaterialAlertDialogBuilder(activity)
                 .setView(optionsMenuLayout)
                 .create()

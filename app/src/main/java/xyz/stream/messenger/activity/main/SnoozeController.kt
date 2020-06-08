@@ -22,6 +22,8 @@ class SnoozeController(private val activity: MessengerActivity) {
             snooze.imageTintList = ColorStateList.valueOf(optionsMenu.resources.getColor(R.color.lightToolbarTextColor))
         }
 
+        updateSnoozeIcon(optionsMenu)
+
         snooze.setOnClickListener { view ->
             val menu = PopupMenu(activity, view)
             val currentlySnoozed = Settings.snooze > TimeUtils.now
