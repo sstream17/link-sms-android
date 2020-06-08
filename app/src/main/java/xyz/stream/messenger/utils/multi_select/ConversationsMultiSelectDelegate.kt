@@ -22,6 +22,9 @@ import xyz.stream.messenger.shared.util.ActivityUtils
 import java.util.*
 import android.graphics.PorterDuff
 import android.util.Log
+import xyz.stream.messenger.activity.MessengerActivity
+import xyz.stream.messenger.shared.util.hide
+import xyz.stream.messenger.shared.util.show
 
 @Suppress("DEPRECATION")
 class ConversationsMultiSelectDelegate(private val fragment: ConversationListFragment) : MultiSelector() {
@@ -87,6 +90,11 @@ class ConversationsMultiSelectDelegate(private val fragment: ConversationListFra
 
             Handler().postDelayed({ isSelectable = false }, 250)
             ActivityUtils.setUpLightStatusBar(activity, Settings.mainColorSet.color)
+            if (activity is MessengerActivity) {
+                val messengerActivity = (activity as MessengerActivity)
+                messengerActivity.searchBar.show()
+                messengerActivity.searchLayout.invalidateScrollRanges()
+            }
         }
 
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
@@ -217,6 +225,9 @@ class ConversationsMultiSelectDelegate(private val fragment: ConversationListFra
     }
 
     fun startActionMode() {
+        if (activity is MessengerActivity) {
+            (activity as MessengerActivity).searchBar.hide()
+        }
         mode = activity?.startSupportActionMode(actionMode)
     }
 

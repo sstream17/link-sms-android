@@ -65,9 +65,9 @@ class MessengerActivity : AppCompatActivity() {
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
     val searchBar: PersistentSearchView by lazy { findViewById<PersistentSearchView>(R.id.search_view) }
+    val searchLayout: SearchLayout by lazy { findViewById<View>(R.id.search_bar_container) as SearchLayout }
     lateinit var bottomNav: BottomNavigationView
     private val content: View by lazy { findViewById<View>(R.id.nav_host) }
-    private val searchLayout: SearchLayout by lazy { findViewById<View>(R.id.search_bar_container) as SearchLayout }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
