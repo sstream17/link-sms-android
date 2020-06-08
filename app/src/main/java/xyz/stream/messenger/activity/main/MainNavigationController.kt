@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +28,7 @@ import xyz.stream.messenger.shared.util.options.OptionsMenuDataFactory
 import xyz.stream.messenger.utils.FixedScrollLinearLayoutManager
 
 @Suppress("DEPRECATION")
-class MainNavigationController(private val activity: MessengerActivity) : NavController(activity) {
+class MainNavigationController(private val activity: MessengerActivity) {
 
     val conversationActionDelegate = MainNavigationConversationListActionDelegate(activity)
     val messageActionDelegate = MainNavigationMessageListActionDelegate(activity)
