@@ -3,6 +3,7 @@ package xyz.stream.messenger.activity.main
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -112,6 +113,7 @@ class MainNavigationController(private val activity: MessengerActivity) {
             optionsMenu = MaterialAlertDialogBuilder(activity)
                     .setView(optionsMenuLayout)
                     .create()
+            optionsMenu!!.window?.setGravity(Gravity.TOP)
         }
 
         optionsMenu!!.show()
