@@ -77,6 +77,7 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/menu_snooze"
             android:padding="8dp"
+            android:tint="@color/secondaryText"
             android:src="@drawable/ic_snooze" />
 
     </LinearLayout>

@@ -16,7 +16,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
-        android:textColor="@drawable/drawer_text_selector"
+        android:textColor="@color/secondaryText"
         android:textSize="16sp" />
 
     <ImageView
@@ -25,6 +25,6 @@
         android:layout_height="24dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="16dp"
-        android:tint="@drawable/drawer_icon_selector" />
+        android:tint="@color/secondaryText" />
 
 </FrameLayout>

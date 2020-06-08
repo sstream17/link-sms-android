@@ -25,11 +25,8 @@ class OptionsItemAdapter(private val items: List<OptionsItem>, private val optio
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        val color = getColor(holder.itemView.context, R.color.secondaryText)
         holder.image.setImageResource(item.image)
-        holder.image.imageTintList = ColorStateList.valueOf(color)
         holder.text.setText(item.label)
-        holder.text.setTextColor(color)
         holder.itemView.setOnClickListener { optionsItemSelected(item.id) }
     }
 
