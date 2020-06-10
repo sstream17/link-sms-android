@@ -117,7 +117,6 @@
     <color name="quickReplyBackground">#FFFFFF</color>
     <color name="replyBarCard">#FFFFFF</color>
     <color name="swipeBackground">#F2F2F2</color>
-    <color name="drawerBackground">@android:color/white</color>
     <color name="elevatedCardBackground">@android:color/white</color>
     <color name="selectedBackground">#EEEEEE</color>
     <color name="primaryText">#E2000000</color>

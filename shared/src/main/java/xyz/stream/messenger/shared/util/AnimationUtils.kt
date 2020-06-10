@@ -174,7 +174,7 @@ object AnimationUtils {
             if (Settings.baseTheme == BaseTheme.BLACK) {
                 activity.findViewById<View?>(R.id.nav_host)?.setBackgroundColor(Color.BLACK)
             } else {
-                activity.findViewById<View?>(R.id.nav_host)?.setBackgroundColor(activity.resources.getColor(R.color.drawerBackground))
+                activity.findViewById<View?>(R.id.nav_host)?.setBackgroundColor(activity.resources.getColor(R.color.background))
             }
         }, EXPAND_CONVERSATION_DURATION + 50L)
 

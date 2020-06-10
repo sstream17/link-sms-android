@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/message_circle_background"
-        android:backgroundTint="@color/drawerBackground"
+        android:backgroundTint="@color/background"
         android:maxWidth="@dimen/max_message_width"
         android:minWidth="@dimen/min_mms_picture_width"
         android:clickable="true"
