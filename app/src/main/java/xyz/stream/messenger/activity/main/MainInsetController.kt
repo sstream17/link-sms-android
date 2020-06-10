@@ -1,11 +1,10 @@
 package xyz.stream.messenger.activity.main
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
+import androidx.core.view.doOnPreDraw
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -53,30 +52,6 @@ class MainInsetController(private val activity: MessengerActivity) {
         activity.window.decorView.systemUiVisibility = newSystemUiFlags
     }
 
-    @SuppressLint("RestrictedApi")
-    fun overrideDrawerInsets() {
-        if (!useEdgeToEdge()) {
-            return
-        }
-
-        activity.navController.drawerLayout?.setOnApplyWindowInsetsListener { _, insets ->
-            if (insets.systemWindowInsetBottom != 0 && bottomInsetValue == 0) {
-                bottomInsetValue = insets.systemWindowInsetBottom
-            }
-
-            val modifiedInsets = insets.replaceSystemWindowInsets(insets.systemWindowInsetLeft, insets.systemWindowInsetTop, insets.systemWindowInsetRight, 0)
-            activity.navController.drawerLayout?.setChildInsets(modifiedInsets, insets.systemWindowInsetTop > 0)
-
-            try {
-                modifyMessengerActivityElements()
-                modifyConversationListElements(activity.navController.conversationListFragment)
-            } catch (e: Exception) {
-            }
-
-            modifiedInsets
-        }
-    }
-
     fun modifyConversationListElements(fragment: ConversationListFragment?) {
         if (!useEdgeToEdge() || fragment == null) {
             return
@@ -84,7 +59,17 @@ class MainInsetController(private val activity: MessengerActivity) {
 
         val recycler = fragment.recyclerView
         recycler.clipToPadding = false
-        recycler.applySystemWindowInsetsPadding(applyTop = true)
+        recycler.doOnPreDraw {
+            val searchBar = activity.searchBar
+            val searchBarHeight = searchBar.measuredHeight + sixteenDp
+            recycler.setPadding(recycler.paddingLeft, searchBarHeight, recycler.paddingRight, recycler.paddingBottom)
+            recycler.applySystemWindowInsetsPadding(applyTop = true)
+            val navBar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
+            val navBarHeight = navBar.measuredHeight
+            val layoutParams = recycler.layoutParams as FrameLayout.LayoutParams
+            layoutParams.bottomMargin = navBarHeight
+            recycler.layoutParams = layoutParams
+        }
 
         val snackbar = activity.snackbarContainer
         val layoutParams = snackbar.layoutParams as CoordinatorLayout.LayoutParams
@@ -99,7 +84,17 @@ class MainInsetController(private val activity: MessengerActivity) {
 
         val recycler = fragment.list
         recycler.clipToPadding = false
-        recycler.applySystemWindowInsetsPadding(applyTop = true)
+        recycler.doOnPreDraw {
+            val searchBar = activity.searchBar
+            val searchBarHeight = searchBar.measuredHeight + sixteenDp
+            recycler.setPadding(recycler.paddingLeft, searchBarHeight, recycler.paddingRight, recycler.paddingBottom)
+            recycler.applySystemWindowInsetsPadding(applyTop = true)
+            val navBar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
+            val navBarHeight = navBar.measuredHeight
+            val layoutParams = recycler.layoutParams as FrameLayout.LayoutParams
+            layoutParams.bottomMargin = navBarHeight
+            recycler.layoutParams = layoutParams
+        }
 
         // move fab above the nav bar
         val params = fragment.fab.layoutParams as FrameLayout.LayoutParams
@@ -127,7 +122,7 @@ class MainInsetController(private val activity: MessengerActivity) {
         }
 
         recycler.clipToPadding = false
-        recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, bottomInsetValue)
+        recycler.applySystemWindowInsetsPadding(applyBottom = true)
     }
 
     fun modifyMessageListElements(fragment: MessageListFragment) {
@@ -158,23 +153,15 @@ class MainInsetController(private val activity: MessengerActivity) {
         }
 
         val view = snackbar.view
-        val layoutParams = view.layoutParams as FrameLayout.LayoutParams
-        layoutParams.bottomMargin = bottomInsetValue
-        view.layoutParams = layoutParams
+        view.doOnPreDraw {
+            val navbar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
+            val navbarHeight = navbar.measuredHeight
+            val layoutParams = view.layoutParams as CoordinatorLayout.LayoutParams
+            layoutParams.bottomMargin = navbarHeight
+            view.layoutParams = layoutParams
+        }
 
         return snackbar
-    }
-
-    private fun modifyMessengerActivityElements() {
-        // move fab above the nav bar
-        val params = activity.fab.layoutParams as CoordinatorLayout.LayoutParams
-        params.bottomMargin = sixteenDp + bottomInsetValue
-
-        // put padding at the bottom of the navigation view's recycler view
-        val navView = activity.navController.navigationView
-        val navRecycler = navView.getChildAt(0) as RecyclerView
-        navRecycler.clipToPadding = false
-        navRecycler.setPadding(navView.paddingLeft, navView.paddingTop, navView.paddingRight, bottomInsetValue)
     }
 
     private fun useEdgeToEdge(): Boolean {

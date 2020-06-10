@@ -6,6 +6,7 @@ import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.adapter.view_holder.ConversationViewHolder
 import xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper
+import xyz.stream.messenger.fragment.settings.AboutFragment
 import xyz.stream.messenger.shared.data.SectionType
 import xyz.stream.messenger.shared.data.Settings
 
@@ -61,7 +62,7 @@ class ConversationSectionHeaderBinder(private val adapter: ConversationListAdapt
             adapter.notifyItemRemoved(0)
 
             tryIt.postDelayed({
-                activity.navController.drawerItemClicked(R.id.drawer_account)
+                activity.navController.conversationActionDelegate.displayAbout()
                 AnalyticsHelper.convoListTryIt(activity)
             }, 500)
         }

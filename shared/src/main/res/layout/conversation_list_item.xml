@@ -23,7 +23,6 @@
     android:layout_marginEnd="@dimen/conversation_list_padding"
     android:background="@drawable/conversation_list_item_background"
     android:clickable="true"
-    android:elevation="2dp"
     android:foreground="?android:attr/selectableItemBackground"
     android:paddingStart="16dp"
     android:paddingEnd="16dp">

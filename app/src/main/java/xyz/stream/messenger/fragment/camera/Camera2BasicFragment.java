@@ -18,7 +18,6 @@ package xyz.stream.messenger.fragment.camera;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -62,6 +61,8 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -1085,7 +1086,7 @@ public class Camera2BasicFragment extends Fragment
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Activity activity = getActivity();
-            return new AlertDialog.Builder(activity)
+            return new MaterialAlertDialogBuilder(activity)
                     .setMessage(getArguments().getString(ARG_MESSAGE))
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
@@ -1101,7 +1102,7 @@ public class Camera2BasicFragment extends Fragment
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Fragment parent = getParentFragment();
-            return new AlertDialog.Builder(getActivity())
+            return new MaterialAlertDialogBuilder(getActivity())
                     .setMessage(R.string.camera_permission_needed)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override

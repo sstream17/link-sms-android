@@ -100,33 +100,17 @@ object ColorUtils {
      */
     fun adjustStatusBarColor(toolbarColor: Int, statusBarColor: Int, activity: Activity?) {
         var statusBarColor = statusBarColor
-        var toolbarColor = toolbarColor
         if (activity == null) {
             return
         }
 
         if (Settings.useGlobalThemeColor) {
             statusBarColor = Settings.mainColorSet.colorDark
-            toolbarColor = Settings.mainColorSet.color
         }
 
         statusBarColor = ActivityUtils.possiblyOverrideColorSelection(activity, statusBarColor)
-        toolbarColor = ActivityUtils.possiblyOverrideColorSelection(activity, toolbarColor)
 
-        if (!activity.resources.getBoolean(R.bool.pin_drawer)) {
-            val drawerLayout = activity
-                    .findViewById<View>(R.id.drawer_layout) as DrawerLayout?
-
-            drawerLayout?.setStatusBarBackgroundColor(statusBarColor)
-        } else {
-            val status = activity.findViewById<View>(R.id.status_bar)
-
-            if (status != null) {
-                status.backgroundTintList = ColorStateList.valueOf(statusBarColor)
-            }
-        }
-
-        ActivityUtils.setUpLightStatusBar(activity, toolbarColor)
+        ActivityUtils.setStatusBarColor(activity, statusBarColor)
     }
 
     /**

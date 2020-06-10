@@ -1,6 +1,5 @@
 package xyz.stream.messenger.view.preference
 
-import android.app.AlertDialog
 import android.content.Context
 import android.net.Uri
 import android.preference.Preference
@@ -9,6 +8,7 @@ import android.view.LayoutInflater
 import android.widget.MultiAutoCompleteTextView
 import com.android.ex.chips.BaseRecipientAdapter
 import com.android.ex.chips.RecipientEditTextView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.R
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.api.implementation.ApiUtils
@@ -41,7 +41,7 @@ class QuickComposeFavoriteUserPreference : Preference, Preference.OnPreferenceCl
         prepareContactEntry(contactEntryTwo, if (prefNumbers.size > 1) prefNumbers[1] else null)
         prepareContactEntry(contactEntryThree, if (prefNumbers.size > 2) prefNumbers[2] else null)
 
-        AlertDialog.Builder(context, R.style.SubscriptionPicker)
+        MaterialAlertDialogBuilder(context, R.style.SubscriptionPicker)
                 .setTitle(R.string.quick_compose_favorites_title)
                 .setView(layout)
                 .setNegativeButton(R.string.cancel) { _, _ -> }

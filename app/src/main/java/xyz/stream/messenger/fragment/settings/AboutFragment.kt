@@ -16,7 +16,6 @@
 
 package xyz.stream.messenger.fragment.settings
 
-import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
@@ -27,6 +26,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.adapter.ChangelogAdapter
@@ -149,7 +149,7 @@ class AboutFragment : MaterialPreferenceFragmentCompat() {
             return
         }
 
-        AlertDialog.Builder(fragmentActivity!!)
+        MaterialAlertDialogBuilder(fragmentActivity!!)
                 .setTitle(R.string.changelog)
                 .setAdapter(ChangelogAdapter(fragmentActivity!!, ChangelogParser.parse(fragmentActivity!!)!!), null)
                 .setPositiveButton(android.R.string.ok, null)
@@ -164,7 +164,7 @@ class AboutFragment : MaterialPreferenceFragmentCompat() {
             return
         }
 
-        AlertDialog.Builder(fragmentActivity!!)
+        MaterialAlertDialogBuilder(fragmentActivity!!)
                 .setAdapter(OpenSourceAdapter(fragmentActivity!!, OpenSourceParser.parse(fragmentActivity!!)!!), null)
                 .setPositiveButton(android.R.string.ok, null)
                 .show()

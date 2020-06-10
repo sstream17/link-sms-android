@@ -37,6 +37,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sgottard.sofa.ContentFragment
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerTvActivity
@@ -229,9 +230,9 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
     fun onBackPressed(): Boolean {
         dismissDetailsChoiceDialog()
 
-        if (searchHelper.closeSearch()) {
+        /*if (searchHelper.closeSearch()) {
             return true
-        }
+        }*/
 
         if (attachManager.backPressed()) {
             return true
@@ -320,7 +321,7 @@ class MessageListFragment : Fragment(), ContentFragment, IMessageListFragment {
             android.R.string.cancel
         }
 
-        val builder = AlertDialog.Builder(fragmentActivity!!)
+        val builder = MaterialAlertDialogBuilder(fragmentActivity!!)
                 .setView(layout)
                 .setCancelable(false)
                 .setNegativeButton(cancelText) { _, _ ->

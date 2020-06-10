@@ -111,12 +111,14 @@
     <color name="colorToReplaceWhite">#F3F3F3</color>
 
     <!-- Theme Specific Colors -->
-    <color name="background">#F2F2F2</color>
+    <color name="background">@android:color/white</color>
+    <color name="statusBarBackground">#BFFFFFFF</color>
     <color name="dark_background">#374248</color>
     <color name="quickReplyBackground">#FFFFFF</color>
     <color name="replyBarCard">#FFFFFF</color>
     <color name="swipeBackground">#F2F2F2</color>
     <color name="drawerBackground">@android:color/white</color>
+    <color name="elevatedCardBackground">@android:color/white</color>
     <color name="selectedBackground">#EEEEEE</color>
     <color name="primaryText">#E2000000</color>
     <color name="secondaryText">#8C000000</color>
@@ -124,6 +126,7 @@
     <color name="divider">#e5e5e5</color>
     <color name="ripple">#22000000</color>
     <color name="code_block_color">#11000000</color>
+    <color name="stroke">#979797</color>
 
     <color name="emptyIconTint">@android:color/white</color>
     <color name="emptyTextPrimary">#FFFFFFFF</color>

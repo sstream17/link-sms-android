@@ -390,10 +390,10 @@ class MainNavigationMessageListActionDelegate(private val activity: MessengerAct
                 messageListFragment.sendManager.messageEntry.setText("")
 
                 conversationActionDelegate.displayFragmentWithBackStack(
-                        ScheduledMessagesFragment.newInstance(conversation!!.title!!, conversation.phoneNumbers!!, messageText))
+                        ScheduledMessagesFragment.newInstance(conversation!!.title!!, conversation.phoneNumbers!!, messageText), R.id.navigation_scheduled)
             } else {
                 conversationActionDelegate.displayFragmentWithBackStack(
-                        ScheduledMessagesFragment.newInstance(conversation!!.title!!, conversation.phoneNumbers!!, ""))
+                        ScheduledMessagesFragment.newInstance(conversation!!.title!!, conversation.phoneNumbers!!, ""), R.id.navigation_scheduled)
             }
         } else {
             false

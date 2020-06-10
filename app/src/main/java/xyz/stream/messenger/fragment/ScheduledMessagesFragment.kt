@@ -29,6 +29,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,7 +54,7 @@ import xyz.stream.messenger.shared.util.listener.ScheduledMessageClickListener
 /**
  * Fragment for displaying scheduled messages.
  */
-class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener, BackPressedListener {
+class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
 
     private val fragmentActivity: FragmentActivity? by lazy { activity }
 
@@ -169,14 +170,6 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener, Bac
             fragment.setFragment(this)
             fragment.show(fragmentActivity?.supportFragmentManager!!, "")
         }
-    }
-
-    // always consume the back event and send us to the conversation list
-    override fun onBackPressed(): Boolean {
-        activity?.title = getString(R.string.app_title)
-        (activity as MessengerActivity).displayConversations()
-
-        return true
     }
 
     companion object {

@@ -1,39 +1,36 @@
 package xyz.stream.messenger.activity.main
 
-import android.view.MenuItem
 import android.view.View
-import com.miguelcatalan.materialsearchview.MaterialSearchView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
+import xyz.stream.messenger.shared.util.hide
+import xyz.stream.messenger.shared.util.show
+import xyz.stream.messenger.shared.view.search.SearchLayout
 
 @Suppress("DEPRECATION")
-class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearchView.OnQueryTextListener, MaterialSearchView.SearchViewListener {
-    
+class MainSearchHelper(private val activity: MessengerActivity) : SearchLayout.OnQueryTextListener, SearchLayout.SearchViewListener {
+
     private val navController
         get() = activity.navController
-    
-    private val searchView: MaterialSearchView by lazy { activity.findViewById<View>(R.id.search_view) as MaterialSearchView }
+
+    private val searchView: SearchLayout by lazy { activity.findViewById<View>(R.id.search_bar_container) as SearchLayout }
     private var searchFragment: SearchFragment? = null
-    
-    fun setup(item: MenuItem) {
-        searchView.setVoiceSearch(false)
-        searchView.setBackgroundColor(activity.resources.getColor(R.color.drawerBackground))
+
+    fun setup() {
         searchView.setOnQueryTextListener(this)
-        searchView.setOnSearchViewListener(this)
-        
-        searchView.setMenuItem(item)
+        searchView.setSearchViewListener(this)
     }
-    
+
     fun closeSearch(): Boolean {
         if (searchView.isSearchOpen) {
             searchView.closeSearch()
             return true
         }
-        
+
         return false
     }
-    
+
     override fun onQueryTextSubmit(query: String): Boolean {
         ensureSearchFragment()
         searchFragment?.search(query)
@@ -41,41 +38,29 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-        if (newText.isNotEmpty()) {
-            // display search fragment
-            ensureSearchFragment()
-            searchFragment!!.search(newText)
-            if (!searchFragment!!.isAdded) {
-                displaySearchFragment()
-            }
-        } else {
-            // display conversation fragment
-            ensureSearchFragment()
-            searchFragment?.search(null)
-
-            if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
-                activity.displayConversations()
-                activity.fab.hide()
-            }
+        ensureSearchFragment()
+        searchFragment!!.search(newText)
+        if (!searchFragment!!.isAdded) {
+            displaySearchFragment()
         }
 
         return true
     }
 
-    override fun onSearchViewShown() {
+    override fun onSearchOpened() {
         activity.fab.hide()
+        activity.bottomNav.hide()
         ensureSearchFragment()
+        displaySearchFragment()
     }
 
-    override fun onSearchViewClosed() {
+    override fun onSearchClosed() {
         ensureSearchFragment()
 
         if (!searchFragment!!.isSearching) {
+            searchFragment!!.dismissKeyboard()
             activity.fab.show()
-
-            if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
-                activity.displayConversations()
-            }
+            activity.bottomNav.show()
         }
     }
 
@@ -91,7 +76,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
         if (searchFragment != null) {
             try {
                 activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.conversation_list_container, searchFragment!!)
+                        .replace(R.id.conversation_search_list, searchFragment!!)
                         .commit()
             } catch (e: Exception) {
             }

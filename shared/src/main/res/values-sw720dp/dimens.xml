@@ -23,5 +23,6 @@
     <dimen name="max_message_width">436dp</dimen>
     <dimen name="max_gif_width">350dp</dimen>
     <dimen name="compose_forward_margin">32dp</dimen>
+    <dimen name="search_bar_column_margin">16dp</dimen>
 
 </resources>

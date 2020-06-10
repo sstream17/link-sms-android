@@ -23,6 +23,7 @@
     <dimen name="attach_menu_height">288dp</dimen>
     <dimen name="overlay_size">72dp</dimen>
     <dimen name="timestamp_height">16sp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
 
     <dimen name="fab_margin">24dp</dimen>
     <dimen name="conversation_list_padding">0dp</dimen>
@@ -35,6 +36,7 @@
     <dimen name="max_gif_width">250dp</dimen>
     <dimen name="attached_image_size">96dp</dimen>
     <dimen name="compose_forward_margin">16dp</dimen>
+    <dimen name="search_bar_column_margin">8dp</dimen>
     <dimen name="header_height">184dp</dimen>
     <dimen name="header_image_top_margin">24dp</dimen>
 

@@ -1,27 +1,28 @@
 package xyz.stream.messenger.activity.main
 
 import android.content.res.ColorStateList
-import androidx.appcompat.widget.PopupMenu
 import android.view.View
 import android.widget.ImageButton
+import androidx.appcompat.widget.PopupMenu
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.api.implementation.ApiUtils
 import xyz.stream.messenger.fragment.bottom_sheet.CustomSnoozeFragment
 import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.util.ColorUtils
 import xyz.stream.messenger.shared.util.TimeUtils
 
 @Suppress("DEPRECATION")
 class SnoozeController(private val activity: MessengerActivity) {
 
-    fun initSnooze() {
-        val snooze = activity.findViewById<View>(R.id.snooze) as ImageButton? ?: return
+    fun initSnooze(optionsMenu: View) {
+        val snooze = optionsMenu.findViewById<View>(R.id.snooze) as ImageButton? ?: return
 
-        if (!ColorUtils.isColorDark(Settings.mainColorSet.colorDark)) {
-            snooze.imageTintList = ColorStateList.valueOf(activity.resources.getColor(R.color.lightToolbarTextColor))
+        if (!Settings.isCurrentlyDarkTheme(activity)) {
+            snooze.imageTintList = ColorStateList.valueOf(optionsMenu.resources.getColor(R.color.lightToolbarTextColor))
         }
+
+        updateSnoozeIcon(optionsMenu)
 
         snooze.setOnClickListener { view ->
             val menu = PopupMenu(activity, view)
@@ -49,7 +50,7 @@ class SnoozeController(private val activity: MessengerActivity) {
                 Settings.setValue(activity.applicationContext,
                         activity.getString(R.string.pref_snooze), snoozeTil)
                 ApiUtils.updateSnooze(Account.accountId, snoozeTil)
-                updateSnoozeIcon()
+                updateSnoozeIcon(optionsMenu)
 
                 true
             }
@@ -58,9 +59,9 @@ class SnoozeController(private val activity: MessengerActivity) {
         }
     }
 
-    fun updateSnoozeIcon() {
+    fun updateSnoozeIcon(optionsMenu: View?) {
         val currentlySnoozed = Settings.snooze > TimeUtils.now
-        val snooze = activity.findViewById<View>(R.id.snooze) as ImageButton?
+        val snooze = optionsMenu?.findViewById<View>(R.id.snooze) as ImageButton?
 
         if (currentlySnoozed) snooze?.setImageResource(R.drawable.ic_snoozed)
         else snooze?.setImageResource(R.drawable.ic_snooze)

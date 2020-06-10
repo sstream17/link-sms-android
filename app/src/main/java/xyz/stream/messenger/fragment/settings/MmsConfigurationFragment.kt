@@ -1,7 +1,6 @@
 package xyz.stream.messenger.fragment.settings
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 
 import com.codekidlabs.storagechooser.StorageChooser
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 import xyz.stream.messenger.R
 import xyz.stream.messenger.api.implementation.Account
@@ -132,7 +132,7 @@ class MmsConfigurationFragment : MaterialPreferenceFragment() {
 
                     if (override) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !android.provider.Settings.System.canWrite(activity)) {
-                            AlertDialog.Builder(activity)
+                            MaterialAlertDialogBuilder(activity)
                                     .setMessage(com.klinker.android.send_message.R.string.write_settings_permission)
                                     .setPositiveButton(com.klinker.android.send_message.R.string.ok) { _, _ ->
                                         val intent = Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS)

@@ -3,35 +3,47 @@ package xyz.stream.messenger.activity.main
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.core.content.ContextCompat
-import android.view.MenuItem
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
-import androidx.drawerlayout.widget.DrawerLayout
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
-import com.google.android.material.navigation.NavigationView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
+import xyz.stream.messenger.adapter.options.OptionsMenuAdapter
+import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
-import xyz.stream.messenger.shared.util.listener.BackPressedListener
+import xyz.stream.messenger.shared.data.Settings
+import xyz.stream.messenger.shared.util.ActivityUtils
+import xyz.stream.messenger.shared.util.MiddleDividerItemDecoration
+import xyz.stream.messenger.shared.util.PhoneNumberUtils
+import xyz.stream.messenger.shared.util.options.OptionsMenuDataFactory
+import xyz.stream.messenger.utils.FixedScrollLinearLayoutManager
 
 @Suppress("DEPRECATION")
-class MainNavigationController(private val activity: MessengerActivity) : NavController(activity) {
+class MainNavigationController(private val activity: MessengerActivity) {
 
     val conversationActionDelegate = MainNavigationConversationListActionDelegate(activity)
     val messageActionDelegate = MainNavigationMessageListActionDelegate(activity)
 
-    val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_conversations) as NavigationView }
-    val drawerLayout: DrawerLayout? by lazy { activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout? }
+    var optionsMenuLayout: View? = null
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
-    var returnNavigationId: Int = R.id.conversation_list
+    var returnNavigationId: Int = R.id.navigation_inbox
     var inSettings = false
     var selectedNavigationItemId: Int = R.id.drawer_conversation
+
+    private var optionsMenu: AlertDialog? = null
+    private val colorController = MainColorController(activity)
 
     fun isConversationListExpanded() = conversationListFragment != null && conversationListFragment!!.isExpanded
     fun isOtherFragmentConvoAndShowing() = otherFragment != null && otherFragment is ConversationListFragment && (otherFragment as ConversationListFragment).isExpanded
@@ -40,33 +52,106 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         else -> conversationListFragment
     }
 
-    fun backPressed(): Boolean {
-        val fragments = activity.supportFragmentManager.fragments.first().childFragmentManager.fragments
+    fun initOptionsMenu() {
+        optionsMenuLayout = LayoutInflater.from(activity).inflate(R.layout.dialog_options_menu, null, false)
+        val recyclerView = optionsMenuLayout!!.findViewById<View>(R.id.recycler_view) as RecyclerView
+        recyclerView.apply {
+            setHasFixedSize(true)
+            val noScrollLayoutManager = FixedScrollLinearLayoutManager(activity)
+            noScrollLayoutManager.setCanScroll(false)
+            layoutManager = noScrollLayoutManager
+            adapter = OptionsMenuAdapter(OptionsMenuDataFactory.getOptions(), ::optionsItemSelected)
+            addItemDecoration(MiddleDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+        }
 
-        fragments
-                .filter { it is BackPressedListener && (it as BackPressedListener).onBackPressed() }
-                .forEach { return true }
+        colorController.configureProfilePictureColor(optionsMenuLayout)
 
-        when {
-            returnNavigationId != -1 -> {
-                findNavController(activity, R.id.nav_host).navigate(returnNavigationId)
-                return true
-            }
-            conversationListFragment == null -> {
-                val messageListFragment = findMessageListFragment()
-                if (messageListFragment != null) {
-                    try {
-                        activity.supportFragmentManager.beginTransaction().remove(messageListFragment).commit()
-                    } catch (e: Exception) {
-                    }
+        optionsMenuLayout!!.postDelayed({
+            try {
+                if (Account.exists()) {
+                    (optionsMenuLayout!!.findViewById<View>(R.id.drawer_header_my_name) as TextView).text = Account.myName
                 }
 
-                conversationActionDelegate.displayConversations()
-                activity.fab.show()
-                drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                return true
+                (optionsMenuLayout!!.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView).text =
+                        PhoneNumberUtils.format(PhoneNumberUtils.getMyPhoneNumber(activity))
+
+                if (!Settings.isCurrentlyDarkTheme(activity)) {
+                    (optionsMenuLayout!!.findViewById<View>(R.id.drawer_header_my_name) as TextView)
+                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
+                    (optionsMenuLayout!!.findViewById<View>(R.id.drawer_header_my_phone_number) as TextView)
+                            .setTextColor(activity.resources.getColor(R.color.lightToolbarTextColor))
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-            else -> return false
+
+            activity.snoozeController.initSnooze(optionsMenuLayout!!)
+        }, 300)
+    }
+
+    fun optionsItemSelected(itemId: Int): Boolean {
+        conversationListFragment?.swipeHelper?.dismissSnackbars()
+
+        closeMenu()
+
+        return when (itemId) {
+            R.id.drawer_private -> conversationActionDelegate.displayPrivate()
+            R.id.drawer_mute_contacts -> conversationActionDelegate.displayBlacklist()
+            R.id.drawer_invite -> conversationActionDelegate.displayInviteFriends()
+            R.id.drawer_feature_settings -> conversationActionDelegate.displayFeatureSettings()
+            R.id.drawer_settings -> conversationActionDelegate.displaySettings()
+            R.id.drawer_account -> conversationActionDelegate.displayMyAccount()
+            R.id.drawer_help -> conversationActionDelegate.displayHelpAndFeedback()
+            R.id.drawer_about -> conversationActionDelegate.displayAbout()
+            R.id.drawer_edit_folders -> conversationActionDelegate.displayEditFolders()
+            else -> false
+        }
+    }
+
+    fun openMenu() {
+        if (optionsMenu == null) {
+            optionsMenu = MaterialAlertDialogBuilder(activity)
+                    .setView(optionsMenuLayout)
+                    .create()
+            optionsMenu!!.window?.setGravity(Gravity.TOP)
+        }
+
+        optionsMenu!!.show()
+    }
+
+    fun closeMenu() {
+        if (optionsMenu != null) {
+            optionsMenu!!.cancel()
+        }
+    }
+
+    fun backPressed(): Boolean {
+        val controller = findNavController(activity, R.id.nav_host)
+        return when (controller.currentDestination?.id) {
+            R.id.navigation_archived,
+            R.id.navigation_folder,
+            R.id.navigation_private,
+            R.id.navigation_scheduled,
+            R.id.navigation_unread -> {
+                controller.setGraph(R.navigation.navigation_conversations)
+                true
+            }
+            R.id.navigation_message_list -> {
+                val fragments = activity.supportFragmentManager.fragments.first().childFragmentManager.fragments
+                fragments
+                        .filter { it is MessageListFragment && it.onBackPressed() }
+                        .forEach { return true }
+
+                if (returnNavigationId != 1 && returnNavigationId != R.id.navigation_inbox) {
+                    controller.navigate(returnNavigationId)
+                    returnNavigationId = -1
+                } else {
+                    controller.setGraph(R.navigation.navigation_conversations)
+                }
+                ActivityUtils.setStatusBarColor(activity, activity.getColor(R.color.statusBarBackground))
+                true
+            }
+            else -> false
         }
     }
 
@@ -77,19 +162,6 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
         conversationListFragment?.swipeHelper?.dismissSnackbars()
 
         when (id) {
-            R.id.drawer_conversation -> return conversationActionDelegate.displayConversations()
-            R.id.drawer_archived -> return conversationActionDelegate.displayArchived()
-            R.id.drawer_private -> return conversationActionDelegate.displayPrivate()
-            R.id.drawer_unread -> return conversationActionDelegate.displayUnread()
-            R.id.drawer_schedule -> return conversationActionDelegate.displayScheduledMessages()
-            R.id.drawer_mute_contacts -> return conversationActionDelegate.displayBlacklist()
-            R.id.drawer_invite -> return conversationActionDelegate.displayInviteFriends()
-            R.id.drawer_feature_settings -> return conversationActionDelegate.displayFeatureSettings()
-            R.id.drawer_settings -> return conversationActionDelegate.displaySettings()
-            R.id.drawer_account -> return conversationActionDelegate.displayMyAccount()
-            R.id.drawer_help -> return conversationActionDelegate.displayHelpAndFeedback()
-            R.id.drawer_about -> return conversationActionDelegate.displayAbout()
-            R.id.drawer_edit_folders -> return conversationActionDelegate.displayEditFolders()
             R.id.menu_view_contact, R.id.drawer_view_contact -> return messageActionDelegate.viewContact()
             R.id.menu_view_media, R.id.drawer_view_media -> return messageActionDelegate.viewMedia()
             R.id.menu_delete_conversation, R.id.drawer_delete_conversation -> return messageActionDelegate.deleteConversation()
@@ -116,10 +188,5 @@ class MainNavigationController(private val activity: MessengerActivity) : NavCon
                 return true
             }
         }
-    }
-
-    fun optionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home, R.id.menu_search -> true
-        else -> false
     }
 }

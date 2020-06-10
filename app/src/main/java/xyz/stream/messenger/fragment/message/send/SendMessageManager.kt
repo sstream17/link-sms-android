@@ -1,6 +1,5 @@
 package xyz.stream.messenger.fragment.message.send
 
-import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
@@ -14,9 +13,9 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.fragment.app.FragmentActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.R
-import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.MessageListFragment
@@ -130,7 +129,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
 
             when {
                 signature && delayedSending -> {
-                    AlertDialog.Builder(activity!!)
+                    MaterialAlertDialogBuilder(activity!!)
                             .setItems(R.array.send_button_signature_delay) { _, position ->
                                 when (position) {
                                     0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
@@ -140,7 +139,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                             }.show()
                 }
                 !signature && delayedSending -> {
-                    AlertDialog.Builder(activity!!)
+                    MaterialAlertDialogBuilder(activity!!)
                             .setItems(R.array.send_button_no_signature_delay) { _, position ->
                                 when (position) {
                                     0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
@@ -149,7 +148,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                             }.show()
                 }
                 signature && !delayedSending -> {
-                    AlertDialog.Builder(activity!!)
+                    MaterialAlertDialogBuilder(activity!!)
                             .setItems(R.array.send_button_signature_no_delay) { _, position ->
                                 when (position) {
                                     0 -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately)
@@ -158,7 +157,7 @@ class SendMessageManager(private val fragment: MessageListFragment) {
                             }.show()
                 }
                 else -> {
-                    val builder = AlertDialog.Builder(activity!!)
+                    val builder = MaterialAlertDialogBuilder(activity!!)
                             .setMessage(R.string.send_as_scheduled_message_question)
                             .setPositiveButton(android.R.string.yes) { _, _ -> fragment.startSchedulingMessage(scheduleImmediately = scheduleImmediately) }
                             .setNegativeButton(android.R.string.no) { _, _ -> }
@@ -172,11 +171,6 @@ class SendMessageManager(private val fragment: MessageListFragment) {
 
             false
         }
-    }
-
-    private fun scheduleMessage() {
-        (activity as? MessengerActivity)?.navController?.drawerItemClicked(R.id.menu_conversation_schedule)
-
     }
 
     fun sendDelayedMessage() {

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.navigation.Navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.InitialLoadActivity
@@ -103,7 +104,7 @@ class MainAccountController(private val activity: MessengerActivity) {
         Handler().postDelayed({
             downloadReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                    activity.navController.drawerItemClicked(R.id.drawer_conversation)
+                    findNavController(activity, R.id.nav_host).setGraph(R.navigation.navigation_conversations)
                 }
             }
 

@@ -16,7 +16,7 @@
 
 <resources>
 
-    <style name="LinkTheme.NoActionBar" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+    <style name="LinkTheme.NoActionBar" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/linkColorPrimary</item>
         <item name="colorPrimaryDark">@color/linkColorPrimaryDark</item>
         <item name="colorAccent">@color/linkColorAccent</item>
@@ -26,6 +26,7 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeBackground">@color/actionModeBackground</item>
         <item name="actionModeCloseDrawable">@drawable/ic_close</item>
+        <item name="shapeAppearanceMediumComponent">@style/RoundShapeAppearance</item>
     </style>
 
     <style name="LinkTheme.MessengerActivity" parent="@style/LinkTheme.NoActionBar">
@@ -90,6 +91,11 @@
     </style>
 
     <style name="SubscriptionPicker" parent="Theme.MaterialComponents.Light.Dialog.Alert" />
+
+    <style name="RoundShapeAppearance" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/card_corner_radius</item>
+    </style>
 
     <style name="Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_overflow</item>

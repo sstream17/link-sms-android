@@ -18,10 +18,7 @@ package xyz.stream.messenger.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -29,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
@@ -37,11 +35,12 @@ import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.conversation.MessageListManager.Companion.ARG_CONVERSATION_TO_OPEN_ID
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.data.pojo.BaseTheme
 import xyz.stream.messenger.shared.databinding.ActivityMainBinding
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
 import xyz.stream.messenger.shared.util.*
-import xyz.stream.messenger.shared.view.WhitableToolbar
+import xyz.stream.messenger.shared.util.ActivityUtils.setStatusBarColor
+import xyz.stream.messenger.shared.view.search.PersistentSearchView
+import xyz.stream.messenger.shared.view.search.SearchLayout
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 
@@ -63,10 +62,12 @@ class MessengerActivity : AppCompatActivity() {
     private val permissionHelper = MainPermissionHelper(this)
     private val resultHandler = MainResultHandler(this)
 
-    val toolbar: WhitableToolbar by lazy { findViewById<View>(R.id.toolbar) as WhitableToolbar }
     val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
-    private val content: View by lazy { findViewById<View>(android.R.id.content) }
+    val searchBar: PersistentSearchView by lazy { findViewById<PersistentSearchView>(R.id.search_view) }
+    val searchLayout: SearchLayout by lazy { findViewById<View>(R.id.search_bar_container) as SearchLayout }
+    lateinit var bottomNav: BottomNavigationView
+    private val content: View by lazy { findViewById<View>(R.id.nav_host) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,17 +79,26 @@ class MessengerActivity : AppCompatActivity() {
             navController.setGraph(R.navigation.navigation_conversations, intent.extras)
             navView.setupWithNavController(navController)
 
+            bottomNav = navView
+
             // Hide bottom nav on screens which don't require it
             lifecycleScope.launchWhenResumed {
                 navController.addOnDestinationChangedListener { _, destination, args ->
+                    searchLayout.invalidateScrollRanges()
                     when (destination.id) {
-                        R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_private, R.id.navigation_archived, R.id.navigation_scheduled -> {
+                        R.id.navigation_inbox, R.id.navigation_unread, R.id.navigation_archived, R.id.navigation_scheduled -> {
                             val convoId = args?.getLong(ARG_CONVERSATION_TO_OPEN_ID) ?: -1L
                             if (convoId == -1L || convoId == 0L) {
+                                searchView.show()
                                 navView.show()
+                                fab.show()
                             }
                         }
-                        else -> navView.hide()
+                        else -> {
+                            searchView.hide()
+                            navView.hide()
+                            fab.hide()
+                        }
                     }
                 }
             }
@@ -99,21 +109,21 @@ class MessengerActivity : AppCompatActivity() {
 
         colorController.configureGlobalColors()
         colorController.configureNavigationBarColor()
+        colorController.configureProfilePictureColor(null)
         intentHandler.dismissIfFromNotification()
         intentHandler.displayPrivateFromNotification()
         navController.conversationActionDelegate.displayConversations(savedInstanceState)
         accountController.startIntroOrLogin(savedInstanceState)
         permissionHelper.requestDefaultSmsApp()
 
-        val content = findViewById<View>(R.id.content)
+        val content = findViewById<View>(R.id.nav_host)
         content.post {
             AnimationUtils.conversationListSize = content.height
-            AnimationUtils.toolbarSize = toolbar.height
         }
 
-
-        if (Settings.baseTheme == BaseTheme.BLACK) {
-            findViewById<View?>(xyz.stream.messenger.shared.R.id.nav_bar_divider)?.visibility = View.GONE
+        val accountImage = findViewById<FrameLayout>(R.id.account_image_holder)
+        accountImage.setOnClickListener {
+            navController.openMenu()
         }
     }
 
@@ -127,10 +137,12 @@ class MessengerActivity : AppCompatActivity() {
         UnreadBadger(this).clearCount()
 
         colorController.colorActivity()
+        navController.initOptionsMenu()
         intentHandler.displayAccount()
         intentHandler.handleShortcutIntent(intent)
         accountController.listenForFullRefreshes()
         accountController.refreshAccountToken()
+        searchHelper.setup()
 
         startDelegate.run()
 
@@ -205,22 +217,6 @@ class MessengerActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        if (!navController.inSettings) {
-            menuInflater.inflate(R.menu.activity_messenger, menu)
-
-            val item = menu.findItem(R.id.menu_search)
-            item.icon.setTintList(ColorStateList.valueOf(toolbar.textColor))
-            searchHelper.setup(item)
-        }
-
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return navController.optionsItemSelected(item)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
             Settings.forceUpdate(this)
@@ -239,7 +235,7 @@ class MessengerActivity : AppCompatActivity() {
     fun displayConversations() = navController.conversationActionDelegate.displayConversations()
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
+        setStatusBarColor(this, getColor(R.color.statusBarBackground))
         val actionBar = supportActionBar
 
         if (actionBar != null && !resources.getBoolean(R.bool.pin_drawer)) {

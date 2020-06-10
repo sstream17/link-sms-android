@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (c) 2019 Google Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -12,12 +11,11 @@
   or implied. See the License for the specific language governing permissions and limitations under
   the License.
   -->
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,141 +23,176 @@
         app:layoutFullscreen="@{true}"
         tools:context=".MessengerActivity">
 
-        <FrameLayout
+        <fragment
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            app:defaultNavHost="true" />
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/content"
+        <xyz.stream.messenger.shared.view.search.SearchLayout
+            android:id="@+id/search_bar_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <xyz.stream.messenger.shared.view.search.PersistentSearchView
+                android:id="@+id/search_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/search_bar_column_margin"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/search_bar_column_margin"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/elevatedCardBackground"
+                app:cardElevation="2dp"
+                app:marginTopSystemWindowInsets="@{true}">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.appbar.AppBarLayout
-                        android:id="@+id/app_bar_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <xyz.stream.messenger.shared.view.WhitableToolbar
-                                android:id="@+id/toolbar"
-                                android:layout_width="match_parent"
-                                android:layout_height="?attr/actionBarSize"
-                                android:background="?attr/colorPrimary"
-                                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-                            <com.miguelcatalan.materialsearchview.MaterialSearchView
-                                android:id="@+id/search_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/enter_search"
-                                android:textColor="@color/primaryText"
-                                android:textColorHint="@color/secondaryText"
-                                app:searchBackIcon="@drawable/ic_search_back"
-                                app:searchBackground="@color/drawerBackground"
-                                app:searchCloseIcon="@drawable/ic_search_close" />
-
-                        </FrameLayout>
-
-                    </com.google.android.material.appbar.AppBarLayout>
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
 
                     <FrameLayout
-                        android:id="@+id/conversation_list_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:id="@+id/search_back_holder"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:visibility="gone">
 
+                        <ImageView
+                            android:id="@+id/search_back_button"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-1dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:src="@drawable/ic_search_back" />
+
+                    </FrameLayout>
+
+                    <xyz.stream.messenger.shared.view.emoji.EmojiableEditText
+                        android:id="@+id/search_text"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|start"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:ellipsize="end"
+                        android:gravity="start|center_vertical"
+                        android:hint="@string/enter_search"
+                        android:imeOptions="actionSearch|flagNoExtractUi"
+                        android:inputType="text|textNoSuggestions"
+                        android:layoutDirection="locale"
+                        android:maxLines="1"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:privateImeOptions="nm"
+                        android:singleLine="true"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/primaryText"
+                        android:textColorHint="@color/hintText"
+                        android:textDirection="locale"
+                        android:textSize="16sp"
+                        android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustNothing" />
+
+                    <FrameLayout
+                        android:id="@+id/account_image_holder"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?selectableItemBackgroundBorderless">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/account_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:civ_border_width="0dp" />
+
+                        <ImageView
+                            android:id="@+id/default_icon"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-1dp"
+                            android:src="@drawable/ic_person" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/account_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:civ_border_width="0dp" />
+
+                    </FrameLayout>
                 </LinearLayout>
-
-                <View
-                    android:id="@+id/nav_bar_divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="bottom"
-                    android:background="@color/navigationBarDivider" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="@dimen/fab_margin"
-                    android:contentDescription="@string/compose_message"
-                    android:src="@drawable/ic_add"
-                    app:borderWidth="0dp"
-                    app:elevation="6dp"
-                    app:fabSize="normal"
-                    app:pressedTranslationZ="12dp"
-                    app:rippleColor="@android:color/white" />
-
-                <FrameLayout
-                    android:id="@+id/message_list_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <FrameLayout
-                    android:id="@+id/snackbar_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </xyz.stream.messenger.shared.view.search.PersistentSearchView>
 
             <LinearLayout
+                android:id="@+id/search_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <com.miguelcatalan.materialsearchview.MaterialSearchView
-                    android:id="@+id/conversation_search_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_search"
-                    android:textColor="@color/primaryText"
-                    android:textColorHint="@color/secondaryText"
-                    app:searchBackIcon="@drawable/ic_search_back"
-                    app:searchBackground="@color/drawerBackground"
-                    app:searchCloseIcon="@drawable/ic_search_close" />
+                android:background="@color/background"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <FrameLayout
                     android:id="@+id/conversation_search_list"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/background"
-                    android:visibility="gone" />
+                    android:background="@color/background" />
 
             </LinearLayout>
+        </xyz.stream.messenger.shared.view.search.SearchLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            app:layout_anchor="@id/nav_view"
+            app:layout_anchorGravity="top|end">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:contentDescription="@string/compose_message"
+                android:src="@drawable/ic_add"
+                app:borderWidth="0dp"
+                app:elevation="6dp"
+                app:fabSize="normal"
+                app:pressedTranslationZ="12dp"
+                app:rippleColor="@android:color/white" />
 
         </FrameLayout>
 
-        <fragment
-            android:id="@+id/nav_host"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <FrameLayout
+            android:id="@+id/snackbar_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:defaultNavHost="true" />
+            android:layout_height="match_parent" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/conversation_list_item_background"
-            android:visibility="gone"
+            android:layout_gravity="bottom"
+            android:background="@color/background"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_conversations"
             app:paddingBottomSystemWindowInsets="@{true}"
             app:paddingLeftSystemWindowInsets="@{true}"
             app:paddingRightSystemWindowInsets="@{true}" />
 
-    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

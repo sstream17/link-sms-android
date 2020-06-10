@@ -1,12 +1,11 @@
 package xyz.stream.messenger.shared.util
 
 import android.annotation.TargetApi
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Build
 import android.telephony.SubscriptionInfo
 import android.view.View
-
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.stream.messenger.shared.R
 import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.model.Conversation
@@ -68,7 +67,7 @@ class DualSimApplication(private val switchSim: View) {
             }
         }
 
-        AlertDialog.Builder(context)
+        MaterialAlertDialogBuilder(context)
                 .setTitle(context.getString(R.string.select_sim))
                 .setSingleChoiceItems(active, selected) { dialogInterface, i ->
                     if (i == 0) {

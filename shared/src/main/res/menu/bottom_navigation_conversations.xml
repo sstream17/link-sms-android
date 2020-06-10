@@ -28,11 +28,6 @@
         android:title="@string/menu_unread" />
 
     <item
-        android:id="@+id/navigation_private"
-        android:icon="@drawable/asl_lock"
-        android:title="@string/menu_private" />
-
-    <item
         android:id="@+id/navigation_archived"
         android:icon="@drawable/asl_archive"
         android:title="@string/menu_archived" />

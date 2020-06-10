@@ -1,7 +1,6 @@
 package xyz.stream.messenger.view.preference
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.Notification
 import android.content.Context
 import android.content.Intent
@@ -17,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 import xyz.stream.messenger.R
 import xyz.stream.messenger.api.implementation.Account
@@ -64,7 +64,7 @@ class NotificationAlertsPreference : Preference, Preference.OnPreferenceClickLis
         layout.findViewById<View>(R.id.wake_screen).setOnClickListener { wakeClicked() }
         layout.findViewById<View>(R.id.heads_up).setOnClickListener { headsUpClicked() }
 
-        val builder = AlertDialog.Builder(context, R.style.SubscriptionPicker)
+        val builder = MaterialAlertDialogBuilder(context, R.style.SubscriptionPicker)
                 .setView(layout)
                 .setPositiveButton(R.string.ok) { _, _ ->  }
 
@@ -124,7 +124,7 @@ class NotificationAlertsPreference : Preference, Preference.OnPreferenceClickLis
                 .takeWhile { it != currentPattern }
                 .count()
 
-        AlertDialog.Builder(context, R.style.SubscriptionPicker)
+        MaterialAlertDialogBuilder(context, R.style.SubscriptionPicker)
                 .setSingleChoiceItems(R.array.repeat, actual) { dialogInterface, i ->
                     val newRepeat = context.resources.getStringArray(R.array.repeat_values)[i]
 
@@ -143,7 +143,7 @@ class NotificationAlertsPreference : Preference, Preference.OnPreferenceClickLis
                 .takeWhile { it != current }
                 .count()
 
-        AlertDialog.Builder(context, R.style.SubscriptionPicker)
+        MaterialAlertDialogBuilder(context, R.style.SubscriptionPicker)
                 .setSingleChoiceItems(R.array.wake_screen, actual) { dialogInterface, i ->
                     val newVal = context.resources.getStringArray(R.array.wake_screen_values)[i]
 
@@ -167,7 +167,7 @@ class NotificationAlertsPreference : Preference, Preference.OnPreferenceClickLis
                 .takeWhile { it != current }
                 .count()
 
-        AlertDialog.Builder(context, R.style.SubscriptionPicker)
+        MaterialAlertDialogBuilder(context, R.style.SubscriptionPicker)
                 .setSingleChoiceItems(R.array.wake_screen, actual) { dialogInterface, i ->
                     val newVal = context.resources.getStringArray(R.array.wake_screen_values)[i]
 
@@ -191,7 +191,7 @@ class NotificationAlertsPreference : Preference, Preference.OnPreferenceClickLis
                 .takeWhile { it != currentPattern }
                 .count()
 
-        AlertDialog.Builder(context, R.style.SubscriptionPicker)
+        MaterialAlertDialogBuilder(context, R.style.SubscriptionPicker)
                 .setSingleChoiceItems(R.array.vibrate, actual) { dialogInterface, i ->
                     val newPattern = context.resources.getStringArray(R.array.vibrate_values)[i]
 

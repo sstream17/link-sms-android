@@ -59,7 +59,7 @@ class MessageListManager(private val fragment: ConversationListFragment) {
             try {
                 val messengerActivity = activity as MessengerActivity
                 messengerActivity.navController.returnNavigationId = getReturnNavigationId(fragment)
-                findNavController(fragment).navigate(R.id.action_global_message_list, messageListFragment!!.arguments)
+                findNavController(fragment).navigate(R.id.navigation_message_list, messageListFragment!!.arguments)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
