@@ -96,9 +96,14 @@ class MainInsetController(private val activity: MessengerActivity) {
             recycler.layoutParams = layoutParams
         }
 
-        // move fab above the nav bar
-        val params = fragment.fab.layoutParams as FrameLayout.LayoutParams
-        params.bottomMargin = sixteenDp + bottomInsetValue
+        val fab = fragment.fab
+        fab.doOnPreDraw {
+            val navBar = activity.findViewById<BottomNavigationView>(R.id.nav_view)
+            val navBarHeight = navBar.measuredHeight
+            val layoutParams = fab.layoutParams as FrameLayout.LayoutParams
+            layoutParams.bottomMargin = navBarHeight + sixteenDp
+            fab.layoutParams = layoutParams
+        }
     }
 
     fun modifyBlacklistElements(fragment: BlacklistFragment) {

@@ -29,10 +29,9 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.activity.compose.ComposeActivity
@@ -47,7 +46,6 @@ import xyz.stream.messenger.shared.service.jobs.ScheduledMessageJob
 import xyz.stream.messenger.shared.util.ColorUtils
 import xyz.stream.messenger.shared.util.PhoneNumberUtils
 import xyz.stream.messenger.shared.util.SmsMmsUtils
-import xyz.stream.messenger.shared.util.listener.BackPressedListener
 import xyz.stream.messenger.shared.util.listener.ScheduledMessageClickListener
 
 @Suppress("DEPRECATION")
@@ -61,7 +59,7 @@ class ScheduledMessagesFragment : Fragment(), ScheduledMessageClickListener {
     private var conversationMatcher: String? = null
 
     val list: RecyclerView by lazy { view!!.findViewById<View>(R.id.list) as RecyclerView }
-    val fab: FloatingActionButton by lazy { view!!.findViewById<View>(R.id.fab) as FloatingActionButton }
+    val fab: ExtendedFloatingActionButton by lazy { view!!.findViewById<View>(R.id.fab) as ExtendedFloatingActionButton }
     private val progress: ProgressBar? by lazy { view?.findViewById<View>(R.id.progress) as ProgressBar? }
     private val emptyView: View by lazy { view!!.findViewById<View>(R.id.empty_view) }
 

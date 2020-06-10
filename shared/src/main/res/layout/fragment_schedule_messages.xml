@@ -20,65 +20,63 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/empty_view"
-        android:orientation="vertical"
         android:background="@color/linkColorPrimaryLight"
         android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <ImageView
             android:layout_width="196dp"
             android:layout_height="196dp"
+            android:contentDescription="@string/no_scheduled_messages"
             android:src="@drawable/ic_schedule"
-            android:tint="@color/emptyIconTint"
-            android:contentDescription="@string/no_scheduled_messages" />
+            android:tint="@color/emptyIconTint" />
 
         <TextView
             android:layout_width="196dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="@color/emptyTextPrimary"
-            android:textSize="20sp"
+            android:gravity="center_horizontal"
             android:text="@string/no_scheduled_messages"
-            android:gravity="center_horizontal" />
+            android:textColor="@color/emptyTextPrimary"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="172dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/emptyTextSecondary"
-            android:textSize="14sp"
+            android:gravity="center_horizontal"
             android:text="@string/no_scheduled_messages_summary"
-            android:gravity="center_horizontal" />
+            android:textColor="@color/emptyTextSecondary"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
     <ProgressBar
+        android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progress"
         android:layout_gravity="center" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/message_list_padding"
         android:layout_marginEnd="@dimen/message_list_padding"
-        android:id="@+id/list"
         android:scrollbars="vertical" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        android:id="@+id/fab"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom|center"
+        android:text="@string/schedule_message_title"
         app:elevation="6dp"
+        app:icon="@drawable/ic_add"
         app:pressedTranslationZ="12dp"
-        app:rippleColor="@android:color/white"
-        app:fabSize="normal"
-        app:borderWidth="0dp" />
+        app:rippleColor="@android:color/white" />
 
 </FrameLayout>
