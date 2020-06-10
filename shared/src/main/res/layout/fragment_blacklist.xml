@@ -61,17 +61,15 @@
         android:scrollbars="vertical"
         android:id="@+id/list" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        android:id="@+id/fab"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom|center"
+        android:text="@string/create_blacklist"
         app:elevation="6dp"
+        app:icon="@drawable/ic_add"
         app:pressedTranslationZ="12dp"
-        app:rippleColor="@android:color/white"
-        app:fabSize="normal"
-        app:borderWidth="0dp" />
+        app:rippleColor="@android:color/white" />
 
 </FrameLayout>

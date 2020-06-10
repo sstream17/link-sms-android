@@ -30,12 +30,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.adapter.BlacklistAdapter
 import xyz.stream.messenger.shared.data.DataSource
-import xyz.stream.messenger.shared.data.FeatureFlags
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.Blacklist
 import xyz.stream.messenger.shared.util.ColorUtils
@@ -50,7 +49,7 @@ class BlacklistFragment : Fragment(), BlacklistClickedListener {
     private val fragmentActivity: FragmentActivity? by lazy { activity }
 
     val list: RecyclerView by lazy { view!!.findViewById<View>(R.id.list) as RecyclerView }
-    val fab: FloatingActionButton by lazy { view!!.findViewById<View>(R.id.fab) as FloatingActionButton }
+    val fab: ExtendedFloatingActionButton by lazy { view!!.findViewById<View>(R.id.fab) as ExtendedFloatingActionButton }
     private val emptyView: View by lazy { view!!.findViewById<View>(R.id.empty_view) }
 
     private var adapter: BlacklistAdapter? = null

@@ -17,6 +17,7 @@ import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.fragment.settings.MaterialPreferenceFragmentCompat
 import xyz.stream.messenger.shared.util.ActivityUtils
 import xyz.stream.messenger.shared.util.DensityUtil
+import xyz.stream.messenger.shared.util.applySystemWindowInsetsMargin
 import xyz.stream.messenger.shared.util.applySystemWindowInsetsPadding
 import xyz.stream.messenger.shared.view.WhitableToolbar
 
@@ -113,11 +114,13 @@ class MainInsetController(private val activity: MessengerActivity) {
 
         val recycler = fragment.list
         recycler.clipToPadding = false
-        recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, bottomInsetValue)
+        recycler.applySystemWindowInsetsPadding(applyTop = true, applyBottom = true)
 
-        // move fab above the nav bar
-        val params = fragment.fab.layoutParams as FrameLayout.LayoutParams
-        params.bottomMargin = sixteenDp + bottomInsetValue
+        val fab = fragment.fab
+        val layoutParams = fab.layoutParams as FrameLayout.LayoutParams
+        layoutParams.bottomMargin = sixteenDp
+        fab.layoutParams = layoutParams
+        fab.applySystemWindowInsetsMargin(applyBottom = true)
     }
 
     fun modifySearchListElements(fragment: SearchFragment?) {

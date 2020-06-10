@@ -452,6 +452,7 @@
     <string name="blacklist_need_phrase">You need to enter a phrase to blacklist!</string>
     <string name="no_blacklists">No blacklists</string>
     <string name="no_blacklists_summary">You can add one with the plus button below!</string>
+    <string name="create_blacklist">Create Blacklist</string>
     <string name="add">Add</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="privacy_policy_summary">View our privacy policy on the web</string>
