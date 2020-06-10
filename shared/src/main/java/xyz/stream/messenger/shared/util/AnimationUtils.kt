@@ -167,7 +167,6 @@ object AnimationUtils {
      */
     fun expandActivityForConversation(activity: Activity) {
         val toolbar = activity.findViewById<View?>(R.id.app_bar_layout)
-        val fab = activity.findViewById<View>(R.id.fab) as FloatingActionButton
 
         activity.findViewById<View?>(R.id.nav_bar_divider)?.visibility = View.GONE
 
@@ -182,11 +181,8 @@ object AnimationUtils {
         val extraDistance = activity.resources
                 .getDimensionPixelSize(R.dimen.extra_expand_distance)
         val toolbarTranslate = -1 * (toolbar?.height ?: 0 + extraDistance)
-        val fabTranslate = fab.height + extraDistance +
-                activity.resources.getDimensionPixelSize(R.dimen.fab_margin)
 
         animateActivityWithConversation(toolbar, toolbarTranslate, FastOutLinearInInterpolator(), EXPAND_PERIPHERAL_DURATION)
-        fab.hide()
     }
 
     /**
@@ -207,7 +203,6 @@ object AnimationUtils {
         }
 
         val toolbar = activity.findViewById<View>(R.id.app_bar_layout)
-        val fab = activity.findViewById<View>(R.id.fab) as FloatingActionButton
 
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
@@ -218,7 +213,6 @@ object AnimationUtils {
         }
 
         animateActivityWithConversation(toolbar, 0, FastOutLinearInInterpolator(), CONTRACT_PERIPHERAL_DURATION)
-        fab.show()
     }
 
     /**

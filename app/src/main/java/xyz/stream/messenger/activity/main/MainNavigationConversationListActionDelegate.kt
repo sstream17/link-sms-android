@@ -1,23 +1,22 @@
 package xyz.stream.messenger.activity.main
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.activity.SettingsActivity
 import xyz.stream.messenger.activity.passcode.PasscodeVerificationActivity
-import xyz.stream.messenger.fragment.*
+import xyz.stream.messenger.fragment.BlacklistFragment
+import xyz.stream.messenger.fragment.FolderConversationListFragment
+import xyz.stream.messenger.fragment.InviteFriendsFragment
+import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.settings.AboutFragment
 import xyz.stream.messenger.fragment.settings.HelpAndFeedbackFragment
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.model.Folder
-import xyz.stream.messenger.shared.util.AnimationUtils
 import xyz.stream.messenger.shared.util.TimeUtils
 
 
@@ -33,7 +32,6 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
     }
 
     fun displayConversations(savedInstanceState: Bundle?): Boolean {
-        activity.fab.show()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
 
@@ -112,7 +110,6 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
 
     internal fun displayFragmentWithBackStack(fragment: Fragment, id: Int): Boolean {
         activity.searchHelper.closeSearch()
-        activity.fab.hide()
         activity.invalidateOptionsMenu()
         navController.inSettings = true
 

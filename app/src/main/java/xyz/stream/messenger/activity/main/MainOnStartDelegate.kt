@@ -19,8 +19,6 @@ class MainOnStartDelegate(private val activity: MessengerActivity) {
         Handler().postDelayed({
             if (navController.conversationListFragment != null &&
                     !navController.conversationListFragment!!.isExpanded) {
-
-                if (!activity.fab.isShown && navController.otherFragment == null) activity.fab.show()
                 showTextAnywherePromotion()
             }
 

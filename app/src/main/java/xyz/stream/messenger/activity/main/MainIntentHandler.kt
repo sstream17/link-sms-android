@@ -113,7 +113,6 @@ class MainIntentHandler(private val activity: MessengerActivity) {
     }
 
     private fun displayShortcutConversation(convo: Long) {
-        activity.fab.show()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
 

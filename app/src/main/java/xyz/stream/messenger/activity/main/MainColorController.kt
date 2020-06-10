@@ -7,7 +7,6 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.hdodenhof.circleimageview.CircleImageView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -19,7 +18,6 @@ import xyz.stream.messenger.shared.util.TimeUtils
 
 class MainColorController(private val activity: AppCompatActivity) {
 
-    private val fab: FloatingActionButton by lazy { activity.findViewById<View>(R.id.fab) as FloatingActionButton }
     private val conversationListContainer: View by lazy { activity.findViewById<View>(R.id.conversation_list_container) }
     private val accountColor: CircleImageView by lazy { activity.findViewById<View>(R.id.account_color) as CircleImageView }
     private val defaultIcon: ImageView by lazy { activity.findViewById<View>(R.id.default_icon) as ImageView }
@@ -37,8 +35,6 @@ class MainColorController(private val activity: AppCompatActivity) {
         if (Settings.isCurrentlyDarkTheme(activity)) {
             activity.window.navigationBarColor = Color.BLACK
         }
-
-        fab.backgroundTintList = ColorStateList.valueOf(Settings.mainColorSet.colorAccent)
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
             conversationListContainer.setBackgroundColor(Color.BLACK)

@@ -28,7 +28,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
 import xyz.stream.messenger.activity.main.*
@@ -63,7 +62,6 @@ class MessengerActivity : AppCompatActivity() {
     private val permissionHelper = MainPermissionHelper(this)
     private val resultHandler = MainResultHandler(this)
 
-    val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
     val searchBar: PersistentSearchView by lazy { findViewById<PersistentSearchView>(R.id.search_view) }
     val searchLayout: SearchLayout by lazy { findViewById<View>(R.id.search_bar_container) as SearchLayout }
@@ -107,13 +105,11 @@ class MessengerActivity : AppCompatActivity() {
                             if (convoId == -1L || convoId == 0L) {
                                 searchView.show()
                                 navView.show()
-                                fab.show()
                             }
                         }
                         else -> {
                             searchView.hide()
                             navView.hide()
-                            fab.hide()
                         }
                     }
                 }
@@ -121,7 +117,6 @@ class MessengerActivity : AppCompatActivity() {
         }
 
         initToolbar()
-        fab.setOnClickListener { startActivity(Intent(applicationContext, ComposeActivity::class.java)) }
 
         colorController.configureGlobalColors()
         colorController.configureNavigationBarColor()

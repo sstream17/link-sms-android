@@ -48,7 +48,6 @@ class MainSearchHelper(private val activity: MessengerActivity) : SearchLayout.O
     }
 
     override fun onSearchOpened() {
-        activity.fab.hide()
         activity.bottomNav.hide()
         ensureSearchFragment()
         displaySearchFragment()
@@ -59,7 +58,6 @@ class MainSearchHelper(private val activity: MessengerActivity) : SearchLayout.O
 
         if (!searchFragment!!.isSearching) {
             searchFragment!!.dismissKeyboard()
-            activity.fab.show()
             activity.bottomNav.show()
         }
     }
