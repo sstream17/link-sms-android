@@ -25,6 +25,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -78,6 +79,21 @@ class MessengerActivity : AppCompatActivity() {
             val navController = Navigation.findNavController(this@MessengerActivity, R.id.nav_host)
             navController.setGraph(R.navigation.navigation_conversations, intent.extras)
             navView.setupWithNavController(navController)
+
+            // Start the ComposeActivity when the compose item is selected, otherwise use the default behavior
+            navView.setOnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_compose -> {
+                        startActivity(Intent(applicationContext, ComposeActivity::class.java))
+                        false
+                    }
+                    R.id.navigation_inbox,
+                    R.id.navigation_unread,
+                    R.id.navigation_archived,
+                    R.id.navigation_scheduled -> onNavDestinationSelected(item, navController)
+                    else -> false
+                }
+            }
 
             bottomNav = navView
 
