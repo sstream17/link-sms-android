@@ -20,7 +20,6 @@
     <color name="statusBarBackground">#BF202020</color>
     <color name="quickReplyBackground">@color/background</color>
     <color name="replyBarCard">@color/background</color>
-    <color name="swipeBackground">#2c353a</color>
     <color name="elevatedCardBackground">#3B3B3B</color>
     <color name="selectedBackground">#393E41</color>
     <color name="primaryText">#FFFFFFFF</color>
@@ -29,7 +28,6 @@
     <color name="divider">#29353a</color>
     <color name="ripple">#22FFFFFF</color>
     <color name="code_block_color">#11FFFFFF</color>
-    <color name="stroke">#606060</color>
 
     <color name="emptyIconTint">@color/background</color>
     <color name="emptyTextPrimary">#E2374248</color>
