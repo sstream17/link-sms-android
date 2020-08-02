@@ -7,6 +7,7 @@ import androidx.core.app.NotificationManagerCompat
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.api.implementation.ApiUtils
 import xyz.stream.messenger.shared.data.DataSource
+import xyz.stream.messenger.shared.util.NotificationUtils
 import xyz.stream.messenger.shared.util.UnreadBadger
 import xyz.stream.messenger.shared.util.closeSilent
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
@@ -19,7 +20,7 @@ class NotificationMuteReceiver : BroadcastReceiver() {
         }
 
         Thread {
-            val conversationId = intent.getLongExtra(xyz.stream.messenger.shared.receiver.notification_action.NotificationMuteReceiver.Companion.EXTRA_CONVERSATION_ID, -1)
+            val conversationId = intent.getLongExtra(EXTRA_CONVERSATION_ID, -1)
             DataSource.readConversation(context, conversationId)
             val conversation = DataSource.getConversation(context, conversationId)
 
@@ -30,7 +31,7 @@ class NotificationMuteReceiver : BroadcastReceiver() {
             // if there are no more notifications, cancel the summary as well
             val unseenMessages = DataSource.getUnseenMessages(context)
             if (unseenMessages.count <= 0) {
-                NotificationManagerCompat.from(context).cancelAll()
+                NotificationUtils.cancelAll(context)
             } else {
                 NotificationManagerCompat.from(context).cancel(conversationId.toInt())
             }

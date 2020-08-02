@@ -29,10 +29,7 @@ import xyz.stream.messenger.shared.data.MimeType
 import xyz.stream.messenger.shared.data.model.Message
 import xyz.stream.messenger.shared.receiver.ConversationListUpdatedReceiver
 import xyz.stream.messenger.shared.receiver.MessageListUpdatedReceiver
-import xyz.stream.messenger.shared.util.DualSimUtils
-import xyz.stream.messenger.shared.util.SendUtils
-import xyz.stream.messenger.shared.util.TimeUtils
-import xyz.stream.messenger.shared.util.closeSilent
+import xyz.stream.messenger.shared.util.*
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 /**
@@ -91,7 +88,7 @@ class ReplyService : IntentService("Reply Service") {
         val unseenMessages = DataSource.getUnseenMessages(this)
         if (unseenMessages.count <= 0) {
             try {
-                NotificationManagerCompat.from(this).cancelAll()
+                NotificationUtils.cancelAll(this)
             } catch (e: SecurityException) {
             }
         } else {

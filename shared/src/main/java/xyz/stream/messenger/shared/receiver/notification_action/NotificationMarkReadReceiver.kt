@@ -7,6 +7,7 @@ import androidx.core.app.NotificationManagerCompat
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.api.implementation.ApiUtils
 import xyz.stream.messenger.shared.data.DataSource
+import xyz.stream.messenger.shared.util.NotificationUtils
 import xyz.stream.messenger.shared.util.UnreadBadger
 import xyz.stream.messenger.shared.util.closeSilent
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
@@ -36,7 +37,7 @@ open class NotificationMarkReadReceiver : BroadcastReceiver() {
                 val unseenMessages = DataSource.getUnseenMessages(context)
                 try {
                     if (unseenMessages.count <= 0) {
-                        NotificationManagerCompat.from(context).cancelAll()
+                        NotificationUtils.cancelAll(context)
                     } else {
                         NotificationManagerCompat.from(context).cancel(conversationId.toInt())
                     }

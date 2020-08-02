@@ -17,6 +17,7 @@ import androidx.core.app.Person
 import androidx.core.app.RemoteInput
 import androidx.core.graphics.drawable.IconCompat
 import android.text.Html
+import androidx.core.content.LocusIdCompat
 import com.google.firebase.ml.naturallanguage.smartreply.SmartReplySuggestion
 import xyz.stream.messenger.shared.R
 import xyz.stream.messenger.shared.data.DataSource
@@ -48,14 +49,15 @@ class NotificationConversationProvider(private val service: Context, private val
                 .setDefaults(buildNotificationDefaults(conversation))
                 .applyLightsSoundAndVibrate(conversation)
                 .addPerson(conversation)
-//                .bubble(conversation)
 
         val builder = prepareBuilder(conversation)
                 .setDefaults(buildNotificationDefaults(conversation))
                 .setLargeIcon(buildContactImage(conversation))
                 .setPublicVersion(publicVersion.build())
                 .applyLightsSoundAndVibrate(conversation)
+                .addPerson(conversation)
                 .applyStyle(conversation)
+                .bubble(service, conversation)
 
         val remoteInputBuilder = RemoteInput.Builder(ReplyService.EXTRA_REPLY)
                 .setLabel(service.getString(R.string.reply_to, conversation.title))
@@ -69,7 +71,7 @@ class NotificationConversationProvider(private val service: Context, private val
 
         val wearableExtender = wearableHelper.buildExtender(conversation)
 
-        if (!conversation.privateNotification) {
+        if (!conversation.privateNotification && !Settings.hideMessageContentNotifications) {
             val otp = try {
                 OneTimePasswordParser.getOtp(conversation.messages[0].data)
             } catch (e: Exception) {
@@ -301,7 +303,7 @@ class NotificationConversationProvider(private val service: Context, private val
     }
 
     private fun NotificationCompat.Builder.applyStyle(conversation: NotificationConversation): NotificationCompat.Builder {
-        val messagingStyle: NotificationCompat.Style? = buildMessagingStyle(conversation)
+        var messagingStyle: NotificationCompat.Style? = buildMessagingStyle(conversation)
         var pictureStyle: NotificationCompat.BigPictureStyle? = null
         var inboxStyle: NotificationCompat.InboxStyle? = null
 
@@ -347,6 +349,13 @@ class NotificationConversationProvider(private val service: Context, private val
             content = content.substring(0, content.length - 5)
         }
 
+        if (Settings.hideMessageContentNotifications) {
+            pictureStyle = null
+            messagingStyle = null
+            inboxStyle = null
+            content = service.resources.getQuantityString(R.plurals.new_messages, conversation.messages.size, conversation.messages.size)
+        }
+
         if (!conversation.privateNotification) {
             val formattedText = when {
                 !content.contains("<b>") && !content.contains("<br/>") -> content
@@ -371,7 +380,6 @@ class NotificationConversationProvider(private val service: Context, private val
     }
 
     private fun NotificationCompat.Builder.addPerson(conversation: NotificationConversation): NotificationCompat.Builder {
-        // TODO: use a "person" object here, so that bubbles work?
         if (!conversation.groupConversation) {
             this.addPerson("tel:" + conversation.phoneNumbers!!)
         } else {
@@ -383,12 +391,18 @@ class NotificationConversationProvider(private val service: Context, private val
         return this
     }
 
-    private fun NotificationCompat.Builder.bubble(conversation: NotificationConversation): NotificationCompat.Builder {
-        if (!AndroidVersionUtil.isAndroidQ) {
+    private fun NotificationCompat.Builder.bubble(context: Context, conversation: NotificationConversation): NotificationCompat.Builder {
+        if (!AndroidVersionUtil.isAndroidR) {
             return this
         }
 
-        val icon = IconCompat.createWithAdaptiveBitmap(buildContactImage(conversation))
+        val bitmap = buildContactImage(conversation)
+        val icon = if (bitmap != null) {
+            IconCompat.createWithAdaptiveBitmap(buildContactImage(conversation))
+        } else {
+            val letterImage = ContactImageCreator.getLetterPicture(context, conversation) ?: return this
+            IconCompat.createWithAdaptiveBitmap(letterImage)
+        }
         val uri = Uri.parse("https://messenger.klinkerapps.com/" + conversation.id)
         val intent = PendingIntent.getActivity(
                 service,
@@ -399,11 +413,14 @@ class NotificationConversationProvider(private val service: Context, private val
                 PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-//        this.bubbleMetadata = NotificationCompat.BubbleMetadata.Builder()
-//                .setDesiredHeight(DensityUtil.toDp(service, 400))
-//                .setIcon(icon)
-//                .setIntent(intent)
-//                .build()
+        this.setShortcutId(conversation.id.toString())
+        this.setLocusId(LocusIdCompat(conversation.id.toString()))
+
+        this.bubbleMetadata = NotificationCompat.BubbleMetadata.Builder()
+                .setDesiredHeight(DensityUtil.toDp(service, 400))
+                .setIcon(icon)
+                .setIntent(intent)
+                .build()
 
         return this
     }

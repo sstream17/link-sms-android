@@ -63,6 +63,7 @@ object Settings {
     var rightToLeftSwipe: SwipeOption = SwipeOption.ARCHIVE
     var stripUnicode: Boolean = false
     var historyInNotifications: Boolean = false
+    var hideMessageContentNotifications: Boolean = false
     var bundleNotifications: Boolean = false
     var dismissNotificationAfterReply: Boolean = false
     var smartReplies: Boolean = true
@@ -84,6 +85,7 @@ object Settings {
     var timestampEveryMessage = false
     lateinit var notificationActions: List<NotificationAction>
     var unknownNumbersReception = UnknownNumbersReception.DEFAULT
+    var blacklistPhraseRegex = false
 
     // configuration
     var smallFont: Int = 0
@@ -161,6 +163,7 @@ object Settings {
         this.legacySwipeDelete = sharedPrefs.getBoolean(context.getString(R.string.pref_swipe_delete), false)
         this.stripUnicode = sharedPrefs.getBoolean(context.getString(R.string.pref_strip_unicode), false)
         this.historyInNotifications = sharedPrefs.getBoolean(context.getString(R.string.pref_history_in_notifications), true)
+        this.hideMessageContentNotifications = sharedPrefs.getBoolean(context.getString(R.string.pref_hide_message_content), false)
         this.bundleNotifications = sharedPrefs.getBoolean(context.getString(R.string.pref_bundle_notifications), false)
         this.dismissNotificationAfterReply = sharedPrefs.getBoolean(context.getString(R.string.pref_dismiss_notifications_on_reply_android_p), false)
         this.smartReplies = sharedPrefs.getBoolean(context.getString(R.string.pref_smart_reply), true)
@@ -171,6 +174,7 @@ object Settings {
         this.applyPrimaryColorToToolbar = sharedPrefs.getBoolean(context.getString(R.string.pref_apply_primary_color_toolbar), true)
         this.showConversationCategories = sharedPrefs.getBoolean(context.getString(R.string.pref_conversation_categories), true)
         this.timestampEveryMessage = sharedPrefs.getBoolean(context.getString(R.string.pref_message_timestamp), false)
+        this.blacklistPhraseRegex = sharedPrefs.getBoolean(context.getString(R.string.pref_blacklist_phrase_regex), false)
 
         val leftToRightSwipeRep = sharedPrefs.getString(context.getString(R.string.pref_left_to_right_swipe), SwipeOption.ARCHIVE.rep)
         val rightToLeftSwipeRep = sharedPrefs.getString(context.getString(R.string.pref_right_to_left_swipe), SwipeOption.ARCHIVE.rep)

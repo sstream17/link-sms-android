@@ -16,10 +16,7 @@ import xyz.stream.messenger.shared.data.model.Message
 import xyz.stream.messenger.shared.receiver.ConversationListUpdatedReceiver
 import xyz.stream.messenger.shared.receiver.MessageListUpdatedReceiver
 import xyz.stream.messenger.shared.service.ReplyService
-import xyz.stream.messenger.shared.util.DualSimUtils
-import xyz.stream.messenger.shared.util.SendUtils
-import xyz.stream.messenger.shared.util.TimeUtils
-import xyz.stream.messenger.shared.util.closeSilent
+import xyz.stream.messenger.shared.util.*
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 class SendSmartReplyReceiver : BroadcastReceiver() {
@@ -64,7 +61,7 @@ class SendSmartReplyReceiver : BroadcastReceiver() {
         val unseenMessages = DataSource.getUnseenMessages(context)
         if (unseenMessages.count <= 0) {
             try {
-                NotificationManagerCompat.from(context).cancelAll()
+                NotificationUtils.cancelAll(context)
             } catch (e: SecurityException) {
             }
         } else {
@@ -79,7 +76,7 @@ class SendSmartReplyReceiver : BroadcastReceiver() {
         MessageListUpdatedReceiver.sendBroadcast(context, conversationId)
         MessengerAppWidgetProvider.refreshWidget(context)
 
-        xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper.sendSmartReply(context)
+        AnalyticsHelper.sendSmartReply(context)
     }
 
     companion object {

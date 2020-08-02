@@ -10,6 +10,7 @@ import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.MimeType
 import xyz.stream.messenger.shared.data.model.Message
 import xyz.stream.messenger.shared.util.CursorUtil
+import xyz.stream.messenger.shared.util.NotificationUtils
 import xyz.stream.messenger.shared.util.UnreadBadger
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
@@ -21,8 +22,8 @@ class NotificationDeleteReceiver : BroadcastReceiver() {
         }
 
         Thread {
-            val messageId = intent.getLongExtra(xyz.stream.messenger.shared.receiver.notification_action.NotificationDeleteReceiver.Companion.EXTRA_MESSAGE_ID, -1)
-            val conversationId = intent.getLongExtra(xyz.stream.messenger.shared.receiver.notification_action.NotificationDeleteReceiver.Companion.EXTRA_CONVERSATION_ID, -1)
+            val messageId = intent.getLongExtra(EXTRA_MESSAGE_ID, -1)
+            val conversationId = intent.getLongExtra(EXTRA_CONVERSATION_ID, -1)
 
             DataSource.deleteMessage(context, messageId)
 
@@ -43,7 +44,7 @@ class NotificationDeleteReceiver : BroadcastReceiver() {
             // if there are no more notifications, cancel the summary as well
             val unseenMessages = DataSource.getUnseenMessages(context)
             if (unseenMessages.count <= 0) {
-                NotificationManagerCompat.from(context).cancelAll()
+                NotificationUtils.cancelAll(context)
             } else {
                 NotificationManagerCompat.from(context).cancel(conversationId.toInt())
             }

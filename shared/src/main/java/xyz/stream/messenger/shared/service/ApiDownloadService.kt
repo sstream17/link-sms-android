@@ -146,18 +146,19 @@ class ApiDownloadService : Service() {
                 downloaded += messageList.size
 
                 messageList.clear()
+
+                Log.v(TAG, "$downloaded messages downloaded. $pageNumber pages so far.")
+                pageNumber++
             } else {
                 nullCount++
+                Log.v(TAG, "message download failed. Retrying in 5 seconds")
 
                 try {
-                    Thread.sleep(2000)
+                    Thread.sleep(5000)
                 } catch (e: InterruptedException) {
                 }
             }
-
-            Log.v(TAG, downloaded.toString() + " messages downloaded. " + pageNumber + " pages so far.")
-            pageNumber++
-        } while (downloaded % MESSAGE_DOWNLOAD_PAGE_SIZE == 0 && nullCount < 5)
+        } while (downloaded % MESSAGE_DOWNLOAD_PAGE_SIZE == 0 && nullCount < 10)
 
         if (downloaded > 0) {
             Log.v(TAG, downloaded.toString() + " messages inserted in " + (TimeUtils.now - startTime) + " ms with " + pageNumber + " pages")
@@ -515,7 +516,7 @@ class ApiDownloadService : Service() {
         private const val MESSAGE_DOWNLOAD_ID = 7237
         const val ACTION_DOWNLOAD_FINISHED = "xyz.stream.messenger.API_DOWNLOAD_FINISHED"
 
-        const val MESSAGE_DOWNLOAD_PAGE_SIZE = 1000
+        const val MESSAGE_DOWNLOAD_PAGE_SIZE = 5000
         const val CONVERSATION_DOWNLOAD_PAGE_SIZE = 500
         const val CONTACTS_DOWNLOAD_PAGE_SIZE = 1000
         const val MAX_MEDIA_DOWNLOADS = 400

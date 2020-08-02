@@ -41,6 +41,12 @@
     <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
         android:title="@string/experiments_preferences_section_title">
 
+        <SwitchPreference
+            android:key="@string/pref_blacklist_phrase_regex"
+            android:title="@string/blacklist_phrase_regex"
+            android:summary="@string/blacklist_phrase_regex_summary"
+            android:defaultValue="false" />
+
     </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
 
 </PreferenceScreen>

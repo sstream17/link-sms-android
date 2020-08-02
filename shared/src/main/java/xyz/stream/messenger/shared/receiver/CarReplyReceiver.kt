@@ -14,10 +14,7 @@ import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.MimeType
 import xyz.stream.messenger.shared.data.model.Message
 import xyz.stream.messenger.shared.service.ReplyService
-import xyz.stream.messenger.shared.util.DualSimUtils
-import xyz.stream.messenger.shared.util.SendUtils
-import xyz.stream.messenger.shared.util.TimeUtils
-import xyz.stream.messenger.shared.util.closeSilent
+import xyz.stream.messenger.shared.util.*
 
 class CarReplyReceiver : BroadcastReceiver() {
 
@@ -67,7 +64,7 @@ class CarReplyReceiver : BroadcastReceiver() {
         // if there are no more notifications, cancel the summary as well
         val unseenMessages = DataSource.getUnseenMessages(context)
         if (unseenMessages.count <= 0) {
-            NotificationManagerCompat.from(context).cancelAll()
+            NotificationUtils.cancelAll(context)
         } else {
             NotificationManagerCompat.from(context).cancel(conversationId.toInt())
         }

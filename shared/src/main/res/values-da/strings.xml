@@ -14,9 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">Link</string>
-    <string name="app_name_long">Link SMS</string>
+    <string name="app_name_long">Link (SMS/tablet)</string>
     <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Ny besked</string>
@@ -95,7 +95,7 @@ Du kan bruge Link til at sende besked fra <b>alle</b>enheder!</string>
     <string name="messages">Beskeder</string>
     <!-- Invite Friends Screen -->
     <string name="invite_friends_title">Elsker du Link?</string>
-    <string name="invite_friends_summary">Det gør vi, og det vil andre også! Vi forsøger at få det ud til så mange som muligt, så vi kan forsætte med at skabe den bedste tjeneste muligt, og ved at invitere dine venner til at prøve Link hjælper du med dette! 
+    <string name="invite_friends_summary">Det gør vi, og det vil andre også! Vi forsøger at få det ud til så mange som muligt, så vi kan forsætte med at skabe den bedste tjeneste muligt, og ved at invitere dine venner til at prøve Link hjælper du med dette!
 \n\nSelect de venner forneden, som du vil invitere til app\'en, og de vil modtage en SMS med en kort beskrivelse og et downloadlink.</string>
     <string name="invite_friends_sms">Jeg bruger en ny app til tekstbeskeder, og jeg er sikker på, du vil elske den! Den er oven i købet gratis, så du taber intet ved at prøve den: http://messenger.klinkerapps.com</string>
     <!-- Message List Screen -->
