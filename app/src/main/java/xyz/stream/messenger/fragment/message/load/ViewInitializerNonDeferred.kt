@@ -216,8 +216,6 @@ class ViewInitializerNonDeferred(private val fragment: MessageListFragment) {
                         .load(Uri.parse(imageUri))
                         .into(image!!)
             }
-
-            ColorUtils.adjustDrawerColor(colorDarker, isGroup, activity)
         }
 
         val nav = activity?.findViewById<View>(R.id.navigation_view) as NavigationView?

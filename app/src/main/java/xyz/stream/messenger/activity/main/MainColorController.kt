@@ -20,7 +20,6 @@ class MainColorController(private val activity: AppCompatActivity) {
 
     private val toolbar: Toolbar by lazy { activity.findViewById<View>(R.id.toolbar) as Toolbar }
     private val fab: FloatingActionButton by lazy { activity.findViewById<View>(R.id.fab) as FloatingActionButton }
-    private val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_view) as NavigationView }
     private val conversationListContainer: View by lazy { activity.findViewById<View>(R.id.conversation_list_container) }
 
     fun colorActivity() {
@@ -45,15 +44,6 @@ class MainColorController(private val activity: AppCompatActivity) {
         val baseColor = if (activity.resources.getBoolean(R.bool.is_night)) "FFFFFF" else "000000"
         val iconColors = intArrayOf(Color.parseColor("#77$baseColor"), Settings.mainColorSet.colorAccent)
         val textColors = intArrayOf(Color.parseColor("#DD$baseColor"), Settings.mainColorSet.colorAccent)
-
-        navigationView.itemIconTintList = ColorStateList(states, iconColors)
-        navigationView.itemTextColor = ColorStateList(states, textColors)
-        navigationView.post {
-            ColorUtils.adjustStatusBarColor(Settings.mainColorSet.color, Settings.mainColorSet.colorDark, activity)
-
-            val header = navigationView.findViewById<View>(R.id.header)
-            header?.setBackgroundColor(Settings.mainColorSet.colorDark)
-        }
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
             conversationListContainer.setBackgroundColor(Color.BLACK)

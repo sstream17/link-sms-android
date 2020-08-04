@@ -59,23 +59,6 @@ class MainInsetController(private val activity: MessengerActivity) {
         if (!useEdgeToEdge()) {
             return
         }
-
-        activity.navController.drawerLayout?.setOnApplyWindowInsetsListener { _, insets ->
-            if (insets.systemWindowInsetBottom != 0 && bottomInsetValue == 0) {
-                bottomInsetValue = insets.systemWindowInsetBottom
-            }
-
-            val modifiedInsets = insets.replaceSystemWindowInsets(insets.systemWindowInsetLeft, insets.systemWindowInsetTop, insets.systemWindowInsetRight, 0)
-            activity.navController.drawerLayout?.setChildInsets(modifiedInsets, insets.systemWindowInsetTop > 0)
-
-            try {
-                modifyMessengerActivityElements()
-                modifyConversationListElements(activity.navController.conversationListFragment)
-            } catch (e: Exception) {
-            }
-
-            modifiedInsets
-        }
     }
 
     fun modifyConversationListElements(fragment: ConversationListFragment?) {

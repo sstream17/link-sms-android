@@ -101,7 +101,6 @@ class MessageListManager(private val fragment: ConversationListFragment) {
 
         val color = Settings.mainColorSet
         ColorUtils.adjustStatusBarColor(color.color, color.colorDark, activity)
-        ColorUtils.adjustDrawerColor(color.colorDark, activity)
 
         ColorUtils.changeRecyclerOverscrollColors(fragment.recyclerView, color.color)
         ActivityUtils.setTaskDescription(activity)

@@ -11,6 +11,7 @@ import android.view.WindowInsets
 import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -27,13 +28,12 @@ import xyz.stream.messenger.shared.util.listener.BackPressedListener
 
 @Suppress("DEPRECATION")
 class MainNavigationController(private val activity: MessengerActivity)
-    : NavigationView.OnNavigationItemSelectedListener {
+    : BottomNavigationView.OnNavigationItemSelectedListener {
 
     val conversationActionDelegate = MainNavigationConversationListActionDelegate(activity)
     val messageActionDelegate = MainNavigationMessageListActionDelegate(activity)
 
-    val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_view) as NavigationView }
-    val drawerLayout: DrawerLayout? by lazy { activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout? }
+    val navigationView: BottomNavigationView by lazy { activity.findViewById<View>(R.id.nav_view) as BottomNavigationView }
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
@@ -49,7 +49,7 @@ class MainNavigationController(private val activity: MessengerActivity)
 
     fun initDrawer() {
         activity.insetController.overrideDrawerInsets()
-        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.setOnNavigationItemSelectedListener(this)
         navigationView.postDelayed({
             try {
                 if (Account.exists()) {
@@ -92,20 +92,10 @@ class MainNavigationController(private val activity: MessengerActivity)
     }
 
     fun openDrawer(): Boolean {
-        if (drawerLayout != null && !drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout!!.openDrawer(GravityCompat.START)
-            return true
-        }
-
         return false
     }
 
     fun closeDrawer(): Boolean {
-        if (drawerLayout != null && drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout!!.closeDrawer(GravityCompat.START)
-            return true
-        }
-
         return false
     }
 
@@ -128,7 +118,6 @@ class MainNavigationController(private val activity: MessengerActivity)
 
                 conversationActionDelegate.displayConversations()
                 activity.fab.show()
-                drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 return true
             }
             inSettings -> {
@@ -181,14 +170,7 @@ class MainNavigationController(private val activity: MessengerActivity)
                 }
             }
 
-            else -> {
-                val folder = activity.drawerItemHelper.findFolder(id)
-                return if (folder != null) {
-                    conversationActionDelegate.displayFolder(folder)
-                } else {
-                    true
-                }
-            }
+            else -> return true
         }
     }
 
