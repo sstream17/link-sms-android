@@ -71,7 +71,6 @@ class MessengerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initToolbar()
-        fab.setOnClickListener { startActivity(Intent(applicationContext, ComposeActivity::class.java)) }
 
         colorController.configureGlobalColors()
         colorController.configureNavigationBarColor()
@@ -120,7 +119,7 @@ class MessengerActivity : AppCompatActivity() {
                     navController.getShownConversationList()?.expandedItem?.itemView?.performClick()
                 }
 
-                clickNavigationItem(R.id.drawer_conversation)
+                clickNavigationItem(R.id.navigation_inbox)
             }
         } catch (e: Throwable) {
             e.printStackTrace()
@@ -223,6 +222,8 @@ class MessengerActivity : AppCompatActivity() {
 
     fun clickNavigationItem(itemId: Int) { navController.onNavigationItemSelected(itemId) }
     fun displayConversations() = navController.conversationActionDelegate.displayConversations()
+
+    fun composeMessage() = startActivity(Intent(applicationContext, ComposeActivity::class.java))
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)

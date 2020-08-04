@@ -461,7 +461,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
         val holderActivity = activity ?: return
 
         val nav = holderActivity.findViewById<View>(R.id.navigation_view) as NavigationView?
-        nav?.setCheckedItem(R.id.drawer_conversation)
+        nav?.setCheckedItem(R.id.navigation_inbox)
 
         val account = Account
         if (account.exists() && account.primary) {

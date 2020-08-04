@@ -38,7 +38,7 @@ class MainNavigationController(private val activity: MessengerActivity)
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
     var inSettings = false
-    var selectedNavigationItemId: Int = R.id.drawer_conversation
+    var selectedNavigationItemId: Int = R.id.navigation_inbox
 
     fun isConversationListExpanded() = conversationListFragment != null && conversationListFragment!!.isExpanded
     fun isOtherFragmentConvoAndShowing() = otherFragment != null && otherFragment is ConversationListFragment && (otherFragment as ConversationListFragment).isExpanded
@@ -121,7 +121,7 @@ class MainNavigationController(private val activity: MessengerActivity)
                 return true
             }
             inSettings -> {
-                onNavigationItemSelected(R.id.drawer_conversation)
+                onNavigationItemSelected(R.id.navigation_inbox)
                 return true
             }
             else -> return false
@@ -135,11 +135,12 @@ class MainNavigationController(private val activity: MessengerActivity)
         conversationListFragment?.swipeHelper?.dismissSnackbars()
 
         when (id) {
-            R.id.drawer_conversation -> return conversationActionDelegate.displayConversations()
+            R.id.navigation_inbox -> return conversationActionDelegate.displayConversations()
+            R.id.navigation_unread -> return conversationActionDelegate.displayUnread()
+            R.id.navigation_compose -> return conversationActionDelegate.displayCompose()
+            R.id.navigation_scheduled -> return conversationActionDelegate.displayScheduledMessages()
             R.id.drawer_archived -> return conversationActionDelegate.displayArchived()
             R.id.drawer_private -> return conversationActionDelegate.displayPrivate()
-            R.id.drawer_unread -> return conversationActionDelegate.displayUnread()
-            R.id.drawer_schedule -> return conversationActionDelegate.displayScheduledMessages()
             R.id.drawer_mute_contacts -> return conversationActionDelegate.displayBlacklist()
             R.id.drawer_invite -> return conversationActionDelegate.displayInviteFriends()
             R.id.drawer_feature_settings -> return conversationActionDelegate.displayFeatureSettings()
@@ -194,20 +195,18 @@ class MainNavigationController(private val activity: MessengerActivity)
         closeDrawer()
         selectedNavigationItemId = item.itemId
 
-        if (item.isChecked || ApiDownloadService.IS_RUNNING) {
+        if (ApiDownloadService.IS_RUNNING) {
             return true
         }
 
-        if (item.isCheckable) {
-            item.isChecked = true
-        }
+        val shouldSelect = drawerItemClicked(item.itemId)
 
-        if (item.itemId == R.id.drawer_conversation) {
+        if (item.itemId == R.id.navigation_inbox) {
             activity.setTitle(R.string.app_title)
-        } else if (item.isCheckable) {
+        } else if (shouldSelect && item.isCheckable) {
             activity.title = StringUtils.titleize(item.title.toString())
         }
 
-        return drawerItemClicked(item.itemId)
+        return  shouldSelect
     }
 }

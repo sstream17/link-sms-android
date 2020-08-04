@@ -103,7 +103,7 @@ class MainAccountController(private val activity: MessengerActivity) {
         Handler().postDelayed({
             downloadReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                    activity.navController.drawerItemClicked(R.id.drawer_conversation)
+                    activity.navController.drawerItemClicked(R.id.navigation_inbox)
                 }
             }
 

@@ -39,6 +39,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
     }
 
     fun displayConversations(savedInstanceState: Bundle?): Boolean {
+        navController.navigationView.menu.findItem(R.id.navigation_inbox).isChecked = true
         activity.fab.show()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
@@ -107,7 +108,13 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
     }
 
     internal fun displayUnread(): Boolean {
+        navController.navigationView.menu.findItem(R.id.navigation_unread).isChecked = true
         return displayFragmentWithBackStack(UnreadConversationListFragment())
+    }
+
+    internal fun displayCompose(): Boolean {
+        activity.composeMessage()
+        return false
     }
 
     internal fun displayFolder(folder: Folder): Boolean {
@@ -115,6 +122,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
     }
 
     internal fun displayScheduledMessages(): Boolean {
+        navController.navigationView.menu.findItem(R.id.navigation_scheduled).isChecked = true
         return displayFragmentWithBackStack(ScheduledMessagesFragment())
     }
 

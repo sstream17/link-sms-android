@@ -93,7 +93,7 @@ class MainIntentHandler(private val activity: MessengerActivity) {
             outState = Bundle()
         }
 
-        if (navController.selectedNavigationItemId != R.id.drawer_conversation) {
+        if (navController.selectedNavigationItemId != R.id.navigation_inbox) {
             outState.putInt(MessengerActivityExtras.EXTRA_NAVIGATION_ITEM_ID, navController.selectedNavigationItemId)
         } else if (navController.isConversationListExpanded()) {
             outState.putLong(MessengerActivityExtras.EXTRA_CONVERSATION_ID, navController.getShownConversationList()!!.expandedId)
