@@ -180,7 +180,7 @@ class MessengerActivity : AppCompatActivity() {
                 super.onBackPressed()
             }
         } catch (e: Exception) {
-
+            e.printStackTrace()
         }
     }
 

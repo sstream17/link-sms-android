@@ -208,7 +208,7 @@ object AnimationUtils {
 
         val toolbar = activity.findViewById<View>(R.id.app_bar_layout)
         val fragmentContainer = activity.findViewById<View>(R.id.conversation_list_container)
-        val bottomNav = activity.findViewById<View>(R.id.fab) as BottomNavigationView
+        val bottomNav = activity.findViewById<View>(R.id.nav_view) as BottomNavigationView
 
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
