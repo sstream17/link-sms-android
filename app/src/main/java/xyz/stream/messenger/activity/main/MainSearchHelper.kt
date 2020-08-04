@@ -63,6 +63,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
             activity.fab.show()
 
             if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
+                activity.setTitle(R.string.app_title)
                 activity.displayConversations()
             }
         }
