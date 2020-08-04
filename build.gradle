@@ -26,12 +26,12 @@ buildscript {
 
     ext.buildInfo = [
             'id'                : 'xyz.stream.messenger',
-            'name'              : '0.2.3',
+            'name'              : '0.4.2',
             'number'            : System.getenv("BUILD_NUMBER") as Integer ?: Calendar.getInstance().get(Calendar.DAY_OF_YEAR),
     ]
 
     ext.versions = [
-            'gradlePlugin'      : '4.0.0',
+            'gradlePlugin'      : '4.0.1',
             'targetSdk'         : 29,
             'minSdk'            : 21,
 
@@ -46,10 +46,10 @@ buildscript {
             'androidXTester'    : '1.1.0',
             'androidXEspresso'  : '3.1.0',
 
-            'firebaseAnalytics' : '17.4.3',
+            'firebaseAnalytics' : '17.4.4',
             'firebaseMessaging' : '20.2.0',
             'firebaseStorage'   : '19.1.1',
-            'firebaseAuth'      : '19.3.1',
+            'firebaseAuth'      : '19.3.2',
 
             'mockito'           : '2.18.3',
             'robolectric'       : '4.2',
@@ -67,7 +67,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:${versions.gradlePlugin}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
         classpath 'com.google.gms:google-services:4.3.3'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.1.1'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.0'
     }
 
 }
@@ -78,11 +78,11 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
-        maven { url "https://maven.google.com" }
-        maven { url "https://dl.bintray.com/drummer-aidan/maven" }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url "https://jitpack.io" }
+        maven { url "https://dl.bintray.com/drummer-aidan/maven" }
+        maven { url "https://dl.bintray.com/sensor-tower/android-usage" }
         maven { url "https://dl.bintray.com/mockito/maven" }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         flatDir { dirs "$rootProject.projectDir/shared/libs" }
     }
 
