@@ -147,9 +147,6 @@ class MainInsetController(private val activity: MessengerActivity) {
     }
 
     private fun modifyMessengerActivityElements() {
-        // move fab above the nav bar
-        val params = activity.fab.layoutParams as CoordinatorLayout.LayoutParams
-        params.bottomMargin = sixteenDp + bottomInsetValue
 
         // put padding at the bottom of the navigation view's recycler view
         val navView = activity.navController.navigationView

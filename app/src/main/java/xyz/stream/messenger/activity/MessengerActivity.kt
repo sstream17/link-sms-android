@@ -59,7 +59,6 @@ class MessengerActivity : AppCompatActivity() {
     private val resultHandler = MainResultHandler(this)
 
     val toolbar: WhitableToolbar by lazy { findViewById<View>(R.id.toolbar) as WhitableToolbar }
-    val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
     private val content: View by lazy { findViewById<View>(android.R.id.content) }
 
@@ -87,10 +86,6 @@ class MessengerActivity : AppCompatActivity() {
         content.post {
             AnimationUtils.conversationListSize = content.height
             AnimationUtils.toolbarSize = toolbar.height
-        }
-
-        if (Settings.baseTheme == BaseTheme.BLACK) {
-            findViewById<View?>(xyz.stream.messenger.shared.R.id.nav_bar_divider)?.visibility = View.GONE
         }
     }
 

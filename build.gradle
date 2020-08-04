@@ -109,6 +109,10 @@ subprojects {
             android {
                 compileSdkVersion versions.targetSdk
 
+                kotlinOptions {
+                    jvmTarget = "1.8"
+                }
+
                 defaultConfig {
                     targetSdkVersion versions.targetSdk
 

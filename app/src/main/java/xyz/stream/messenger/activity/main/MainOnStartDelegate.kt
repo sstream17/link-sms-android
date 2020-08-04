@@ -8,6 +8,7 @@ import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.service.jobs.ScheduledMessageJob
 import xyz.stream.messenger.shared.util.CursorUtil
 import xyz.stream.messenger.shared.util.NotificationUtils
+import xyz.stream.messenger.shared.util.show
 import xyz.stream.messenger.utils.TextAnywhereConversationCardApplier
 
 class MainOnStartDelegate(private val activity: MessengerActivity) {
@@ -20,7 +21,7 @@ class MainOnStartDelegate(private val activity: MessengerActivity) {
             if (navController.conversationListFragment != null &&
                     !navController.conversationListFragment!!.isExpanded) {
 
-                if (!activity.fab.isShown && navController.otherFragment == null) activity.fab.show()
+                if (!navController.navigationView.isShown && navController.otherFragment == null) navController.navigationView.show()
                 showTextAnywherePromotion()
             }
 

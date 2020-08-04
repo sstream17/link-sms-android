@@ -10,6 +10,7 @@ import xyz.stream.messenger.api.implementation.ApiUtils
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
 import xyz.stream.messenger.shared.service.jobs.SubscriptionExpirationCheckJob
+import xyz.stream.messenger.shared.util.show
 
 class MainIntentHandler(private val activity: MessengerActivity) {
 
@@ -121,7 +122,7 @@ class MainIntentHandler(private val activity: MessengerActivity) {
     }
 
     private fun displayShortcutConversation(convo: Long) {
-        activity.fab.show()
+        navController.navigationView.show()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
 

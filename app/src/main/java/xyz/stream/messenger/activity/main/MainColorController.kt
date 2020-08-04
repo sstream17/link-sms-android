@@ -1,13 +1,10 @@
 package xyz.stream.messenger.activity.main
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.View
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.shared.data.Settings
@@ -19,7 +16,6 @@ import xyz.stream.messenger.shared.util.TimeUtils
 class MainColorController(private val activity: AppCompatActivity) {
 
     private val toolbar: Toolbar by lazy { activity.findViewById<View>(R.id.toolbar) as Toolbar }
-    private val fab: FloatingActionButton by lazy { activity.findViewById<View>(R.id.fab) as FloatingActionButton }
     private val conversationListContainer: View by lazy { activity.findViewById<View>(R.id.conversation_list_container) }
 
     fun colorActivity() {
@@ -37,7 +33,6 @@ class MainColorController(private val activity: AppCompatActivity) {
         }
 
         toolbar.setBackgroundColor(Settings.mainColorSet.color)
-        fab.backgroundTintList = ColorStateList.valueOf(Settings.mainColorSet.colorAccent)
 
         val states = arrayOf(intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked))
 

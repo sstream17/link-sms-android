@@ -24,7 +24,8 @@ import xyz.stream.messenger.shared.util.AnimationUtils
 import xyz.stream.messenger.shared.util.TimeUtils
 import java.util.concurrent.Executor
 import android.os.Looper
-
+import xyz.stream.messenger.shared.util.hide
+import xyz.stream.messenger.shared.util.show
 
 
 class MainNavigationConversationListActionDelegate(private val activity: MessengerActivity) {
@@ -40,7 +41,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
 
     fun displayConversations(savedInstanceState: Bundle?): Boolean {
         navController.navigationView.menu.findItem(R.id.navigation_inbox).isChecked = true
-        activity.fab.show()
+        navController.navigationView.show()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
 
@@ -109,7 +110,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
 
     internal fun displayUnread(): Boolean {
         navController.navigationView.menu.findItem(R.id.navigation_unread).isChecked = true
-        return displayFragmentWithBackStack(UnreadConversationListFragment())
+        return displayFragmentWithBackStack(UnreadConversationListFragment(), false)
     }
 
     internal fun displayCompose(): Boolean {
@@ -123,7 +124,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
 
     internal fun displayScheduledMessages(): Boolean {
         navController.navigationView.menu.findItem(R.id.navigation_scheduled).isChecked = true
-        return displayFragmentWithBackStack(ScheduledMessagesFragment())
+        return displayFragmentWithBackStack(ScheduledMessagesFragment(), false)
     }
 
     internal fun displayBlacklist(): Boolean {
@@ -161,9 +162,9 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         return true
     }
 
-    internal fun displayFragmentWithBackStack(fragment: Fragment): Boolean {
+    internal fun displayFragmentWithBackStack(fragment: Fragment, hideBottomNav: Boolean = true): Boolean {
         activity.searchHelper.closeSearch()
-        activity.fab.hide()
+        if (hideBottomNav) navController.navigationView.hide()
         activity.invalidateOptionsMenu()
         navController.inSettings = true
 

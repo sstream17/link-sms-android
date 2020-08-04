@@ -6,6 +6,8 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
+import xyz.stream.messenger.shared.util.hide
+import xyz.stream.messenger.shared.util.show
 
 @Suppress("DEPRECATION")
 class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearchView.OnQueryTextListener, MaterialSearchView.SearchViewListener {
@@ -51,7 +53,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
     }
 
     override fun onSearchViewShown() {
-        activity.fab.hide()
+        activity.navController.navigationView.hide()
         ensureSearchFragment()
         displaySearchFragment()
     }
@@ -60,7 +62,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
         ensureSearchFragment()
 
         if (!searchFragment!!.isSearching) {
-            activity.fab.show()
+            activity.navController.navigationView.show()
 
             if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
                 activity.setTitle(R.string.app_title)

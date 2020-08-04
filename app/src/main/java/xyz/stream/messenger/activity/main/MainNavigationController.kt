@@ -25,6 +25,7 @@ import xyz.stream.messenger.shared.util.ColorUtils
 import xyz.stream.messenger.shared.util.PhoneNumberUtils
 import xyz.stream.messenger.shared.util.StringUtils
 import xyz.stream.messenger.shared.util.listener.BackPressedListener
+import xyz.stream.messenger.shared.util.show
 
 @Suppress("DEPRECATION")
 class MainNavigationController(private val activity: MessengerActivity)
@@ -117,7 +118,7 @@ class MainNavigationController(private val activity: MessengerActivity)
                 }
 
                 conversationActionDelegate.displayConversations()
-                activity.fab.show()
+                navigationView.show()
                 return true
             }
             inSettings -> {
