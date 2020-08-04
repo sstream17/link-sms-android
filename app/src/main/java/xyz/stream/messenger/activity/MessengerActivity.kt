@@ -193,9 +193,8 @@ class MessengerActivity : AppCompatActivity() {
         if (!navController.inSettings) {
             menuInflater.inflate(R.menu.activity_messenger, menu)
 
-            val item = menu.findItem(R.id.menu_search)
-            item.icon.setTintList(ColorStateList.valueOf(toolbar.textColor))
-            searchHelper.setup(item)
+            val searchItem = navController.navigationView.menu.findItem(R.id.navigation_search)
+            searchHelper.setup(searchItem)
         }
 
         return super.onCreateOptionsMenu(menu)

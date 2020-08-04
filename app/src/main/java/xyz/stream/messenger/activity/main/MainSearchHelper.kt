@@ -42,21 +42,9 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
 
     override fun onQueryTextChange(newText: String): Boolean {
         if (newText.isNotEmpty()) {
-            // display search fragment
-            ensureSearchFragment()
             searchFragment!!.search(newText)
-            if (!searchFragment!!.isAdded) {
-                displaySearchFragment()
-            }
         } else {
-            // display conversation fragment
-            ensureSearchFragment()
             searchFragment?.search(null)
-
-            if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
-                activity.displayConversations()
-                activity.fab.hide()
-            }
         }
 
         return true
@@ -65,6 +53,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
     override fun onSearchViewShown() {
         activity.fab.hide()
         ensureSearchFragment()
+        displaySearchFragment()
     }
 
     override fun onSearchViewClosed() {
