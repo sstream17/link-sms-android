@@ -22,7 +22,8 @@
                     android:id="@+id/app_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:elevation="0dp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                             android:textColor="@color/primaryText"
                             android:textColorHint="@color/secondaryText"
                             app:searchBackIcon="@drawable/ic_search_back"
-                            app:searchBackground="@color/drawerBackground"
+                            app:searchBackground="@color/background"
                             app:searchCloseIcon="@drawable/ic_search_close" />
 
                     </FrameLayout>
@@ -82,7 +83,7 @@
                 android:textColor="@color/primaryText"
                 android:textColorHint="@color/secondaryText"
                 app:searchBackIcon="@drawable/ic_search_back"
-                app:searchBackground="@color/drawerBackground"
+                app:searchBackground="@color/background"
                 app:searchCloseIcon="@drawable/ic_search_close" />
 
             <FrameLayout

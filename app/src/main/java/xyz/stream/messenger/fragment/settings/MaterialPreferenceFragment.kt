@@ -19,7 +19,7 @@ abstract class MaterialPreferenceFragment : PreferenceFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val list = view.findViewById<View>(android.R.id.list) as ListView
-        list.setBackgroundColor(resources.getColor(R.color.drawerBackground))
+        list.setBackgroundColor(resources.getColor(R.color.background))
         list.divider = ColorDrawable(resources.getColor(R.color.background))
         list.dividerHeight = DensityUtil.toDp(activity, 1)
     }

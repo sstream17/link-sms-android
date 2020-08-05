@@ -77,7 +77,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="18dp"
-            app:cardBackgroundColor="@color/drawerBackground"
+            app:cardBackgroundColor="@color/background"
             app:cardCornerRadius="3dp"
             app:cardElevation="4dp">
 

@@ -23,7 +23,7 @@ class GiphySearchView(context: Context, private val listener: ImageSelectedListe
         val toolbarContainer = findViewById<View>(R.id.toolbar_container)
         val searchInput = findViewById<EditText>(R.id.search_view)
 
-        toolbarContainer.setBackgroundColor(context.resources.getColor(R.color.drawerBackground))
+        toolbarContainer.setBackgroundColor(context.resources.getColor(R.color.background))
         searchInput.setTextColor(context.resources.getColor(R.color.primaryText))
         searchInput.setHintTextColor(context.resources.getColor(R.color.hintText))
 

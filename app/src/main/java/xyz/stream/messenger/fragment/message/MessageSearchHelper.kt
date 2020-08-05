@@ -22,7 +22,7 @@ class MessageSearchHelper(private val fragment: MessageListFragment) : MaterialS
         this.searchView = searchView
 
         if (activity != null) {
-            searchView.setBackgroundColor(activity!!.resources.getColor(R.color.drawerBackground))
+            searchView.setBackgroundColor(activity!!.resources.getColor(R.color.background))
         }
 
         searchView.setVoiceSearch(false)

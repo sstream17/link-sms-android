@@ -44,7 +44,7 @@
             android:layout_width="292dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/drawerBackground"
+            android:background="@color/background"
             android:elevation="8dp"
             app:headerLayout="@layout/drawer_header"
             app:itemIconTint="@drawable/drawer_icon_selector"
@@ -87,7 +87,7 @@
                             android:textColor="@color/primaryText"
                             android:textColorHint="@color/secondaryText"
                             app:searchBackIcon="@drawable/ic_search_back"
-                            app:searchBackground="@color/drawerBackground"
+                            app:searchBackground="@color/background"
                             app:searchCloseIcon="@drawable/ic_search_close" />
 
                     </FrameLayout>
@@ -157,7 +157,7 @@
                 android:textColor="@color/primaryText"
                 android:textColorHint="@color/secondaryText"
                 app:searchBackIcon="@drawable/ic_search_back"
-                app:searchBackground="@color/drawerBackground"
+                app:searchBackground="@color/background"
                 app:searchCloseIcon="@drawable/ic_search_close" />
 
             <FrameLayout

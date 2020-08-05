@@ -20,7 +20,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
     
     fun setup(item: MenuItem) {
         searchView.setVoiceSearch(false)
-        searchView.setBackgroundColor(activity.resources.getColor(R.color.drawerBackground))
+        searchView.setBackgroundColor(activity.resources.getColor(R.color.background))
         searchView.setOnQueryTextListener(this)
         searchView.setOnSearchViewListener(this)
         

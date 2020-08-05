@@ -246,7 +246,7 @@ class MessageMultiSelectDelegate(private val fragment: MessageListFragment) : Mu
                 textColor = if (ColorUtils.isColorDark(message.color)) Color.WHITE else activity!!.resources.getColor(R.color.darkText)
             }
             else -> {
-                states = ColorStateList.valueOf(activity!!.resources.getColor(R.color.drawerBackground))
+                states = ColorStateList.valueOf(activity!!.resources.getColor(R.color.background))
                 textColor = activity!!.resources.getColor(R.color.primaryText)
             }
         }
