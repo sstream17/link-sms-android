@@ -1,14 +1,11 @@
 package xyz.stream.messenger.activity.main
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.BlacklistFragment
 import xyz.stream.messenger.fragment.ScheduledMessagesFragment
@@ -17,9 +14,7 @@ import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.EdgeToEdgeKeyboardWorkaround
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.fragment.settings.MaterialPreferenceFragmentCompat
-import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.util.ActivityUtils
-import xyz.stream.messenger.shared.util.AndroidVersionUtil
 import xyz.stream.messenger.shared.util.DensityUtil
 
 class MainInsetController(private val activity: MessengerActivity) {

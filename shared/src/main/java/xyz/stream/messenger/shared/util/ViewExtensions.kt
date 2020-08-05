@@ -24,7 +24,6 @@ import android.view.animation.AnimationUtils
 import androidx.core.animation.doOnEnd
 import androidx.core.view.drawToBitmap
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.card.MaterialCardView
 
 /**
  * Potentially animate showing a [BottomNavigationView].
