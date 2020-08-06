@@ -17,13 +17,16 @@
 package xyz.stream.messenger.shared.util
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
+import android.os.Build
 import android.provider.Telephony
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
@@ -87,6 +90,7 @@ object PermissionsUtils {
      *
      * @param context the current application context.
      */
+    @SuppressLint("NewApi")
     fun setDefaultSmsApp(context: Context) {
         val startDefaultApp = { intent: Intent ->
             try {
@@ -102,16 +106,12 @@ object PermissionsUtils {
         }
 
         if (AndroidVersionUtil.isAndroidQ) {
-            // Android Q has not been working with the normal ACTION_CHANGE_DEFAULT prompt, and I have no clue why....
-            AlertDialog.Builder(context)
-                    .setMessage(R.string.google_requires_default_sms)
-                    .setNegativeButton(R.string.google_requires_default_sms_policy) { _, _ ->
-                        val policy = Intent(Intent.ACTION_VIEW, Uri.parse("https://android-developers.googleblog.com/2018/10/providing-safe-and-secure-experience.html"))
-                        startDefaultApp(policy)
-                    }.setPositiveButton(R.string.ok) { _, _ ->
-                        startDefaultApp(Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
-                    }.setCancelable(false)
-                    .show()
+            // At Android Q, Google introduced roles to handle the default system apps.
+            val roleManager = context.getSystemService(RoleManager::class.java)
+            if (roleManager != null && roleManager.isRoleAvailable(RoleManager.ROLE_SMS) && !roleManager.isRoleHeld(RoleManager.ROLE_SMS)) {
+                val intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_SMS)
+                startDefaultApp(intent)
+            }
         } else {
             val intent = Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT)
             intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, context.applicationContext.packageName)
