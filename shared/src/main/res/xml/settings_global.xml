@@ -79,7 +79,7 @@
             android:summary="@string/show_conversation_history_summary"
             android:defaultValue="true" />
 
-        <xyz.klinker.messenger.view.preference.NotificationActionsPreference
+        <xyz.stream.messenger.view.preference.NotificationActionsPreference
             android:key="@string/pref_notification_actions"
             android:title="@string/notification_actions"
             android:summary="@string/notification_actions_summary_2" />
