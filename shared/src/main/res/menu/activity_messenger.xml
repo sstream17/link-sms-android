@@ -17,10 +17,75 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/menu_search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/menu_search"
-        app:showAsAction="always" />
+    <group>
+
+        <item
+            android:id="@+id/drawer_account"
+            android:icon="@drawable/ic_devices"
+            android:orderInCategory="0"
+            android:title="@string/menu_account" />
+
+    </group>
+
+    <group>
+
+        <item
+            android:id="@+id/drawer_archived"
+            android:icon="@drawable/ic_archive"
+            android:orderInCategory="1"
+            android:title="@string/menu_archived_conversations" />
+
+        <item
+            android:id="@+id/drawer_private"
+            android:icon="@drawable/ic_lock"
+            android:orderInCategory="1"
+            android:title="@string/menu_private_conversations" />
+
+    </group>
+
+    <group>
+
+        <item
+            android:id="@+id/drawer_mute_contacts"
+            android:icon="@drawable/ic_block"
+            android:orderInCategory="2"
+            android:title="@string/menu_mute_contacts" />
+
+        <item
+            android:id="@+id/drawer_invite"
+            android:icon="@drawable/ic_invite"
+            android:orderInCategory="2"
+            android:title="@string/menu_invite" />
+
+    </group>
+
+    <group>
+
+        <item
+            android:id="@+id/drawer_feature_settings"
+            android:icon="@drawable/ic_feature_settings"
+            android:orderInCategory="3"
+            android:title="@string/menu_feature_settings"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/drawer_settings"
+            android:icon="@drawable/ic_settings"
+            android:orderInCategory="3"
+            android:title="@string/menu_settings" />
+
+        <item
+            android:id="@+id/drawer_help"
+            android:icon="@drawable/ic_help"
+            android:orderInCategory="3"
+            android:title="@string/menu_help" />
+
+        <item
+            android:id="@+id/drawer_about"
+            android:icon="@drawable/ic_about"
+            android:orderInCategory="3"
+            android:title="@string/menu_about" />
+
+    </group>
 
 </menu>

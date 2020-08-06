@@ -197,7 +197,7 @@ class MessengerActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return navController.optionsItemSelected(item)
+        return navController.onNavigationItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -223,11 +223,5 @@ class MessengerActivity : AppCompatActivity() {
     private fun initToolbar() {
         setStatusBarColor(this, getColor(R.color.statusBarBackground))
         setSupportActionBar(toolbar)
-        val actionBar = supportActionBar
-
-        if (actionBar != null && !resources.getBoolean(R.bool.pin_drawer)) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-        }
     }
 }

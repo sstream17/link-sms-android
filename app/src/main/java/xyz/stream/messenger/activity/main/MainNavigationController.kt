@@ -171,15 +171,6 @@ class MainNavigationController(private val activity: MessengerActivity)
         }
     }
 
-    fun optionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home -> {
-            openDrawer()
-            true
-        }
-        R.id.menu_search -> true
-        else -> false
-    }
-
     fun onNavigationItemSelected(itemId: Int) {
         val item = navigationView.menu.findItem(itemId)
         if (item != null) {
@@ -199,7 +190,7 @@ class MainNavigationController(private val activity: MessengerActivity)
 
         if (item.itemId == R.id.navigation_inbox) {
             activity.setTitle(R.string.app_title)
-        } else if (shouldSelect && item.isCheckable) {
+        } else {
             activity.title = StringUtils.titleize(item.title.toString())
         }
 
