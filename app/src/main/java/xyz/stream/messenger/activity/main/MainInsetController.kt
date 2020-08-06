@@ -45,7 +45,7 @@ class MainInsetController(private val activity: MessengerActivity) {
         }
 
         val oldSystemUiFlags = activity.window.decorView.systemUiVisibility
-        val newSystemUiFlags = oldSystemUiFlags or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        val newSystemUiFlags = oldSystemUiFlags or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         activity.window.decorView.systemUiVisibility = newSystemUiFlags
     }
 
