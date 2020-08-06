@@ -5,7 +5,9 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
+import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.BlacklistFragment
 import xyz.stream.messenger.fragment.ScheduledMessagesFragment
@@ -16,6 +18,7 @@ import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.fragment.settings.MaterialPreferenceFragmentCompat
 import xyz.stream.messenger.shared.util.ActivityUtils
 import xyz.stream.messenger.shared.util.DensityUtil
+import xyz.stream.messenger.shared.util.doOnApplyWindowInsets
 
 class MainInsetController(private val activity: MessengerActivity) {
 
@@ -61,6 +64,11 @@ class MainInsetController(private val activity: MessengerActivity) {
             return
         }
 
+        val appBar = activity.findViewById<AppBarLayout>(R.id.app_bar_layout)
+        appBar.doOnApplyWindowInsets { view, insets, padding, _ ->
+            view.setPadding(padding.left, insets.systemWindowInsetTop, padding.right, padding.bottom)
+        }
+
         val recycler = fragment.recyclerView
         recycler.clipToPadding = false
         recycler.setPadding(recycler.paddingLeft, recycler.paddingTop, recycler.paddingRight, bottomInsetValue)
@@ -74,6 +82,11 @@ class MainInsetController(private val activity: MessengerActivity) {
     fun modifyScheduledMessageElements(fragment: ScheduledMessagesFragment) {
         if (!useEdgeToEdge()) {
             return
+        }
+
+        val appBar = activity.findViewById<AppBarLayout>(R.id.app_bar_layout)
+        appBar.doOnApplyWindowInsets { view, insets, padding, _ ->
+            view.setPadding(padding.left, insets.systemWindowInsetTop, padding.right, padding.bottom)
         }
 
         val recycler = fragment.list
@@ -112,6 +125,11 @@ class MainInsetController(private val activity: MessengerActivity) {
     fun modifyMessageListElements(fragment: MessageListFragment) {
         if (!useEdgeToEdge()) {
             return
+        }
+
+        val appBar = fragment.rootView!!.findViewById<AppBarLayout>(R.id.app_bar_layout)
+        appBar.doOnApplyWindowInsets { view, insets, padding, _ ->
+            view.setPadding(padding.left, insets.systemWindowInsetTop, padding.right, padding.bottom)
         }
 
         val sendbar = fragment.nonDeferredInitializer.replyBarCard.getChildAt(0)
