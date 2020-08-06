@@ -34,11 +34,7 @@ class MainColorController(private val activity: AppCompatActivity) {
 
         toolbar.setBackgroundColor(Settings.mainColorSet.color)
 
-        val states = arrayOf(intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked))
-
-        val baseColor = if (activity.resources.getBoolean(R.bool.is_night)) "FFFFFF" else "000000"
-        val iconColors = intArrayOf(Color.parseColor("#77$baseColor"), Settings.mainColorSet.colorAccent)
-        val textColors = intArrayOf(Color.parseColor("#DD$baseColor"), Settings.mainColorSet.colorAccent)
+        ColorUtils.adjustStatusBarColor(Settings.mainColorSet.color, Settings.mainColorSet.colorDark, activity)
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
             conversationListContainer.setBackgroundColor(Color.BLACK)

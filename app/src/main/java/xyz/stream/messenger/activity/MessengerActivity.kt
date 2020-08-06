@@ -221,7 +221,6 @@ class MessengerActivity : AppCompatActivity() {
     fun composeMessage() = startActivity(Intent(applicationContext, ComposeActivity::class.java))
 
     private fun initToolbar() {
-        setStatusBarColor(this, getColor(R.color.statusBarBackground))
         setSupportActionBar(toolbar)
     }
 }

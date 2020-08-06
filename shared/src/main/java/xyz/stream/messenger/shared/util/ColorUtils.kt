@@ -114,10 +114,7 @@ object ColorUtils {
         toolbarColor = ActivityUtils.possiblyOverrideColorSelection(activity, toolbarColor)
 
         if (!activity.resources.getBoolean(R.bool.pin_drawer)) {
-            val drawerLayout = activity
-                    .findViewById<View>(R.id.drawer_layout) as DrawerLayout?
-
-            drawerLayout?.setStatusBarBackgroundColor(statusBarColor)
+            ActivityUtils.setStatusBarColor(activity, statusBarColor)
         } else {
             val status = activity.findViewById<View>(R.id.status_bar)
 
