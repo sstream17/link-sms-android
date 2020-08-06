@@ -32,6 +32,7 @@ import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
+import xyz.stream.messenger.shared.util.ActivityUtils.setStatusBarColor
 import xyz.stream.messenger.shared.util.AnimationUtils
 import xyz.stream.messenger.shared.util.PromotionUtils
 import xyz.stream.messenger.shared.util.UnreadBadger
@@ -220,6 +221,7 @@ class MessengerActivity : AppCompatActivity() {
     fun composeMessage() = startActivity(Intent(applicationContext, ComposeActivity::class.java))
 
     private fun initToolbar() {
+        setStatusBarColor(this, getColor(R.color.statusBarBackground))
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
 
