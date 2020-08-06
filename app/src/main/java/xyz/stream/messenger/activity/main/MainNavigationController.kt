@@ -3,16 +3,12 @@ package xyz.stream.messenger.activity.main
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowInsets
 import android.widget.TextView
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.api.implementation.Account
@@ -49,7 +45,6 @@ class MainNavigationController(private val activity: MessengerActivity)
     }
 
     fun initDrawer() {
-        activity.insetController.overrideDrawerInsets()
         navigationView.setOnNavigationItemSelectedListener(this)
         navigationView.postDelayed({
             try {

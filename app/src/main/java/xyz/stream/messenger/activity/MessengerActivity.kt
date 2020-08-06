@@ -18,27 +18,26 @@ package xyz.stream.messenger.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
 import xyz.stream.messenger.activity.main.*
-import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.view.WhitableToolbar
-import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
-import xyz.stream.messenger.shared.util.UpdateUtils
-import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
-import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
-import xyz.stream.messenger.shared.util.*
+import xyz.stream.messenger.shared.util.AnimationUtils
+import xyz.stream.messenger.shared.util.PromotionUtils
+import xyz.stream.messenger.shared.util.UnreadBadger
+import xyz.stream.messenger.shared.util.UpdateUtils
+import xyz.stream.messenger.shared.view.WhitableToolbar
+import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 
 /**
@@ -81,6 +80,7 @@ class MessengerActivity : AppCompatActivity() {
         accountController.startIntroOrLogin(savedInstanceState)
         permissionHelper.requestDefaultSmsApp()
         insetController.applyWindowStatusFlags()
+        insetController.overrideInsetsForStatusBar()
 
         val content = findViewById<View>(R.id.content)
         content.post {

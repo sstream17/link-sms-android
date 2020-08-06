@@ -1,11 +1,9 @@
 package xyz.stream.messenger.activity.main
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -52,21 +50,20 @@ class MainInsetController(private val activity: MessengerActivity) {
         activity.window.decorView.systemUiVisibility = newSystemUiFlags
     }
 
-    @SuppressLint("RestrictedApi")
-    fun overrideDrawerInsets() {
+    fun overrideInsetsForStatusBar() {
         if (!useEdgeToEdge()) {
             return
+        }
+
+        val contentContainer = activity.findViewById<FrameLayout>(R.id.content_container)
+        contentContainer.doOnApplyWindowInsets { view, insets, padding, _ ->
+            view.setPadding(padding.left, insets.systemWindowInsetTop, padding.right, padding.bottom)
         }
     }
 
     fun modifyConversationListElements(fragment: ConversationListFragment?) {
         if (!useEdgeToEdge() || fragment == null) {
             return
-        }
-
-        val appBar = activity.findViewById<AppBarLayout>(R.id.app_bar_layout)
-        appBar.doOnApplyWindowInsets { view, insets, padding, _ ->
-            view.setPadding(padding.left, insets.systemWindowInsetTop, padding.right, padding.bottom)
         }
 
         val recycler = fragment.recyclerView
@@ -82,11 +79,6 @@ class MainInsetController(private val activity: MessengerActivity) {
     fun modifyScheduledMessageElements(fragment: ScheduledMessagesFragment) {
         if (!useEdgeToEdge()) {
             return
-        }
-
-        val appBar = activity.findViewById<AppBarLayout>(R.id.app_bar_layout)
-        appBar.doOnApplyWindowInsets { view, insets, padding, _ ->
-            view.setPadding(padding.left, insets.systemWindowInsetTop, padding.right, padding.bottom)
         }
 
         val recycler = fragment.list
@@ -125,11 +117,6 @@ class MainInsetController(private val activity: MessengerActivity) {
     fun modifyMessageListElements(fragment: MessageListFragment) {
         if (!useEdgeToEdge()) {
             return
-        }
-
-        val appBar = fragment.rootView!!.findViewById<AppBarLayout>(R.id.app_bar_layout)
-        appBar.doOnApplyWindowInsets { view, insets, padding, _ ->
-            view.setPadding(padding.left, insets.systemWindowInsetTop, padding.right, padding.bottom)
         }
 
         val sendbar = fragment.nonDeferredInitializer.replyBarCard.getChildAt(0)
