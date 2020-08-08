@@ -188,10 +188,13 @@ class MainNavigationController(private val activity: MessengerActivity)
 
         val shouldSelect = drawerItemClicked(item.itemId)
 
-        if (item.itemId == R.id.navigation_inbox) {
-            activity.setTitle(R.string.app_title)
-        } else {
-            activity.title = StringUtils.titleize(item.title.toString())
+        when (item.itemId) {
+            // Set app name as title for main destination
+            R.id.navigation_inbox -> activity.setTitle(R.string.app_title)
+            // Ignore changing title for following destinations
+            R.id.navigation_compose -> {}
+            // Set destination title as title
+            else -> activity.title = StringUtils.titleize(item.title.toString())
         }
 
         return  shouldSelect
