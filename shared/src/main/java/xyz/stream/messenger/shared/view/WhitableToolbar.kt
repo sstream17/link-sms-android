@@ -3,15 +3,19 @@ package xyz.stream.messenger.shared.view
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import androidx.appcompat.widget.Toolbar
+import android.os.Build
 import android.util.AttributeSet
-
+import android.view.Gravity
+import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import xyz.stream.messenger.shared.R
 import xyz.stream.messenger.shared.util.ActivityUtils
 import xyz.stream.messenger.shared.util.ColorUtils
 
 @Suppress("NAME_SHADOWING")
-class WhitableToolbar : Toolbar {
+class WhitableToolbar : MaterialToolbar {
 
     private var appliedBackgroundColor = Integer.MIN_VALUE
 
@@ -25,6 +29,24 @@ class WhitableToolbar : Toolbar {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context) : super(context)
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun setTitle(title: CharSequence?) {
+        var titleView: TextView?
+        titleView = findViewById(TOOLBAR_TITLE_ID)
+        if (titleView == null) {
+            titleView = TextView(context)
+            titleView.id = TOOLBAR_TITLE_ID
+            titleView.setTextAppearance(android.R.style.TextAppearance_Material_Widget_ActionBar_Title)
+            titleView.gravity = Gravity.CENTER
+            this.addView(titleView)
+            val params = titleView.layoutParams as Toolbar.LayoutParams
+            params.gravity = Gravity.CENTER
+            titleView.layoutParams = params
+        }
+
+        titleView.text = title
+    }
 
     override fun setBackgroundColor(color: Int) {
         val color = ActivityUtils.possiblyOverrideColorSelection(context, color)
@@ -54,5 +76,9 @@ class WhitableToolbar : Toolbar {
         (0 until getMenu().size())
                 .filter { getMenu().getItem(it).icon != null }
                 .forEach { getMenu().getItem(it).icon.setTintList(ColorStateList.valueOf(textColor)) }
+    }
+
+    companion object {
+        const val TOOLBAR_TITLE_ID = 730016
     }
 }
