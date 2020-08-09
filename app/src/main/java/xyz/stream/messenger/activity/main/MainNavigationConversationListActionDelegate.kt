@@ -42,6 +42,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
     fun displayConversations(savedInstanceState: Bundle?): Boolean {
         navController.navigationView.menu.findItem(R.id.navigation_inbox).isChecked = true
         navController.navigationView.show()
+        activity.toolbar.alignTitleCenter()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
 
@@ -164,7 +165,10 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
 
     internal fun displayFragmentWithBackStack(fragment: Fragment, hideBottomNav: Boolean = true): Boolean {
         activity.searchHelper.closeSearch()
-        if (hideBottomNav) navController.navigationView.hide()
+        if (hideBottomNav) {
+            navController.navigationView.hide()
+            activity.toolbar.alignTitleStart()
+        }
         activity.invalidateOptionsMenu()
         navController.inSettings = true
 

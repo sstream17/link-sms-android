@@ -123,6 +123,7 @@ class MainIntentHandler(private val activity: MessengerActivity) {
 
     private fun displayShortcutConversation(convo: Long) {
         navController.navigationView.show()
+        activity.toolbar.alignTitleCenter()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
 

@@ -54,6 +54,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
 
     override fun onSearchViewShown() {
         activity.navController.navigationView.hide()
+        activity.toolbar.alignTitleStart()
         ensureSearchFragment()
         displaySearchFragment()
     }
@@ -63,6 +64,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
 
         if (!searchFragment!!.isSearching) {
             activity.navController.navigationView.show()
+            activity.toolbar.alignTitleCenter()
 
             if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
                 activity.setTitle(R.string.app_title)

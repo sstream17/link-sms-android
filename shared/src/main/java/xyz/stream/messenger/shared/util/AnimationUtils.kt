@@ -27,12 +27,12 @@ import android.view.animation.Interpolator
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 import xyz.klinker.android.drag_dismiss.util.StatusBarHelper
 import xyz.stream.messenger.shared.R
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import xyz.stream.messenger.shared.view.WhitableToolbar
 
 /**
  * Helper for handling all animations such as expanding and contracting conversations so that we
@@ -167,11 +167,12 @@ object AnimationUtils {
      * @param activity the activity to find the views at.
      */
     fun expandActivityForConversation(activity: Activity) {
-        val toolbar = activity.findViewById<View>(R.id.app_bar_layout)
+        val appBarLayout = activity.findViewById<View>(R.id.app_bar_layout)
+        val toolbar = activity.findViewById<WhitableToolbar>(R.id.toolbar)
         val fragmentContainer = activity.findViewById<View>(R.id.conversation_list_container)
         val bottomNav = activity.findViewById<View>(R.id.nav_view) as BottomNavigationView
 
-        toolbar.postDelayed({
+        appBarLayout.postDelayed({
             if (Settings.baseTheme == BaseTheme.BLACK) {
                 activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(Color.BLACK)
             } else {
@@ -181,9 +182,9 @@ object AnimationUtils {
 
         val extraDistance = activity.resources
                 .getDimensionPixelSize(R.dimen.extra_expand_distance)
-        val toolbarTranslate = -1 * (toolbar.height + extraDistance)
+        val toolbarTranslate = -1 * (appBarLayout.height + extraDistance)
 
-        animateActivityWithConversation(toolbar, fragmentContainer,
+        animateActivityWithConversation(appBarLayout, fragmentContainer,
                 toolbarTranslate, 0, toolbarTranslate,
                 FastOutLinearInInterpolator(), EXPAND_PERIPHERAL_DURATION)
         bottomNav.hide()
@@ -206,7 +207,8 @@ object AnimationUtils {
             return
         }
 
-        val toolbar = activity.findViewById<View>(R.id.app_bar_layout)
+        val appBarLayout = activity.findViewById<View>(R.id.app_bar_layout)
+        val toolbar = activity.findViewById<WhitableToolbar>(R.id.toolbar)
         val fragmentContainer = activity.findViewById<View>(R.id.conversation_list_container)
         val bottomNav = activity.findViewById<View>(R.id.nav_view) as BottomNavigationView
 
@@ -217,10 +219,11 @@ object AnimationUtils {
             activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(activity.resources.getColor(R.color.background))
         }
 
-        animateActivityWithConversation(toolbar, fragmentContainer, 0,
+        animateActivityWithConversation(appBarLayout, fragmentContainer, 0,
                 fragmentContainer.translationY.toInt(), 0,
                 FastOutLinearInInterpolator(), CONTRACT_PERIPHERAL_DURATION)
         bottomNav.show()
+        toolbar.alignTitleCenter()
     }
 
     /**

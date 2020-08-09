@@ -21,7 +21,10 @@ class MainOnStartDelegate(private val activity: MessengerActivity) {
             if (navController.conversationListFragment != null &&
                     !navController.conversationListFragment!!.isExpanded) {
 
-                if (!navController.navigationView.isShown && navController.otherFragment == null) navController.navigationView.show()
+                if (!navController.navigationView.isShown && navController.otherFragment == null) {
+                    navController.navigationView.show()
+                    activity.toolbar.alignTitleCenter()
+                }
                 showTextAnywherePromotion()
             }
 

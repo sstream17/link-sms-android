@@ -114,6 +114,7 @@ class MainNavigationController(private val activity: MessengerActivity)
 
                 conversationActionDelegate.displayConversations()
                 navigationView.show()
+                activity.toolbar.alignTitleCenter()
                 return true
             }
             inSettings -> {
@@ -186,7 +187,7 @@ class MainNavigationController(private val activity: MessengerActivity)
             return true
         }
 
-        val shouldSelect = drawerItemClicked(item.itemId)
+        val isHomeDestination = drawerItemClicked(item.itemId)
 
         when (item.itemId) {
             // Set app name as title for main destination
@@ -197,6 +198,6 @@ class MainNavigationController(private val activity: MessengerActivity)
             else -> activity.title = StringUtils.titleize(item.title.toString())
         }
 
-        return  shouldSelect
+        return  isHomeDestination
     }
 }

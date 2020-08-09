@@ -7,7 +7,6 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.appbar.MaterialToolbar
 import xyz.stream.messenger.shared.R
@@ -71,6 +70,20 @@ class WhitableToolbar : MaterialToolbar {
                 .forEach { getMenu().getItem(it).icon.setTintList(ColorStateList.valueOf(textColor)) }
     }
 
+    fun alignTitleCenter() {
+        ensureTitleView()
+        val params = titleView!!.layoutParams as Toolbar.LayoutParams
+        params.gravity = Gravity.CENTER
+        titleView!!.layoutParams = params
+    }
+
+    fun alignTitleStart() {
+        ensureTitleView()
+        val params = titleView!!.layoutParams as Toolbar.LayoutParams
+        params.gravity = Gravity.START
+        titleView!!.layoutParams = params
+    }
+
     private fun ensureTitleView() {
         titleView = findViewById(TOOLBAR_TITLE_ID)
         if (titleView == null) {
@@ -84,9 +97,6 @@ class WhitableToolbar : MaterialToolbar {
 
             titleView!!.gravity = Gravity.CENTER
             this.addView(titleView)
-            val params = titleView!!.layoutParams as Toolbar.LayoutParams
-            params.gravity = Gravity.CENTER
-            titleView!!.layoutParams = params
         }
     }
 
