@@ -33,6 +33,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 import java.util.Date
@@ -403,7 +404,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
 
                 (fragmentActivity!! as MessengerActivity).accountController.startResyncingAccount()
 
-                val nav = fragmentActivity!!.findViewById<View>(R.id.navigation_view) as NavigationView
+                val nav = fragmentActivity!!.findViewById<View>(R.id.nav_view) as BottomNavigationView
                 nav.menu.findItem(R.id.drawer_account).setTitle(R.string.menu_account)
             }
         }.start()
