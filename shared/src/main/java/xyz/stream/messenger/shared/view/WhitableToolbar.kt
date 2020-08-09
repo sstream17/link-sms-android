@@ -18,6 +18,7 @@ import xyz.stream.messenger.shared.util.ColorUtils
 class WhitableToolbar : MaterialToolbar {
 
     private var appliedBackgroundColor = Integer.MIN_VALUE
+    private var titleView: TextView? = null
 
     val textColor: Int
         get() = if (appliedBackgroundColor == Integer.MIN_VALUE || ColorUtils.isColorDark(appliedBackgroundColor)) {
@@ -30,22 +31,9 @@ class WhitableToolbar : MaterialToolbar {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context) : super(context)
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun setTitle(title: CharSequence?) {
-        var titleView: TextView?
-        titleView = findViewById(TOOLBAR_TITLE_ID)
-        if (titleView == null) {
-            titleView = TextView(context)
-            titleView.id = TOOLBAR_TITLE_ID
-            titleView.setTextAppearance(android.R.style.TextAppearance_Material_Widget_ActionBar_Title)
-            titleView.gravity = Gravity.CENTER
-            this.addView(titleView)
-            val params = titleView.layoutParams as Toolbar.LayoutParams
-            params.gravity = Gravity.CENTER
-            titleView.layoutParams = params
-        }
-
-        titleView.text = title
+        ensureTitleView()
+        titleView!!.text = title
     }
 
     override fun setBackgroundColor(color: Int) {
@@ -62,6 +50,11 @@ class WhitableToolbar : MaterialToolbar {
         if (navigationIcon != null) navigationIcon!!.setTintList(tintList)
     }
 
+    override fun setTitleTextColor(color: Int) {
+        ensureTitleView()
+        titleView!!.setTextColor(color)
+    }
+
     override fun setNavigationIcon(res: Int) {
         super.setNavigationIcon(res)
 
@@ -76,6 +69,25 @@ class WhitableToolbar : MaterialToolbar {
         (0 until getMenu().size())
                 .filter { getMenu().getItem(it).icon != null }
                 .forEach { getMenu().getItem(it).icon.setTintList(ColorStateList.valueOf(textColor)) }
+    }
+
+    private fun ensureTitleView() {
+        titleView = findViewById(TOOLBAR_TITLE_ID)
+        if (titleView == null) {
+            titleView = TextView(context)
+            titleView!!.id = TOOLBAR_TITLE_ID
+            if (Build.VERSION.SDK_INT < 23) {
+                titleView!!.setTextAppearance(context, android.R.style.TextAppearance_Material_Widget_ActionBar_Title)
+            } else {
+                titleView!!.setTextAppearance(android.R.style.TextAppearance_Material_Widget_ActionBar_Title)
+            }
+
+            titleView!!.gravity = Gravity.CENTER
+            this.addView(titleView)
+            val params = titleView!!.layoutParams as Toolbar.LayoutParams
+            params.gravity = Gravity.CENTER
+            titleView!!.layoutParams = params
+        }
     }
 
     companion object {
