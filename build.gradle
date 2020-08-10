@@ -26,7 +26,7 @@ buildscript {
 
     ext.buildInfo = [
             'id'                : 'xyz.stream.messenger',
-            'name'              : '0.4.2',
+            'name'              : '0.5.0',
             'number'            : System.getenv("BUILD_NUMBER") as Integer ?: Calendar.getInstance().get(Calendar.DAY_OF_YEAR),
     ]
 

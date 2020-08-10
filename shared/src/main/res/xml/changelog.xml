@@ -17,6 +17,13 @@
 <changelog>
 
     <version
+        name="0.5.0"
+        description="August 10th, 2020">
+        <text>Updating UI to use bottom navigation</text>
+        <text>The redesigned interface makes it easier to get to your most used actions</text>
+    </version>
+
+    <version
         name="0.4.3"
         description="August 6th, 2020">
         <text>Upgrade target SDK to Android 11</text>
@@ -38,7 +45,7 @@
     <version
         name="0.4.0"
         description="June 11th, 2020">
-        <text>Android 11: Support for bubble notifications. You will have to enable them for Pulse, through your system settings.</text>
+        <text>Android 11: Support for bubble notifications. You will have to enable them for Link, through your system settings.</text>
     </version>
 
     <version
