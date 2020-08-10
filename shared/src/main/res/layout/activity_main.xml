@@ -1,56 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (C) 2020 Luke Klinker
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/status_bar"
+    <FrameLayout
+        android:id="@+id/content_container"
         android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:background="@drawable/status_bar"
-        android:backgroundTint="@color/linkColorPrimaryDark"
-        android:backgroundTintMode="multiply"
-        android:fitsSystemWindows="true"
-        android:orientation="horizontal"
-        tools:ignore="InconsistentLayout" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        tools:context=".activity.MessengerActivity"
-        tools:ignore="InconsistentLayout">
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigation_view"
-            android:layout_width="292dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/background"
-            android:elevation="8dp"
-            app:headerLayout="@layout/drawer_header"
-            app:itemIconTint="@drawable/drawer_icon_selector"
-            app:itemTextColor="@drawable/drawer_text_selector"
-            app:menu="@menu/navigation_drawer_conversations"
-            app:theme="@style/EllipsizeText" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/content"
@@ -66,7 +26,8 @@
                     android:id="@+id/app_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:elevation="0dp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -101,26 +62,6 @@
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/nav_bar_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="bottom"
-                android:background="@color/navigationBarDivider" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:contentDescription="@string/compose_message"
-                android:src="@drawable/ic_add"
-                app:borderWidth="0dp"
-                app:elevation="6dp"
-                app:fabSize="normal"
-                app:pressedTranslationZ="12dp" />
-
             <FrameLayout
                 android:id="@+id/message_list_container"
                 android:layout_width="match_parent"
@@ -133,19 +74,8 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="292dp"
-            android:layout_height="match_parent" />
-
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -170,6 +100,16 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </FrameLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_conversations" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

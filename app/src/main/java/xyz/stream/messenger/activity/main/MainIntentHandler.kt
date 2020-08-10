@@ -10,6 +10,7 @@ import xyz.stream.messenger.api.implementation.ApiUtils
 import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
 import xyz.stream.messenger.shared.service.jobs.SubscriptionExpirationCheckJob
+import xyz.stream.messenger.shared.util.show
 
 class MainIntentHandler(private val activity: MessengerActivity) {
 
@@ -93,7 +94,7 @@ class MainIntentHandler(private val activity: MessengerActivity) {
             outState = Bundle()
         }
 
-        if (navController.selectedNavigationItemId != R.id.drawer_conversation) {
+        if (navController.selectedNavigationItemId != R.id.navigation_inbox) {
             outState.putInt(MessengerActivityExtras.EXTRA_NAVIGATION_ITEM_ID, navController.selectedNavigationItemId)
         } else if (navController.isConversationListExpanded()) {
             outState.putLong(MessengerActivityExtras.EXTRA_CONVERSATION_ID, navController.getShownConversationList()!!.expandedId)
@@ -121,7 +122,8 @@ class MainIntentHandler(private val activity: MessengerActivity) {
     }
 
     private fun displayShortcutConversation(convo: Long) {
-        activity.fab.show()
+        navController.navigationView.show()
+        activity.toolbar.alignTitleCenter()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
 

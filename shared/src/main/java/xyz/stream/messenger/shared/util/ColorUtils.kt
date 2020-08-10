@@ -16,8 +16,6 @@
 
 package xyz.stream.messenger.shared.util
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
@@ -27,26 +25,20 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.View
-import android.view.ViewAnimationUtils
 import android.widget.EdgeEffect
 import android.widget.EditText
 import android.widget.TextView
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.navigation.NavigationView
-
-import java.util.ArrayList
-
 import xyz.stream.messenger.shared.R
-import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.shared.activity.AbstractSettingsActivity
 import xyz.stream.messenger.shared.data.ColorSet
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import java.util.*
 import kotlin.math.pow
 
 /**
@@ -114,10 +106,7 @@ object ColorUtils {
         toolbarColor = ActivityUtils.possiblyOverrideColorSelection(activity, toolbarColor)
 
         if (!activity.resources.getBoolean(R.bool.pin_drawer)) {
-            val drawerLayout = activity
-                    .findViewById<View>(R.id.drawer_layout) as DrawerLayout?
-
-            drawerLayout?.setStatusBarBackgroundColor(statusBarColor)
+            ActivityUtils.setStatusBarColor(activity, statusBarColor)
         } else {
             val status = activity.findViewById<View>(R.id.status_bar)
 
@@ -127,104 +116,6 @@ object ColorUtils {
         }
 
         ActivityUtils.setUpLightStatusBar(activity, toolbarColor)
-    }
-
-    /**
-     * Adjusts the drawer colors and menu items to be correct depending on current state.
-     *
-     * @param color    the color for the header.
-     * @param activity the activity to find the views in.
-     */
-    fun adjustDrawerColor(color: Int, activity: Activity?) {
-        try {
-            adjustDrawerColor(color, false, activity)
-        } catch (e: IllegalStateException) {
-        }
-
-    }
-
-    fun adjustDrawerColor(color: Int, isGroup: Boolean, activity: Activity?) {
-        try {
-            adjustDrawerColorUnsafely(color, isGroup, activity)
-        } catch (e: IllegalStateException) {
-        }
-    }
-
-    /**
-     * Adjusts the drawer colors and menu items to be correct depending on current state.
-     *
-     * @param color    the color for the header.
-     * @param isGroup  whether we are adjusting the drawer for a group conversation or not. If so,
-     * some of the text will be changed and the call option will be hidden.
-     * @param activity the activity to find the views in.
-     */
-    private fun adjustDrawerColorUnsafely(color: Int, isGroup: Boolean, activity: Activity?) {
-        if (activity == null) {
-            return
-        }
-
-        var color = color
-        if (Settings.useGlobalThemeColor) {
-            color = Settings.mainColorSet.colorDark
-        }
-
-        val revealView = activity.findViewById<View>(R.id.navigation_view).findViewById<View>(R.id.header_reveal)
-        val headerView = activity.findViewById<View>(R.id.navigation_view).findViewById<View>(R.id.header)
-        val navView = activity.findViewById<View>(R.id.navigation_view) as NavigationView
-
-        if (revealView == null) {
-            return
-        }
-
-        val cx = revealView.measuredWidth / 2
-        val cy = revealView.measuredHeight / 2
-        val radius = Math.sqrt((cx * cx + cy * cy).toDouble()).toInt()
-
-        if (revealView.visibility == View.VISIBLE) {
-            val anim = ViewAnimationUtils.createCircularReveal(revealView, cx, cy, radius.toFloat(), 0f)
-            anim.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    super.onAnimationEnd(animation)
-                    revealView.visibility = View.INVISIBLE
-                }
-            })
-            anim.duration = 200
-
-            headerView.visibility = View.VISIBLE
-            anim.start()
-
-            navView.menu.clear()
-            navView.inflateMenu(R.menu.navigation_drawer_conversations)
-            navView.menu.getItem(1).isChecked = true
-
-            // change the text to
-            if (Account.accountId == null && navView.menu.findItem(R.id.drawer_account) != null) {
-                navView.menu.findItem(R.id.drawer_account).setTitle(R.string.menu_device_texting)
-            }
-
-            DrawerItemHelper(navView).prepareDrawer()
-        } else {
-            revealView.setBackgroundColor(color)
-            val anim = ViewAnimationUtils.createCircularReveal(revealView, cx, cy, 0f, radius.toFloat())
-            anim.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    super.onAnimationEnd(animation)
-                    headerView.visibility = View.INVISIBLE
-                }
-            })
-            anim.duration = 200
-
-            revealView.visibility = View.VISIBLE
-            anim.start()
-
-            navView.menu.clear()
-
-            if (isGroup) {
-                navView.inflateMenu(R.menu.navigation_drawer_messages_group)
-            } else {
-                navView.inflateMenu(R.menu.navigation_drawer_messages)
-            }
-        }
     }
 
     /**

@@ -28,7 +28,6 @@ class MessageListActivity : AppCompatActivity(), IMessageListFragment {
 
     private val conversation: Conversation? by lazy { DataSource.getConversation(this, intent.getLongExtra(CONVERSATION_ID, -1L)) }
 
-    private val drawerLayout: WearableDrawerLayout by lazy { findViewById<View>(R.id.drawer_layout) as WearableDrawerLayout }
     private val actionDrawer: WearableActionDrawerView by lazy { findViewById<View>(R.id.action_drawer) as WearableActionDrawerView }
     private val recyclerView: WearableRecyclerView by lazy { findViewById<View>(R.id.recycler_view) as WearableRecyclerView }
 

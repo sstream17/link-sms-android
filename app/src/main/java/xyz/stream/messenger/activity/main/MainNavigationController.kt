@@ -3,15 +3,12 @@ package xyz.stream.messenger.activity.main
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowInsets
 import android.widget.TextView
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.navigation.NavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.api.implementation.Account
@@ -24,21 +21,21 @@ import xyz.stream.messenger.shared.util.ColorUtils
 import xyz.stream.messenger.shared.util.PhoneNumberUtils
 import xyz.stream.messenger.shared.util.StringUtils
 import xyz.stream.messenger.shared.util.listener.BackPressedListener
+import xyz.stream.messenger.shared.util.show
 
 @Suppress("DEPRECATION")
 class MainNavigationController(private val activity: MessengerActivity)
-    : NavigationView.OnNavigationItemSelectedListener {
+    : BottomNavigationView.OnNavigationItemSelectedListener {
 
     val conversationActionDelegate = MainNavigationConversationListActionDelegate(activity)
     val messageActionDelegate = MainNavigationMessageListActionDelegate(activity)
 
-    val navigationView: NavigationView by lazy { activity.findViewById<View>(R.id.navigation_view) as NavigationView }
-    val drawerLayout: DrawerLayout? by lazy { activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout? }
+    val navigationView: BottomNavigationView by lazy { activity.findViewById<View>(R.id.nav_view) as BottomNavigationView }
 
     var conversationListFragment: ConversationListFragment? = null
     var otherFragment: Fragment? = null
     var inSettings = false
-    var selectedNavigationItemId: Int = R.id.drawer_conversation
+    var selectedNavigationItemId: Int = R.id.navigation_inbox
 
     fun isConversationListExpanded() = conversationListFragment != null && conversationListFragment!!.isExpanded
     fun isOtherFragmentConvoAndShowing() = otherFragment != null && otherFragment is ConversationListFragment && (otherFragment as ConversationListFragment).isExpanded
@@ -48,8 +45,7 @@ class MainNavigationController(private val activity: MessengerActivity)
     }
 
     fun initDrawer() {
-        activity.insetController.overrideDrawerInsets()
-        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.setOnNavigationItemSelectedListener(this)
         navigationView.postDelayed({
             try {
                 if (Account.exists()) {
@@ -91,24 +87,6 @@ class MainNavigationController(private val activity: MessengerActivity)
         }
     }
 
-    fun openDrawer(): Boolean {
-        if (drawerLayout != null && !drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout!!.openDrawer(GravityCompat.START)
-            return true
-        }
-
-        return false
-    }
-
-    fun closeDrawer(): Boolean {
-        if (drawerLayout != null && drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout!!.closeDrawer(GravityCompat.START)
-            return true
-        }
-
-        return false
-    }
-
     fun backPressed(): Boolean {
         val fragments = activity.supportFragmentManager.fragments
 
@@ -127,12 +105,12 @@ class MainNavigationController(private val activity: MessengerActivity)
                 }
 
                 conversationActionDelegate.displayConversations()
-                activity.fab.show()
-                drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                navigationView.show()
+                activity.toolbar.alignTitleCenter()
                 return true
             }
             inSettings -> {
-                onNavigationItemSelected(R.id.drawer_conversation)
+                onNavigationItemSelected(R.id.navigation_inbox)
                 return true
             }
             else -> return false
@@ -146,11 +124,12 @@ class MainNavigationController(private val activity: MessengerActivity)
         conversationListFragment?.swipeHelper?.dismissSnackbars()
 
         when (id) {
-            R.id.drawer_conversation -> return conversationActionDelegate.displayConversations()
+            R.id.navigation_inbox -> return conversationActionDelegate.displayConversations()
+            R.id.navigation_unread -> return conversationActionDelegate.displayUnread()
+            R.id.navigation_compose -> return conversationActionDelegate.displayCompose()
+            R.id.navigation_scheduled -> return conversationActionDelegate.displayScheduledMessages()
             R.id.drawer_archived -> return conversationActionDelegate.displayArchived()
             R.id.drawer_private -> return conversationActionDelegate.displayPrivate()
-            R.id.drawer_unread -> return conversationActionDelegate.displayUnread()
-            R.id.drawer_schedule -> return conversationActionDelegate.displayScheduledMessages()
             R.id.drawer_mute_contacts -> return conversationActionDelegate.displayBlacklist()
             R.id.drawer_invite -> return conversationActionDelegate.displayInviteFriends()
             R.id.drawer_feature_settings -> return conversationActionDelegate.displayFeatureSettings()
@@ -181,24 +160,8 @@ class MainNavigationController(private val activity: MessengerActivity)
                 }
             }
 
-            else -> {
-                val folder = activity.drawerItemHelper.findFolder(id)
-                return if (folder != null) {
-                    conversationActionDelegate.displayFolder(folder)
-                } else {
-                    true
-                }
-            }
+            else -> return true
         }
-    }
-
-    fun optionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home -> {
-            openDrawer()
-            true
-        }
-        R.id.menu_search -> true
-        else -> false
     }
 
     fun onNavigationItemSelected(itemId: Int) {
@@ -209,23 +172,23 @@ class MainNavigationController(private val activity: MessengerActivity)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        closeDrawer()
         selectedNavigationItemId = item.itemId
 
-        if (item.isChecked || ApiDownloadService.IS_RUNNING) {
+        if (ApiDownloadService.IS_RUNNING) {
             return true
         }
 
-        if (item.isCheckable) {
-            item.isChecked = true
+        val isHomeDestination = drawerItemClicked(item.itemId)
+
+        when (item.itemId) {
+            // Set app name as title for main destination
+            R.id.navigation_inbox -> activity.setTitle(R.string.app_title)
+            // Ignore changing title for following destinations
+            R.id.navigation_compose, R.id.drawer_settings -> {}
+            // Set destination title as title
+            else -> activity.title = StringUtils.titleize(item.title.toString())
         }
 
-        if (item.itemId == R.id.drawer_conversation) {
-            activity.setTitle(R.string.app_title)
-        } else if (item.isCheckable) {
-            activity.title = StringUtils.titleize(item.title.toString())
-        }
-
-        return drawerItemClicked(item.itemId)
+        return  isHomeDestination
     }
 }

@@ -1,12 +1,8 @@
 package xyz.stream.messenger.activity.main
 
-import android.annotation.SuppressLint
-import android.os.Build
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -17,10 +13,9 @@ import xyz.stream.messenger.fragment.conversation.ConversationListFragment
 import xyz.stream.messenger.fragment.message.EdgeToEdgeKeyboardWorkaround
 import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.fragment.settings.MaterialPreferenceFragmentCompat
-import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.util.ActivityUtils
-import xyz.stream.messenger.shared.util.AndroidVersionUtil
 import xyz.stream.messenger.shared.util.DensityUtil
+import xyz.stream.messenger.shared.util.doOnApplyWindowInsets
 
 class MainInsetController(private val activity: MessengerActivity) {
 
@@ -50,31 +45,18 @@ class MainInsetController(private val activity: MessengerActivity) {
         }
 
         val oldSystemUiFlags = activity.window.decorView.systemUiVisibility
-        val newSystemUiFlags = oldSystemUiFlags or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        val newSystemUiFlags = oldSystemUiFlags or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         activity.window.decorView.systemUiVisibility = newSystemUiFlags
     }
 
-    @SuppressLint("RestrictedApi")
-    fun overrideDrawerInsets() {
+    fun overrideInsetsForStatusBar() {
         if (!useEdgeToEdge()) {
             return
         }
 
-        activity.navController.drawerLayout?.setOnApplyWindowInsetsListener { _, insets ->
-            if (insets.systemWindowInsetBottom != 0 && bottomInsetValue == 0) {
-                bottomInsetValue = insets.systemWindowInsetBottom
-            }
-
-            val modifiedInsets = insets.replaceSystemWindowInsets(insets.systemWindowInsetLeft, insets.systemWindowInsetTop, insets.systemWindowInsetRight, 0)
-            activity.navController.drawerLayout?.setChildInsets(modifiedInsets, insets.systemWindowInsetTop > 0)
-
-            try {
-                modifyMessengerActivityElements()
-                modifyConversationListElements(activity.navController.conversationListFragment)
-            } catch (e: Exception) {
-            }
-
-            modifiedInsets
+        val contentContainer = activity.findViewById<FrameLayout>(R.id.content_container)
+        contentContainer.doOnApplyWindowInsets { view, insets, padding, _ ->
+            view.setPadding(padding.left, insets.systemWindowInsetTop, padding.right, padding.bottom)
         }
     }
 
@@ -161,18 +143,6 @@ class MainInsetController(private val activity: MessengerActivity) {
         view.layoutParams = layoutParams
 
         return snackbar
-    }
-
-    private fun modifyMessengerActivityElements() {
-        // move fab above the nav bar
-        val params = activity.fab.layoutParams as CoordinatorLayout.LayoutParams
-        params.bottomMargin = sixteenDp + bottomInsetValue
-
-        // put padding at the bottom of the navigation view's recycler view
-        val navView = activity.navController.navigationView
-        val navRecycler = navView.getChildAt(0) as RecyclerView
-        navRecycler.clipToPadding = false
-        navRecycler.setPadding(navView.paddingLeft, navView.paddingTop, navView.paddingRight, bottomInsetValue)
     }
 
     private fun useEdgeToEdge(): Boolean {

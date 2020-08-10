@@ -18,27 +18,26 @@ package xyz.stream.messenger.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.compose.ComposeActivity
 import xyz.stream.messenger.activity.main.*
-import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.view.WhitableToolbar
-import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
-import xyz.stream.messenger.shared.util.UpdateUtils
-import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
-import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.service.notification.NotificationConstants
-import xyz.stream.messenger.shared.util.*
+import xyz.stream.messenger.shared.util.AnimationUtils
+import xyz.stream.messenger.shared.util.PromotionUtils
+import xyz.stream.messenger.shared.util.UnreadBadger
+import xyz.stream.messenger.shared.util.UpdateUtils
+import xyz.stream.messenger.shared.view.WhitableToolbar
+import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
 
 
 /**
@@ -58,10 +57,7 @@ class MessengerActivity : AppCompatActivity() {
     private val permissionHelper = MainPermissionHelper(this)
     private val resultHandler = MainResultHandler(this)
 
-    val drawerItemHelper: DrawerItemHelper by lazy { DrawerItemHelper(findViewById(R.id.navigation_view)) }
-
     val toolbar: WhitableToolbar by lazy { findViewById<View>(R.id.toolbar) as WhitableToolbar }
-    val fab: FloatingActionButton by lazy { findViewById<View>(R.id.fab) as FloatingActionButton }
     val snackbarContainer: FrameLayout by lazy { findViewById<FrameLayout>(R.id.snackbar_container) }
     private val content: View by lazy { findViewById<View>(android.R.id.content) }
 
@@ -70,10 +66,9 @@ class MessengerActivity : AppCompatActivity() {
 
         UpdateUtils(this).checkForUpdate()
 
-        setContentView(R.layout.activity_messenger)
+        setContentView(R.layout.activity_main)
 
         initToolbar()
-        fab.setOnClickListener { startActivity(Intent(applicationContext, ComposeActivity::class.java)) }
 
         colorController.configureGlobalColors()
         colorController.configureNavigationBarColor()
@@ -85,17 +80,12 @@ class MessengerActivity : AppCompatActivity() {
         accountController.startIntroOrLogin(savedInstanceState)
         permissionHelper.requestDefaultSmsApp()
         insetController.applyWindowStatusFlags()
+        insetController.overrideInsetsForStatusBar()
 
         val content = findViewById<View>(R.id.content)
         content.post {
             AnimationUtils.conversationListSize = content.height
             AnimationUtils.toolbarSize = toolbar.height
-        }
-
-        drawerItemHelper.prepareDrawer()
-
-        if (Settings.baseTheme == BaseTheme.BLACK) {
-            findViewById<View?>(xyz.stream.messenger.shared.R.id.nav_bar_divider)?.visibility = View.GONE
         }
     }
 
@@ -124,7 +114,7 @@ class MessengerActivity : AppCompatActivity() {
                     navController.getShownConversationList()?.expandedItem?.itemView?.performClick()
                 }
 
-                clickNavigationItem(R.id.drawer_conversation)
+                clickNavigationItem(R.id.navigation_inbox)
             }
         } catch (e: Throwable) {
             e.printStackTrace()
@@ -184,13 +174,12 @@ class MessengerActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         try {
-            if (navController.closeDrawer()) {
-            } else if (searchHelper.closeSearch()) {
+            if (searchHelper.closeSearch()) {
             } else if (!navController.backPressed()) {
                 super.onBackPressed()
             }
         } catch (e: Exception) {
-
+            e.printStackTrace()
         }
     }
 
@@ -198,16 +187,15 @@ class MessengerActivity : AppCompatActivity() {
         if (!navController.inSettings) {
             menuInflater.inflate(R.menu.activity_messenger, menu)
 
-            val item = menu.findItem(R.id.menu_search)
-            item.icon.setTintList(ColorStateList.valueOf(toolbar.textColor))
-            searchHelper.setup(item)
+            val searchItem = navController.navigationView.menu.findItem(R.id.navigation_search)
+            searchHelper.setup(searchItem)
         }
 
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return navController.optionsItemSelected(item)
+        return navController.onNavigationItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -228,13 +216,9 @@ class MessengerActivity : AppCompatActivity() {
     fun clickNavigationItem(itemId: Int) { navController.onNavigationItemSelected(itemId) }
     fun displayConversations() = navController.conversationActionDelegate.displayConversations()
 
+    fun composeMessage() = startActivity(Intent(applicationContext, ComposeActivity::class.java))
+
     private fun initToolbar() {
         setSupportActionBar(toolbar)
-        val actionBar = supportActionBar
-
-        if (actionBar != null && !resources.getBoolean(R.bool.pin_drawer)) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-        }
     }
 }

@@ -6,9 +6,9 @@ import android.os.Handler
 import androidx.fragment.app.Fragment
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
+import xyz.stream.messenger.activity.passcode.PasscodeVerificationActivity
 import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.message.attach.AttachmentListener
-import xyz.stream.messenger.activity.passcode.PasscodeVerificationActivity
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.util.TimeUtils
 
@@ -20,7 +20,7 @@ class MainResultHandler(private val activity: MessengerActivity) {
                 activity.navController.conversationActionDelegate.displayFragmentWithBackStack(PrivateConversationListFragment())
                 Settings.setValue(activity, activity.getString(R.string.pref_private_conversation_passcode_last_entry), TimeUtils.now)
             } else {
-                activity.navController.onNavigationItemSelected(R.id.drawer_conversation)
+                activity.navController.onNavigationItemSelected(R.id.navigation_inbox)
             }
 
             return

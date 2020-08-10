@@ -6,6 +6,8 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.fragment.SearchFragment
+import xyz.stream.messenger.shared.util.hide
+import xyz.stream.messenger.shared.util.show
 
 @Suppress("DEPRECATION")
 class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearchView.OnQueryTextListener, MaterialSearchView.SearchViewListener {
@@ -18,7 +20,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
     
     fun setup(item: MenuItem) {
         searchView.setVoiceSearch(false)
-        searchView.setBackgroundColor(activity.resources.getColor(R.color.drawerBackground))
+        searchView.setBackgroundColor(activity.resources.getColor(R.color.background))
         searchView.setOnQueryTextListener(this)
         searchView.setOnSearchViewListener(this)
         
@@ -42,38 +44,29 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
 
     override fun onQueryTextChange(newText: String): Boolean {
         if (newText.isNotEmpty()) {
-            // display search fragment
             ensureSearchFragment()
             searchFragment!!.search(newText)
-            if (!searchFragment!!.isAdded) {
-                displaySearchFragment()
-            }
         } else {
-            // display conversation fragment
-            ensureSearchFragment()
             searchFragment?.search(null)
-
-            if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
-                activity.displayConversations()
-                activity.fab.hide()
-            }
         }
 
         return true
     }
 
     override fun onSearchViewShown() {
-        activity.fab.hide()
+        activity.navController.navigationView.hide()
         ensureSearchFragment()
+        displaySearchFragment()
     }
 
     override fun onSearchViewClosed() {
         ensureSearchFragment()
 
         if (!searchFragment!!.isSearching) {
-            activity.fab.show()
+            activity.navController.navigationView.show()
 
             if (navController.conversationListFragment != null && !navController.conversationListFragment!!.isAdded) {
+                activity.setTitle(R.string.app_title)
                 activity.displayConversations()
             }
         }

@@ -114,7 +114,7 @@ object ActivityUtils {
                 activateLightNavigationBar(activity, false)
             }
             else -> {
-                activity.window?.navigationBarColor = activity.resources.getColor(R.color.drawerBackground)
+                activity.window?.navigationBarColor = activity.resources.getColor(R.color.background)
                 activateLightNavigationBar(activity, false)
             }
         }
@@ -163,7 +163,7 @@ object ActivityUtils {
 
         return when {
             Settings.baseTheme == BaseTheme.BLACK -> Color.BLACK
-            Settings.isCurrentlyDarkTheme(context) -> context.resources.getColor(R.color.drawerBackground)
+            Settings.isCurrentlyDarkTheme(context) -> context.resources.getColor(R.color.background)
             else -> Color.WHITE
         }
     }

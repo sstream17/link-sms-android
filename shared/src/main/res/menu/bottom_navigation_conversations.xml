@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_inbox"
+        android:checked="true"
+        android:icon="@drawable/asl_inbox"
+        android:title="@string/menu_inbox" />
+
+    <item
+        android:id="@+id/navigation_unread"
+        android:icon="@drawable/asl_unread"
+        android:title="@string/menu_unread" />
+
+    <item
+        android:id="@+id/navigation_compose"
+        android:icon="@drawable/ic_compose"
+        android:title="@string/menu_compose" />
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/menu_search" />
+
+    <item
+        android:id="@+id/navigation_scheduled"
+        android:icon="@drawable/asl_schedule"
+        android:title="@string/menu_scheduled" />
+
+</menu>

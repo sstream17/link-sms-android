@@ -33,7 +33,7 @@ class FolderConversationListFragment : ConversationListFragment() {
     // always consume the back event and send us to the conversation list
     override fun onBackPressed(): Boolean {
         if (!super.onBackPressed()) {
-            navView?.menu?.findItem(R.id.drawer_conversation)?.isChecked = true
+            navView?.menu?.findItem(R.id.navigation_inbox)?.isChecked = true
 
             activity?.title = getString(R.string.app_title)
             (activity as MessengerActivity).displayConversations()

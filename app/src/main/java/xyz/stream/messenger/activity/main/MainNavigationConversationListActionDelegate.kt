@@ -3,11 +3,7 @@ package xyz.stream.messenger.activity.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.Fragment
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -19,12 +15,10 @@ import xyz.stream.messenger.fragment.settings.AboutFragment
 import xyz.stream.messenger.fragment.settings.HelpAndFeedbackFragment
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.data.model.Folder
 import xyz.stream.messenger.shared.util.AnimationUtils
 import xyz.stream.messenger.shared.util.TimeUtils
-import java.util.concurrent.Executor
-import android.os.Looper
-
+import xyz.stream.messenger.shared.util.hide
+import xyz.stream.messenger.shared.util.show
 
 
 class MainNavigationConversationListActionDelegate(private val activity: MessengerActivity) {
@@ -39,7 +33,9 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
     }
 
     fun displayConversations(savedInstanceState: Bundle?): Boolean {
-        activity.fab.show()
+        navController.navigationView.menu.findItem(R.id.navigation_inbox).isChecked = true
+        navController.navigationView.show()
+        activity.toolbar.alignTitleCenter()
         activity.invalidateOptionsMenu()
         navController.inSettings = false
 
@@ -107,15 +103,18 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
     }
 
     internal fun displayUnread(): Boolean {
-        return displayFragmentWithBackStack(UnreadConversationListFragment())
+        navController.navigationView.menu.findItem(R.id.navigation_unread).isChecked = true
+        return displayFragmentWithBackStack(UnreadConversationListFragment(), false)
     }
 
-    internal fun displayFolder(folder: Folder): Boolean {
-        return displayFragmentWithBackStack(FolderConversationListFragment.getInstance(folder))
+    internal fun displayCompose(): Boolean {
+        activity.composeMessage()
+        return false
     }
 
     internal fun displayScheduledMessages(): Boolean {
-        return displayFragmentWithBackStack(ScheduledMessagesFragment())
+        navController.navigationView.menu.findItem(R.id.navigation_scheduled).isChecked = true
+        return displayFragmentWithBackStack(ScheduledMessagesFragment(), false)
     }
 
     internal fun displayBlacklist(): Boolean {
@@ -153,9 +152,12 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         return true
     }
 
-    internal fun displayFragmentWithBackStack(fragment: Fragment): Boolean {
+    internal fun displayFragmentWithBackStack(fragment: Fragment, hideBottomNav: Boolean = true): Boolean {
         activity.searchHelper.closeSearch()
-        activity.fab.hide()
+        if (hideBottomNav) {
+            navController.navigationView.hide()
+            activity.toolbar.alignTitleStart()
+        }
         activity.invalidateOptionsMenu()
         navController.inSettings = true
 

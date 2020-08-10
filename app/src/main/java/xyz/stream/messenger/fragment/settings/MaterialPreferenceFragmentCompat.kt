@@ -12,7 +12,7 @@ abstract class MaterialPreferenceFragmentCompat : PreferenceFragmentCompat() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listView.setBackgroundColor(resources.getColor(R.color.drawerBackground))
+        listView.setBackgroundColor(resources.getColor(R.color.background))
     }
 
     fun findPreference(key: String) = findPreference<Preference>(key as CharSequence)!!
