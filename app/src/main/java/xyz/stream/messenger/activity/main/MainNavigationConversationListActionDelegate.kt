@@ -3,11 +3,7 @@ package xyz.stream.messenger.activity.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.Fragment
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -19,11 +15,8 @@ import xyz.stream.messenger.fragment.settings.AboutFragment
 import xyz.stream.messenger.fragment.settings.HelpAndFeedbackFragment
 import xyz.stream.messenger.fragment.settings.MyAccountFragment
 import xyz.stream.messenger.shared.data.Settings
-import xyz.stream.messenger.shared.data.model.Folder
 import xyz.stream.messenger.shared.util.AnimationUtils
 import xyz.stream.messenger.shared.util.TimeUtils
-import java.util.concurrent.Executor
-import android.os.Looper
 import xyz.stream.messenger.shared.util.hide
 import xyz.stream.messenger.shared.util.show
 

@@ -168,7 +168,6 @@ object AnimationUtils {
      */
     fun expandActivityForConversation(activity: Activity) {
         val appBarLayout = activity.findViewById<View>(R.id.app_bar_layout)
-        val toolbar = activity.findViewById<WhitableToolbar>(R.id.toolbar)
         val fragmentContainer = activity.findViewById<View>(R.id.conversation_list_container)
         val bottomNav = activity.findViewById<View>(R.id.nav_view) as BottomNavigationView
 
@@ -188,6 +187,7 @@ object AnimationUtils {
                 toolbarTranslate, 0, toolbarTranslate,
                 FastOutLinearInInterpolator(), EXPAND_PERIPHERAL_DURATION)
         bottomNav.hide()
+        // Do not adjust toolbar title alignment here since it is unnecessary and causes a visual bug
     }
 
     /**

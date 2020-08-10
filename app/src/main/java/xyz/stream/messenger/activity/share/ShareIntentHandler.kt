@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Parcelable
 import xyz.stream.messenger.activity.compose.ShareData
-import xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper
 import xyz.stream.messenger.shared.data.DataSource
 import xyz.stream.messenger.shared.data.MimeType
 import xyz.stream.messenger.shared.service.MessengerChooserTargetService

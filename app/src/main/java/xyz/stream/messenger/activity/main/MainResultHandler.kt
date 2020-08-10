@@ -6,9 +6,9 @@ import android.os.Handler
 import androidx.fragment.app.Fragment
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
+import xyz.stream.messenger.activity.passcode.PasscodeVerificationActivity
 import xyz.stream.messenger.fragment.PrivateConversationListFragment
 import xyz.stream.messenger.fragment.message.attach.AttachmentListener
-import xyz.stream.messenger.activity.passcode.PasscodeVerificationActivity
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.util.TimeUtils
 

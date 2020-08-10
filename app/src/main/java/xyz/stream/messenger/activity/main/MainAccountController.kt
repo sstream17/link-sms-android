@@ -7,13 +7,11 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.InitialLoadActivity
 import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.activity.OnboardingActivity
-import xyz.stream.messenger.api.implementation.LoginActivity
 import xyz.stream.messenger.shared.MessengerActivityExtras
 import xyz.stream.messenger.shared.data.FeatureFlags
 import xyz.stream.messenger.shared.data.Settings

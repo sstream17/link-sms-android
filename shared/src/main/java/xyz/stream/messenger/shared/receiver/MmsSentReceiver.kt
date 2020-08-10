@@ -16,17 +16,9 @@
 
 package xyz.stream.messenger.shared.receiver
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
-import android.net.Uri
 import xyz.stream.messenger.api.implementation.Account
-
-import xyz.stream.messenger.shared.data.DataSource
-import xyz.stream.messenger.shared.data.model.Message
-import xyz.stream.messenger.shared.util.SmsMmsUtils
-import xyz.stream.messenger.shared.util.closeSilent
 
 /**
  * Receiver which gets a notification when an MMS message has finished sending. It will mark the

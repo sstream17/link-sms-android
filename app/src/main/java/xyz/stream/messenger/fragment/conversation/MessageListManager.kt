@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import xyz.stream.messenger.R
 import xyz.stream.messenger.adapter.view_holder.ConversationViewHolder
-import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.fragment.message.MessageInstanceManager
+import xyz.stream.messenger.fragment.message.MessageListFragment
 import xyz.stream.messenger.shared.MessengerActivityExtras
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.util.ActivityUtils

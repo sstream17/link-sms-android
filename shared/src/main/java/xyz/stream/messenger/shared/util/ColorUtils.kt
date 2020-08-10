@@ -16,8 +16,6 @@
 
 package xyz.stream.messenger.shared.util
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
@@ -27,26 +25,20 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.View
-import android.view.ViewAnimationUtils
 import android.widget.EdgeEffect
 import android.widget.EditText
 import android.widget.TextView
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.navigation.NavigationView
-
-import java.util.ArrayList
-
 import xyz.stream.messenger.shared.R
-import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.shared.activity.AbstractSettingsActivity
 import xyz.stream.messenger.shared.data.ColorSet
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
+import java.util.*
 import kotlin.math.pow
 
 /**
