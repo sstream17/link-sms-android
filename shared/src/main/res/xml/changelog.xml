@@ -20,6 +20,7 @@
         name="0.4.3"
         description="August 6th, 2020">
         <text>Upgrade target SDK to Android 11</text>
+        <text>Use Google's in-app review prompt</text>
     </version>
 
     <version
