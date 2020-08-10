@@ -184,7 +184,7 @@ class MainNavigationController(private val activity: MessengerActivity)
             // Set app name as title for main destination
             R.id.navigation_inbox -> activity.setTitle(R.string.app_title)
             // Ignore changing title for following destinations
-            R.id.navigation_compose -> {}
+            R.id.navigation_compose, R.id.drawer_settings -> {}
             // Set destination title as title
             else -> activity.title = StringUtils.titleize(item.title.toString())
         }
