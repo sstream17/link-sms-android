@@ -146,15 +146,6 @@ class MainInsetController(private val activity: MessengerActivity) {
         return snackbar
     }
 
-    private fun modifyMessengerActivityElements() {
-
-        // put padding at the bottom of the navigation view's recycler view
-        val navView = activity.navController.navigationView
-        val navRecycler = navView.getChildAt(0) as RecyclerView
-        navRecycler.clipToPadding = false
-        navRecycler.setPadding(navView.paddingLeft, navView.paddingTop, navView.paddingRight, bottomInsetValue)
-    }
-
     private fun useEdgeToEdge(): Boolean {
         return ActivityUtils.useEdgeToEdge()
     }

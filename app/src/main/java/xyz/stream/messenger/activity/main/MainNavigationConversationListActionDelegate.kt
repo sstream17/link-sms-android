@@ -119,10 +119,6 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         return false
     }
 
-    internal fun displayFolder(folder: Folder): Boolean {
-        return displayFragmentWithBackStack(FolderConversationListFragment.getInstance(folder))
-    }
-
     internal fun displayScheduledMessages(): Boolean {
         navController.navigationView.menu.findItem(R.id.navigation_scheduled).isChecked = true
         return displayFragmentWithBackStack(ScheduledMessagesFragment(), false)

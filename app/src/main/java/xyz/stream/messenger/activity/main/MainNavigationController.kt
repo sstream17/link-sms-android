@@ -87,14 +87,6 @@ class MainNavigationController(private val activity: MessengerActivity)
         }
     }
 
-    fun openDrawer(): Boolean {
-        return false
-    }
-
-    fun closeDrawer(): Boolean {
-        return false
-    }
-
     fun backPressed(): Boolean {
         val fragments = activity.supportFragmentManager.fragments
 
@@ -180,7 +172,6 @@ class MainNavigationController(private val activity: MessengerActivity)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        closeDrawer()
         selectedNavigationItemId = item.itemId
 
         if (ApiDownloadService.IS_RUNNING) {

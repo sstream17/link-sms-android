@@ -175,8 +175,7 @@ class MessengerActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         try {
-            if (navController.closeDrawer()) {
-            } else if (searchHelper.closeSearch()) {
+            if (searchHelper.closeSearch()) {
             } else if (!navController.backPressed()) {
                 super.onBackPressed()
             }
