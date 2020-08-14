@@ -5,9 +5,12 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.view.MenuItem
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.stream.messenger.R
 import xyz.stream.messenger.activity.MessengerActivity
@@ -123,6 +126,8 @@ class MainNavigationController(private val activity: MessengerActivity)
     fun drawerItemClicked(id: Int): Boolean {
         conversationListFragment?.swipeHelper?.dismissSnackbars()
 
+        setAppBarScrollableByDestination(id)
+
         when (id) {
             R.id.navigation_inbox -> return conversationActionDelegate.displayConversations()
             R.id.navigation_unread -> return conversationActionDelegate.displayUnread()
@@ -190,5 +195,25 @@ class MainNavigationController(private val activity: MessengerActivity)
         }
 
         return  isHomeDestination
+    }
+
+    private fun setAppBarScrollableByDestination(id: Int) {
+        when (id) {
+            R.id.navigation_inbox, R.id.navigation_unread -> setAppBarScrollable(true)
+            else -> setAppBarScrollable(false)
+        }
+    }
+
+    private fun setAppBarScrollable(shouldScroll: Boolean) {
+        val scrollFlags = if (shouldScroll) SCROLL_FLAGS else NO_SCROLL_FLAGS
+        val appBarContent = activity.findViewById<FrameLayout>(R.id.app_bar_content)
+        val params = appBarContent.layoutParams as AppBarLayout.LayoutParams
+        params.scrollFlags = scrollFlags
+        appBarContent.layoutParams = params
+    }
+
+    companion object {
+        const val SCROLL_FLAGS = SCROLL_FLAG_SCROLL or SCROLL_FLAG_SNAP or SCROLL_FLAG_ENTER_ALWAYS
+        const val NO_SCROLL_FLAGS = SCROLL_FLAG_NO_SCROLL
     }
 }
