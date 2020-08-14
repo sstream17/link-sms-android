@@ -136,17 +136,10 @@ object AnimationUtils {
             conversationListSize = activity.findViewById<View>(R.id.content).height
         }
 
-        val realScreenHeight = Resources.getSystem().displayMetrics.heightPixels
-        val percentDifferent = (realScreenHeight.toDouble() - AnimationUtils.conversationListSize.toDouble()) / realScreenHeight.toDouble()
-        val originalHeight = (if (Math.abs(percentDifferent) > .25)
-            realScreenHeight - StatusBarHelper.getStatusBarHeight(activity)
-        else
-            AnimationUtils.conversationListSize) - toolbarSize
-
         val recyclerAnimator = ValueAnimator.ofInt(startY, translateY)
         recyclerAnimator.addUpdateListener { valueAnimator ->
             recyclerView.translationY = (valueAnimator.animatedValue as Int).toFloat()
-            recyclerParams.height = originalHeight + -1 * valueAnimator.animatedValue as Int
+            recyclerParams.height = conversationListSize + -1 * valueAnimator.animatedValue as Int
             recyclerView.requestLayout()
         }
         recyclerAnimator.interpolator = interpolator
@@ -254,17 +247,10 @@ object AnimationUtils {
             conversationListSize = activity.findViewById<View>(R.id.content).height
         }
 
-        val realScreenHeight = Resources.getSystem().displayMetrics.heightPixels
-        val percentDifferent = (realScreenHeight.toDouble() - AnimationUtils.conversationListSize.toDouble()) / realScreenHeight.toDouble()
-        val originalHeight = (if (Math.abs(percentDifferent) > .25)
-            realScreenHeight - StatusBarHelper.getStatusBarHeight(activity)
-        else
-            AnimationUtils.conversationListSize) - toolbarSize
-
         val containerAnimator = ValueAnimator.ofInt(containerStart, containerTranslate)
         containerAnimator.addUpdateListener { valueAnimator ->
             fragmentContainer.translationY = (valueAnimator.animatedValue as Int).toFloat()
-            containerParams.height = originalHeight + -1 * valueAnimator.animatedValue as Int
+            containerParams.height = conversationListSize + -1 * valueAnimator.animatedValue as Int
             fragmentContainer.requestLayout()
         }
         containerAnimator.interpolator = interpolator
