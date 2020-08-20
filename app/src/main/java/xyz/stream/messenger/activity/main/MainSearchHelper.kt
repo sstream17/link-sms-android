@@ -55,6 +55,7 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
 
     override fun onSearchViewShown() {
         activity.navController.navigationView.hide()
+        activity.navController.setAppBarScrollable(false)
         ensureSearchFragment()
         displaySearchFragment()
     }

@@ -197,19 +197,19 @@ class MainNavigationController(private val activity: MessengerActivity)
         return  isHomeDestination
     }
 
-    private fun setAppBarScrollableByDestination(id: Int) {
-        when (id) {
-            R.id.navigation_inbox, R.id.navigation_unread -> setAppBarScrollable(true)
-            else -> setAppBarScrollable(false)
-        }
-    }
-
-    private fun setAppBarScrollable(shouldScroll: Boolean) {
+    fun setAppBarScrollable(shouldScroll: Boolean) {
         val scrollFlags = if (shouldScroll) SCROLL_FLAGS else NO_SCROLL_FLAGS
         val appBarContent = activity.findViewById<FrameLayout>(R.id.app_bar_content)
         val params = appBarContent.layoutParams as AppBarLayout.LayoutParams
         params.scrollFlags = scrollFlags
         appBarContent.layoutParams = params
+    }
+
+    private fun setAppBarScrollableByDestination(id: Int) {
+        when (id) {
+            R.id.navigation_inbox, R.id.navigation_unread -> setAppBarScrollable(true)
+            else -> setAppBarScrollable(false)
+        }
     }
 
     companion object {
