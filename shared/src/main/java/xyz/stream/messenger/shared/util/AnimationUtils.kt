@@ -173,9 +173,9 @@ object AnimationUtils {
 
         appBarLayout.postDelayed({
             if (Settings.baseTheme == BaseTheme.BLACK) {
-                activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(Color.BLACK)
+                fragmentContainer?.setBackgroundColor(Color.BLACK)
             } else {
-                activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(activity.resources.getColor(R.color.background))
+                fragmentContainer?.setBackgroundColor(activity.resources.getColor(R.color.background))
             }
         }, EXPAND_CONVERSATION_DURATION + 50L)
 
@@ -214,9 +214,9 @@ object AnimationUtils {
 
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
-            activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(Color.BLACK)
+            fragmentContainer?.setBackgroundColor(Color.BLACK)
         } else {
-            activity.findViewById<View?>(R.id.conversation_list_container)?.setBackgroundColor(activity.resources.getColor(R.color.background))
+            fragmentContainer?.setBackgroundColor(activity.resources.getColor(R.color.background))
         }
 
         animateActivityWithConversation(appBarLayout, fragmentContainer, 0,
