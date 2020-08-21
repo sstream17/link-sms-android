@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="128dp"
             app:navigationIcon="@drawable/ic_back"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight" />
 
         <xyz.stream.messenger.shared.view.MaxHeightScrollView
             android:layout_width="match_parent"
