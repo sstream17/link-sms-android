@@ -164,7 +164,7 @@ class MainNavigationController(private val activity: MessengerActivity)
                 }
             }
 
-            else -> return true
+            else -> return false
         }
     }
 
