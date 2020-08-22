@@ -48,7 +48,7 @@ import kotlin.math.pow
  */
 object ColorUtils {
 
-    const val CONTRAST_MINIMUM = 2.625
+    const val CONTRAST_MINIMUM = 4.5
 
     fun getRandomMaterialColor(context: Context): ColorSet {
         val num = (Math.random() * (16 + 1)).toInt()
