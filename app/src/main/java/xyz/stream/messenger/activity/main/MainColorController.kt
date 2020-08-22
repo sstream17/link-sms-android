@@ -18,9 +18,8 @@ import xyz.stream.messenger.shared.util.ColorConverter.DARKEN_AMOUNT
 import xyz.stream.messenger.shared.util.ColorConverter.LIGHTEN_AMOUNT
 import xyz.stream.messenger.shared.util.ColorConverter.darken
 import xyz.stream.messenger.shared.util.ColorConverter.lighten
+import xyz.stream.messenger.shared.util.ColorConverter.recursivelyContrastColorToBackground
 import xyz.stream.messenger.shared.util.ColorUtils
-import xyz.stream.messenger.shared.util.ColorUtils.CONTRAST_MINIMUM
-import xyz.stream.messenger.shared.util.ColorUtils.getContrastRatio
 import xyz.stream.messenger.shared.util.TimeUtils
 
 class MainColorController(private val activity: AppCompatActivity) {
@@ -47,7 +46,7 @@ class MainColorController(private val activity: AppCompatActivity) {
 
         ColorUtils.adjustStatusBarColor(Settings.mainColorSet.color, Settings.mainColorSet.colorDark, activity)
 
-        val selectedItemColor = possiblyOverrideColorSelection(activity, Settings.mainColorSet.color, Settings.mainColorSet.colorAccent)
+        val selectedItemColor = possiblyOverrideColorSelection(activity, Settings.mainColorSet.color)
 
         val states = arrayOf(intArrayOf(android.R.attr.state_selected), intArrayOf(-android.R.attr.state_selected))
         val colors = intArrayOf(selectedItemColor, getColor(activity, R.color.secondaryText))
@@ -70,55 +69,41 @@ class MainColorController(private val activity: AppCompatActivity) {
         }
     }
 
-    private fun possiblyOverrideColorSelection(
-            context: Context,
-            mainColor: Int,
-            accentColor: Int): Int {
+    private fun possiblyOverrideColorSelection(context: Context, mainColor: Int): Int {
         val isBlackTheme = Settings.baseTheme == BaseTheme.BLACK
         val isDarkTheme = Settings.isCurrentlyDarkTheme(context)
         val isDarkColor = ColorUtils.isColorDark(mainColor)
         return when {
-            isBlackTheme && isDarkColor -> selectColorMeetingContrast(context, Color.BLACK, mainColor, accentColor, Color.WHITE, LIGHTEN_AMOUNT, ::lighten)
-            isDarkTheme && isDarkColor -> selectColorMeetingContrast(context, context.getColor(R.color.background), mainColor, accentColor, Color.WHITE, LIGHTEN_AMOUNT, ::lighten)
-            !isDarkTheme && !isDarkColor -> selectColorMeetingContrast(context, Color.WHITE, mainColor, accentColor, Color.BLACK, DARKEN_AMOUNT, ::darken)
+            isBlackTheme && isDarkColor -> recursivelyContrastColorToBackground(
+                    Color.BLACK,
+                    mainColor,
+                    BOTTOM_NAVIGATION_CONTRAST_MINIMUM,
+                    Color.WHITE,
+                    LIGHTEN_AMOUNT,
+                    ::lighten,
+                    CONTRAST_RETRIES)
+            isDarkTheme && isDarkColor -> recursivelyContrastColorToBackground(
+                    context.getColor(R.color.background),
+                    mainColor,
+                    BOTTOM_NAVIGATION_CONTRAST_MINIMUM,
+                    Color.WHITE,
+                    LIGHTEN_AMOUNT,
+                    ::lighten,
+                    CONTRAST_RETRIES)
+            !isDarkTheme && !isDarkColor -> recursivelyContrastColorToBackground(
+                    Color.WHITE,
+                    mainColor,
+                    BOTTOM_NAVIGATION_CONTRAST_MINIMUM,
+                    Color.BLACK,
+                    DARKEN_AMOUNT,
+                    ::darken,
+                    CONTRAST_RETRIES)
             else -> mainColor
         }
     }
 
-    private fun selectColorMeetingContrast(
-            context: Context,
-            backgroundColor: Int,
-            mainColor: Int,
-            accentColor: Int,
-            defaultColor: Int,
-            modifyAmount: Int,
-            modifierMethod: (Int, Int) -> Int): Int {
-        val mainColor = when(mainColor) {
-            Color.WHITE -> context.getColor(R.color.nearWhite)
-            Color.BLACK -> context.getColor(R.color.nearBlack)
-            else -> mainColor
-        }
-
-        val accentColor = when(accentColor) {
-            Color.WHITE -> context.getColor(R.color.nearWhite)
-            Color.BLACK -> context.getColor(R.color.nearBlack)
-            else -> accentColor
-        }
-
-        var i = 0
-        do {
-            val modifiedMainColor = modifierMethod(mainColor, modifyAmount * i)
-            val modifiedAccentColor = modifierMethod(accentColor, modifyAmount * i)
-            val contrastMain = getContrastRatio(backgroundColor, modifiedMainColor)
-            val contrastAccent = getContrastRatio(backgroundColor, modifiedAccentColor)
-
-            if (contrastMain > CONTRAST_MINIMUM) {
-                return modifiedMainColor
-            } else if (contrastAccent > CONTRAST_MINIMUM) {
-                return modifiedAccentColor
-            }
-        } while (i++ < 4)
-
-        return defaultColor
+    companion object {
+        const val BOTTOM_NAVIGATION_CONTRAST_MINIMUM = 4.5
+        const val CONTRAST_RETRIES = 4
     }
 }

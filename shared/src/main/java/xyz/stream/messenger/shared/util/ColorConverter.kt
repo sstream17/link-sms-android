@@ -1,6 +1,8 @@
 package xyz.stream.messenger.shared.util
 
 import android.graphics.Color
+import xyz.stream.messenger.shared.util.ColorUtils.getContrastRatio
+import xyz.stream.messenger.shared.util.ColorUtils.isColorDark
 
 /**
  * Class used to help with the Material Design Color palette, which is created
@@ -34,6 +36,27 @@ object ColorConverter {
             Color.BLACK
         } else {
             lighten(color, LIGHTEN_AMOUNT)
+        }
+    }
+
+    fun recursivelyContrastColorToBackground(
+            backgroundColor: Int,
+            color: Int,
+            contrastMinimum: Double,
+            defaultColor: Int,
+            modifyAmount: Int,
+            modifierMethod: (Int, Int) -> Int,
+            retries: Int): Int {
+        return if (isColorDark(backgroundColor) && color == Color.BLACK) {
+            Color.WHITE
+        } else if (!isColorDark(backgroundColor) && color == Color.WHITE) {
+            Color.BLACK
+        } else if (getContrastRatio(backgroundColor, color) > contrastMinimum) {
+            color
+        } else if (retries == 0) {
+            defaultColor
+        } else {
+            recursivelyContrastColorToBackground(backgroundColor, modifierMethod(color, modifyAmount), contrastMinimum, defaultColor, modifyAmount, modifierMethod, retries - 1)
         }
     }
 
