@@ -39,12 +39,16 @@ import xyz.stream.messenger.shared.data.ColorSet
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.pow
 
 /**
  * Helper class for working with colors.
  */
 object ColorUtils {
+
+    const val CONTRAST_MINIMUM = 2.625
 
     fun getRandomMaterialColor(context: Context): ColorSet {
         val num = (Math.random() * (16 + 1)).toInt()
@@ -372,17 +376,28 @@ object ColorUtils {
     // Modeled after WCAG 2.0 Success Criterion 1.4.3
     // https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
     fun isColorDark(color: Int): Boolean {
+        val luminance = getLuminance(color)
+
+        // Determine color based on the contrast ratio
+        // https://www.w3.org/TR/WCAG20/#contrast-ratiodef
+        return luminance  < 0.35
+    }
+
+    fun getContrastRatio(color1: Int, color2: Int) : Double {
+        val luminance1 = getLuminance(color1)
+        val luminance2 = getLuminance(color2)
+
+        return (max(luminance1, luminance2) + 0.05) / (min(luminance1, luminance2) + 0.05)
+    }
+
+    private fun getLuminance(color: Int): Double {
         val red = getSRGB(Color.red(color))
         val green = getSRGB(Color.green(color))
         val blue = getSRGB(Color.blue(color))
 
         // Compute the relative luminance of the color
         // https://www.w3.org/TR/WCAG20/#relativeluminancedef
-        val luminance = (0.2126 * red + 0.7152 * green + 0.0722 * blue)
-
-        // Determine color based on the contrast ratio
-        // https://www.w3.org/TR/WCAG20/#contrast-ratiodef
-        return luminance  < 0.35
+        return (0.2126 * red + 0.7152 * green + 0.0722 * blue)
     }
 
     private fun getSRGB(component: Int): Double {

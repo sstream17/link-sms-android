@@ -8,8 +8,8 @@ import android.graphics.Color
  */
 object ColorConverter {
 
-    const val DARKEN_AMOUNT: Int = 12
-    const val LIGHTEN_AMOUNT: Int = 10
+    const val DARKEN_AMOUNT = 12
+    const val LIGHTEN_AMOUNT = 10
 
     /**
      * When converting a material design primary color, to its darker version, we darken by 12.
