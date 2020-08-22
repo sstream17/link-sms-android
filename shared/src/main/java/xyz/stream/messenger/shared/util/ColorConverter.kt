@@ -8,6 +8,9 @@ import android.graphics.Color
  */
 object ColorConverter {
 
+    const val DARKEN_AMOUNT: Int = 12
+    const val LIGHTEN_AMOUNT: Int = 10
+
     /**
      * When converting a material design primary color, to its darker version, we darken by 12.
      *
@@ -15,11 +18,11 @@ object ColorConverter {
      * @return the darker version of the primary color.
      */
     fun darkenPrimaryColor(color: Int): Int {
-        return darken(color, 12)
+        return darken(color, DARKEN_AMOUNT)
     }
 
     /**
-     * When converting a material design primary color, to its lighter version, we lighten by 12.
+     * When converting a material design primary color, to its lighter version, we lighten by 10.
      *
      * @param color the primary color.
      * @return the darker version of the primary color.
@@ -30,7 +33,7 @@ object ColorConverter {
         } else if (color == Color.BLACK) {
             Color.BLACK
         } else {
-            lighten(color, 10)
+            lighten(color, LIGHTEN_AMOUNT)
         }
     }
 
@@ -41,7 +44,7 @@ object ColorConverter {
      * @param amount amount between 0 and 100
      * @return darken color
      */
-    private fun darken(base: Int, amount: Int): Int {
+    fun darken(base: Int, amount: Int): Int {
         var hsv = FloatArray(3)
         Color.colorToHSV(base, hsv)
 
