@@ -48,6 +48,7 @@ class MainColorController(private val activity: AppCompatActivity) {
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
             conversationListContainer.setBackgroundColor(Color.BLACK)
+            bottomNav.setBackgroundColor(Color.BLACK)
         }
     }
 
