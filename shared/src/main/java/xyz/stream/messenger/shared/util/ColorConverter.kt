@@ -39,6 +39,18 @@ object ColorConverter {
         }
     }
 
+    /**
+     * Recursively sets a color to contrast its background. If the minimum contrast threshold is achieved,
+     * the modified color will be returned. Otherwise, the color will eventually default after a number of retries.
+     *
+     * @param backgroundColor the color of the background
+     * @param color the color to modify
+     * @param contrastMinimum the contrast threshold that must be met in order to modify [color]
+     * @param defaultColor the color to default to if the [contrastMinimum] is not met
+     * @param modifyAmount the amount to modify the color by
+     * @param modifierMethod the method which modifies the color, one of [lighten] or [darken]
+     * @param retries the number of times to continue modifying [color] before using [defaultColor]
+     */
     fun recursivelyContrastColorToBackground(
             backgroundColor: Int,
             color: Int,
