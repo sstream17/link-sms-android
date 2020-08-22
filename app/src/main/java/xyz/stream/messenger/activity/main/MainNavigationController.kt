@@ -182,8 +182,6 @@ class MainNavigationController(private val activity: MessengerActivity)
             return true
         }
 
-        val isHomeDestination = drawerItemClicked(item.itemId)
-
         when (item.itemId) {
             // Set app name as title for main destination
             R.id.navigation_inbox -> activity.setTitle(R.string.app_title)
@@ -193,6 +191,6 @@ class MainNavigationController(private val activity: MessengerActivity)
             else -> activity.title = StringUtils.titleize(item.title.toString())
         }
 
-        return  isHomeDestination
+        return  drawerItemClicked(item.itemId)
     }
 }
