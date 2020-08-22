@@ -184,14 +184,15 @@ class MessengerActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        supportActionBar?.setDisplayHomeAsUpEnabled(navController.inSettings)
         if (!navController.inSettings) {
             menuInflater.inflate(R.menu.activity_messenger, menu)
 
             val searchItem = navController.navigationView.menu.findItem(R.id.navigation_search)
             searchHelper.setup(searchItem)
+        } else {
+            toolbar.setNavigationIcon(R.drawable.ic_back)
         }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(navController.inSettings)
 
         return super.onCreateOptionsMenu(menu)
     }
