@@ -141,4 +141,7 @@
 
     <color name="navigationBarDivider">#00000000</color>
 
+    <color name="nearWhite">#FEFEFE</color>
+    <color name="nearBlack">#010101</color>
+
 </resources>

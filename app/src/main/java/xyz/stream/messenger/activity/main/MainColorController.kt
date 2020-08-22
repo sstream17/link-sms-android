@@ -78,20 +78,33 @@ class MainColorController(private val activity: AppCompatActivity) {
         val isDarkTheme = Settings.isCurrentlyDarkTheme(context)
         val isDarkColor = ColorUtils.isColorDark(mainColor)
         return when {
-            isBlackTheme && isDarkColor -> selectColorMeetingContrast(Color.BLACK, mainColor, accentColor, Color.WHITE, LIGHTEN_AMOUNT, ::lighten)
-            isDarkTheme && isDarkColor -> selectColorMeetingContrast(context.getColor(R.color.background), mainColor, accentColor, Color.WHITE, LIGHTEN_AMOUNT, ::lighten)
-            !isDarkTheme && !isDarkColor -> selectColorMeetingContrast(Color.WHITE, mainColor, accentColor, Color.BLACK, DARKEN_AMOUNT, ::darken)
+            isBlackTheme && isDarkColor -> selectColorMeetingContrast(context, Color.BLACK, mainColor, accentColor, Color.WHITE, LIGHTEN_AMOUNT, ::lighten)
+            isDarkTheme && isDarkColor -> selectColorMeetingContrast(context, context.getColor(R.color.background), mainColor, accentColor, Color.WHITE, LIGHTEN_AMOUNT, ::lighten)
+            !isDarkTheme && !isDarkColor -> selectColorMeetingContrast(context, Color.WHITE, mainColor, accentColor, Color.BLACK, DARKEN_AMOUNT, ::darken)
             else -> mainColor
         }
     }
 
     private fun selectColorMeetingContrast(
+            context: Context,
             backgroundColor: Int,
             mainColor: Int,
             accentColor: Int,
             defaultColor: Int,
             modifyAmount: Int,
             modifierMethod: (Int, Int) -> Int): Int {
+        val mainColor = when(mainColor) {
+            Color.WHITE -> context.getColor(R.color.nearWhite)
+            Color.BLACK -> context.getColor(R.color.nearBlack)
+            else -> mainColor
+        }
+
+        val accentColor = when(accentColor) {
+            Color.WHITE -> context.getColor(R.color.nearWhite)
+            Color.BLACK -> context.getColor(R.color.nearBlack)
+            else -> accentColor
+        }
+
         var i = 0
         do {
             val modifiedMainColor = modifierMethod(mainColor, modifyAmount * i)
