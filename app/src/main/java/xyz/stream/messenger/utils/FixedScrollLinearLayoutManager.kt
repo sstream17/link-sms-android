@@ -23,12 +23,14 @@ class FixedScrollLinearLayoutManager(context: Context?) : LinearLayoutManager(co
         if (childCount == 0) {
             return 0
         }
+
         val firstChildPosition = findFirstVisibleItemPosition()
         val firstChild = findViewByPosition(firstChildPosition)
         var scrolledY: Int = -(firstChild?.y?.toInt() ?: 0)
         for (i in 0 until firstChildPosition) {
             scrolledY += childSizesMap[i] ?: 0
         }
+
         return scrolledY
     }
 
