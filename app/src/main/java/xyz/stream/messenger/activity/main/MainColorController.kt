@@ -1,5 +1,6 @@
 package xyz.stream.messenger.activity.main
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
@@ -13,6 +14,11 @@ import xyz.stream.messenger.activity.MessengerActivity
 import xyz.stream.messenger.shared.data.Settings
 import xyz.stream.messenger.shared.data.pojo.BaseTheme
 import xyz.stream.messenger.shared.util.ActivityUtils
+import xyz.stream.messenger.shared.util.ColorConverter.DARKEN_AMOUNT
+import xyz.stream.messenger.shared.util.ColorConverter.LIGHTEN_AMOUNT
+import xyz.stream.messenger.shared.util.ColorConverter.darken
+import xyz.stream.messenger.shared.util.ColorConverter.lighten
+import xyz.stream.messenger.shared.util.ColorConverter.recursivelyContrastColorToBackground
 import xyz.stream.messenger.shared.util.ColorUtils
 import xyz.stream.messenger.shared.util.TimeUtils
 
@@ -40,14 +46,17 @@ class MainColorController(private val activity: AppCompatActivity) {
 
         ColorUtils.adjustStatusBarColor(Settings.mainColorSet.color, Settings.mainColorSet.colorDark, activity)
 
+        val selectedItemColor = possiblyOverrideColorSelection(activity, Settings.mainColorSet.color)
+
         val states = arrayOf(intArrayOf(android.R.attr.state_selected), intArrayOf(-android.R.attr.state_selected))
-        val colors = intArrayOf(Settings.mainColorSet.color, getColor(activity, R.color.secondaryText))
+        val colors = intArrayOf(selectedItemColor, getColor(activity, R.color.secondaryText))
         val colorStateList = ColorStateList(states, colors)
         bottomNav.itemIconTintList = colorStateList
         bottomNav.itemTextColor = colorStateList
 
         if (Settings.baseTheme == BaseTheme.BLACK) {
             conversationListContainer.setBackgroundColor(Color.BLACK)
+            bottomNav.setBackgroundColor(Color.BLACK)
         }
     }
 
@@ -58,5 +67,43 @@ class MainColorController(private val activity: AppCompatActivity) {
             Settings.isCurrentlyDarkTheme(activity) -> ActivityUtils.setUpNavigationBarColor(activity, -1223, isMessengerActivity) // random. the activity utils will handle the dark color
             else -> ActivityUtils.setUpNavigationBarColor(activity, Color.WHITE, isMessengerActivity)
         }
+    }
+
+    private fun possiblyOverrideColorSelection(context: Context, mainColor: Int): Int {
+        val isBlackTheme = Settings.baseTheme == BaseTheme.BLACK
+        val isDarkTheme = Settings.isCurrentlyDarkTheme(context)
+        val isDarkColor = ColorUtils.isColorDark(mainColor)
+        return when {
+            isBlackTheme && isDarkColor -> recursivelyContrastColorToBackground(
+                    Color.BLACK,
+                    mainColor,
+                    BOTTOM_NAVIGATION_CONTRAST_MINIMUM,
+                    Color.WHITE,
+                    LIGHTEN_AMOUNT,
+                    ::lighten,
+                    CONTRAST_RETRIES)
+            isDarkTheme && isDarkColor -> recursivelyContrastColorToBackground(
+                    context.getColor(R.color.background),
+                    mainColor,
+                    BOTTOM_NAVIGATION_CONTRAST_MINIMUM,
+                    Color.WHITE,
+                    LIGHTEN_AMOUNT,
+                    ::lighten,
+                    CONTRAST_RETRIES)
+            !isDarkTheme && !isDarkColor -> recursivelyContrastColorToBackground(
+                    Color.WHITE,
+                    mainColor,
+                    BOTTOM_NAVIGATION_CONTRAST_MINIMUM,
+                    Color.BLACK,
+                    DARKEN_AMOUNT,
+                    ::darken,
+                    CONTRAST_RETRIES)
+            else -> mainColor
+        }
+    }
+
+    companion object {
+        const val BOTTOM_NAVIGATION_CONTRAST_MINIMUM = 1.5
+        const val CONTRAST_RETRIES = 4
     }
 }

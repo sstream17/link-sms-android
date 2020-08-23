@@ -1,12 +1,17 @@
 package xyz.stream.messenger.shared.util
 
 import android.graphics.Color
+import xyz.stream.messenger.shared.util.ColorUtils.getContrastRatio
+import xyz.stream.messenger.shared.util.ColorUtils.isColorDark
 
 /**
  * Class used to help with the Material Design Color palette, which is created
  * by lightening and darkening base colors.
  */
 object ColorConverter {
+
+    const val DARKEN_AMOUNT = 12
+    const val LIGHTEN_AMOUNT = 10
 
     /**
      * When converting a material design primary color, to its darker version, we darken by 12.
@@ -15,11 +20,11 @@ object ColorConverter {
      * @return the darker version of the primary color.
      */
     fun darkenPrimaryColor(color: Int): Int {
-        return darken(color, 12)
+        return darken(color, DARKEN_AMOUNT)
     }
 
     /**
-     * When converting a material design primary color, to its lighter version, we lighten by 12.
+     * When converting a material design primary color, to its lighter version, we lighten by 10.
      *
      * @param color the primary color.
      * @return the darker version of the primary color.
@@ -30,7 +35,41 @@ object ColorConverter {
         } else if (color == Color.BLACK) {
             Color.BLACK
         } else {
-            lighten(color, 10)
+            lighten(color, LIGHTEN_AMOUNT)
+        }
+    }
+
+    /**
+     * Recursively sets a color to contrast its background. If the minimum contrast threshold is achieved,
+     * the modified color will be returned. Otherwise, the color will eventually default after a number of retries.
+     *
+     * @param backgroundColor the color of the background
+     * @param color the color to modify
+     * @param contrastMinimum the contrast threshold that must be met in order to modify [color]
+     * @param defaultColor the color to default to if the [contrastMinimum] is not met
+     * @param modifyAmount the amount to modify the color by
+     * @param modifierMethod the method which modifies the color, one of [lighten] or [darken]
+     * @param retries the number of times to continue modifying [color] before using [defaultColor]
+     */
+    fun recursivelyContrastColorToBackground(
+            backgroundColor: Int,
+            color: Int,
+            contrastMinimum: Double,
+            defaultColor: Int,
+            modifyAmount: Int,
+            modifierMethod: (Int, Int) -> Int,
+            retries: Int): Int {
+        val isDarkTheme = isColorDark(backgroundColor)
+        return if (isDarkTheme && color == Color.BLACK) {
+            Color.WHITE
+        } else if (!isDarkTheme && color == Color.WHITE) {
+            Color.BLACK
+        } else if (getContrastRatio(backgroundColor, color) > contrastMinimum) {
+            color
+        } else if (retries == 0) {
+            defaultColor
+        } else {
+            recursivelyContrastColorToBackground(backgroundColor, modifierMethod(color, modifyAmount), contrastMinimum, defaultColor, modifyAmount, modifierMethod, retries - 1)
         }
     }
 
@@ -41,7 +80,7 @@ object ColorConverter {
      * @param amount amount between 0 and 100
      * @return darken color
      */
-    private fun darken(base: Int, amount: Int): Int {
+    fun darken(base: Int, amount: Int): Int {
         var hsv = FloatArray(3)
         Color.colorToHSV(base, hsv)
 
