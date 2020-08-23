@@ -103,7 +103,7 @@ class MainColorController(private val activity: AppCompatActivity) {
     }
 
     companion object {
-        const val BOTTOM_NAVIGATION_CONTRAST_MINIMUM = 4.5
+        const val BOTTOM_NAVIGATION_CONTRAST_MINIMUM = 1.5
         const val CONTRAST_RETRIES = 4
     }
 }
