@@ -25,7 +25,7 @@
     <color name="primaryText">#FFFFFFFF</color>
     <color name="secondaryText">#B2FFFFFF</color>
     <color name="hintText">#8FFFFFFF</color>
-    <color name="divider">#29353a</color>
+    <color name="divider">#606060</color>
     <color name="ripple">#22FFFFFF</color>
     <color name="code_block_color">#11FFFFFF</color>
 
