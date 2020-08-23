@@ -157,9 +157,10 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         if (hideBottomNav) {
             navController.navigationView.hide()
             activity.toolbar.alignTitleStart()
+            navController.inSettings = true
         }
+
         activity.invalidateOptionsMenu()
-        navController.inSettings = true
 
         navController.otherFragment = fragment
         Handler().postDelayed({
