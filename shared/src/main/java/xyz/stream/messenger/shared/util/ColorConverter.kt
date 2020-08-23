@@ -59,9 +59,10 @@ object ColorConverter {
             modifyAmount: Int,
             modifierMethod: (Int, Int) -> Int,
             retries: Int): Int {
-        return if (isColorDark(backgroundColor) && color == Color.BLACK) {
+        val isDarkTheme = isColorDark(backgroundColor)
+        return if (isDarkTheme && color == Color.BLACK) {
             Color.WHITE
-        } else if (!isColorDark(backgroundColor) && color == Color.WHITE) {
+        } else if (!isDarkTheme && color == Color.WHITE) {
             Color.BLACK
         } else if (getContrastRatio(backgroundColor, color) > contrastMinimum) {
             color
