@@ -64,11 +64,11 @@ public class KeyUtils {
     public String hashPassword(String password, String salt) {
         try {
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(StandardCharsets.UTF_8),
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), Base64.decode(salt.getBytes(StandardCharsets.ISO_8859_1), Base64.DEFAULT),
                     ITERATIONS, KEY_LENGTH);
             SecretKey tmp = factory.generateSecret(spec);
             SecretKey secret = new SecretKeySpec(tmp.getEncoded(), "AES");
-            return Base64.encodeToString(secret.getEncoded(), Base64.DEFAULT);
+            return Base64.encodeToString(secret.getEncoded(), Base64.NO_WRAP);
         } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
             System.out.println("could not create key");
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class KeyUtils {
 
         try {
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(StandardCharsets.UTF_8),
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), Base64.decode(salt.getBytes(StandardCharsets.ISO_8859_1), Base64.DEFAULT),
                     ITERATIONS, KEY_LENGTH);
             SecretKey tmp = factory.generateSecret(spec);
             return new SecretKeySpec(tmp.getEncoded(), "AES");

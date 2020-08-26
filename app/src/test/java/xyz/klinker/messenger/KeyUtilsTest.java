@@ -1,21 +1,17 @@
 package xyz.klinker.messenger;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import javax.crypto.SecretKey;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotSame;
-import static junit.framework.Assert.assertSame;
-import static junit.framework.Assert.assertTrue;
-
 import xyz.klinker.messenger.encryption.KeyUtils;
+
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class KeyUtilsTest extends MessengerSuite {
 
-    private final String SALT = "abcdefghijklmnopqrstuvwxyz";
+    private final String SALT = "JC279mE3nLZaskH6lmPboIGijTWiZdAn";
     private final String SALT2 = "zyxwvutsrqponmlkjihgfedcba";
     private final String accountId = "aabss-fjfj11-jfjf00-jj";
 
