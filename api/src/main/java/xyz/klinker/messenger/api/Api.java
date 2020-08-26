@@ -62,9 +62,9 @@ import xyz.klinker.messenger.api.service.TemplateService;
  */
 public class Api {
 
-    private static final String API_DEBUG_URL = "http://192.168.86.111:3000/api/v1/";
-    private static final String API_STAGING_URL = "https://klinkerapps-messenger-staging.herokuapp.com/api/v1/";
-    private static final String API_RELEASE_URL = "https://api.messenger.klinkerapps.com/api/v1/";
+    private static final String API_DEBUG_URL = "https://192.168.0.142:45455/api/";
+    private static final String API_STAGING_URL = "https://192.168.0.142:45455/api/";
+    private static final String API_RELEASE_URL = "https://192.168.0.142:45455/api/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -113,25 +113,7 @@ public class Api {
     };
 
     private static Gson gson = new GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .setFieldNamingStrategy(new FieldNamingStrategy() {
-                @Override
-                public String translateName(Field f) {
-                    return separateCamelCase(f.getName(), "_").toLowerCase(Locale.ROOT);
-                }
-
-                private String separateCamelCase(String name, String separator) {
-                    StringBuilder translation = new StringBuilder();
-                    for (int i = 0; i < name.length(); i++) {
-                        char character = name.charAt(i);
-                        if (Character.isUpperCase(character) && translation.length() != 0) {
-                            translation.append(separator);
-                        }
-                        translation.append(character);
-                    }
-                    return translation.toString();
-                }
-            })
+            .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
             .create();
 
     private Retrofit retrofit;
