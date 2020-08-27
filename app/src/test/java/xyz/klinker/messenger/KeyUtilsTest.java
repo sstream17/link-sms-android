@@ -12,7 +12,7 @@ import static junit.framework.Assert.assertTrue;
 public class KeyUtilsTest extends MessengerSuite {
 
     private final String SALT = "JC279mE3nLZaskH6lmPboIGijTWiZdAn";
-    private final String SALT2 = "zyxwvutsrqponmlkjihgfedcba";
+    private final String SALT2 = "qPQNKGrQ8coC8umJOKy6PK+a3AnaTNrU";
     private final String accountId = "aabss-fjfj11-jfjf00-jj";
 
     @Test

@@ -23,14 +23,27 @@ public class SignupRequest {
 
     public String name;
     public String realName;
-    public String password;
+    public String passwordHash;
     public String phoneNumber;
+    public String salt1;
+    public String salt2;
+    public int iterations;
 
-    public SignupRequest(String username, String realName, String password, String phoneNumber) {
+    public SignupRequest(
+            String username,
+            String realName,
+            String passwordHash,
+            String phoneNumber,
+            String salt1,
+            String salt2,
+            int iterations) {
         this.name = username;
         this.realName = realName;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.phoneNumber = phoneNumber;
+        this.salt1 = salt1;
+        this.salt2 = salt2;
+        this.iterations = iterations;
     }
 
 }

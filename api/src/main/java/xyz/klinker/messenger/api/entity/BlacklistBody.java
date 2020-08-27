@@ -22,6 +22,11 @@ public class BlacklistBody {
     public String phoneNumber;
     public String phrase;
 
+    public BlacklistBody(long deviceId, String phoneNumber) {
+        this.deviceId = deviceId;
+        this.phoneNumber = phoneNumber;
+    }
+
     public BlacklistBody(long deviceId, String phoneNumber, String phrase) {
         this.deviceId = deviceId;
         this.phoneNumber = phoneNumber;

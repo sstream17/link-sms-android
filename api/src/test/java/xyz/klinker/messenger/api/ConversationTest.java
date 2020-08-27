@@ -36,7 +36,7 @@ public class ConversationTest extends ApiTest {
 
         ConversationBody draft = new ConversationBody(1, 1, 1, 1, 1, 1, true, false,
                 System.currentTimeMillis(), "test", "5154224558", "hey!", null, null,
-                "24558", false, false, false);
+                "24558", false, false, false, 1L);
         AddConversationRequest request = new AddConversationRequest(accountId, draft);
         Object response = api.conversation().add(request).execute().body();
         assertNotNull(response);

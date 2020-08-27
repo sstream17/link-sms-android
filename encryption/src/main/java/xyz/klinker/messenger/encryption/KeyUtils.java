@@ -18,6 +18,7 @@ package xyz.klinker.messenger.encryption;
 
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
@@ -42,13 +43,35 @@ public class KeyUtils {
      * 1000 = 42 ms on Nexus 6P
      * 10000 = 400 ms on Nexus 6P
      */
-    private static final int ITERATIONS = 10000;
+    private static final int ITERATIONS = 12000;
 
     /**
      * The length of the key we should generate. Higher means more security but longer computation
      * again.
      */
     private static final int KEY_LENGTH = 256;
+
+    /**
+     * The length of the generated salt in bytes.
+     */
+    private static final int SALT_LENGTH = 24;
+
+    /**
+     * Generates a random salt.
+     */
+    public String generateSalt() {
+        try {
+            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+            byte[] salt = new byte[SALT_LENGTH];
+            random.nextBytes(salt);
+            return Base64.encodeToString(salt, Base64.NO_WRAP);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Could not create salt");
+            e.printStackTrace();
+        }
+
+        throw new RuntimeException("Error creating salt!");
+    }
 
     /**
      * Hashes the password provided by the user during the login sequence to something that can be
@@ -105,6 +128,10 @@ public class KeyUtils {
         }
 
         throw new RuntimeException("error creating secret key from hash!");
+    }
+
+    public int getIterations() {
+        return ITERATIONS;
     }
 
 }
