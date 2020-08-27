@@ -24,11 +24,10 @@ public class SignupResponse {
     public String accountId;
     public String salt1;
     public String salt2;
-    public String passwordHash;
 
     @Override
     public String toString() {
-        return accountId + ", " + salt1 + ", " + salt2 + ", " + passwordHash;
+        return accountId + ", " + salt1 + ", " + salt2;
     }
 
 }

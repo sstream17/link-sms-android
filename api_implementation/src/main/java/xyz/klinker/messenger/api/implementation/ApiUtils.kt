@@ -77,8 +77,9 @@ object ApiUtils {
     /**
      * Signs up for the service.
      */
-    fun signup(request: SignupRequest): SignupResponse? {
+    fun signup(email: String?, password: String?, name: String?, phoneNumber: String?): SignupResponse? {
         return try {
+            val request = SignupRequest(email, name, password, phoneNumber)
             api.account().signup(request).execute().body()
         } catch (e: IOException) {
             null

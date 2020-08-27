@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 
 import xyz.klinker.messenger.api.entity.LoginResponse;
-import xyz.klinker.messenger.api.entity.SignupRequest;
 import xyz.klinker.messenger.api.entity.SignupResponse;
 import xyz.klinker.messenger.encryption.EncryptionUtils;
 import xyz.klinker.messenger.encryption.KeyUtils;
@@ -54,15 +53,7 @@ public class AccountEncryptionCreator {
                 loginResponse.accountId, loginResponse.salt1, loginResponse.salt2);
     }
 
-    public SignupRequest initializeEncryptorParamsFromSignup(String email, String name, String phone) {
-        KeyUtils keyUtils = new KeyUtils();
-        String salt1 = keyUtils.generateSalt();
-        String salt2 = keyUtils.generateSalt();
-        String hash = keyUtils.hashPassword(password, salt2);
-        return new SignupRequest(email, name, hash, phone, salt1, salt2, keyUtils.getIterations());
-    }
-
-    public EncryptionUtils createAccountEncryptionFromSuccessfulSignup(String name, String phone, SignupResponse signupResponse) {
+    public EncryptionUtils createAccountEncryptionFromSignup(String name, String phone, SignupResponse signupResponse) {
         return createEncryptorParams(name, phone,
                 signupResponse.accountId, signupResponse.salt1, signupResponse.salt2);
     }

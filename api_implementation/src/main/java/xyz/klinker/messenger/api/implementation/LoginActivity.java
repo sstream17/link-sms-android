@@ -62,7 +62,6 @@ import java.util.List;
 
 import xyz.klinker.messenger.api.entity.DeviceBody;
 import xyz.klinker.messenger.api.entity.LoginResponse;
-import xyz.klinker.messenger.api.entity.SignupRequest;
 import xyz.klinker.messenger.api.entity.SignupResponse;
 import xyz.klinker.messenger.api.implementation.firebase.AnalyticsHelper;
 import xyz.klinker.messenger.encryption.EncryptionUtils;
@@ -297,16 +296,10 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
 
         new Thread(() -> {
-            AccountEncryptionCreator encryptionCreator =
-                    new AccountEncryptionCreator(LoginActivity.this, password.getText().toString());
-
-            SignupRequest request = encryptionCreator.initializeEncryptorParamsFromSignup(
-                    email.getText().toString(),
-                    name.getText().toString(),
-                    phoneNumber.getText().toString());
-
             ApiUtils utils = ApiUtils.INSTANCE;
-            final SignupResponse response = utils.signup(request);
+            final SignupResponse response = utils.signup(email.getText().toString(),
+                    password.getText().toString(), name.getText().toString(),
+                    phoneNumber.getText().toString());
 
             if (response == null) {
                 runOnUiThread(() -> {
@@ -319,7 +312,9 @@ public class LoginActivity extends AppCompatActivity {
                 });
             } else {
                 // This will automatically give them the free trial status, unless they have the LIFETIME
-                encryptionCreator.createAccountEncryptionFromSuccessfulSignup(
+                AccountEncryptionCreator encryptionCreator =
+                        new AccountEncryptionCreator(LoginActivity.this, password.getText().toString());
+                encryptionCreator.createAccountEncryptionFromSignup(
                         name.getText().toString(), phoneNumber.getText().toString(),
                         response);
 
