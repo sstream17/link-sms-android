@@ -19,8 +19,10 @@ package xyz.stream.messenger
 import android.app.Application
 import android.content.Intent
 import android.os.Build
+import com.sensortower.events.EventHandler
 import xyz.stream.messenger.api.implementation.Account
 import xyz.stream.messenger.api.implementation.AccountInvalidator
+import xyz.stream.messenger.api.implementation.firebase.AnalyticsHelper
 import xyz.stream.messenger.api.implementation.firebase.FirebaseApplication
 import xyz.stream.messenger.api.implementation.firebase.FirebaseMessageHandler
 import xyz.stream.messenger.api.implementation.retrofit.ApiErrorPersister
@@ -30,6 +32,7 @@ import xyz.stream.messenger.shared.data.model.RetryableRequest
 import xyz.stream.messenger.shared.service.FirebaseHandlerService
 import xyz.stream.messenger.shared.service.FirebaseResetService
 import xyz.stream.messenger.shared.service.QuickComposeNotificationService
+import xyz.stream.messenger.shared.service.notification.ShortcutUpdater
 import xyz.stream.messenger.shared.util.*
 import xyz.stream.messenger.shared.util.UpdateUtils
 
@@ -37,7 +40,7 @@ import xyz.stream.messenger.shared.util.UpdateUtils
  * Base application that will serve as any intro for any context in the rest of the app. Main
  * function is to enable night mode so that colors change depending on time of day.
  */
-class MessengerApplication : xyz.stream.messenger.api.implementation.firebase.FirebaseApplication(), xyz.stream.messenger.api.implementation.retrofit.ApiErrorPersister, AccountInvalidator {
+class MessengerApplication : FirebaseApplication(), ApiErrorPersister, AccountInvalidator, EventHandler.Provider, ShortcutUpdater {
 
     override fun onCreate() {
         super.onCreate()
@@ -56,19 +59,23 @@ class MessengerApplication : xyz.stream.messenger.api.implementation.firebase.Fi
         }
     }
 
-    fun refreshDynamicShortcuts() {
+    override fun refreshDynamicShortcuts(delay: Long) {
         if ("robolectric" != Build.FINGERPRINT && !Settings.firstStart) {
+            val update = {
+                val conversations = DataSource.getUnarchivedConversationsAsList(this)
+                DynamicShortcutUtils(this@MessengerApplication).buildDynamicShortcuts(conversations)
+            }
+
+            if (delay == 0L) try {
+                update()
+                return
+            } catch (e: Exception) {
+            }
+
             Thread {
                 try {
-                    Thread.sleep(10 * TimeUtils.SECOND)
-                    val source = DataSource
-
-                    var conversations = source.getPinnedConversationsAsList(this)
-                    if (conversations.isEmpty()) {
-                        conversations = source.getUnarchivedConversationsAsList(this)
-                    }
-
-                    DynamicShortcutUtils(this@MessengerApplication).buildDynamicShortcuts(conversations)
+                    Thread.sleep(delay)
+                    update()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -76,8 +83,8 @@ class MessengerApplication : xyz.stream.messenger.api.implementation.firebase.Fi
         }
     }
 
-    override fun getFirebaseMessageHandler(): xyz.stream.messenger.api.implementation.firebase.FirebaseMessageHandler {
-        return object : xyz.stream.messenger.api.implementation.firebase.FirebaseMessageHandler {
+    override fun getFirebaseMessageHandler(): FirebaseMessageHandler {
+        return object : FirebaseMessageHandler {
             override fun handleMessage(application: Application, operation: String, data: String) {
                 Thread { FirebaseHandlerService.process(application, operation, data) }.start()
             }
@@ -137,4 +144,11 @@ class MessengerApplication : xyz.stream.messenger.api.implementation.firebase.Fi
 
         }
     }
+
+    override val eventHandler: EventHandler
+        get() = object : EventHandler {
+            override fun onAnalyticsEvent(type: String, message: String?) {
+                AnalyticsHelper.logEvent(this@MessengerApplication, type)
+            }
+        }
 }

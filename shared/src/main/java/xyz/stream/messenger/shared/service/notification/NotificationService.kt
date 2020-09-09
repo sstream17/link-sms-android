@@ -28,6 +28,7 @@ import xyz.stream.messenger.shared.data.pojo.NotificationAction
 import xyz.stream.messenger.shared.data.pojo.NotificationConversation
 import xyz.stream.messenger.shared.service.jobs.RepeatNotificationJob
 import xyz.stream.messenger.shared.service.notification.conversation.NotificationConversationProvider
+import xyz.stream.messenger.shared.util.AndroidVersionUtil
 import xyz.stream.messenger.shared.util.MockableDataSourceWrapper
 import xyz.stream.messenger.shared.util.TimeUtils
 import xyz.stream.messenger.shared.widget.MessengerAppWidgetProvider
@@ -70,6 +71,15 @@ class Notifier(private val context: Context) {
             val conversation = conversations.first()
             if (conversation.mute || NotificationConstants.CONVERSATION_ID_OPEN == conversation.id) {
                 return
+            }
+
+            if (AndroidVersionUtil.isAndroidR) {
+                // build dynamic shortcuts for the bubble functionality
+
+                try {
+                    (context.applicationContext as ShortcutUpdater).refreshDynamicShortcuts(0)
+                } catch (e: Exception) {
+                }
             }
 
             notifyLatestConversation(conversation)
