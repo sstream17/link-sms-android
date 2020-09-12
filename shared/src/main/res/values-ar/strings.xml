@@ -488,7 +488,7 @@ http://messenger.klinkerapps.com</string>
     <string name="on">تشغيل</string>
     <string name="share_promo">مرحبا، لقد أعجبني تطبيق نبض للرسائل النصية! أنصحك بتجريبه الأن:
 قم بتثبيته من المتجر العالمي قوقل بلاي Google Play
-https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">جار التحقق من كلمة المرور ...</string>
     <!-- Rate it -->
     <string name="rate_it">تقييم الأن!</string>

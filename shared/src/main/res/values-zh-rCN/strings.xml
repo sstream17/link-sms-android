@@ -621,7 +621,7 @@
     <string name="off">关闭</string>
     <string name="on">开启</string>
     <string name="share_promo">嗨，我最近喜欢上了用Link发短信，你也来试试吧：
-https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">正在验证密码...</string>
     <!-- Rate it -->
     <string name="rate_it">给它打分！</string>

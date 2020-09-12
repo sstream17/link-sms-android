@@ -6,7 +6,7 @@ The goal of this project is to create an SMS/MMS app that has full support for a
 that users love, is based on material design, and supports a strong end-to-end encryption version of a
 tablet/desktop messenger that sends messages through your personal phone number.
 
-Check out Pulse on the [Play Store](https://play.google.com/store/apps/details?id=xyz.stream.messenger)
+Check out Pulse on the [Play Store](https://play.google.com/store/apps/details?id=com.stream_suite.link)
 or the app's [website](https://messenger.klinkerapps.com/overview) for a more comprehensive overview
 of the app's features, platforms, and functionality!
 

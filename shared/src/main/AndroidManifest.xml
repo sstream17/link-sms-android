@@ -16,7 +16,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="xyz.stream.messenger.shared"
+    package="com.stream_suite.link.shared"
     tools:ignore="MissingLeanbackLauncher">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -83,7 +83,7 @@
 
     <application android:appCategory="social">
 
-        <activity android:name=".activity.RateItDialog"
+        <activity android:name="com.stream_suite.link.shared.activity.RateItDialog"
             android:theme="@style/tutorial_FloatingTutorialTheme"
             android:launchMode="singleInstance" />
 
@@ -115,7 +115,7 @@
         <service android:name="com.android.mms.transaction.TransactionService" />
 
         <service
-            android:name=".service.MessengerChooserTargetService"
+            android:name="com.stream_suite.link.shared.service.MessengerChooserTargetService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
             <intent-filter>
@@ -124,7 +124,7 @@
         </service>
 
         <receiver
-            android:name=".receiver.SmsReceivedReceiver"
+            android:name="com.stream_suite.link.shared.receiver.SmsReceivedReceiver"
             android:exported="true"
             android:permission="android.permission.BROADCAST_SMS">
 
@@ -135,7 +135,7 @@
         </receiver>
 
         <receiver
-            android:name=".receiver.SmsReceivedNonDefaultReceiver"
+            android:name="com.stream_suite.link.shared.receiver.SmsReceivedNonDefaultReceiver"
             android:exported="true"
             android:permission="android.permission.BROADCAST_SMS">
 
@@ -146,16 +146,16 @@
         </receiver>
 
         <receiver
-            android:name=".receiver.SmsSentReceiver"
+            android:name="com.stream_suite.link.shared.receiver.SmsSentReceiver"
             android:exported="true"
             android:taskAffinity="${applicationId}.SMS_SENT" />
 
         <receiver
-            android:name=".receiver.SmsSentReceiverNoRetry"
+            android:name="com.stream_suite.link.shared.receiver.SmsSentReceiverNoRetry"
             android:exported="true" />
 
         <receiver
-            android:name=".receiver.SmsDeliveredReceiver"
+            android:name="com.stream_suite.link.shared.receiver.SmsDeliveredReceiver"
             android:exported="true"
             android:taskAffinity="${applicationId}.SMS_DELIVERED" />
 
@@ -172,12 +172,12 @@
         </receiver>
 
         <receiver
-            android:name=".receiver.MmsSentReceiver"
+            android:name="com.stream_suite.link.shared.receiver.MmsSentReceiver"
             android:exported="true"
             android:taskAffinity="com.klinker.android.messaging.MMS_SENT" />
 
         <receiver
-            android:name=".receiver.MmsReceivedReceiver"
+            android:name="com.stream_suite.link.shared.receiver.MmsReceivedReceiver"
             android:exported="true"
             android:taskAffinity="com.klinker.android.messaging.MMS_RECEIVED">
 
@@ -187,7 +187,7 @@
 
         </receiver>
 
-        <receiver android:name=".receiver.BootCompletedReceiver">
+        <receiver android:name="com.stream_suite.link.shared.receiver.BootCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
@@ -195,67 +195,67 @@
         </receiver>
 
         <receiver
-            android:name=".service.jobs.ScheduledMessageJob"
+            android:name="com.stream_suite.link.shared.service.jobs.ScheduledMessageJob"
             android:exported="false" />
 
         <receiver
-            android:name=".service.jobs.RepeatNotificationJob"
+            android:name="com.stream_suite.link.shared.service.jobs.RepeatNotificationJob"
             android:exported="false" />
 
         <receiver
-            android:name=".receiver.notification_action.NotificationDismissedReceiver"
+            android:name="com.stream_suite.link.shared.receiver.notification_action.NotificationDismissedReceiver"
             android:exported="false" />
 
         <receiver
-            android:name=".service.NotificationDismissedReceiver"
+            android:name="com.stream_suite.link.shared.service.NotificationDismissedReceiver"
             android:exported="false"/>
 
         <receiver
-            android:name=".receiver.notification_action.NotificationMarkReadReceiver"
+            android:name="com.stream_suite.link.shared.receiver.notification_action.NotificationMarkReadReceiver"
             android:exported="false" />
 
         <receiver
-            android:name=".receiver.notification_action.NotificationMuteReceiver"
+            android:name="com.stream_suite.link.shared.receiver.notification_action.NotificationMuteReceiver"
             android:exported="false" />
 
         <receiver
-            android:name=".receiver.notification_action.NotificationCallReceiver"
+            android:name="com.stream_suite.link.shared.receiver.notification_action.NotificationCallReceiver"
             android:exported="false" />
 
         <receiver
-            android:name=".receiver.notification_action.NotificationCopyOtpReceiver"
+            android:name="com.stream_suite.link.shared.receiver.notification_action.NotificationCopyOtpReceiver"
             android:exported="false" />
 
         <receiver
-            android:name=".receiver.notification_action.NotificationArchiveReceiver"
+            android:name="com.stream_suite.link.shared.receiver.notification_action.NotificationArchiveReceiver"
             android:exported="false" />
 
         <receiver
-            android:name=".receiver.notification_action.SendSmartReplyReceiver"
+            android:name="com.stream_suite.link.shared.receiver.notification_action.SendSmartReplyReceiver"
             android:exported="false" />
 
         <receiver
-            android:name=".receiver.notification_action.NotificationDeleteReceiver"
+            android:name="com.stream_suite.link.shared.receiver.notification_action.NotificationDeleteReceiver"
             android:exported="false" />
 
         <receiver
-            android:name=".receiver.CarReplyReceiver"
+            android:name="com.stream_suite.link.shared.receiver.CarReplyReceiver"
             android:exported="false" >
             <intent-filter>
-                <action android:name="xyz.stream.messenger.CAR_REPLY"/>
+                <action android:name="com.stream_suite.link.CAR_REPLY"/>
             </intent-filter>
         </receiver>
 
         <receiver
-            android:name=".receiver.CarReadReceiver"
+            android:name="com.stream_suite.link.shared.receiver.CarReadReceiver"
             android:exported="false" >
             <intent-filter>
-                <action android:name="xyz.stream.messenger.CAR_READ"/>
+                <action android:name="com.stream_suite.link.CAR_READ"/>
             </intent-filter>
         </receiver>
 
         <service
-            android:name=".service.HeadlessSmsSendService"
+            android:name="com.stream_suite.link.shared.service.HeadlessSmsSendService"
             android:exported="true"
             android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE">
             <intent-filter>
@@ -270,7 +270,7 @@
         </service>
 
         <service
-            android:name=".service.DashclockExtension"
+            android:name="com.stream_suite.link.shared.service.DashclockExtension"
             android:icon="@drawable/ic_stat_notify_group"
             android:label="@string/app_name"
             android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
@@ -286,44 +286,44 @@
                 android:value="true" />
         </service>
 
-        <service android:name=".service.ApiUploadService"
+        <service android:name="com.stream_suite.link.shared.service.ApiUploadService"
             android:foregroundServiceType="dataSync"/>
-        <service android:name=".service.ApiDownloadService"
+        <service android:name="com.stream_suite.link.shared.service.ApiDownloadService"
             android:foregroundServiceType="dataSync"/>
-        <service android:name=".service.message_parser.MediaParserService"
+        <service android:name="com.stream_suite.link.shared.service.message_parser.MediaParserService"
             android:foregroundServiceType="dataSync"/>
-        <service android:name=".service.message_parser.AutoReplyParserService"
+        <service android:name="com.stream_suite.link.shared.service.message_parser.AutoReplyParserService"
             android:foregroundServiceType="dataSync"/>
-        <service android:name=".service.message_parser.VcardParserService"
+        <service android:name="com.stream_suite.link.shared.service.message_parser.VcardParserService"
             android:foregroundServiceType="dataSync"/>
-        <service android:name=".service.ResendFailedMessage"
+        <service android:name="com.stream_suite.link.shared.service.ResendFailedMessage"
             android:foregroundServiceType="dataSync"/>
-        <service android:name=".service.QuickComposeNotificationService"
+        <service android:name="com.stream_suite.link.shared.service.QuickComposeNotificationService"
             android:foregroundServiceType="dataSync"/>
 
         <service
-            android:name=".service.jobs.SubscriptionExpirationCheckJob"
+            android:name="com.stream_suite.link.shared.service.jobs.SubscriptionExpirationCheckJob"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".service.jobs.SignoutJob"
+            android:name="com.stream_suite.link.shared.service.jobs.SignoutJob"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <service android:name=".service.FirebaseTokenUpdateCheckService" />
-        <service android:name=".service.FirebaseHandlerService" />
-        <service android:name=".service.notification.NotificationService" />
-        <service android:name=".receiver.notification_action.NotificationMuteReceiver" />
-        <service android:name=".service.ReplyService" />
-        <service android:name=".service.SimpleSubscriptionCheckService" />
-        <service android:name=".service.SimpleLifetimeSubscriptionCheckService" />
-        <service android:name=".service.NewMessagesCheckService" />
-        <service android:name=".service.FirebaseResetService" />
-        <service android:name=".service.CreateNotificationChannelService" />
-        <service android:name=".service.ContactResyncService" />
-        <service android:name=".service.SmsReceivedService"
+        <service android:name="com.stream_suite.link.shared.service.FirebaseTokenUpdateCheckService" />
+        <service android:name="com.stream_suite.link.shared.service.FirebaseHandlerService" />
+        <service android:name="com.stream_suite.link.shared.service.notification.NotificationService" />
+        <service android:name="com.stream_suite.link.shared.receiver.notification_action.NotificationMuteReceiver" />
+        <service android:name="com.stream_suite.link.shared.service.ReplyService" />
+        <service android:name="com.stream_suite.link.shared.service.SimpleSubscriptionCheckService" />
+        <service android:name="com.stream_suite.link.shared.service.SimpleLifetimeSubscriptionCheckService" />
+        <service android:name="com.stream_suite.link.shared.service.NewMessagesCheckService" />
+        <service android:name="com.stream_suite.link.shared.service.FirebaseResetService" />
+        <service android:name="com.stream_suite.link.shared.service.CreateNotificationChannelService" />
+        <service android:name="com.stream_suite.link.shared.service.ContactResyncService" />
+        <service android:name="com.stream_suite.link.shared.service.SmsReceivedService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <service
-            android:name=".service.ComposeTileService"
+            android:name="com.stream_suite.link.shared.service.ComposeTileService"
             android:icon="@drawable/ic_stat_notify_group"
             android:label="@string/shortcut_compose_short"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">

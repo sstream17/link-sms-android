@@ -599,7 +599,7 @@ Du kan tilpasse disse alternativene med knappen nedenfor og lese mer om denne en
     <string name="off">Av</string>
     <string name="on">På</string>
     <string name="share_promo">Hei, jeg elsker Link for teksting! Gi det et forsøk:
-https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">Verifiserer passord ...</string>
     <!-- Rate it -->
     <string name="rate_it">Rangere det!</string>

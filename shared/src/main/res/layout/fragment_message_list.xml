@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<xyz.stream.messenger.view.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.stream_suite.link.view.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <xyz.stream.messenger.shared.view.WhitableToolbar
+                <com.stream_suite.link.shared.view.WhitableToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -243,7 +243,7 @@
 
                     </FrameLayout>
 
-                    <xyz.stream.messenger.view.ImageKeyboardEditText
+                    <com.stream_suite.link.view.ImageKeyboardEditText
                         android:id="@+id/message_entry"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -287,4 +287,4 @@
 
     </LinearLayout>
 
-</xyz.stream.messenger.view.ElasticDragDismissFrameLayout>
+</com.stream_suite.link.view.ElasticDragDismissFrameLayout>

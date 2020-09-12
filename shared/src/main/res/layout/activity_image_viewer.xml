@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <xyz.stream.messenger.view.HackyViewPager
+    <com.stream_suite.link.view.HackyViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
