@@ -631,7 +631,7 @@ Aşağıdaki düğme ile bu seçenekleri özelleştirebilirsiniz. Daha fazla bil
     <string name="off">Kapalı</string>
     <string name="on">Açık</string>
     <string name="share_promo">Selam, mesajlaşmak için Link\'a bayılıyorum! Bir şans ver:
-https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">Parola doğrulanıyor...</string>
     <!-- Rate it -->
     <string name="rate_it">Oyla!</string>

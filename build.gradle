@@ -25,7 +25,7 @@ apiKeys.load(new FileInputStream(propsFile))
 buildscript {
 
     ext.buildInfo = [
-            'id'                : 'xyz.stream.messenger',
+            'id'                : 'com.stream_suite.link',
             'name'              : '0.5.4',
             'number'            : System.getenv("BUILD_NUMBER") as Integer ?: Calendar.getInstance().get(Calendar.DAY_OF_YEAR),
     ]

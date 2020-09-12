@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="noScroll">
 
-                    <xyz.stream.messenger.shared.view.WhitableToolbar
+                    <com.stream_suite.link.shared.view.WhitableToolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"

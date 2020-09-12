@@ -20,7 +20,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <xyz.stream.messenger.shared.view.MaxHeightScrollView
+    <com.stream_suite.link.shared.view.MaxHeightScrollView
         android:id="@+id/top_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,9 +42,9 @@
             android:textColor="@android:color/white"
             android:textColorHint="@color/toolbarEditTextHint" />
 
-    </xyz.stream.messenger.shared.view.MaxHeightScrollView>
+    </com.stream_suite.link.shared.view.MaxHeightScrollView>
 
-    <xyz.stream.messenger.view.ImageKeyboardEditText
+    <com.stream_suite.link.view.ImageKeyboardEditText
         android:id="@+id/message_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

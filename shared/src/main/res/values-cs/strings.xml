@@ -666,7 +666,7 @@ Tato nastavení můžete upravit s pomocí tlačítka níže. Více o této změ
     <string name="off">Vypnuto</string>
     <string name="on">Zapnuto</string>
     <string name="share_promo">Ahoj, miluji Link pro psaní zpráv! Zkus to:
-https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">Ověřuji heslo...</string>
     <!-- Rate it -->
     <string name="rate_it">Ohodnoťe ho!</string>

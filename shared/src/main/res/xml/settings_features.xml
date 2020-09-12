@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_app_features_category"
         android:title="@string/app_features">
 
@@ -30,21 +30,21 @@
             android:summary="@string/internal_browser_summary"
             android:defaultValue="true" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:title="@string/spam_features_category">
 
-        <xyz.stream.messenger.view.AutoSummaryListPreference
+        <com.stream_suite.link.view.AutoSummaryListPreference
             android:key="@string/pref_unknown_number_reception"
             android:title="@string/handle_messages_from_unknown_numbers"
             android:entries="@array/unknown_numbers"
             android:entryValues="@array/unknown_numbers_values"
             android:defaultValue="default" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_messaging_category"
         android:title="@string/messaging_features">
 
@@ -78,9 +78,9 @@
             android:summary="@string/signature_summary"
             android:title="@string/signature" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_quick_compose_category"
         android:title="@string/quick_compose">
 
@@ -89,12 +89,12 @@
             android:key="@string/pref_quick_compose"
             android:summary="@string/quick_compose_notification_summary" />
 
-        <xyz.stream.messenger.view.preference.QuickComposeFavoriteUserPreference
+        <com.stream_suite.link.view.preference.QuickComposeFavoriteUserPreference
             android:dependency="@string/pref_quick_compose"
             android:key="@string/pref_quick_compose_favorites"
             android:summary="@string/quick_compose_favorites_summary"
             android:title="@string/quick_compose_favorites" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
 </PreferenceScreen>

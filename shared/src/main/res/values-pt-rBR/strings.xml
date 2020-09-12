@@ -638,7 +638,7 @@ Você pode personalizar estas opções tocando no botão abaixo e saber mais a r
     <string name="off">Desligado</string>
     <string name="on">Ligado</string>
     <string name="share_promo">Ei, estou adorando o Link para o envio de mensagens! Dê uma olhada:
-https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">Verificando senha...</string>
     <!-- Rate it -->
     <string name="rate_it">Avalie!</string>

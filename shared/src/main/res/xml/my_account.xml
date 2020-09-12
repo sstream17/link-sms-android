@@ -17,7 +17,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategoryCompat
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategoryCompat
         android:title="@string/account_information"
         android:key="@string/pref_category_account_information">
 
@@ -45,13 +45,13 @@
             android:title="@string/view_platforms"
             app:iconSpaceReserved="false" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategoryCompat>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategoryCompat>
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategoryCompat
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategoryCompat
         android:title="@string/danger_zone"
         android:key="@string/pref_category_account_actions">
 
-        <xyz.stream.messenger.shared.view.AlwaysOffSwitchPreference
+        <com.stream_suite.link.shared.view.AlwaysOffSwitchPreference
             android:key="@string/pref_enable_danger_zone"
             android:summary="@string/be_careful_using_these_settings"
             android:defaultValue="false"
@@ -85,6 +85,6 @@
             android:dependency="@string/pref_enable_danger_zone"
             app:iconSpaceReserved="false"/>
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategoryCompat>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategoryCompat>
 
 </PreferenceScreen>
