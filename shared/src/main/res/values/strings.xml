@@ -133,7 +133,7 @@
         a link to download!</string>
     <string name="invite_friends_sms">I started using a new texting app and I think
         you\'ll like it! Plus it\'s free, so might as well download it:
-        http://messenger.klinkerapps.com</string>
+        http://link.stream-suite.com</string>
 
     <!-- Message List Screen -->
     <string name="type_message">Type message</string>
@@ -345,7 +345,7 @@
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link Beta Community</string>
     <string name="email">Email</string>
-    <string name="email_summary">luke@klinkerapps.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
     <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Support</string>

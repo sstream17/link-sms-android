@@ -110,7 +110,7 @@ Vous pouvez utiliser Link pour échanger des messages depuis <b>tout</b> apparei
     <!-- Invite Friends Screen -->
     <string name="invite_friends_title">Vous aimez Link?</string>
     <string name="invite_friends_summary">D\'autres l\'aimeront également ! Nous essayons de la mettre entre toutes les mains pour continuer à en faire la meilleure application possible et en invitant vos amis à essayer, vous nous aidez ! \n\nSélectionnez ci-dessous les amis avec qui vous voulez partager l\'application et un SMS avec une courte description sera envoyé avec un lien pour télécharger Link !</string>
-    <string name="invite_friends_sms">J\'ai commencé à utiliser une nouvelle application de messagerie et je pense que tu vas l\'aimer ! En plus, elle est gratuite, pense à la télécharger ici : http://messenger.klinkerapps.com</string>
+    <string name="invite_friends_sms">J\'ai commencé à utiliser une nouvelle application de messagerie et je pense que tu vas l\'aimer ! En plus, elle est gratuite, pense à la télécharger ici : http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Composez votre message</string>
     <string name="type_message_to">Composez votre message à %1$s</string>
@@ -314,7 +314,7 @@ pourriez rencontrer !</string>
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Communauté de BétaTesteurs de Link</string>
     <string name="email">Courriel</string>
-    <string name="email_summary">luke@klinkerapps.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
     <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Support</string>

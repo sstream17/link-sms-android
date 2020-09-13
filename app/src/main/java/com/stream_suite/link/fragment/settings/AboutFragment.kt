@@ -95,19 +95,19 @@ class AboutFragment : MaterialPreferenceFragmentCompat() {
 
         findPreference(getString(R.string.pref_about_privacy_policy))
                 .setOnPreferenceClickListener {
-                    openWebsite("https://messenger.klinkerapps.com/privacy.html")
+                    openWebsite("https://link.stream-suite.com/privacy.html")
                     true
                 }
 
         findPreference(getString(R.string.pref_website))
                 .setOnPreferenceClickListener {
-                    openWebsite("https://messenger.klinkerapps.com")
+                    openWebsite("https://link.stream-suite.com/")
                     false
                 }
 
         findPreference(getString(R.string.pref_supported_platforms))
                 .setOnPreferenceClickListener {
-                    openWebsite("https://messenger.klinkerapps.com/overview")
+                    openWebsite("https://link.stream-suite.com/")
                     true
                 }
 

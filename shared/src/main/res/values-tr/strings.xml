@@ -111,7 +111,7 @@
     <string name="invite_friends_summary">Biz sevdiysek başkalarıda sever! Onu, elimizden gelen en iyi ürün haline getirmek ve olabildiğince çok kişiye ulaştırmak istiyoruz. Denemeleri için arkadaşlarınızı davet ederek buna yardımcı olabilirsiniz.
 \n\nUygulamayı göndermek istediğiniz arkadaşlarınızı aşağıdan seçin. Onlara kısa bir açıklama ve indirme bağlantısı içeren bir SMS gönderilecek!</string>
     <string name="invite_friends_sms">Yeni bir mesajlaşma uygulaması kullanmaya başladım ve bence beğeneceksin! Ayrıca ücretsiz. Şuradan indirebilirsin:
-http://messenger.klinkerapps.com</string>
+http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Mesaj yazın</string>
     <string name="type_message_to">%1$s adlı kişiye mesaj yaz</string>
@@ -311,7 +311,7 @@ hadi başlatın!</string>
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link Beta Topluluğu</string>
     <string name="email">E-posta</string>
-    <string name="email_summary">luke@klinkerapps.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
     <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Destek</string>

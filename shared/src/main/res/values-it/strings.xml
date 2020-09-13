@@ -107,7 +107,7 @@
 as many hands as we can to continue making it the best product that it can be and by
 inviting your friends to try, you\'re helping with this! \n\nseleziona gli amici ai quali ti piacerebbe inviare l\'app ed a loro sarà inviato un sms con una breve descrizione ed il link per il download!</string>
     <string name="invite_friends_sms">Sto usando una nuova app di messaggistica che penso potrebbe piacerti! Inoltre è gratuita, puoi scaricarla da qui:
-http://messenger.klinkerapps.com</string>
+http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Scrivi un messaggio</string>
     <string name="type_message_to">Scrivi messaggio a  %1$s</string>
@@ -251,7 +251,7 @@ per ogni contatto col quale messaggi. Fai tuo Link.</string>
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link Beta Community</string>
     <string name="email">Email</string>
-    <string name="email_summary">luke@klinkerapps.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
     <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Supporto</string>

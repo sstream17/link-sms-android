@@ -110,7 +110,7 @@ Você pode usar o Link para enviar mensagens de texto de <b>qualquer</b> disposi
     <!-- Invite Friends Screen -->
     <string name="invite_friends_title">Gosta do Link?</string>
     <string name="invite_friends_summary">Nós também, e outros também podem gostar! Estamos tentando obter toda ajuda disponível, para continuar a torná-lo o melhor produto possível, e convidando seus amigos para tentar, você estará nos ajudando com isso! \n\nSelecione os contatos abaixo para enviar um SMS com uma breve descrição e um link para download!</string>
-    <string name="invite_friends_sms">Eu comecei a usar um novo app de SMS e eu acho que você gostará dele! Ele é grátis e você pode baixar ele em: http://messenger.klinkerapps.com</string>
+    <string name="invite_friends_sms">Eu comecei a usar um novo app de SMS e eu acho que você gostará dele! Ele é grátis e você pode baixar ele em: http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Digite a mensagem</string>
     <string name="type_message_to">Digite mensagem para %1$s</string>
@@ -310,7 +310,7 @@ onde não existam configurações individuais para a conversa.</string>
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Comunidade Link Beta</string>
     <string name="email">E-mail</string>
-    <string name="email_summary">luke@klinkerapps.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
     <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Suporte</string>

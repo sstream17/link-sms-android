@@ -27,7 +27,7 @@ object NotificationBubbleHelper {
                 .setIcon(icon)
                 .setImportant(true)
                 .build()
-        val contentUri = Uri.parse("https://messenger.klinkerapps.com/${conversation.id}")
+        val contentUri = Uri.parse("https://link.stream-suite.com/${conversation.id}")
 
         val intent = PendingIntent.getActivity(
                 context,

@@ -99,7 +99,7 @@
 Виберіть нижче, друзів, яким Ви хочете відправити цю програму, і надішліть їм SMS з коротким описом і посиланням для завантаження!</string>
     <string name="invite_friends_sms">Я використовую новий додаток для текстових повідомлень і я думаю, що 
 він вам теж сподобається! Плюс це безкоштовно, так що можете також його завантажити: 
-http://messenger.klinkerapps.com</string>
+http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Введіть повідомлення</string>
     <string name="type_message_to">Введіть повідомлення для %1$s</string>
@@ -228,7 +228,7 @@ Link ставить ваші розмови на попередній план.<
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link бета-спільноти</string>
     <string name="email">Email</string>
-    <string name="email_summary">luke@klinkerapps.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
     <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">підтримка</string>

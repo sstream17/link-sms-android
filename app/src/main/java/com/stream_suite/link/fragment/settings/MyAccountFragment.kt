@@ -151,7 +151,7 @@ class MyAccountFragment : MaterialPreferenceFragmentCompat() {
     private fun initWebsitePreference() {
         val preference = findPreference(getString(R.string.pref_go_to_web))
         preference.setOnPreferenceClickListener {
-            val web = Intent(Intent.ACTION_VIEW, Uri.parse("https://messenger.klinkerapps.com"))
+            val web = Intent(Intent.ACTION_VIEW, Uri.parse("https://link.stream-suite.com"))
             web.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
             try {

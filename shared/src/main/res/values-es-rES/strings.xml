@@ -94,7 +94,7 @@ Invitando a tus amigos a probarlo , nos estás ayudando! \ N \ nSelecciona abajo
 a los que te gustaría enviar la aplicación y les enviaremos un SMS con una breve descripción y
 Un enlace para descargar!</string>
     <string name="invite_friends_sms">¡He empezado a usar una nueva app de mensajería, y he pensado 
-que te gustaría!. Link es gratuita, y puedes descargarla de aquí: http://messenger.klinkerapps.com</string>
+que te gustaría!. Link es gratuita, y puedes descargarla de aquí: http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Escribir mensaje</string>
     <string name="type_message_to">Escribir mensaje a %1$s</string>
@@ -214,7 +214,7 @@ pudieses encontrar!</string>
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Comunidad Link beta</string>
     <string name="email">Correo electronico</string>
-    <string name="email_summary">luke@klinkerapps.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
     <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Soporte</string>
