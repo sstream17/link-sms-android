@@ -22,23 +22,24 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import android.util.Log
-
 import com.google.firebase.auth.FirebaseAuth
-
-import java.io.File
-import java.io.IOException
-
-import com.stream_suite.link.shared.R
-import com.stream_suite.link.api.implementation.ApiUtils
+import com.stream_suite.link.api.entity.MessageBody
 import com.stream_suite.link.api.implementation.Account
+import com.stream_suite.link.api.implementation.ApiUtils
+import com.stream_suite.link.shared.R
 import com.stream_suite.link.shared.data.ColorSet
 import com.stream_suite.link.shared.data.DataSource
 import com.stream_suite.link.shared.data.MimeType
 import com.stream_suite.link.shared.data.model.*
-import com.stream_suite.link.shared.util.*
+import com.stream_suite.link.shared.util.ContactUtils
+import com.stream_suite.link.shared.util.NotificationUtils
+import com.stream_suite.link.shared.util.TimeUtils
+import com.stream_suite.link.shared.util.closeSilent
+import java.io.File
+import java.io.IOException
 
 class ApiDownloadService : Service() {
 
