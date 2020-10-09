@@ -16,10 +16,15 @@
 
 <changelog>
 
+    <version
+        name="0.5.5"
+        description="October 5th, 2020">
+        <text>Bug fixes</text>
+    </version>
 
     <version
-        name="5.4.4"
-        description="September 7th, 2020">
+        name="0.5.4"
+        description="September 21st, 2020">
         <text>Bug fixes</text>
     </version>
 

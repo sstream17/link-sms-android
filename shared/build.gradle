@@ -66,7 +66,7 @@ dependencies {
     api 'com.klinkerapps:floating-tutorial:1.1.0'
 
     api 'com.github.apl-devs:appintro:v4.2.0'
-    api 'com.github.yalantis:ucrop:2.2.2'
+    api 'com.github.yalantis:ucrop:2.2.6'
     api 'de.hdodenhof:circleimageview:3.0.1'
     api 'com.afollestad:sectioned-recyclerview:0.2.3'
     api 'com.afollestad:easyvideoplayer:0.3.0'
@@ -80,7 +80,7 @@ dependencies {
     api 'com.l4digital.fastscroll:fastscroll:2.0.1'
     api 'com.miguelcatalan:materialsearchview:1.4.0'
     api 'com.pes.materialcolorpicker:library:1.2.5'
-    api 'com.sensortower.usage:rating-prompt-lib:2.2.1'
+    api 'com.sensortower.usage:rating-prompt-lib:3.2.2'
     implementation 'com.sensortower.usage:event-emitter-lib:1.0.0'
 
     api 'com.raycoarana.codeinputview:codeinputview:1.2.5'
