@@ -23,7 +23,6 @@ import android.database.MatrixCursor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
@@ -38,7 +37,6 @@ import com.stream_suite.link.shared.util.MockableDataSourceWrapper;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -75,7 +73,7 @@ public class NotificationServiceTest extends MessengerRobolectricSuite {
 
     @Test
     public void getUnseenConversations() {
-        service = Mockito.spy(service);
+        service = spy(service);
         doReturn(getUnseenCursor()).when(source).getUnseenMessages(any(Context.class));
         doReturn(getConversation1()).when(source).getConversation(any(Context.class), eq(1L));
         doReturn(getConversation2()).when(source).getConversation(any(Context.class), eq(2L));

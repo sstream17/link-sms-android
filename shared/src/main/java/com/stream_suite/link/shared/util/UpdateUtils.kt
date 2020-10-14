@@ -3,6 +3,7 @@ package com.stream_suite.link.shared.util
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.preference.PreferenceManager
 import android.util.Log
 import androidx.work.WorkManager
@@ -55,6 +56,10 @@ class UpdateUtils(private val context: Activity) {
         private const val TAG = "UpdateUtil"
 
         fun rescheduleWork(context: Context) {
+            if (Build.FINGERPRINT == "robolectric") {
+                return
+            }
+
             WorkManager.getInstance().cancelAllWork()
 
             CleanupOldMessagesWork.scheduleNextRun(context)

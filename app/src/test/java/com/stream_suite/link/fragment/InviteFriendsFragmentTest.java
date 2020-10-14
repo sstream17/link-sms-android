@@ -18,11 +18,13 @@ package com.stream_suite.link.fragment;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.robolectric.annotation.LooperMode;
 
 import com.stream_suite.link.MessengerRobolectricSuite;
 
 import static org.junit.Assert.assertTrue;
 
+@LooperMode(LooperMode.Mode.LEGACY)
 public class InviteFriendsFragmentTest extends MessengerRobolectricSuite {
 
     private InviteFriendsFragment fragment;

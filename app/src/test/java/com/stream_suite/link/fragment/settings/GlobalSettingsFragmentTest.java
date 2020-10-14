@@ -18,11 +18,13 @@ package com.stream_suite.link.fragment.settings;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.robolectric.annotation.LooperMode;
 
 import com.stream_suite.link.MessengerRobolectricSuite;
 
 import static org.junit.Assert.assertTrue;
 
+@LooperMode(LooperMode.Mode.LEGACY)
 public class GlobalSettingsFragmentTest extends MessengerRobolectricSuite {
 
     private GlobalSettingsFragment fragment;
