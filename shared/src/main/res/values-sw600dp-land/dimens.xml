@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 Luke Klinker
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +16,7 @@
 
 <resources>
 
+    <dimen name="conversation_list_padding">0dp</dimen>
     <dimen name="header_height">160dp</dimen>
     <dimen name="header_image_top_margin">0dp</dimen>
     <dimen name="attach_menu_height">288dp</dimen>
