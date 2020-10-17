@@ -137,7 +137,7 @@ class MainIntentHandler(private val activity: MessengerActivity) {
             transaction.replace(R.id.conversation_list_container, navController.conversationListFragment!!)
         }
 
-        if (!DensityUtil.isSmallestWidth600(activity)) {
+        if (!DensityUtil.isSmallestWidth600Landscape(activity)) {
             val messageList = activity.supportFragmentManager.findFragmentById(R.id.message_list_container)
             if (messageList != null) {
                 transaction.remove(messageList)

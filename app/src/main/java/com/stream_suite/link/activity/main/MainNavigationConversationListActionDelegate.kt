@@ -65,7 +65,7 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
             transaction.replace(R.id.conversation_list_container, navController.conversationListFragment!!)
         }
 
-        if (!DensityUtil.isSmallestWidth600(activity)) {
+        if (!DensityUtil.isSmallestWidth600Landscape(activity)) {
             val messageList = activity.supportFragmentManager
                     .findFragmentById(R.id.message_list_container)
 

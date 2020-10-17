@@ -54,7 +54,7 @@ object AnimationUtils {
      * @param itemView the item to animate.
      */
     fun expandConversationListItem(itemView: View) {
-        if (DensityUtil.isSmallestWidth600(itemView.context)) {
+        if (DensityUtil.isSmallestWidth600Landscape(itemView.context)) {
             return
         }
 
@@ -79,10 +79,10 @@ object AnimationUtils {
      * @param itemView the item to animate.
      */
     fun contractConversationListItem(itemView: View) {
-        if (DensityUtil.isSmallestWidth600(itemView.context)) {
+        if (DensityUtil.isSmallestWidth600Landscape(itemView.context)) {
             return
         }
-        
+
         PerformanceProfiler.logEvent("contracting conversation item")
 
         if (itemView.parent !is RecyclerView) {
@@ -175,7 +175,7 @@ object AnimationUtils {
      * @param activity the activity to find the views at.
      */
     fun expandActivityForConversation(activity: Activity) {
-        if (DensityUtil.isSmallestWidth600(activity)) {
+        if (DensityUtil.isSmallestWidth600Landscape(activity)) {
             return
         }
 
@@ -215,7 +215,7 @@ object AnimationUtils {
      * @param activity the activity to find the views in.
      */
     fun contractActivityFromConversation(activity: Activity?) {
-        if (activity == null || DensityUtil.isSmallestWidth600(activity)) {
+        if (activity == null || DensityUtil.isSmallestWidth600Landscape(activity)) {
             return
         }
 

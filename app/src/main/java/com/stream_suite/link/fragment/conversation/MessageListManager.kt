@@ -66,7 +66,7 @@ class MessageListManager(private val fragment: ConversationListFragment) {
                     viewHolder.conversation!!.title!!, viewHolder.conversation!!.colors.color)
         }
 
-        if (!DensityUtil.isSmallestWidth600(activity)) {
+        if (!DensityUtil.isSmallestWidth600Landscape(activity)) {
             fragment.recyclerManager.canScroll(false)
         }
 
