@@ -38,6 +38,7 @@ class MessageListManager(private val fragment: ConversationListFragment) {
 
         fragment.swipeHelper.dismissSnackbars()
 
+        expandedConversation?.expanded = false
         expandedConversation = viewHolder
         AnimationUtils.expandActivityForConversation(activity)
 
