@@ -22,6 +22,14 @@ object DensityUtil {
         return (sp * scaledDensity).toInt()
     }
 
+    fun isSmallestWidth600(context: Context?): Boolean {
+        if (context == null) {
+            return false
+        }
+
+        return context.resources.configuration.smallestScreenWidthDp >= 600
+    }
+
     private fun convert(context: Context?, amount: Int, conversionUnit: Int): Int {
         if (amount < 0) {
             throw IllegalArgumentException("px should not be less than zero")
