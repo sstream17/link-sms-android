@@ -12,6 +12,7 @@ import com.stream_suite.link.shared.data.Settings
 import com.stream_suite.link.shared.util.ActivityUtils
 import com.stream_suite.link.shared.util.AnimationUtils
 import com.stream_suite.link.shared.util.ColorUtils
+import com.stream_suite.link.shared.util.DensityUtil
 
 class MessageListManager(private val fragment: ConversationListFragment) {
 
@@ -63,7 +64,9 @@ class MessageListManager(private val fragment: ConversationListFragment) {
                     viewHolder.conversation!!.title!!, viewHolder.conversation!!.colors.color)
         }
 
-        fragment.recyclerManager.canScroll(false)
+        if (!DensityUtil.isSmallestWidth600(activity)) {
+            fragment.recyclerManager.canScroll(false)
+        }
 
         activity.intent?.putExtra(MessengerActivityExtras.EXTRA_CONVERSATION_ID, -1L)
         fragment.arguments?.putLong(ARG_CONVERSATION_TO_OPEN_ID, -1L)
