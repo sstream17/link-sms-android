@@ -79,6 +79,10 @@ object AnimationUtils {
      * @param itemView the item to animate.
      */
     fun contractConversationListItem(itemView: View) {
+        if (DensityUtil.isSmallestWidth600(itemView.context)) {
+            return
+        }
+        
         PerformanceProfiler.logEvent("contracting conversation item")
 
         if (itemView.parent !is RecyclerView) {
@@ -211,7 +215,7 @@ object AnimationUtils {
      * @param activity the activity to find the views in.
      */
     fun contractActivityFromConversation(activity: Activity?) {
-        if (activity == null) {
+        if (activity == null || DensityUtil.isSmallestWidth600(activity)) {
             return
         }
 
