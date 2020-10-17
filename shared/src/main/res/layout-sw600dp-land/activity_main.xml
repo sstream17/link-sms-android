@@ -78,6 +78,12 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <View
+            android:id="@+id/nav_bar_divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/navigationBarDivider" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
