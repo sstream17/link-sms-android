@@ -54,6 +54,10 @@ object AnimationUtils {
      * @param itemView the item to animate.
      */
     fun expandConversationListItem(itemView: View) {
+        if (DensityUtil.isSmallestWidth600(itemView.context)) {
+            return
+        }
+
         PerformanceProfiler.logEvent("expanding conversation item")
 
         val extraExpand = itemView.resources
