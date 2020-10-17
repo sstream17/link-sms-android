@@ -31,7 +31,8 @@ class MessageListManager(private val fragment: ConversationListFragment) {
         fragment.updateHelper.updateInfo = null
 
         val activity = activity
-        if (expandedConversation != null || activity == null) {
+        if ((expandedConversation != null && expandedConversation!!.conversation!!.id == viewHolder.conversation!!.id)
+                || activity == null) {
             return false
         }
 
