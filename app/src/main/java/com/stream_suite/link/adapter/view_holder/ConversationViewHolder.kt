@@ -65,7 +65,7 @@ class ConversationViewHolder(itemView: View, private val expandedListener: Conve
     var conversation: Conversation? = null
     var absolutePosition: Int = 0
 
-    private var expanded = false
+    var expanded = false
     private var contactClickedListener: ContactClickedListener? = null
 
     private val isBold: Boolean

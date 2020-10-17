@@ -27,12 +27,11 @@ import android.view.animation.Interpolator
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
-import xyz.klinker.android.drag_dismiss.util.StatusBarHelper
 import com.stream_suite.link.shared.R
 import com.stream_suite.link.shared.data.Settings
 import com.stream_suite.link.shared.data.pojo.BaseTheme
 import com.stream_suite.link.shared.view.WhitableToolbar
+import xyz.klinker.android.drag_dismiss.util.StatusBarHelper
 
 /**
  * Helper for handling all animations such as expanding and contracting conversations so that we
@@ -55,6 +54,10 @@ object AnimationUtils {
      * @param itemView the item to animate.
      */
     fun expandConversationListItem(itemView: View) {
+        if (DensityUtil.isSmallestWidth600Landscape(itemView.context)) {
+            return
+        }
+
         PerformanceProfiler.logEvent("expanding conversation item")
 
         val extraExpand = itemView.resources
@@ -76,6 +79,10 @@ object AnimationUtils {
      * @param itemView the item to animate.
      */
     fun contractConversationListItem(itemView: View) {
+        if (DensityUtil.isSmallestWidth600Landscape(itemView.context)) {
+            return
+        }
+
         PerformanceProfiler.logEvent("contracting conversation item")
 
         if (itemView.parent !is RecyclerView) {
@@ -111,10 +118,11 @@ object AnimationUtils {
      * @param translateY   the amount to move the view in the Y direction.
      * @param interpolator the interpolator to animate with.
      */
-    private fun animateConversationListItem(itemView: View,
-                                            fromBottom: Int, toBottom: Int,
-                                            startY: Int, translateY: Int,
-                                            interpolator: Interpolator, duration: Int) {
+    private fun animateConversationListItem(
+            itemView: View,
+            fromBottom: Int, toBottom: Int,
+            startY: Int, translateY: Int,
+            interpolator: Interpolator, duration: Int) {
         val params = itemView.layoutParams as RecyclerView.LayoutParams
 
         val animator = ValueAnimator.ofInt(fromBottom, toBottom)
@@ -167,6 +175,10 @@ object AnimationUtils {
      * @param activity the activity to find the views at.
      */
     fun expandActivityForConversation(activity: Activity) {
+        if (DensityUtil.isSmallestWidth600Landscape(activity)) {
+            return
+        }
+
         val appBarLayout = activity.findViewById<View>(R.id.app_bar_layout)
         val fragmentContainer = activity.findViewById<View>(R.id.conversation_list_container)
         val bottomNav = activity.findViewById<View>(R.id.nav_view) as BottomNavigationView
@@ -203,7 +215,7 @@ object AnimationUtils {
      * @param activity the activity to find the views in.
      */
     fun contractActivityFromConversation(activity: Activity?) {
-        if (activity == null) {
+        if (activity == null || DensityUtil.isSmallestWidth600Landscape(activity)) {
             return
         }
 
@@ -236,10 +248,11 @@ object AnimationUtils {
      * @param containerTranslate the distance the container should translate.
      * @param interpolator       the interpolator to use.
      */
-    private fun animateActivityWithConversation(toolbar: View, fragmentContainer: View,
-                                                toolbarTranslate: Int,
-                                                containerStart: Int, containerTranslate: Int,
-                                                interpolator: Interpolator, duration: Int) {
+    private fun animateActivityWithConversation(
+            toolbar: View, fragmentContainer: View,
+            toolbarTranslate: Int,
+            containerStart: Int, containerTranslate: Int,
+            interpolator: Interpolator, duration: Int) {
         toolbar.animate().withLayer().translationY(toolbarTranslate.toFloat())
                 .setDuration(duration.toLong())
                 .setInterpolator(interpolator)

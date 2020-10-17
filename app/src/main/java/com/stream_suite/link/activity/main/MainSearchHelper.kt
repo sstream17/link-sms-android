@@ -6,36 +6,37 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.stream_suite.link.R
 import com.stream_suite.link.activity.MessengerActivity
 import com.stream_suite.link.fragment.SearchFragment
+import com.stream_suite.link.shared.util.DensityUtil
 import com.stream_suite.link.shared.util.hide
 import com.stream_suite.link.shared.util.show
 
 @Suppress("DEPRECATION")
 class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearchView.OnQueryTextListener, MaterialSearchView.SearchViewListener {
-    
+
     private val navController
         get() = activity.navController
-    
+
     private val searchView: MaterialSearchView by lazy { activity.findViewById<View>(R.id.search_view) as MaterialSearchView }
     private var searchFragment: SearchFragment? = null
-    
+
     fun setup(item: MenuItem) {
         searchView.setVoiceSearch(false)
         searchView.setBackgroundColor(activity.resources.getColor(R.color.background))
         searchView.setOnQueryTextListener(this)
         searchView.setOnSearchViewListener(this)
-        
+
         searchView.setMenuItem(item)
     }
-    
+
     fun closeSearch(): Boolean {
         if (searchView.isSearchOpen) {
             searchView.closeSearch()
             return true
         }
-        
+
         return false
     }
-    
+
     override fun onQueryTextSubmit(query: String): Boolean {
         ensureSearchFragment()
         searchFragment?.search(query)
@@ -83,8 +84,14 @@ class MainSearchHelper(private val activity: MessengerActivity) : MaterialSearch
 
         if (searchFragment != null) {
             try {
+                val searchContainer = if (DensityUtil.isSmallestWidth600Landscape(activity)) {
+                    R.id.message_list_container
+                } else {
+                    R.id.conversation_list_container
+                }
+
                 activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.conversation_list_container, searchFragment!!)
+                        .replace(searchContainer, searchFragment!!)
                         .commit()
             } catch (e: Exception) {
             }

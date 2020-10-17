@@ -12,6 +12,7 @@ import com.stream_suite.link.shared.data.Settings
 import com.stream_suite.link.shared.util.ActivityUtils
 import com.stream_suite.link.shared.util.AnimationUtils
 import com.stream_suite.link.shared.util.ColorUtils
+import com.stream_suite.link.shared.util.DensityUtil
 
 class MessageListManager(private val fragment: ConversationListFragment) {
 
@@ -30,12 +31,14 @@ class MessageListManager(private val fragment: ConversationListFragment) {
         fragment.updateHelper.updateInfo = null
 
         val activity = activity
-        if (expandedConversation != null || activity == null) {
+        if ((expandedConversation != null && expandedConversation!!.conversation!!.id == viewHolder.conversation!!.id)
+                || activity == null) {
             return false
         }
 
         fragment.swipeHelper.dismissSnackbars()
 
+        expandedConversation?.expanded = false
         expandedConversation = viewHolder
         AnimationUtils.expandActivityForConversation(activity)
 
@@ -63,7 +66,9 @@ class MessageListManager(private val fragment: ConversationListFragment) {
                     viewHolder.conversation!!.title!!, viewHolder.conversation!!.colors.color)
         }
 
-        fragment.recyclerManager.canScroll(false)
+        if (!DensityUtil.isSmallestWidth600Landscape(activity)) {
+            fragment.recyclerManager.canScroll(false)
+        }
 
         activity.intent?.putExtra(MessengerActivityExtras.EXTRA_CONVERSATION_ID, -1L)
         fragment.arguments?.putLong(ARG_CONVERSATION_TO_OPEN_ID, -1L)

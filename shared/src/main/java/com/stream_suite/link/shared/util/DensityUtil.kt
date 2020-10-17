@@ -1,6 +1,7 @@
 package com.stream_suite.link.shared.util
 
 import android.content.Context
+import android.content.res.Configuration
 import android.util.TypedValue
 
 object DensityUtil {
@@ -20,6 +21,15 @@ object DensityUtil {
 
         val scaledDensity = context.resources.displayMetrics.scaledDensity
         return (sp * scaledDensity).toInt()
+    }
+
+    fun isSmallestWidth600Landscape(context: Context?): Boolean {
+        if (context == null) {
+            return false
+        }
+
+        return context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+                && context.resources.configuration.smallestScreenWidthDp >= 600
     }
 
     private fun convert(context: Context?, amount: Int, conversionUnit: Int): Int {
