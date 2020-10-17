@@ -10,6 +10,7 @@ import com.stream_suite.link.api.implementation.ApiUtils
 import com.stream_suite.link.fragment.conversation.ConversationListFragment
 import com.stream_suite.link.shared.MessengerActivityExtras
 import com.stream_suite.link.shared.service.jobs.SubscriptionExpirationCheckJob
+import com.stream_suite.link.shared.util.DensityUtil
 import com.stream_suite.link.shared.util.show
 
 class MainIntentHandler(private val activity: MessengerActivity) {
@@ -136,9 +137,11 @@ class MainIntentHandler(private val activity: MessengerActivity) {
             transaction.replace(R.id.conversation_list_container, navController.conversationListFragment!!)
         }
 
-        val messageList = activity.supportFragmentManager.findFragmentById(R.id.message_list_container)
-        if (messageList != null) {
-            transaction.remove(messageList)
+        if (!DensityUtil.isSmallestWidth600(activity)) {
+            val messageList = activity.supportFragmentManager.findFragmentById(R.id.message_list_container)
+            if (messageList != null) {
+                transaction.remove(messageList)
+            }
         }
 
         transaction.commit()

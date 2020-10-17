@@ -15,10 +15,7 @@ import com.stream_suite.link.fragment.settings.AboutFragment
 import com.stream_suite.link.fragment.settings.HelpAndFeedbackFragment
 import com.stream_suite.link.fragment.settings.MyAccountFragment
 import com.stream_suite.link.shared.data.Settings
-import com.stream_suite.link.shared.util.AnimationUtils
-import com.stream_suite.link.shared.util.TimeUtils
-import com.stream_suite.link.shared.util.hide
-import com.stream_suite.link.shared.util.show
+import com.stream_suite.link.shared.util.*
 
 
 class MainNavigationConversationListActionDelegate(private val activity: MessengerActivity) {
@@ -68,11 +65,13 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
             transaction.replace(R.id.conversation_list_container, navController.conversationListFragment!!)
         }
 
-        val messageList = activity.supportFragmentManager
-                .findFragmentById(R.id.message_list_container)
+        if (!DensityUtil.isSmallestWidth600(activity)) {
+            val messageList = activity.supportFragmentManager
+                    .findFragmentById(R.id.message_list_container)
 
-        if (messageList != null) {
-            transaction.remove(messageList)
+            if (messageList != null) {
+                transaction.remove(messageList)
+            }
         }
 
         try {
@@ -152,7 +151,9 @@ class MainNavigationConversationListActionDelegate(private val activity: Messeng
         return true
     }
 
-    internal fun displayFragmentWithBackStack(fragment: Fragment, hideBottomNav: Boolean = true): Boolean {
+    internal fun displayFragmentWithBackStack(
+            fragment: Fragment,
+            hideBottomNav: Boolean = true): Boolean {
         activity.searchHelper.closeSearch()
         if (hideBottomNav) {
             navController.navigationView.hide()
