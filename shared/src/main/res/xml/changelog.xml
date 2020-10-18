@@ -17,13 +17,19 @@
 <changelog>
 
     <version
-        name="0.5.5"
+        name="0.6.0"
+        description="October 17th, 2020">
+        <text>Enhancing the layout for tablets to make better use of the available screen size</text>
+    </version>
+
+    <version
+        name="0.5.2"
         description="October 5th, 2020">
         <text>Bug fixes</text>
     </version>
 
     <version
-        name="0.5.4"
+        name="0.5.1"
         description="September 21st, 2020">
         <text>Bug fixes</text>
     </version>
