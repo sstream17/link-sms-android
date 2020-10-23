@@ -28,7 +28,7 @@ android {
         versionName(buildInfo.name + '.' + buildInfo.number)
         versionCode buildInfo.number
 
-        project.archivesBaseName = "messenger-${buildInfo.name}.${buildInfo.number}"
+        project.archivesBaseName = "link-${buildInfo.name}.${buildInfo.number}"
     }
 
     buildTypes {
