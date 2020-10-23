@@ -20,6 +20,20 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.stream_suite.link.api.service.AccountService;
+import com.stream_suite.link.api.service.ActivateService;
+import com.stream_suite.link.api.service.AutoReplyService;
+import com.stream_suite.link.api.service.BetaService;
+import com.stream_suite.link.api.service.BlacklistService;
+import com.stream_suite.link.api.service.ContactService;
+import com.stream_suite.link.api.service.ConversationService;
+import com.stream_suite.link.api.service.DeviceService;
+import com.stream_suite.link.api.service.DraftService;
+import com.stream_suite.link.api.service.FolderService;
+import com.stream_suite.link.api.service.MessageService;
+import com.stream_suite.link.api.service.PurchaseService;
+import com.stream_suite.link.api.service.ScheduledMessageService;
+import com.stream_suite.link.api.service.TemplateService;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -41,36 +55,22 @@ import retrofit2.CallAdapter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import com.stream_suite.link.api.service.AccountService;
-import com.stream_suite.link.api.service.ActivateService;
-import com.stream_suite.link.api.service.AutoReplyService;
-import com.stream_suite.link.api.service.BetaService;
-import com.stream_suite.link.api.service.BlacklistService;
-import com.stream_suite.link.api.service.ContactService;
-import com.stream_suite.link.api.service.ConversationService;
-import com.stream_suite.link.api.service.DeviceService;
-import com.stream_suite.link.api.service.DraftService;
-import com.stream_suite.link.api.service.FolderService;
-import com.stream_suite.link.api.service.MessageService;
-import com.stream_suite.link.api.service.PurchaseService;
-import com.stream_suite.link.api.service.ScheduledMessageService;
-import com.stream_suite.link.api.service.TemplateService;
 
 /**
  * Direct access to the messenger APIs using retrofit.
  */
 public class Api {
 
-    private static final String API_DEBUG_URL = "http://192.168.86.111:3000/api/v1/";
-    private static final String API_STAGING_URL = "https://klinkerapps-messenger-staging.herokuapp.com/api/v1/";
-    private static final String API_RELEASE_URL = "https://api.messenger.klinkerapps.com/api/v1/";
+    private static final String API_DEBUG_URL = "https://192.168.0.142:45455/api/";
+    private static final String API_STAGING_URL = "https://192.168.0.142:45455/api/";
+    private static final String API_RELEASE_URL = "https://link.stream-suite.com/api/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
     private static CallAdapter.Factory callAdapterFactory = new CallAdapter.Factory() {
         @Override
         public CallAdapter<Object, Object> get(final Type returnType, Annotation[] annotations,
-                                       Retrofit retrofit) {
+                                               Retrofit retrofit) {
             // if returnType is retrofit2.Call, do nothing
             if (returnType.getClass().getPackage().getName().contains("retrofit2.Call")) {
                 return null;
@@ -176,7 +176,7 @@ public class Api {
                 new Retrofit.Builder()
                         .baseUrl(baseUrl)
                         .addConverterFactory(GsonConverterFactory.create(gson));
-                        //.addCallAdapterFactory(callAdapterFactory);
+        //.addCallAdapterFactory(callAdapterFactory);
 
         this.retrofit = builder.client(httpClient.build()).build();
         this.baseUrl = baseUrl;
@@ -244,6 +244,7 @@ public class Api {
     public TemplateService template() {
         return retrofit.create(TemplateService.class);
     }
+
     /**
      * Gets a service that can be used for template requests.
      */
