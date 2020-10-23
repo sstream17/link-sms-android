@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
     <!--
-  ~ Copyright (C) 2016 Jacob Klinker
+  ~ Copyright (C) 2017 Luke Klinker
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-    <string name="app_name">Pulse</string>
-    <string name="app_name_long">Pulse (SMS/Mensajería en tablet)</string>
-    <string name="app_title">Pulse</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">Link</string>
+    <string name="app_name_long">Link Mensajería SMS</string>
+    <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Nuevo Mensaje</string>
     <string name="shortcut_compose_long">Comenzar una nueva consersación</string>
@@ -87,14 +87,14 @@
     <string name="conversations">Conversaciones</string>
     <string name="messages">Mensajes</string>
     <!-- Invite Friends Screen -->
-    <string name="invite_friends_title">¿Te encanta Pulse?</string>
+    <string name="invite_friends_title">¿Te encanta Link?</string>
     <string name="invite_friends_summary">¡A Nosotros también! Estamos intentando conseguirlo pasarlo a 
 Tantas manos como podamos para seguir haciendo el mejor producto que podamos e
 Invitando a tus amigos a probarlo , nos estás ayudando! \ N \ nSelecciona abajo a los amigos 
 a los que te gustaría enviar la aplicación y les enviaremos un SMS con una breve descripción y
 Un enlace para descargar!</string>
     <string name="invite_friends_sms">¡He empezado a usar una nueva app de mensajería, y he pensado 
-que te gustaría!. Pulse es gratuita, y puedes descargarla de aquí: http://messenger.klinkerapps.com</string>
+que te gustaría!. Link es gratuita, y puedes descargarla de aquí: http://messenger.klinkerapps.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Escribir mensaje</string>
     <string name="type_message_to">Escribir mensaje a %1$s</string>
@@ -142,6 +142,7 @@ fotos!</string>
     <string name="message_sending_failed">¡No se pudo enviar el mensaje!</string>
     <string name="preparing_video">Preparando video&#8230;</string>
     <string name="delete_message">¿Eliminar este mensaje?</string>
+    <!-- Templates -->
     <!-- Compose Screen -->
     <string name="compose_message">Redactar nuevo mensaje</string>
     <string name="send_message">Enviar mensaje</string>
@@ -159,9 +160,9 @@ No nos llevará mucho</string>
     <string name="onboarding_title_2">Disponible en cualquier lugar</string>
     <string name="onboarding_title_3">Potente capacidad de personalización</string>
     <string name="onboarding_content_1">Diseños fluidos y suaves con un diseño potente y una integración perfecta.
-Pulse pone tus conversaciones en el centro de todo.</string>
+Link pone tus conversaciones en el centro de todo.</string>
     <string name="onboarding_content_2">Manda mensajes desde tu tablet, ordenador, reloj o cualquier otro dispositivo conectado.</string>
-    <string name="onboarding_content_3">Fija, silencia, aplica temas y personaliza las notificaciones para cualquier contacto con el que estés chateando. Haz Pulse tuyo</string>
+    <string name="onboarding_content_3">Fija, silencia, aplica temas y personaliza las notificaciones para cualquier contacto con el que estés chateando. Haz Link tuyo</string>
     <string name="message_anywhere_onboarding_title_1">Manda mensajes desde cualquier lugar</string>
     <string name="message_anywhere_onboarding_title_2">Suscripción o pago único</string>
     <string name="message_anywhere_onboarding_title_3">Período de prueba de una semana</string>
@@ -211,7 +212,7 @@ pudieses encontrar!</string>
     <string name="issues">Sistema de seguimiento de incidentes</string>
     <string name="issues_summary">También sirve como hoja de ruta de características</string>
     <string name="google_plus">Google+</string>
-    <string name="google_plus_summary">Comunidad Pulse beta</string>
+    <string name="google_plus_summary">Comunidad Link beta</string>
     <string name="email">Correo electronico</string>
     <string name="email_summary">luke@klinkerapps.com</string>
     <string name="twitter">Twitter</string>
@@ -306,11 +307,10 @@ que se base el contacto:</string>
     <!-- MMS Configuration Settings -->
     <!-- Advanced Features Settings -->
     <string name="signature">Firma</string>
-    <string name="signature_summary">NOTA: las firmas enviadas NO se mostrarán en la lista de mensajes de Pulse. Las firmas sólo se mostrarán al receptor del mensaje.</string>
+    <string name="signature_summary">NOTA: las firmas enviadas NO se mostrarán en la lista de mensajes de Link. Las firmas sólo se mostrarán al receptor del mensaje.</string>
     <string name="cleanup_old_messages">Limpieza de mensajes antiguos</string>
     <string name="delayed_sending">Envio retrasado</string>
     <string name="quick_compose">Composición rápida</string>
-    <string name="quick_compose_summary">Notificación siempre activa para conseguir la manera mas rápida de componer de un nuevo mensaje.</string>
     <string name="secure_private_conversations">Conversaciones privadas seguras</string>
     <string name="secure_private_conversations_summary">Requerir PIN para desbloquear conversaciones privadas</string>
     <!-- Theming Options -->
@@ -342,12 +342,13 @@ abajo!</string>
     <string name="contact_card">Tarjeta de contacto</string>
     <string name="conversation_with">Conversación con %1$s</string>
     <string name="send">Enviar</string>
+    <!-- Passcode Entry -->
     <!-- Other -->
     <string name="dashclock_description">Marcar la información de SMS/MMS como no leída</string>
     <string name="default_text">Por defecto</string>
     <string name="did_you_know">Lo sabías?</string>
-    <string name="use_from_anywhere">Pulse se puede utilizar desde cualquier dispositivo conectado a internet- ¡ Pruébalo hoy!</string>
-    <string name="use_from_anywhere_short">¡Pulse puede utilizarse en cualquiera de tus dispositivos!</string>
+    <string name="use_from_anywhere">Link se puede utilizar desde cualquier dispositivo conectado a internet- ¡ Pruébalo hoy!</string>
+    <string name="use_from_anywhere_short">¡Link puede utilizarse en cualquiera de tus dispositivos!</string>
     <string name="learn_more">Saber Más</string>
     <string name="dismiss">Descartar</string>
     <string name="renew">Renovar</string>
@@ -357,6 +358,7 @@ abajo!</string>
     <string name="minutes">Minutos</string>
     <string name="test">Test</string>
     <string name="off">Apagar</string>
+    <!-- Rate it -->
     <!-- Times -->
     <string name="five_seconds">Cinco Segundos</string>
     <string name="ten_seconds">Diez segundos</string>
@@ -391,4 +393,5 @@ de tú cuenta en 2 días. Si esto es un error, ponte en contacto conmigo por cor
     <string name="monthly_purchase">$0,99 cada mes</string>
     <string name="monthly_purchase_summary">Solamente quieres probar? Sin problema</string>
     <string name="change_subscription_message">¿Quieres actualizar? ¡Genial! Después de haber hecho tú selección en la siguiente pantalla, debes ir a la Play Store y cancelar la suscripción antigua manualmente.</string>
+    <string name="quick_compose_summary">Notificación siempre activa para conseguir la manera mas rápida de componer de un nuevo mensaje.</string>
 </resources>

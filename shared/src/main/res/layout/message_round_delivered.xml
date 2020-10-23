@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/message_round_sent_background"
-        android:backgroundTint="@color/drawerBackground"
+        android:backgroundTint="@color/background"
         android:clickable="true"
         android:maxWidth="@dimen/max_message_width"
         android:minWidth="@dimen/min_mms_picture_width"
@@ -51,7 +51,7 @@
             android:scaleType="centerInside"
             android:transitionName="image" />
 
-        <xyz.stream.messenger.shared.view.emoji.EmojiableTextView
+        <com.stream_suite.link.shared.view.emoji.EmojiableTextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

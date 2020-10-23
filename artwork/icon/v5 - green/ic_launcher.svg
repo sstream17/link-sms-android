@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 108 108">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #33ef7e;
+      }
+
+      .cls-2, .cls-4, .cls-5, .cls-7 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        opacity: 0.23;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: #3c3c3c;
+        opacity: 0.2;
+      }
+
+      .cls-6, .cls-7 {
+        fill: #00bb4f;
+      }
+
+      .cls-8 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-9 {
+        fill: none;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="49.949" y1="50.314" x2="144.444" y2="144.809" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#008700" stop-opacity="0.2"/>
+      <stop offset="0.171" stop-color="#008700" stop-opacity="0.145"/>
+      <stop offset="0.622" stop-color="#008700" stop-opacity="0.037"/>
+      <stop offset="1" stop-color="#008700" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="radial-gradient" cx="-0.011" cy="-0.011" r="152.926" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.1"/>
+      <stop offset="0.143" stop-color="#fff" stop-opacity="0.077"/>
+      <stop offset="0.609" stop-color="#fff" stop-opacity="0.02"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <title>Artboard 1</title>
+  <g id="Background_Layer" data-name="Background Layer">
+    <rect id="Background_Colour" data-name="Background Colour" class="cls-1" width="108" height="108"/>
+  </g>
+  <g id="Foreground_Layer" data-name="Foreground Layer">
+    <g id="MessageBubble">
+      <path id="shadow" class="cls-2" d="M145.864,113.4c-.109-.122-73.557-73.559-73.686-73.677A5.027,5.027,0,0,0,68.53,38L34.5,65.764a5.021,5.021,0,0,0,1.721,3.647c.117.129,73.5,73.515,73.632,73.632a5.021,5.021,0,0,0,3.647,1.721H142.53a5.2,5.2,0,0,0,5-5V117A5.016,5.016,0,0,0,145.864,113.4Z"/>
+      <g id="path-17">
+        <image class="cls-3" width="68" height="57" transform="translate(22 30)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAAA5CAYAAACPr42tAAAACXBIWXMAAAsSAAALEgHS3X78AAAFh0lEQVRoQ+2b/XKbMBDEF8dtvto+bx4hr9s0dmInDv1DLFqOExIYOZNOd+YGYWMj/dg7MMJN27b4r6htboOcmsemyW1zCbUP6xzZZo5DMoP/TDDJQcwFVQTEgGjMcrCp81pt2QHo+uC9EjiTQASELlPtz1Yry1Q7CyUJxMCwsXFegywvKTt4Lz7MdkkwLhAHxkaWXnwWGA/Gx0Todi6UqbOMwtgAuEoE3/McU1spEKcu3qXdyPv87Egjh4g7eOQ58K3Ety64TjCeW2rJpsVJ4g0Bhl2eYNxiXZJyiEKhA7YAvndxLW3CUcdcInU8GBz8UeKA8QHq06Z5bBqFUpoydMU1gJsubrsl4dAt1im1pKmiMA5dvAJ4wfAAWVdBlgAMkEQxpUO+IQz8BsB9F3eIYOgWTR9+19riIGh/dQZB7BD7ws8QoDproFKHaMrcIID4AeAnApgUlBqpo0eWQN66eAWwR4DBfkC2o5O43gBoNW08INp5dYmmzS0CiJ9d/ECAxPRhPdG0WQuKBcIiyjTZIfSDMLTQanHV4l9UQ6gclF+IUG5R3yUWiNaOPcYwNJUOGPdroBIgVKrA3iE65Q4xdWrVkhSQV4Q+cUwnRNfs4R+oUZ8GQNqHtm0eG3gbihQMT8FaV24RO1YjbRQI0+GIoTPeER3DFLIFf1HKeKcpIH6RFlsFYzvgHo2F8hxyxDBNDgggtNDrBWSyPykgCmHqdwEwBqMXblpcgXWgeA6xMK4RD4rCsED6/vBMM+UQDwo7oGAophLhsCP2iJwLxXMIEPqlV84ejBGITn3alKSMDt770WTdQihc2jqylngdAYR+cOBbaW8kLAxd9uWAZ4Be3QWKFycT72bd1hntxKZCXDltC8GDMXlwShyScomG1hWv+NZwCBAGS6ekAs56UrkawqWCScGwxdZTtkOFmtqH1ax9jlLGyCusU2cdG5fQlDtmwQDyQKhUXSGoS0OoplIg1BQYm2JfUqVA7CBTEL4sCKoEyBQI+/6XVwmQlP4JR1idA+Sf1H8gRmsBsQXWvlZTq+57DSBegV3UmTPl7Xt2P3K/ZTx5R6E14W1v22vI25fth+egpOYASVnTu2zXS/qNLNcU9zv180F/W3mARsoB8T7oDToX/Nzs3xYJLelDCsTgtdyv3UbaKQfo/REbdIXeRgSWg9HOt0jv197ASjlIvwtA3iHA0GopCJwE0klm3uf8QLxRAyyHQbE/7AtvMmvopJQHx6ZRLxdINx2hHVeq/HKFwPkPzqvqTV+djgDWA6IOOSLs9wWxHwcM4dg7ewMYU1OZVlMwdJZ9j3Dbf4sw6BPiUwGXcAinMfddEM4BhVCAPBAvXXTqkLNiz/BnzfTOe00gnLnbAXhC6M8zQt8Uik50u2mTAwJEkqwddi6Vk0H8Ls6a6dxMTSAnxLTdIYD4DeAPomMUCGvJIocA42JKGC8YzpcC0RmcdK7xvIgHRPtElzwhQGH6EIpXXHuVPKfKwXDyiU8P3SM+I/Kra3Nul08W2elDYD0g1rVaz5gyhPKMAIp1ZZA+pY9UUTZl3jCcFkT3HvOYj0R4z4mcC4PyCj1PuTzb7BBT5hXxjHN2ygDjonpEHJzm8QtiqtjZs7VgUDaVbbGnW9g+wi+qA2Wfde/SxqYO0yf3VKLCqAHEq296gXiQtl6o9VBKH8u0smmjr+nFkTevuna6UJo21il69cy2Xq266QIUOAQYuETdcjURtWFQKSipUBgjdwCFQIAkFE2lK7OuIGoC4VKh0Lm6noUBzAACwHuO1cKxAVnWkoViXWNfm/yLyCwgwAgKl6n2JWXBeO3l/5fJKfEvK9v21teWHYCu9+0cCGoxENXEf/Fqw6DcQZRCUK0CxNOl/625ZPCeqgH5qvoLh/qwbyjdaksAAAAASUVORK5CYII="/>
+        <path class="cls-4" d="M34.5,46.1V65.764a5.2,5.2,0,0,0,5,5H68.53a5.2,5.2,0,0,0,5-5V43a5.2,5.2,0,0,0-5-5H30.744Z"/>
+      </g>
+      <path id="shaded-edge" class="cls-5" d="M68.53,69.764H39.5a5.2,5.2,0,0,1-5-5v1a5.2,5.2,0,0,0,5,5H68.53a5.2,5.2,0,0,0,5-5v-1A5.2,5.2,0,0,1,68.53,69.764Z"/>
+    </g>
+    <g id="Lines">
+      <rect id="bottom" class="cls-6" x="41.555" y="56.383" width="16.593" height="5.531" rx="2.766"/>
+      <path id="top" class="cls-7" d="M44.321,48.086H63.679a2.766,2.766,0,0,1,2.766,2.766h0a2.765,2.765,0,0,1-2.766,2.765H44.321a2.765,2.765,0,0,1-2.766-2.765h0A2.766,2.766,0,0,1,44.321,48.086Z"/>
+    </g>
+    <rect id="finish" class="cls-8" width="108" height="108"/>
+  </g>
+  <g id="Layer_4" data-name="Layer 4">
+    <circle class="cls-9" cx="54" cy="54" r="36"/>
+  </g>
+</svg>

@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<xyz.stream.messenger.shared.view.ExclusionRectDrawerLayout
+<com.stream_suite.link.shared.view.ExclusionRectDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -48,7 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <xyz.stream.messenger.shared.view.WhitableToolbar
+                        <com.stream_suite.link.shared.view.WhitableToolbar
                             android:id="@+id/toolbar"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
@@ -63,7 +63,7 @@
                             android:textColor="@color/primaryText"
                             android:textColorHint="@color/secondaryText"
                             app:searchBackIcon="@drawable/ic_search_back"
-                            app:searchBackground="@color/drawerBackground"
+                            app:searchBackground="@color/background"
                             app:searchCloseIcon="@drawable/ic_search_close" />
 
                     </FrameLayout>
@@ -123,7 +123,7 @@
                 android:textColor="@color/primaryText"
                 android:textColorHint="@color/secondaryText"
                 app:searchBackIcon="@drawable/ic_search_back"
-                app:searchBackground="@color/drawerBackground"
+                app:searchBackground="@color/background"
                 app:searchCloseIcon="@drawable/ic_search_close" />
 
             <FrameLayout
@@ -143,11 +143,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/drawerBackground"
+        android:background="@color/background"
         app:headerLayout="@layout/drawer_header"
         app:itemIconTint="@drawable/drawer_icon_selector"
         app:itemTextColor="@drawable/drawer_text_selector"
         app:menu="@menu/navigation_drawer_conversations"
         app:theme="@style/EllipsizeText" />
 
-</xyz.stream.messenger.shared.view.ExclusionRectDrawerLayout>
+</com.stream_suite.link.shared.view.ExclusionRectDrawerLayout>

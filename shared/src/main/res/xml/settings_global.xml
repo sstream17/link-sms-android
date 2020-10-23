@@ -16,11 +16,11 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <xyz.stream.messenger.shared.view.AutoSummaryEditTextPreference
+    <com.stream_suite.link.shared.view.AutoSummaryEditTextPreference
         android:key="@string/pref_phone_number"
         android:title="@string/settings_phone_number" />
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_customization_category"
         android:title="@string/theme_settings_category">
 
@@ -28,14 +28,14 @@
             android:key="@string/pref_theme_settings"
             android:title="@string/theme_settings_redirect" />
 
-        <xyz.stream.messenger.view.AutoSummaryListPreference
+        <com.stream_suite.link.view.AutoSummaryListPreference
             android:key="@string/pref_emoji_style"
             android:title="@string/emoji_style"
             android:entries="@array/emoji_style"
             android:entryValues="@array/emoji_style_values"
             android:defaultValue="default" />
 
-        <xyz.stream.messenger.view.AutoSummaryListPreference
+        <com.stream_suite.link.view.AutoSummaryListPreference
             android:key="@string/pref_keyboard_layout"
             android:title="@string/keyboard_layout"
             android:entries="@array/keyboard_layout"
@@ -52,27 +52,37 @@
             android:title="@string/sound_effects"
             android:defaultValue="true" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_notification_category"
         android:title="@string/notification_settings">
 
-        <xyz.stream.messenger.view.preference.NotificationAlertsPreference
+        <com.stream_suite.link.view.preference.NotificationAlertsPreference
             android:key="@string/pref_alert_types"
             android:title="@string/notification_customization"
             android:summary="@string/alert_types_summary" />
 
-        <xyz.stream.messenger.view.preference.NotificationActionsPreference
+        <com.stream_suite.link.view.preference.NotificationActionsPreference
             android:key="@string/pref_notification_actions"
             android:title="@string/notification_actions"
             android:summary="@string/notification_actions_summary_2" />
+        <SwitchPreference
+            android:key="@string/pref_hide_message_content"
+            android:title="@string/hide_message_content_notifications"
+            android:summary="@string/hide_message_content_notifications_summary"
+            android:defaultValue="false" />
 
         <SwitchPreference
             android:key="@string/pref_history_in_notifications"
             android:title="@string/show_conversation_history"
             android:summary="@string/show_conversation_history_summary"
             android:defaultValue="true" />
+
+        <com.stream_suite.link.view.preference.NotificationActionsPreference
+            android:key="@string/pref_notification_actions"
+            android:title="@string/notification_actions"
+            android:summary="@string/notification_actions_summary_2" />
 
         <SwitchPreference
             android:key="@string/pref_bundle_notifications"
@@ -86,9 +96,9 @@
             android:summary="@string/dismiss_notifications_on_reply_summary"
             android:defaultValue="false" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:key="@string/pref_advanced_category"
         android:title="@string/advanced">
 
@@ -127,6 +137,6 @@
             android:key="@string/pref_experiment_settings"
             android:title="@string/menu_open_source_experiments" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
 </PreferenceScreen>

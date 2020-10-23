@@ -16,7 +16,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="xyz.stream.messenger">
+    package="com.stream_suite.link">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -81,7 +81,7 @@
         android:required="false" />
 
     <application
-        android:name=".MessengerApplication"
+        android:name="com.stream_suite.link.MessengerApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:banner="@mipmap/ic_banner"
@@ -89,7 +89,7 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/PulseTheme"
+        android:theme="@style/LinkTheme"
         android:requestLegacyExternalStorage="true"
         tools:replace="android:allowBackup">
 
@@ -98,10 +98,10 @@
             android:resource="@xml/automotive_app_desc" />
 
         <activity
-            android:name=".activity.MessengerActivity"
+            android:name="com.stream_suite.link.activity.MessengerActivity"
             android:configChanges="keyboardHidden"
             android:launchMode="singleTop"
-            android:theme="@style/PulseTheme.MessengerActivity"
+            android:theme="@style/LinkTheme.MessengerActivity"
             android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
 
@@ -120,15 +120,15 @@
         </activity>
 
         <activity
-            android:name=".activity.BubbleActivity"
-            android:theme="@style/PulseTheme.MessengerActivity"
+            android:name="com.stream_suite.link.activity.BubbleActivity"
+            android:theme="@style/LinkTheme.MessengerActivity"
             android:allowEmbedded="true"
             android:documentLaunchMode="always"
             android:resizeableActivity="true"
             />
 
         <activity
-            android:name=".activity.MessengerTvActivity"
+            android:name="com.stream_suite.link.activity.MessengerTvActivity"
             android:theme="@style/AppTheme.Leanback"
             android:windowSoftInputMode="adjustPan">
 
@@ -140,9 +140,9 @@
         </activity>
 
         <activity
-            android:name=".activity.compose.ComposeActivity"
+            android:name="com.stream_suite.link.activity.compose.ComposeActivity"
             android:exported="true"
-            android:theme="@style/PulseTheme.NoActionBar"
+            android:theme="@style/LinkTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" >
 
             <intent-filter>
@@ -184,7 +184,7 @@
         </activity>
 
         <activity
-            android:name=".activity.share.QuickShareActivity"
+            android:name="com.stream_suite.link.activity.share.QuickShareActivity"
             android:label="@string/quick_share"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
@@ -208,81 +208,81 @@
         </activity>
 
         <activity
-            android:name=".activity.AccountPurchaseActivity"
+            android:name="com.stream_suite.link.activity.AccountPurchaseActivity"
             android:theme="@style/api_Theme.MaterialComponents.Translucent"
             android:configChanges="keyboardHidden|keyboard|screenLayout|orientation|screenSize"
             android:launchMode="singleTask"/>
 
         <activity
-            android:name=".activity.AccountPickSubscriptionActivity"
+            android:name="com.stream_suite.link.activity.AccountPickSubscriptionActivity"
             android:theme="@style/api_Theme.MaterialComponents.Translucent"
             android:configChanges="keyboardHidden|keyboard|screenLayout|orientation|screenSize"
             android:launchMode="singleTask"/>
 
         <activity
-            android:name=".activity.AccountTrialActivity"
+            android:name="com.stream_suite.link.activity.AccountTrialActivity"
             android:theme="@style/api_Theme.MaterialComponents.Translucent"
             android:configChanges="keyboardHidden|keyboard|screenLayout|orientation|screenSize"
             android:launchMode="singleTask"/>
 
         <activity
-            android:name=".activity.NoLimitMessageListActivity"
-            android:theme="@style/PulseTheme.NoActionBar" />
+            android:name="com.stream_suite.link.activity.NoLimitMessageListActivity"
+            android:theme="@style/LinkTheme.NoActionBar" />
         <activity
-            android:name=".shared.util.RedirectToMyAccount"
+            android:name="com.stream_suite.link.shared.util.RedirectToMyAccount"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
-            android:name=".activity.OnboardingActivity"
+            android:name="com.stream_suite.link.activity.OnboardingActivity"
             android:launchMode="singleInstance"
             android:theme="@style/AppIntro" />
         <activity
-            android:name=".activity.InitialLoadActivity"
+            android:name="com.stream_suite.link.activity.InitialLoadActivity"
             android:configChanges="keyboardHidden|keyboard|screenLayout|orientation|screenSize" />
         <activity
-            android:name=".activity.InitialLoadTvActivity"
-            android:theme="@style/PulseTheme.NoActionBar" />
+            android:name="com.stream_suite.link.activity.InitialLoadTvActivity"
+            android:theme="@style/LinkTheme.NoActionBar" />
         <activity
-            android:name=".activity.MediaGridActivity"
-            android:theme="@style/PulseTheme.NoColors.Media" />
+            android:name="com.stream_suite.link.activity.MediaGridActivity"
+            android:theme="@style/LinkTheme.NoColors.Media" />
         <activity
-            android:name=".activity.ContactSettingsActivity"
-            android:theme="@style/PulseTheme.NoColors" />
+            android:name="com.stream_suite.link.activity.ContactSettingsActivity"
+            android:theme="@style/LinkTheme.NoColors" />
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name="com.stream_suite.link.activity.SettingsActivity"
             android:label="@string/menu_settings"
-            android:theme="@style/PulseTheme.NoColors" />
+            android:theme="@style/LinkTheme.NoColors" />
         <activity
-            android:name=".activity.ImageViewerActivity"
-            android:theme="@style/PulseTheme.NoActionBar.Translucent" />
+            android:name="com.stream_suite.link.activity.ImageViewerActivity"
+            android:theme="@style/LinkTheme.NoActionBar.Translucent" />
         <activity
             android:name="xyz.klinker.giphy.GiphyActivity"
-            android:theme="@style/PulseTheme.NoActionBar"
+            android:theme="@style/LinkTheme.NoActionBar"
             tools:replace="android:theme" />
         <activity
-            android:name=".activity.notification.MarshmallowReplyActivity"
+            android:name="com.stream_suite.link.activity.notification.MarshmallowReplyActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:theme="@style/api_Theme.MaterialComponents.Translucent"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
-        <activity android:name=".activity.EnableDrivingModeActivity"
+        <activity android:name="com.stream_suite.link.activity.EnableDrivingModeActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:theme="@style/api_Theme.MaterialComponents.Translucent"/>
         <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
-        <activity android:name="xyz.stream.messenger.activity.passcode.PasscodeVerificationActivity"
-            android:theme="@style/PulsePasscode"
+        <activity android:name="com.stream_suite.link.activity.passcode.PasscodeVerificationActivity"
+            android:theme="@style/LinkPasscode"
             android:launchMode="singleInstance" />
-        <activity android:name="xyz.stream.messenger.activity.passcode.PasscodeSetupActivity"
-            android:theme="@style/PulsePasscode"
+        <activity android:name="com.stream_suite.link.activity.passcode.PasscodeSetupActivity"
+            android:theme="@style/LinkPasscode"
             android:launchMode="singleInstance" />
 
 
         <service
-            android:name=".service.DrivingModeQuickSettingTile"
+            android:name="com.stream_suite.link.service.DrivingModeQuickSettingTile"
             android:icon="@drawable/ic_drive"
             android:label="@string/driving_mode"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -293,7 +293,7 @@
         </service>
 
         <!-- Widget -->
-        <receiver android:name=".shared.widget.MessengerAppWidgetProvider">
+        <receiver android:name="com.stream_suite.link.shared.widget.MessengerAppWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -304,7 +304,7 @@
         </receiver>
 
         <service
-            android:name=".shared.widget.MessengerWidgetService"
+            android:name="com.stream_suite.link.shared.widget.MessengerWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
 

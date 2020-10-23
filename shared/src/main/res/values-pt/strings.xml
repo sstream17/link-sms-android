@@ -14,10 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-    <string name="app_name">Pulse</string>
-    <string name="app_name_long">Pulse (Mensageiro SMS/Tablet)</string>
-    <string name="app_title">Pulse</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">Link</string>
+    <string name="app_name_long">Link Mensageiro SMS</string>
+    <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Mensagem nova</string>
     <string name="shortcut_compose_long">"Inicie uma nova conversa! "</string>
@@ -79,8 +79,8 @@
     <string name="marking_section_as_read">Marcando todas %1$s como lidas</string>
     <string name="undo">Anular</string>
     <string name="enter_search">Pesquisar por...</string>
-    <string name="text_anywhere_description">"Sabia que: Pulse é mais do que apenas uma aplicação de telemóvel.
-Pode usar Pulse para enviar mensagens a partir de <b>qualquer</b> dispositivo! "</string>
+    <string name="text_anywhere_description">"Sabia que: Link é mais do que apenas uma aplicação de telemóvel.
+Pode usar Link para enviar mensagens a partir de <b>qualquer</b> dispositivo! "</string>
     <string name="convo_list_try_it">"Experimente! "</string>
     <string name="convo_list_not_now">Agora não</string>
     <string name="no_private_messages_description">"Definir conversas privadas a partir do menu de definições! "</string>
@@ -90,7 +90,7 @@ Pode usar Pulse para enviar mensagens a partir de <b>qualquer</b> dispositivo! "
     <string name="conversations">Conversas</string>
     <string name="messages">Mensagens</string>
     <!-- Invite Friends Screen -->
-    <string name="invite_friends_title">"Adora o Pulse? "</string>
+    <string name="invite_friends_title">"Adora o Link? "</string>
     <string name="invite_friends_summary">Também nós e também outros adorarão! Estamos a tentar fazê-lo chegar
 a tantas mãos quantas conseguirmos de forma a podermos continuar a fazer dele o melhor produto que puder ser e,
 por convidar os seus amigos a experimentá-lo, está a ajudar-nos com isso!
@@ -191,7 +191,7 @@ vai demorar muito! "</string>
     <string name="onboarding_title_3">Personalização poderosa</string>
     <string name="onboarding_content_1">Interfaces suaves e fluidas com um desenho poderoso e integração sem falhas.</string>
     <string name="onboarding_content_2">Envie mensagem a partir do seu tablet, computador, relógio, ou qualquer outro dispositivo conectado.</string>
-    <string name="onboarding_content_3">Adicione pin, silencie, altere o tema e personalize as notificações para quaisquer contactos com que troque mensagem. Torne o Pulse seu.</string>
+    <string name="onboarding_content_3">Adicione pin, silencie, altere o tema e personalize as notificações para quaisquer contactos com que troque mensagem. Torne o Link seu.</string>
     <string name="message_anywhere_onboarding_title_1">Envie mensagem de qualquer lado</string>
     <string name="message_anywhere_onboarding_title_2">Subscrição ou pagamento único</string>
     <string name="message_anywhere_onboarding_title_3">Experiência de uma semana</string>
@@ -263,11 +263,11 @@ possa encontrar! "</string>
     <string name="get_help">Obtenha ajuda</string>
     <string name="get_help_summary">Tem uma questão? Para uma equipa de um só homem, recebo uma quantidade imensa de e-mails todos os dias, o que se imiscui no tempo que tenho para desenvolver novas funcionalidades. Para me ajudar, seria óptimo que pudesse procurar aqui para ver se a sua questão já foi apreciada.</string>
     <string name="get_help_summary_2">"A secção de ajuda é bastante exaustiva mas, se não encontrar a sua questão específica, por favor entre em contacto e terei todo o gosto em lhe responder! "</string>
-    <string name="features">Funcionalidades do Pulse</string>
+    <string name="features">Funcionalidades do Link</string>
     <string name="issues">Rastreamento de problemas</string>
     <string name="issues_summary">Também serve como guia de funcionalidades</string>
     <string name="google_plus">Google+</string>
-    <string name="google_plus_summary">Comunidade Beta do Pulse</string>
+    <string name="google_plus_summary">Comunidade Beta do Link</string>
     <string name="email">E-mail</string>
     <string name="email_summary">luke@klinkerapps.com</string>
     <string name="twitter">Twitter</string>

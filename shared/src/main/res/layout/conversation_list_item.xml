@@ -23,7 +23,6 @@
     android:layout_marginEnd="@dimen/conversation_list_padding"
     android:background="@drawable/conversation_list_item_background"
     android:clickable="true"
-    android:elevation="2dp"
     android:foreground="?android:attr/selectableItemBackground"
     android:paddingStart="16dp"
     android:paddingEnd="16dp">
@@ -82,14 +81,14 @@
 
             <ImageView
                 android:id="@+id/pinned_indicator"
-                android:scaleType="centerCrop"
                 android:layout_width="16dp"
                 android:layout_height="12dp"
-                android:src="@drawable/ic_pin"
+                android:layout_marginEnd="8dp"
                 android:rotation="-90"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_pin"
                 android:tint="@color/primaryText"
-                android:visibility="gone"
-                android:layout_marginEnd="8dp"/>
+                android:visibility="gone" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/unread_indicator"
@@ -99,27 +98,27 @@
                 android:src="@android:color/black"
                 android:visibility="gone" />
 
-            <xyz.stream.messenger.shared.view.emoji.EmojiableTextView
+            <com.stream_suite.link.shared.view.emoji.EmojiableTextView
                 android:id="@+id/name"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/primaryText"
                 android:textSize="16sp" />
 
-            <xyz.stream.messenger.shared.view.emoji.EmojiableTextView
+            <com.stream_suite.link.shared.view.emoji.EmojiableTextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:textColor="@color/secondaryText"
-                android:textSize="13sp"
-                android:layout_marginStart="12dp" />
+                android:textSize="13sp" />
 
         </LinearLayout>
 
-        <xyz.stream.messenger.shared.view.emoji.EmojiableTextView
+        <com.stream_suite.link.shared.view.emoji.EmojiableTextView
             android:id="@+id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -15,9 +15,9 @@
   ~ limitations under the License.
   -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">Pulse</string>
-    <string name="app_name_long">Pulse (SMS/Tablet Messenger)</string>
-    <string name="app_title">Pulse</string>
+    <string name="app_name">Link</string>
+    <string name="app_name_long">Link SMS Messenger</string>
+    <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Yeni Mesaj</string>
     <string name="shortcut_compose_long">Yeni bir sohbet başlat!</string>
@@ -44,6 +44,7 @@
     <string name="menu_snooze">Bildirimleri ertele</string>
     <string name="menu_call">Kişiyi ara</string>
     <string name="menu_video_call">Duo ile görüntülü çağrı</string>
+    <string name="menu_show_bubble">Balon olarak açıl</string>
     <string name="menu_view_contact">Kişiyi göster</string>
     <string name="menu_view_contacts">Kişileri göster</string>
     <string name="menu_view_media">Medyayı göster</string>
@@ -51,6 +52,7 @@
     <string name="menu_archive_conversation">Sohbeti arşivle</string>
     <string name="menu_move_to_inbox">Gelen kutusuna taşı</string>
     <string name="menu_conversation_information">Sohbet bilgileri</string>
+    <string name="menu_search_conversation">Sohbet içinde ara</string>
     <string name="menu_copy_phone_number">Numarayı kopyala</string>
     <string name="menu_view_full_conversation">Geçmişi Göster</string>
     <string name="menu_conversation_blacklist">Kişiyi kara listeye al</string>
@@ -95,7 +97,7 @@
     </plurals>
     <string name="undo">Geri al</string>
     <string name="enter_search">Ara…</string>
-    <string name="text_anywhere_description">Biliyor musunuz: Pulse bir telefon uygulamasından çok daha fazlasıdır. Pulse ile <b>herhangi</b> bir cihazdan SMS gönderebilirsiniz!</string>
+    <string name="text_anywhere_description">Biliyor musunuz: Link bir telefon uygulamasından çok daha fazlasıdır. Link ile <b>herhangi</b> bir cihazdan SMS gönderebilirsiniz!</string>
     <string name="convo_list_try_it">Dene!</string>
     <string name="convo_list_not_now">Şimdi değil</string>
     <string name="no_private_messages_description">Özel sohbetler, sohbetin kendi ayarlar menüsünden belirlenir!</string>
@@ -105,7 +107,7 @@
     <string name="conversations">Sohbetler</string>
     <string name="messages">Mesajlar</string>
     <!-- Invite Friends Screen -->
-    <string name="invite_friends_title">Pulse\'u sevdin mi?</string>
+    <string name="invite_friends_title">Link\'u sevdin mi?</string>
     <string name="invite_friends_summary">Biz sevdiysek başkalarıda sever! Onu, elimizden gelen en iyi ürün haline getirmek ve olabildiğince çok kişiye ulaştırmak istiyoruz. Denemeleri için arkadaşlarınızı davet ederek buna yardımcı olabilirsiniz.
 \n\nUygulamayı göndermek istediğiniz arkadaşlarınızı aşağıdan seçin. Onlara kısa bir açıklama ve indirme bağlantısı içeren bir SMS gönderilecek!</string>
     <string name="invite_friends_sms">Yeni bir mesajlaşma uygulaması kullanmaya başladım ve bence beğeneceksin! Ayrıca ücretsiz. Şuradan indirebilirsin:
@@ -152,7 +154,7 @@ hadi başlatın!</string>
     <string name="save">Kaydet</string>
     <string name="share">Paylaş</string>
     <string name="share_content">İçerik paylaş...</string>
-    <string name="saved">İndirilenler klasörüne kaydedildi!</string>
+    <string name="saved">Dosya kaydedildi!</string>
     <string name="failed_to_save">Kaydedilemedi</string>
     <string name="start_recording_audio">Ses kaydını başlamak için düğmeye basın!</string>
     <string name="audio_recording_error">Kayıt hatası :(</string>
@@ -184,6 +186,8 @@ hadi başlatın!</string>
     <string name="send_as_scheduled_message">Zamanlanmış mesaj olarak gönder</string>
     <string name="send_without_signature">İmzasız gönder</string>
     <string name="send_without_delay">Gecikmeden gönder</string>
+    <string name="confirm_delete">Bu sohbeti silmek istediğinize emin misiniz?</string>
+    <string name="confirm_archive">Bu sohbeti arşivlemek istediğinize emin misiniz?</string>
     <!-- Templates -->
     <string name="type_template_text">Şablon metnini yaz</string>
     <string name="delete_template">Bu şablonu silmek istediğinize emin misiniz?</string>
@@ -213,7 +217,7 @@ hadi başlatın!</string>
     <string name="onboarding_title_3">Güçlü Özelleştirme</string>
     <string name="onboarding_content_1">Güçlü bir tasarımın, pürüzsüz ve akıcı yerleşim ile eşsiz bütünleşmesi.</string>
     <string name="onboarding_content_2">Tabletiniz, bilgisayarınız, saatiniz veya bağlı diğer cihazlarınızdan gelen mesajlar.</string>
-    <string name="onboarding_content_3">Sohbet ettiğiniz herhangi bir kişi için bildirimleri özelleştir, tema değiştir, sabitle veya sessize al. Pulse\'u sizin yapın.</string>
+    <string name="onboarding_content_3">Sohbet ettiğiniz herhangi bir kişi için bildirimleri özelleştir, tema değiştir, sabitle veya sessize al. Link\'u sizin yapın.</string>
     <string name="message_anywhere_onboarding_title_1">Mesaj Her Yerde</string>
     <string name="message_anywhere_onboarding_title_2">Abonelik veya Tek Ödeme</string>
     <string name="message_anywhere_onboarding_title_3">Hafta Uzun Deneme</string>
@@ -240,6 +244,12 @@ hadi başlatın!</string>
     <string name="reply">Yanıtla</string>
     <string name="reply_to">%1$s yanıtladı</string>
     <string name="call">Ara</string>
+    <string name="notification_action_reply">Sohbeti Yanıtla</string>
+    <string name="notification_action_call">Kişiyi Ara</string>
+    <string name="notification_action_delete">Mesajı Sil</string>
+    <string name="notification_action_archive">Sohbeti Arşivle</string>
+    <string name="notification_action_no_action">Eylem Gösterme</string>
+    <string name="notification_action_smart_reply">Akıllı Yanıt Öner</string>
     <string-array name="reply_choices">
         <item>Evet</item>
         <item>Hayır</item>
@@ -271,19 +281,20 @@ hadi başlatın!</string>
     <string name="creating_channels_text">Bildirim kanalları oluşturuluyor</string>
     <string name="write_new_message">Yeni bir mesaj yazın...</string>
     <string name="receiving_a_message">Bir mesaj alınıyor...</string>
+    <string name="bubble_channel">Bildirim Balonları</string>
     <!-- About, Help and Feedback and Settings -->
     <string name="changelog">Değişim Günlüğü</string>
-    <string name="copyright">© 2018 Luke &amp; Jake Klinker</string>
+    <string name="copyright">© 2019 Luke &amp; Jake Klinker</string>
     <string name="copyright_summary">Açık kaynak lisans bilgilerini görüntüle</string>
     <string name="app_version">Uygulama Sürümü</string>
     <string name="account_information">Hesap Bilgileri</string>
     <string name="account_actions">Hesap İşlemleri</string>
     <string name="danger_zone">Tehlikeli Bölge</string>
-    <string name="be_careful_using_these_settings">Yönergeleri takip edin ve bu eylemleri kullanırken dikkatli olun</string>
+    <string name="be_careful_using_these_settings">Bu seçenekler tehlikeli olabilir. Lütfen, yardım sayfasındaki kullanım yönergelerini ve notları inceleyin.</string>
     <string name="device_id">Cihaz Kimliği</string>
     <string name="device_info">Cihaz Bilgisi</string>
     <string name="website">Web Sitesi</string>
-    <string name="view_platforms">Mevcut Pulse Platformları</string>
+    <string name="view_platforms">Mevcut Link Platformları</string>
     <string name="access_messages_from_any_device">Herhangi bir cihazdan erişin ve mesaj gönderin!</string>
     <string name="beta_disclaimer">Bu proje hala beta aşamasında. Lütfen, bulduğunuz sorunları bildirin!</string>
     <string name="app_info">Uygulama Bilgisi</string>
@@ -294,11 +305,11 @@ hadi başlatın!</string>
     <string name="get_help">Yardım Alın</string>
     <string name="get_help_summary">"Bir sorunuz mu var? Tek-kişilik takım için her gün çılgın sayıda e-posta alıyorum. Sorunuzun ile ilgili daha önce bir cevap verilip verilmediğini şuradan aratarak bana yardımcı olabilirsiniz. "</string>
     <string name="get_help_summary_2">Yardım bölümü oldukça kapsamlıdır ancak sorunuza  belirgin bir yanıt bulamazsanız, lütfen benimle iletişime geçin, size geri dönüş yapacağım!</string>
-    <string name="features">Pulse\'un Özellikleri</string>
+    <string name="features">Link\'un Özellikleri</string>
     <string name="issues">Sorun İzleyici</string>
     <string name="issues_summary">Ayrıca bir özellik haritası olarak da hizmet ediyor</string>
     <string name="google_plus">Google+</string>
-    <string name="google_plus_summary">Pulse Beta Topluluğu</string>
+    <string name="google_plus_summary">Link Beta Topluluğu</string>
     <string name="email">E-posta</string>
     <string name="email_summary">luke@klinkerapps.com</string>
     <string name="twitter">Twitter</string>
@@ -351,14 +362,15 @@ hadi başlatın!</string>
     <string name="vibrate_one_long_one_short_one_long">Bir uzun, bir kısa, bir uzun titreşim</string>
     <string name="keyboard_layout">Klavye Düzeni</string>
     <string name="keyboard_default">Varsayılan Klavye</string>
-    <string name="keyboard_send_key">Send Key</string>
-    <string name="keyboard_enter_key">Enter Key</string>
+    <string name="keyboard_send_key">Bir \"Send Key\" Göster</string>
+    <string name="keyboard_enter_key">Bir \"Enter/Return Key\" Göster</string>
     <string name="sound_effects">Ses Efektleri</string>
     <string name="delivery_reports">Teslim Raporları</string>
     <string name="delivery_reports_summary">Çoğu taşıyıcı bu özelliği desteklemez. RCS değil.</string>
     <string name="theme_settings">Özelleştirme</string>
     <string name="theme_settings_category">Görünüm</string>
     <string name="conversation_list_category">Sohbet Listesi</string>
+    <string name="message_list_category">Mesaj Listesi</string>
     <string name="general_category">Genel</string>
     <string name="theme_settings_redirect">Tema</string>
     <string name="base_theme">Ana Tema</string>
@@ -373,6 +385,11 @@ hadi başlatın!</string>
     <string name="adjustable_nav_bar_summary">Aydınlık temalarda, beyaz gezinti çubuğu kullanılırken, koyu temalarda siyah gezinti çubuğu kullanılır.</string>
     <string name="apply_theme_globally">Tüm Sohbetlere Uygula</string>
     <string name="apply_theme_globally_summary">Sohbete-özel temaları sil, bu genel renk setini kullan</string>
+    <string name="conversation_categories">Tarih Kategorilerini Göster</string>
+    <string name="conversation_categories_summary">Sohbetleri tarihe göre sınıflandır (Bugün, Dün vb.)
+her sohbet için bir zaman damgası gösterme</string>
+    <string name="message_timestamp">Tüm Mesajlarda Zaman Damgası Göster</string>
+    <string name="message_timestamp_summary">Devre dışı bırakıldığında, zaman damgasını görmek için herhangi bir mesaja dokunmanız yeterlidir.</string>
     <string name="apply_primary_theme_toolbar">Uygulama Çubuğuna Birincil Rengi Uygula</string>
     <string name="apply_primary_theme_toolbar_summary">Uygulama çubuğu renklendirilsin mi?</string>
     <string name="swipe_delete">Kaydırarak Sil</string>
@@ -411,7 +428,7 @@ bu ifadeyi içeren mesajlar kaydedilmeyecek ve bildirim almayacaksınız!</strin
     <string name="trial_subscription_summary">Yükseltmek veya denemeyi iptal etmek için buraya dokunun!</string>
     <string name="upgrade_or_cancel_title">Denemeyi tamamladınız mi?</string>
     <string name="trial_expired">Deneme için teşekkürler!</string>
-    <string name="upgrade_or_cancel">Pulse\'u tüm cihazlarınızda kullanmaya devam etmek için bir abonelik satın alabilir veya ömür boyu üyeliğe yükseltebilirsiniz!\n\nİptal edilsin mi?
+    <string name="upgrade_or_cancel">Link\'u tüm cihazlarınızda kullanmaya devam etmek için bir abonelik satın alabilir veya ömür boyu üyeliğe yükseltebilirsiniz!\n\nİptal edilsin mi?
 Hesabınız kaldırılacak ve sizden ödeme alınmayacak. Uygulamayı ücretsiz olarak telefonunuzda kullanmaya devam edebilirsiniz! İstediğiniz zaman geri gelebilirsiniz.</string>
     <string name="upgrade">Yükselt!</string>
     <string name="cancel_trial">Denemeyi İptal Et</string>
@@ -446,6 +463,7 @@ Hesabınız kaldırılacak ve sizden ödeme alınmayacak. Uygulamayı ücretsiz 
     <string name="giffgaff_delivery">Giffgaff Teslim Raporları</string>
     <string name="notification_actions">Bildirim Eylemleri</string>
     <string name="notification_actions_summary">Bir bildirime en fazla üç eylem uygulanabilir</string>
+    <string name="notification_actions_summary_2">Note: Akıllı Yanıtlar şu anda yalnızca İngilizce dilinde kullanılabilir</string>
     <string name="mms_download_directory">Medya İndirme Klasörü</string>
     <string name="mms_download_directory_summary">Resimlerin ve diğer MMS medyalarının kaydedilmesini istediğiniz yer</string>
     <string name="refresh_firebase">Hesabı Yenile</string>
@@ -462,7 +480,7 @@ Hesabınız kaldırılacak ve sizden ödeme alınmayacak. Uygulamayı ücretsiz 
     <string name="emoji_style_android_o">Google\'s Android Oreo</string>
     <string name="settings_phone_number">Telefon Numarası</string>
     <string name="disable_battery_optimization">Pil Optimizasyonunu Kapat</string>
-    <string name="disable_battery_optimization_summary">Mesajlar telefonunuzdan web\'e ulaşmıyorsa, Pulse için pil optimizasyonlarını devre dışı bırakmayı deneyin.</string>
+    <string name="disable_battery_optimization_summary">Mesajlar telefonunuzdan web\'e ulaşmıyorsa, Link için pil optimizasyonlarını devre dışı bırakmayı deneyin.</string>
     <string name="hex">Hex Rengi</string>
     <!-- MMS Configuration Settings -->
     <string name="max_mms_size">Maksimum Görüntü Boyutu</string>
@@ -471,7 +489,7 @@ Hesabınız kaldırılacak ve sizden ödeme alınmayacak. Uygulamayı ücretsiz 
     <string name="use_group_mms_summary">Kapatıldığında, grup mesajları, her bir alıcıya bireysel mesaj olarak gönderilir</string>
     <string name="use_mms_read_receipts">Alıcıları Oku</string>
     <string name="auto_save_media">Medyayı Otomatik-Kaydet</string>
-    <string name="auto_save_media_summary">Herhangi bir MMS medyası alındığında \"İndirilenler\" klasörüne otomatik kaydet</string>
+    <string name="auto_save_media_summary">Herhangi bir MMS medyası alındığında otomatik kaydet</string>
     <string name="apn_configuration">APN Yapılandırması</string>
     <string name="override_system_apn">Sistem APN\'lerini Geçersiz Kıl</string>
     <string name="mmsc_url">MMSC URL\'si</string>
@@ -482,7 +500,7 @@ Hesabınız kaldırılacak ve sizden ödeme alınmayacak. Uygulamayı ücretsiz 
     <string name="user_agent_profile_tag">Kullanıcı Aracısı Profil Etiket Adı</string>
     <!-- Advanced Features Settings -->
     <string name="signature">İmza</string>
-    <string name="signature_summary">İmzalar, Pulse\'un mesaj listesinde gösterilmez,
+    <string name="signature_summary">İmzalar, Link\'un mesaj listesinde gösterilmez,
 sadece mesajın alıcısına gösterilir.</string>
     <string name="cleanup_old_messages">Eski Mesajları Temizle</string>
     <string name="cleanup_old_messages_summary">Seçilen zaman diliminden eski tüm mesajları silmek için günde bir kez çalıştırılır</string>
@@ -501,12 +519,16 @@ sadece mesajın alıcısına gösterilir.</string>
     <string name="secure_private_conversations_summary">Bir parola belirlerseniz, özel sohbetlerinizi görmek için onu girmeniz gerekir</string>
     <string name="use_internal_browser">Dahili Web Tarayıcısını Kullan</string>
     <string name="internal_browser_summary">Bunu kapatmak, mesaj listesinde bağlantıların önizlenmesini de devre dışı bırakır</string>
+    <string name="use_smart_replies">Akıllı Yanıtlar Öner</string>
+    <string name="use_smart_replies_summary">Pulse, kullanılabilir olduğunda ilgili yanıtları önerecektir. Bunlar uzak bir sunucuda değil, doğrudan cihazda oluşturulur.</string>
+    <string name="use_smart_replies_dialog">Pulse, kullanılabilir olduğunda ilgili yanıtları önerecektir. Bunlar uzak bir sunucuda değil, doğrudan cihazda oluşturulur.\n\nBu özelliği kullanmak istemezseniz, ayarlardan devre dışı bırakılabilir.</string>
+    <string name="use_smart_reply_settings">Ayarlar</string>
     <string name="message_backup">Mesajları Yedekle</string>
-    <string name="message_backup_pref_summary">Mesajlarınızı kaybetmekten mi korkuyorsunuz? Pulse sizi korur.</string>
-    <string name="message_backup_summary">Biliyor musunuz: Pulse\'un çevrimiçi hizmeti, mesajlarınızı yedeklemek için geliştirildi. 
-Bir Pulse hesabı oluşturduğunuzda, herhangi bir cihazınızdan bu hesaba giriş yapabilir ve tüm mesajlarınızı, otomatik olarak geri yükleyebilirsiniz.\n\nElle yedekleme yapmanın güçlüğünü ve karışıklığını yaşamazsınız. 
-Pulse ile her şey pürüzsüz, kolay ve tamamen otomatiktir.</string>
-    <string name="message_backup_summary_have_account">Zaten bir Pulse hesabınızın olduğu görünüyor, harika! Pulse otomatik olarak gönderdiğiniz ve aldığınız mesajları hesabınıza yedekler. Başka bir cihazda uygulamayı açtığınızda, tam olarak bu yedeğe erişirsiniz. Yeni bir cihaza mesajları geri yüklemek için tüm yapmanız gereken, bu cihazda hesabınıza giriş yapmaktır.</string>
+    <string name="message_backup_pref_summary">Mesajlarınızı kaybetmekten mi korkuyorsunuz? Link sizi korur.</string>
+    <string name="message_backup_summary">Biliyor musunuz: Link\'un çevrimiçi hizmeti, mesajlarınızı yedeklemek için geliştirildi.
+Bir Link hesabı oluşturduğunuzda, herhangi bir cihazınızdan bu hesaba giriş yapabilir ve tüm mesajlarınızı, otomatik olarak geri yükleyebilirsiniz.\n\nElle yedekleme yapmanın güçlüğünü ve karışıklığını yaşamazsınız.
+Link ile her şey pürüzsüz, kolay ve tamamen otomatiktir.</string>
+    <string name="message_backup_summary_have_account">Zaten bir Link hesabınızın olduğu görünüyor, harika! Link otomatik olarak gönderdiğiniz ve aldığınız mesajları hesabınıza yedekler. Başka bir cihazda uygulamayı açtığınızda, tam olarak bu yedeğe erişirsiniz. Yeni bir cihaza mesajları geri yüklemek için tüm yapmanız gereken, bu cihazda hesabınıza giriş yapmaktır.</string>
     <string name="auto_reply_configuration">Otomatik Yanıt Yapılandırması</string>
     <string name="auto_reply_configuration_summary">Otomatik yanıtları, durumunuza göre belirleyin</string>
     <string name="auto_replies">Otomatik Yanıtlar</string>
@@ -532,6 +554,7 @@ Pulse ile her şey pürüzsüz, kolay ve tamamen otomatiktir.</string>
     <string name="no_folder">Klasör yok</string>
     <!-- Theming Options -->
     <string name="day_night">Varsayılan (Gündüz/Gece)</string>
+    <string name="system_default">Sistem Varsayılanı</string>
     <string name="always_light">Daima aydınlık</string>
     <string name="always_dark">Daima Koyu</string>
     <string name="always_black">Daima Siyah</string>
@@ -574,7 +597,7 @@ Alıcı %1$s?</string>
     <string name="set_passcode">Güvenlik Kodu kaydet</string>
     <string name="confirm_fingerprint">Devam etmek için parmak izini doğrulayın. Sensöre dokunun.</string>
     <string name="confirm_passcode">Devam etmek için güvenlik kodunu doğrulayın</string>
-    <string name="confirm_pulse_password">Devam etmek için Pulse hesap kimliğinizi doğrulayın.</string>
+    <string name="confirm_link_password">Devam etmek için Link hesap kimliğinizi doğrulayın.</string>
     <string name="type_passcode">Bir güvenlik kodu oluşturun</string>
     <string name="incorrect_passcode">Güvenlik kodu yanlış</string>
     <string name="verify">Doğrula</string>
@@ -584,9 +607,9 @@ Alıcı %1$s?</string>
     <string name="dashclock_description">Okunmamış SMS / MMS bilgisi</string>
     <string name="default_text">Varsayılan</string>
     <string name="did_you_know">Biliyor musun?</string>
-    <string name="use_from_anywhere">Pulse internet\'e bağlı herhangi bir cihazdan kullanılabilir -
+    <string name="use_from_anywhere">Link internet\'e bağlı herhangi bir cihazdan kullanılabilir -
 Bugün deneyin!</string>
-    <string name="use_from_anywhere_short">Pulse, herhangi bir cihazınızda kullanılabilir!</string>
+    <string name="use_from_anywhere_short">Link, herhangi bir cihazınızda kullanılabilir!</string>
     <string name="learn_more">Daha fazla bilgi edin</string>
     <string name="dismiss">azletme</string>
     <string name="renew">yenilemek</string>
@@ -594,7 +617,7 @@ Bugün deneyin!</string>
     <string name="cancel">İptal et</string>
     <string name="hours">Saat</string>
     <string name="minutes">Dakika</string>
-    <string name="test">Ölçek</string>
+    <string name="test">Test Et</string>
     <string name="channel_settings">Sohbet Bildirim Özelleştirmeleri</string>
     <string name="channel_settings_summary">Android Oreo ile gelen sistem-seviyesi ayarları, bu sohbet için bildirimleri özelleştirilmenize imkan verir</string>
     <string name="restore_default_channel_settings">Varsayılan Bildirim Ayarlarını Geri Yükle</string>
@@ -603,19 +626,20 @@ Bugün deneyin!</string>
     <string name="default_channel">Varsayılan Kanal</string>
     <string name="channels_global_warning">Çoğu genel kişiselleştirmeyi artık her bir kanal için yapmak mümkün</string>
     <string name="channels_global_warning_2">Android Oreo ile zil sesi, titreşim, LED ve diğer bildirim seçeneklerini özelleştirmek için uygulamalara <i>Bildirim Kanalları</i>nı kullanma zorunluluğu getirildi.\n\n
-Aşağıdaki düğme ile bu seçenekleri özelleştirebilirsiniz. Daha fazla bilgi için Pulse\'un yardım bölümünü okuyun.</string>
-    <string name="channels_global_warning_3">Android Oreo\'da, yukarıdaki seçeneklerden bazıları sizi özelleştirme için sistem düzeyinde <i>Bildirim Kanalları</i> tercihlerine yönlendirir. Bu kanallar hakkında daha fazla bilgi edinmek, nasıl çalıştıklarını ve neden kullanılmaları gerektiğini öğrenmek için lütfen Pulse\'un yardım sayfasına bakın.</string>
+Aşağıdaki düğme ile bu seçenekleri özelleştirebilirsiniz. Daha fazla bilgi için Link\'un yardım bölümünü okuyun.</string>
+    <string name="channels_global_warning_3">Android Oreo\'da, yukarıdaki seçeneklerden bazıları sizi özelleştirme için sistem düzeyinde <i>Bildirim Kanalları</i> tercihlerine yönlendirir. Bu kanallar hakkında daha fazla bilgi edinmek, nasıl çalıştıklarını ve neden kullanılmaları gerektiğini öğrenmek için lütfen Link\'un yardım sayfasına bakın.</string>
     <string name="off">Kapalı</string>
     <string name="on">Açık</string>
-    <string name="share_promo">Selam, mesajlaşmak için Pulse\'a bayılıyorum! Bir şans ver:
-https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+    <string name="share_promo">Selam, mesajlaşmak için Link\'a bayılıyorum! Bir şans ver:
+https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">Parola doğrulanıyor...</string>
     <!-- Rate it -->
     <string name="rate_it">Oyla!</string>
+    <string name="no_thanks">Hayır teşekkürler</string>
     <string name="rate_it_title">Yüksek değerlendirmeler çok yararlıdır</string>
-    <string name="rate_it_summary"><b>5-yıldızlı değerlendirmeler</b> uygulamanın Play Store\'da büyümesine ve görünür olmasına oldukça yardımcı olur. Uygulamanın <i>hızla yükseldiğini</i> görmek istiyorsanız, bana yardımcı olun!</string>
-    <string name="rate_it_not_ready">Değerlendirme yapmaya hazır değil misiniz? Bu pencereyi kapatın, tekrar sormayacağım.</string>
-    <string name="love_pulse_question">Pulse\'u sevdin mi?</string>
+    <string name="rate_it_summary"><b>Yüksek değerlendirmeler</b> uygulamanın büyümesinde oldukça önemlidir. Uygulamanın <i>hızla yükseldiğini</i> görmek istiyorsanız, lütfen bir saniyenizi ayırın bana yardımcı olun!</string>
+    <string name="rate_it_not_ready"><b>Değerlendirme yapmaya hazır değil misiniz?</b> Sorun değil. Telefonunuzun geri butonuna basın, tekrar sormayacağım.</string>
+    <string name="love_link_question">Link\'u sevdin mi?</string>
     <string name="give_a_rating">Bir değerlendirme yapmayı veya arkadaşlarınızla paylaşmayı düşünün!\n\n
 5 yıldızlı değerlendirmeler kalbimi ısıttır :)</string>
     <!-- Times -->
@@ -648,22 +672,25 @@ Bu süre içinde yeni bir abonelik oluşturmazsanız, uygulama otomatik olarak 2
     <string name="billed_immediately">Hemen fatura edilir.</string>
     <string name="lifetime_purchase">$10.99 - Ömür Boyu Üyelik</string>
     <string name="lifetime_purchase_summary">Bir kez ödeyin, bir daha asla!</string>
+    <string name="subscription_purchase_description">Düşük fiyatlı, sevmesi kolay!</string>
+    <string name="subscription_purchase_summary">7 günlük deneme süresi bulunur.</string>
     <string name="yearly_purchase">Her yıl $5.99</string>
     <string name="yearly_purchase_summary">En iyi anlaşma.</string>
     <string name="three_month_purchase">Üç ayda bir $1,99</string>
     <string name="three_month_purchase_summary">Bununla yanılıyor olamam.</string>
-    <string name="monthly_purchase">Her ay $0,99</string>
+    <string name="yearly_purchase_2">$5.99 - Yıllık Abonelik</string>
+    <string name="monthly_purchase">$0.99 - Aylık Abonelik</string>
     <string name="monthly_purchase_summary">Sadece denemek ister misin? Sorun değil.</string>
     <string name="change_subscription_message">Yeni sürüme geçirmek ister misiniz? Harika! Sonraki ekranda seçim yaptıktan sonra Play Store uygulamasına gidip, eski aboneliğinizi iptal etmeniz <b>gerekiyor</b>.
 Ben, bunu otomatik <b>yapamam</b>.</string>
     <string name="beautiful_powerful_instant">Modern çağa hoş geldiniz.</string>
-    <string name="optimized_for_all_your_devices">Pulse, <b>tüm</b> cihazlarınız için optimize edildi.
+    <string name="optimized_for_all_your_devices">Link, <b>tüm</b> cihazlarınız için optimize edildi.
 Web\'den, masaüstü bilgisayardan, tabletinizden, saatinizden ve hatta TV\'nizden metin gönderin.</string>
     <string name="true_imessage_competitor">Android için ilk <b>gerçek</b> iMessage rakibi.</string>
-    <string name="trial_description">Hiçbir rakip, Pulse\'un <b>düşük fiyatı</b> ve <b>sonsuz platform desteği</b> ile rekabet edemez. Mesajlar, tüm cihazlarınız arasında anında ve sorunsuz bir şekilde senkronize edilir.</string>
+    <string name="trial_description">Hiçbir rakip, Link\'un <b>sonsuz platform desteği</b> ve <b>düşük fiyatı</b> ile rekabet edemez. Mesajlar, tüm cihazlarınız arasında anında ve sorunsuz bir şekilde senkronize edilir.</string>
     <string name="purchase_description">Çevrimiçi sürümü <b>yedi gün</b> süresince deneyin, ardından uygulamayı nasıl desteklemek istediğinize karar verin:\n\n<b>$10.99</b> ömür boyu üyelik\n<b>$5.99</b> yıllık\n<b>$1.99</b> üç aylık\n<b>$0.99</b> aylık</string>
     <string name="start_free_trial">Ücretsiz deneme sürümünü başlat!</string>
-    <string name="create_your_pulse_account">Bir Pulse hesabı oluştur!</string>
+    <string name="create_your_link_account">Bir Link hesabı oluştur!</string>
     <string name="try_it">Deneyin!</string>
     <string name="select_purchase">Satın Al\'ı Seçin</string>
     <string name="have_an_account">Hasabınız var mı?\nOturum açın</string>
@@ -671,14 +698,15 @@ Web\'den, masaüstü bilgisayardan, tabletinizden, saatinizden ve hatta TV\'nizd
     <string name="select_a_purchase_description">Üç abonelikten birini seçin veya bir kerelik satın alma yapmak için <b>ömür boyu üyelik</b>\'i seçin.</string>
     <string name="seven_days_free">7 gün ücretsiz!</string>
     <string name="competition_cant_beat"><b>7 gün ÜCRETSİZ deneyin</b> ve neden hızımız, fiyatımız, veya hizmetimizle rekabet edilemeyeceğini kendiniz keşfedin.</string>
-    <string name="select_a_trial_below"><b>Ücretsiz deneme</b> sürecini başlatmak için <b>üç abonelik seçeneğinden</b> birini seçin.</string>
+    <string name="select_a_trial_below"><b>Ücretsiz deneme</b> sürenizi başlatmak için <b>üç abonelik seçeneğinden</b> herhangi birini seçin. İstediğiniz zaman değiştirebilir veya yükseltebilirsiniz.</string>
+    <string name="select_a_subscription_below"><b>Ücretsiz deneme süresini</b> başlatmak için abonelik seçin. İstediğiniz zaman yükseltme yapabilirsiniz!</string>
     <string name="charged_after_trial">Denemeden sonra ücretlendirildi:</string>
     <string name="monthly_purchase_improved">$0,99 /\nay</string>
     <string name="three_month_purchase_improved">$1,99 /\n3 ay</string>
     <string name="yearly_purchase_improved">$5,99 /\nyıl</string>
     <string name="subscription_toast">7 günlük deneme tamamlanıncaya kadar ödeme <b>yapmazsınız</b>.
 İstediğiniz zaman iptal edin.</string>
-    <string name="redirect_to_play_store">Yükseltme yaptığınız için teşekkürler! Lütfen eski aboneliği <b>Play Store</b>\'dan iptal edin. Pulse bunu otomatik <b>yapamaz</b>.</string>
+    <string name="redirect_to_play_store">Yükseltme yaptığınız için teşekkürler! Lütfen eski aboneliği <b>Play Store</b>\'dan iptal edin. Link bunu otomatik <b>yapamaz</b>.</string>
     <string name="play_store">Play Store</string>
     <string name="notification_trial_title">Herhangi bir cihazdan SMS - Deneme</string>
     <string name="notification_days_remaining_in_trial">%s deneme gününüz kaldı. Yükseltmek için tıklayın!</string>

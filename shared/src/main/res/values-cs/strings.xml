@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
     <!--
-  ~ Copyright (C) 2020 Luke Klinker
+  ~ Copyright (C) 2017 Luke Klinker
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
   ~ limitations under the License.
   -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">Pulse</string>
-    <string name="app_name_long">Puls (SMS/Tablet zprávy)</string>
-    <string name="app_title">Pulse</string>
+    <string name="app_name">Link</string>
+    <string name="app_name_long">Puls SMS zprávy</string>
+    <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Nová zpráva</string>
     <string name="shortcut_compose_long">Zahájit novou konverzaci</string>
@@ -44,6 +44,7 @@
     <string name="menu_snooze">Odložit oznámení</string>
     <string name="menu_call">Zavolat kontakt</string>
     <string name="menu_video_call">Videohovor pomocí Duo</string>
+    <string name="menu_show_bubble">Přesunout do bubliny</string>
     <string name="menu_view_contact">Zobrazit kontakt</string>
     <string name="menu_view_contacts">Zobrazit kontakty</string>
     <string name="menu_view_media">Zobrazit média</string>
@@ -51,6 +52,7 @@
     <string name="menu_archive_conversation">Archivovat konverzaci</string>
     <string name="menu_move_to_inbox">Přesunout do doručených zpráv</string>
     <string name="menu_conversation_information">Informace o konverzaci</string>
+    <string name="menu_search_conversation">Vyhledat v konverzaci</string>
     <string name="menu_copy_phone_number">Kopírovat číslo</string>
     <string name="menu_view_full_conversation">Zobrazit historii</string>
     <string name="menu_conversation_blacklist">Blokovat tento kontakt</string>
@@ -101,8 +103,8 @@
     </plurals>
     <string name="undo">Vrátit zpět</string>
     <string name="enter_search">Vyhledat...</string>
-    <string name="text_anywhere_description">Věděli jste že: Pulse je víc než jen mobilní aplikace.
-Pulse můžete použít z <b>jakéhokoli</b> zařízení!</string>
+    <string name="text_anywhere_description">Věděli jste že: Link je víc než jen mobilní aplikace.
+Link můžete použít z <b>jakéhokoli</b> zařízení!</string>
     <string name="convo_list_try_it">Vyzkoušet!</string>
     <string name="convo_list_not_now">Nyní ne</string>
     <string name="no_private_messages_description">Nastavte si soukromé konverzace z jejich nastavení!</string>
@@ -112,7 +114,7 @@ Pulse můžete použít z <b>jakéhokoli</b> zařízení!</string>
     <string name="conversations">Konverzace</string>
     <string name="messages">Zprávy</string>
     <!-- Invite Friends Screen -->
-    <string name="invite_friends_title">Milujete Pulse?</string>
+    <string name="invite_friends_title">Milujete Link?</string>
     <string name="invite_friends_summary">My také a také budou ostatní! Snažíme se to dostat do tolika
 rukou, kolik je jenom možné, zatímco pokračujeme ve vylepšování a pozváním
 vašich přátel to vyzkoušet nám s tím pomáháte!\n\nVyberte přátele, kterým
@@ -193,6 +195,8 @@ je čas začít!</string>
     <string name="send_as_scheduled_message">Poslat jako naplánovanou zprávu</string>
     <string name="send_without_signature">Odeslat bez podpisu</string>
     <string name="send_without_delay">Odeslat bez prodlení</string>
+    <string name="confirm_delete">Opravdu chcete smazat tuto konverzaci?</string>
+    <string name="confirm_archive">Opravdu chcete archivovat tuto konverzaci?</string>
     <!-- Templates -->
     <string name="type_template_text">Napište text šablony...</string>
     <string name="delete_template">Opravdu chcete smazat tuto šablonu?</string>
@@ -224,7 +228,7 @@ Nebude to trvat dlouho!</string>
     <string name="onboarding_title_3">Mocná customizace</string>
     <string name="onboarding_content_1">Uhlazený a plynulý vzhled s perfektní integrací.</string>
     <string name="onboarding_content_2">Pište zprávy z vašeho tabletu, počítače, hodinek nebo jakéhokoli jiného propojeného zařízení.</string>
-    <string name="onboarding_content_3">Připněte, ztlumte, změňte vzhled a upravte upozornění pro jakýkoli kontakt se kterým si píšete. Upravte Pulse podle sebe.</string>
+    <string name="onboarding_content_3">Připněte, ztlumte, změňte vzhled a upravte upozornění pro jakýkoli kontakt se kterým si píšete. Upravte Link podle sebe.</string>
     <string name="message_anywhere_onboarding_title_1">Pište odkudkoli</string>
     <string name="message_anywhere_onboarding_title_2">Předplatné, nebo jednorázová platba</string>
     <string name="message_anywhere_onboarding_title_3">Týdenní zkušební období</string>
@@ -255,6 +259,12 @@ Nebude to trvat dlouho!</string>
     <string name="reply">Odpovědět</string>
     <string name="reply_to">Odpovědět %1$s</string>
     <string name="call">Zavolat</string>
+    <string name="notification_action_reply">Odpovědět na konverzaci</string>
+    <string name="notification_action_call">Volat kontakt</string>
+    <string name="notification_action_delete">Smazat zprávu</string>
+    <string name="notification_action_archive">Archivovat konverzaci</string>
+    <string name="notification_action_no_action">Nezobrazovat akci</string>
+    <string name="notification_action_smart_reply">Navrhnout chytrou odpověď</string>
     <string-array name="reply_choices">
         <item>Ano</item>
         <item>Ne</item>
@@ -287,6 +297,7 @@ pro které jste nevytvořili individuální Kanál oznámení pro úpravu jednot
     <string name="creating_channels_text">Vytvářím kanál oznámení</string>
     <string name="write_new_message">Napsat novou zprávu...</string>
     <string name="receiving_a_message">Přijímám zprávu</string>
+    <string name="bubble_channel">Notifikační bubliny</string>
     <!-- About, Help and Feedback and Settings -->
     <string name="changelog">Historie změn</string>
     <string name="copyright">© 2018 Luke &amp; Jake Klinker</string>
@@ -299,7 +310,7 @@ pro které jste nevytvořili individuální Kanál oznámení pro úpravu jednot
     <string name="device_id">ID zařízení</string>
     <string name="device_info">Informace o zařízení</string>
     <string name="website">Webová stránka</string>
-    <string name="view_platforms">Dostupné platformy pro Pulse</string>
+    <string name="view_platforms">Dostupné platformy pro Link</string>
     <string name="access_messages_from_any_device">Čtěte a pište zprávy za jakéhokoli zařízení!</string>
     <string name="beta_disclaimer">Tento projekt je stále v beta verzi, nahlaste prosím jakékoli problémy
 na které narazíte!</string>
@@ -315,7 +326,7 @@ na které narazíte!</string>
     <string name="issues">Issue Tracker</string>
     <string name="issues_summary">Také funguje jako plán do budoucna.</string>
     <string name="google_plus">Google+</string>
-    <string name="google_plus_summary">Pulse beta komunita</string>
+    <string name="google_plus_summary">Link beta komunita</string>
     <string name="email">Email</string>
     <string name="email_summary">luke@klinkerapps.com</string>
     <string name="twitter">Twitter</string>
@@ -324,12 +335,14 @@ na které narazíte!</string>
     <plurals name="message_count">
         <item quantity="one">%1$d zpráva</item>
         <item quantity="other">%1$d zpráv</item>
-        <item quantity="few">%1$d zpráv</item>
+        <item quantity="few">%1$d zprávy</item>
+        <item quantity="many">%1$d zpráv</item>
     </plurals>
     <plurals name="conversation_count">
         <item quantity="one">v %1$d konverzaci</item>
         <item quantity="other">v %1$d konverzacích</item>
         <item quantity="few">v %1$d konverzacích</item>
+        <item quantity="many">v %1$d konverzacích</item>
     </plurals>
     <string name="pin_conversation">Připnout konverzaci</string>
     <string name="pin_conversation_summary">Udržuje tuto konverzaci na vrchu seznamu</string>
@@ -378,6 +391,7 @@ na které narazíte!</string>
     <string name="theme_settings">Přizpůsobení</string>
     <string name="theme_settings_category">Nastavení vzhledu</string>
     <string name="conversation_list_category">Seznam konverzací</string>
+    <string name="message_list_category">Seznam zpráv</string>
     <string name="general_category">Obecné</string>
     <string name="theme_settings_redirect">Téma</string>
     <string name="base_theme">Základní téma</string>
@@ -393,6 +407,11 @@ na které narazíte!</string>
     <string name="apply_theme_globally">Aplikovat na všechny konverzace</string>
     <string name="apply_theme_globally_summary">Odstranit témata jednotlivých konverzací a místo toho použít tuto
 globální sadu barev</string>
+    <string name="conversation_categories">Zobrazit kategorie podle data</string>
+    <string name="conversation_categories_summary">Rozdělit konverzace podle data (dnes, včera atd.)
+místo zobrazování časové značky u každé jednotlivé konverzace</string>
+    <string name="message_timestamp">Časová značka u každé zprávy</string>
+    <string name="message_timestamp_summary">Pokud je vypnuto, časovou značku zobrazíte klepnutím na zprávu.</string>
     <string name="apply_primary_theme_toolbar">Aplikovat primární barvu na lištu</string>
     <string name="apply_primary_theme_toolbar_summary">Má být lišta aplikace barevná?</string>
     <string name="swipe_delete">Táhnout pro smazání</string>
@@ -434,7 +453,7 @@ Vždy se můžete znovu zaregistrovat!</string>
     <string name="trial_subscription_summary">Klepněte sem pro upgrade nebo zrušení zkušební verze!</string>
     <string name="upgrade_or_cancel_title">Stačila vám zkušební verze?</string>
     <string name="trial_expired">Děkujeme za vyzkoušení!</string>
-    <string name="upgrade_or_cancel">Můžete povýšit svůj účet na předplatné nebo doživotní členství, abyste mohli používat Pulse na jakémkoliv ze svých zařízení.\n\nChcete ukončit používání zkušební verze?
+    <string name="upgrade_or_cancel">Můžete povýšit svůj účet na předplatné nebo doživotní členství, abyste mohli používat Link na jakémkoliv ze svých zařízení.\n\nChcete ukončit používání zkušební verze?
 Váš účet bude odstraněn a vy nemusíte nic platit. Můžete nadále zdarma používat aplikaci na svém telefonu. Kdykoliv se můžete vrátit zpět.</string>
     <string name="upgrade">Upgrade!</string>
     <string name="cancel_trial">Zrušit zkušební verzi</string>
@@ -472,6 +491,7 @@ je na vašem primárním zařízení. Jste si jisti, že to je to co chcete?</st
     <string name="giffgaff_delivery">Giffgaff potvrzení o přijetí</string>
     <string name="notification_actions">Akce notifikací</string>
     <string name="notification_actions_summary">Jedno upozornění může mít maximálně tři akce</string>
+    <string name="notification_actions_summary_2">Chytré odpovědi jsou dostupné pouze v angličtině</string>
     <string name="mms_download_directory">Složka ke stahování medií</string>
     <string name="mms_download_directory_summary">Kde chcete mít uloženy obrázky a jiná MMS média</string>
     <string name="refresh_firebase">Aktualizovat účet</string>
@@ -488,7 +508,7 @@ Jakmile bude hotov, pak se můžete přihlásit na Vašich ostatních zařízen�
     <string name="emoji_style_android_o">Google Android Oreo</string>
     <string name="settings_phone_number">Telefonní číslo</string>
     <string name="disable_battery_optimization">Vypnout úsporu baterie</string>
-    <string name="disable_battery_optimization_summary">Pokud se zprávy nezobrazují na webu, tak zkuste vypnout úsporu baterie v Pulse.</string>
+    <string name="disable_battery_optimization_summary">Pokud se zprávy nezobrazují na webu, tak zkuste vypnout úsporu baterie v Link.</string>
     <string name="hex">Hex barva</string>
     <!-- MMS Configuration Settings -->
     <string name="max_mms_size">Maximální velikost obrázku</string>
@@ -528,14 +548,18 @@ pouze příjemci zprávy</string>
     <string name="secure_private_conversations_summary">Nastavíte-li heslo, bude nutné ho zadávat před prohlížením soukromých konverzací</string>
     <string name="use_internal_browser">Použít interní webový prohlížeč</string>
     <string name="internal_browser_summary">Vypnutí této volby také zabrání zobrazování náhledů v seznamu zpráv</string>
+    <string name="use_smart_replies">Navrhnout chytré odpovědi</string>
+    <string name="use_smart_replies_summary">Pulse bude navrhovat relevantní odpovědi, pokud budou dostupné. Tyto se generují na zařízení, ne na vzdáleném serveru</string>
+    <string name="use_smart_replies_dialog">Pulse bude navrhovat relevantní odpovědi, pokud budou dostupné. Tyto se generují na zařízení, ne na vzdáleném serveru.\n\nPokud tuto funkci nechcete využívat, můžete ji vypnout v nastavení.</string>
+    <string name="use_smart_reply_settings">Nastavení</string>
     <string name="message_backup">Záloha zpráv</string>
-    <string name="message_backup_pref_summary">Máte obavu, že přijdete o své zprávy? Pulse Vám hlídá záda</string>
-    <string name="message_backup_summary">Věděli jste že: Pulse online služba je postavena okolo zálohování Vašich zpráv.
-Když si založíte účet Pulse, pak se do něj můžete přihlásit z libovolného zařízení
+    <string name="message_backup_pref_summary">Máte obavu, že přijdete o své zprávy? Link Vám hlídá záda</string>
+    <string name="message_backup_summary">Věděli jste že: Link online služba je postavena okolo zálohování Vašich zpráv.
+Když si založíte účet Link, pak se do něj můžete přihlásit z libovolného zařízení
 pro automatickou obnovu Vašich zpráv!\n\nŽádné nepříjemnosti a žádné zdržování se s ručními zálohami.
-S Pulse je všechno jednoduché a naprosto automatické.</string>
-    <string name="message_backup_summary_have_account">Vypadá to, že už máte učet Pulse, skvěle!
-S Vaším účtem, Pulse Vám bude automaticky zálohovat všechny zprávy, které odešlete a přijmete. Když si otevřete
+S Link je všechno jednoduché a naprosto automatické.</string>
+    <string name="message_backup_summary_have_account">Vypadá to, že už máte učet Link, skvěle!
+S Vaším účtem, Link Vám bude automaticky zálohovat všechny zprávy, které odešlete a přijmete. Když si otevřete
 aplikaci na jiném Vašem zařízení tak přistupujete k této záloze. Pro obnovení zpráv na novém zařízení vše co musíte
 udělat je přihlásit se do Vašeho účtu.</string>
     <string name="auto_reply_configuration">Nastavení automatických odpovědí</string>
@@ -563,6 +587,7 @@ udělat je přihlásit se do Vašeho účtu.</string>
     <string name="no_folder">Žádná složka</string>
     <!-- Theming Options -->
     <string name="day_night">Výchozí (Den/Noc)</string>
+    <string name="system_default">Výchozí nastavení</string>
     <string name="always_light">Vždy světlé</string>
     <string name="always_dark">Vždy tmavé</string>
     <string name="always_black">Vždy černé</string>
@@ -606,7 +631,7 @@ pro %1$s?</string>
     <string name="set_passcode">Uložit kód</string>
     <string name="confirm_fingerprint">Potvrďte otisk prstu pro pokračování. Dotkněte se senzoru.</string>
     <string name="confirm_passcode">Potvrďte heslo pro pokračování.</string>
-    <string name="confirm_pulse_password">Potvrďte přihlašovací údaje Pulse účtu pro pokračování.</string>
+    <string name="confirm_link_password">Potvrďte přihlašovací údaje Link účtu pro pokračování.</string>
     <string name="type_passcode">Vytvořit kód.</string>
     <string name="incorrect_passcode">Nesprávný kód.</string>
     <string name="verify">Ověřit</string>
@@ -617,9 +642,9 @@ Pokud chcete přidat toto zabezpečení, nastavte si kód v sekci <i>Pokročilá
     <string name="dashclock_description">Informace o nepřečtených SMS/MMS</string>
     <string name="default_text">Výchozí</string>
     <string name="did_you_know">Věděli jste že?</string>
-    <string name="use_from_anywhere">Pulse může být použit z jakéhokoli zařízení připojeného na internet?
+    <string name="use_from_anywhere">Link může být použit z jakéhokoli zařízení připojeného na internet?
 Vyzkoušejte to dnes!</string>
-    <string name="use_from_anywhere_short">Pulse můžete používat na kterémkoliv ze svých zařízení.</string>
+    <string name="use_from_anywhere_short">Link můžete používat na kterémkoliv ze svých zařízení.</string>
     <string name="learn_more">Zjistit více</string>
     <string name="dismiss">Zavřít</string>
     <string name="renew">Obnovit</string>
@@ -636,20 +661,21 @@ Vyzkoušejte to dnes!</string>
     <string name="default_channel">Výchozí kanál</string>
     <string name="channels_global_warning">Mnoho globálních nastavení je nyní možno upravit pro každý kanál zvlášť.</string>
     <string name="channels_global_warning_2">S Androidem Oreo jsou aplikace nuceny projít přes <i>Kanály oznámení</i> pro úpravu vyzvánění, vibrací, LED a jiných nastavení oznámení.\n\n
-Tato nastavení můžete upravit s pomocí tlačítka níže. Více o této změně se dočtete v nápovědě Pulse.</string>
-    <string name="channels_global_warning_3">Na Androidu Oreo vás některé z výše uvedených položek přesměrují na nastavení systémových <i>Kategorií oznámení</i>. O tom, jak tyto kanály fungují a proč je nutné je použít, se dozvíte více na stránce nápovědy pro Pulse.</string>
+Tato nastavení můžete upravit s pomocí tlačítka níže. Více o této změně se dočtete v nápovědě Link.</string>
+    <string name="channels_global_warning_3">Na Androidu Oreo vás některé z výše uvedených položek přesměrují na nastavení systémových <i>Kategorií oznámení</i>. O tom, jak tyto kanály fungují a proč je nutné je použít, se dozvíte více na stránce nápovědy pro Link.</string>
     <string name="off">Vypnuto</string>
     <string name="on">Zapnuto</string>
-    <string name="share_promo">Ahoj, miluji Pulse pro psaní zpráv! Zkus to:
-https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+    <string name="share_promo">Ahoj, miluji Link pro psaní zpráv! Zkus to:
+https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">Ověřuji heslo...</string>
     <!-- Rate it -->
     <string name="rate_it">Ohodnoťe ho!</string>
+    <string name="no_thanks">Ne děkuji</string>
     <string name="rate_it_title">Dobrá hodnocení velmi pomohou</string>
     <string name="rate_it_summary"><b>pěti hvězdičkové</b> hodnocení velmi pomohou růstu aplikace
 a její viditelnosti v Obchodě Play. Pokud chcete této vidět tuto aplikaci <i>pokračovat stoupat</i>, tak mi pomožte!</string>
     <string name="rate_it_not_ready">Nejste připraveni hodnotit? Není problém. Opusťte toto okno a už se nezeptám.</string>
-    <string name="love_pulse_question">Milujete Pulse?</string>
+    <string name="love_link_question">Milujete Link?</string>
     <string name="give_a_rating">Zvažte ohodnocení nebo sdílení s přáteli!\n\n
 Pětihvězdičková ohodnocení mě zahřejí z srdce :)</string>
     <!-- Times -->
@@ -682,23 +708,26 @@ Pokud nevytvoříte nové tak vás aplikace automaticky odhlásí z vašeho úč
     <string name="billed_immediately">Toto se platí ihned.</string>
     <string name="lifetime_purchase">$10.99 - Celoživotní členství</string>
     <string name="lifetime_purchase_summary">Zaplaťte jednou a nikdy víc!</string>
+    <string name="subscription_purchase_description">Nízká cena, budete potěšeni!</string>
+    <string name="subscription_purchase_summary">Sedmidenní zkušební lhůta.</string>
     <string name="yearly_purchase">$5.99 každý rok</string>
     <string name="yearly_purchase_summary">Nejlepší nabídka.</string>
     <string name="three_month_purchase">$1.99 každé tři měsíce</string>
     <string name="three_month_purchase_summary">S touto volbou nemůžete nic pokazit.</string>
+    <string name="yearly_purchase_2">$5.99 - roční předplatné</string>
     <string name="monthly_purchase">$0.99 každý měsíc</string>
     <string name="monthly_purchase_summary">Nechcete platit? Žádný problém. Vyzkoušejte si aplikaci zdarma.</string>
     <string name="change_subscription_message">Chcete upgrade? Skvělé! Až si na následující obrazovce
 vyberete, <b>musíte</b> otevřít aplikaci Obchod Play a zrušit své staré předplatné ručně.
 <b>Nelze</b> to udělat automaticky.</string>
     <string name="beautiful_powerful_instant">Vítejte v moderní době.</string>
-    <string name="optimized_for_all_your_devices">Pulse je optimalizované pro <b>všechna</b> Vaše zařízení.
+    <string name="optimized_for_all_your_devices">Link je optimalizované pro <b>všechna</b> Vaše zařízení.
 Posílejte zprávy z webu, z počítače, z tabletu, hodinek a dokonce i z televize.</string>
     <string name="true_imessage_competitor">První opravdový iMessage konkurent pro Android.</string>
-    <string name="trial_description">Žádná konkurence nemůže nabídnout <b>doživotní podporu platformy</b> a <b>nízkou cenu</b> tak, jako Pulse. Zprávy se mezi všemi zařízeními synchronizují okamžitě a bez námahy.</string>
+    <string name="trial_description">Žádná konkurence nemůže nabídnout <b>doživotní podporu platformy</b> a <b>nízkou cenu</b> tak, jako Link. Zprávy se mezi všemi zařízeními synchronizují okamžitě a bez námahy.</string>
     <string name="purchase_description">Vyzkoušejte online verzi po dobu <b>sedmi dní</b>, pak se rozhodněte, jak chcete aplikaci podpořit:\n\n<b>$10.99</b> za doživotní členství\n<b>$5.99</b> za rok\n<b>$1.99</b> čtvrtletně\n<b>$0.99</b> za měsíc</string>
     <string name="start_free_trial">Začněte používat bezplatnou zkušební verzi!</string>
-    <string name="create_your_pulse_account">Vytvořte si účet Pulse!</string>
+    <string name="create_your_link_account">Vytvořte si účet Link!</string>
     <string name="try_it">Vyzkoušejte!</string>
     <string name="select_purchase">Vyberte nákup</string>
     <string name="have_an_account">Máte účet?\nPřihlašte se</string>
@@ -707,13 +736,14 @@ Posílejte zprávy z webu, z počítače, z tabletu, hodinek a dokonce i z telev
     <string name="seven_days_free">7 dní zdarma!</string>
     <string name="competition_cant_beat">Konkurence se nemůže dotknout našich cen, rychlosti či služeb - <b>vyzkoušejte 7 dní ZDARMA</b> a zjistěte sami!</string>
     <string name="select_a_trial_below">Vyberte jednu ze tří možností předplatného pro spuštění vaší <b>bezplatné zkušební verze</b>.</string>
+    <string name="select_a_subscription_below">Vyberte si předplatné a začněte používat svou <b>bezplatnou zkušební verzi</b>. Upgradovat můžete kdykoliv!</string>
     <string name="charged_after_trial">Účtováno po zkušebním období:</string>
     <string name="monthly_purchase_improved">$0.99 za měsíc</string>
     <string name="three_month_purchase_improved">$1.99 za měsíc</string>
     <string name="yearly_purchase_improved">$5.99 za měsíc</string>
     <string name="subscription_toast">Nic Vám nebude účtováno před zkončením 7 denního zkušebního období.
 Zrušte kdykoli.</string>
-    <string name="redirect_to_play_store">Děkujeme za upgrade! Zrušte si starý odběr z <b>Obchodu Play</b>. Pulse <b>nemůže</b> toto udělat automaticky.</string>
+    <string name="redirect_to_play_store">Děkujeme za upgrade! Zrušte si starý odběr z <b>Obchodu Play</b>. Link <b>nemůže</b> toto udělat automaticky.</string>
     <string name="play_store">Obchod Play</string>
     <string name="notification_trial_title">Zprávy z libovolného zařízení - zkušební verze</string>
     <string name="notification_days_remaining_in_trial">%s dní zbývá ve zkušební verzi. Klikněte pro upgrade!</string>

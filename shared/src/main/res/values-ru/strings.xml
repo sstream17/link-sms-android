@@ -14,10 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-    <string name="app_name">Pulse</string>
-    <string name="app_name_long">Pulse (чат и SMS)</string>
-    <string name="app_title">Pulse</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">Link</string>
+    <string name="app_name_long">Link (чат и SMS)</string>
+    <string name="app_title">Link</string>
     <!-- Launcher Shortcuts -->
     <string name="shortcut_compose_short">Новое сообщение</string>
     <string name="shortcut_compose_long">Начните новый диалог!</string>
@@ -43,6 +43,8 @@
     <string name="menu_mobile_only">Только мобильные</string>
     <string name="menu_snooze">Не беспокоить</string>
     <string name="menu_call">Позвонить</string>
+    <string name="menu_video_call">Видео вызов через Duo</string>
+    <string name="menu_show_bubble">Всплывающий пузырь</string>
     <string name="menu_view_contact">Посмотреть контакт</string>
     <string name="menu_view_contacts">Посмотреть контакты</string>
     <string name="menu_view_media">Посмотреть медиа</string>
@@ -50,9 +52,11 @@
     <string name="menu_archive_conversation">В архив</string>
     <string name="menu_move_to_inbox">Переместить во Входящие</string>
     <string name="menu_conversation_information">Информация о диалоге</string>
+    <string name="menu_search_conversation">Поиск диалога</string>
     <string name="menu_copy_phone_number">Скопировать номер</string>
     <string name="menu_view_full_conversation">Смотреть историю</string>
     <string name="menu_conversation_blacklist">Добавить в чёрный список</string>
+    <string name="menu_conversation_blacklist_all">Заблокировать всех участников</string>
     <string name="menu_conversation_schedule">Отложить сообщение</string>
     <string name="menu_contact_settings">Настройки беседы</string>
     <string name="menu_group_settings">Настройки группы</string>
@@ -82,25 +86,25 @@
     <string name="marking_section_as_read">Отмечаю все %1$s как прочитанные</string>
     <plurals name="conversations_deleted">
         <item quantity="one">%1$d диалог удален</item>
+        <item quantity="other">%1$d диалогов удалены</item>
         <item quantity="few">%1$d диалога удалены</item>
         <item quantity="many">%1$d диалогов удалены</item>
-        <item quantity="other">%1$d диалогов удалены</item>
     </plurals>
     <plurals name="conversations_archived">
         <item quantity="one">%1$d диалог отправлен в архив</item>
+        <item quantity="other">%1$d диалогов отправлены в архив</item>
         <item quantity="few">%1$d диалога отправлены в архив</item>
         <item quantity="many">%1$d диалогов отправлены в архив</item>
-        <item quantity="other">%1$d диалогов отправлены в архив</item>
     </plurals>
     <plurals name="conversations_unarchived">
         <item quantity="one">%1$d диалог перемещен во Входящие</item>
+        <item quantity="other">%1$d диалогов перемещены во Входящие</item>
         <item quantity="few">%1$d диалога перемещены во Входящие</item>
         <item quantity="many">%1$d диалогов перемещены во Входящие</item>
-        <item quantity="other">%1$d диалогов перемещены во Входящие</item>
     </plurals>
     <string name="undo">Отменить</string>
     <string name="enter_search">Найти...</string>
-    <string name="text_anywhere_description">Знаете ли Вы:  Pulse - это больше, чем просто мобильное приложение. Вы можете пользоваться Pulse на <b>любом</b> устройстве!</string>
+    <string name="text_anywhere_description">Знаете ли Вы:  Link - это больше, чем просто мобильное приложение. Вы можете пользоваться Link на <b>любом</b> устройстве!</string>
     <string name="convo_list_try_it">Попробуйте!</string>
     <string name="convo_list_not_now">Позже</string>
     <string name="no_private_messages_description">Настройте личные беседы из меню настроек!</string>
@@ -110,7 +114,7 @@
     <string name="conversations">Диалоги</string>
     <string name="messages">Сообщения</string>
     <!-- Invite Friends Screen -->
-    <string name="invite_friends_title">Понравился Pulse?</string>
+    <string name="invite_friends_title">Понравился Link?</string>
     <string name="invite_friends_summary">И нам тоже, и остальным понравится! Распространяя это приложение, вы помогаете его развитию. Приглашайте своих друзей! \n\nВыберите контакты из списка ниже, с которыми вы бы хотели поделиться, и мы отправим им SMS  с коротким описанием и ссылку для загрузки!</string>
     <string name="invite_friends_sms">Я начал использовать новое приложение для переписки и думаю, что оно тебе бы понравилось! К тому же оно бесплатное. Можешь загрузить его тут: http://messenger.klinkerapps.com</string>
     <!-- Message List Screen -->
@@ -118,6 +122,7 @@
     <string name="type_message_to">Ваше сообщение для %1$s</string>
     <string name="attach">Прикрепить</string>
     <string name="select_sim">Выбрать SIM</string>
+    <string name="view_scheduled_messages">Просмотр запланированных сообщений для диалога</string>
     <string name="message_from">%1$s</string>
     <string name="message_from_bullet">%1$s  •</string>
     <string name="mms_image">MMS изображение</string>
@@ -128,6 +133,7 @@
     <string name="attach_image">Прикрепить изображение</string>
     <string name="capture_image">Сделать снимок</string>
     <string name="attach_gif">Прикрепить GIF</string>
+    <string name="attach_sticker">Прикрепить стикер</string>
     <string name="record_video">Записать видео</string>
     <string name="record_audio">Записать аудио</string>
     <string name="attach_location">Добавить местоположение</string>
@@ -141,6 +147,7 @@
     <string name="fullscreen">Во весь экран</string>
     <string name="attached_image">Прикрепить изображение</string>
     <string name="remove_image">Удалить прикреплённое изображение</string>
+    <string name="remove_image_short">Удалить изображение</string>
     <string name="edit_image">Редактировать прикреплённое изображение</string>
     <string name="edit_recipients">Редактировать получателей</string>
     <string name="select_folder">Выберите папку для разговора</string>
@@ -156,6 +163,9 @@
     <string name="audio_recording_error">Возникла ошибка :(</string>
     <string name="message_copied_to_clipboard">Скопировано в буфер</string>
     <string name="view_details">Посмотреть детали</string>
+    <string name="speak_message">Произнести сообщение вслух</string>
+    <string name="select_all_messages">Выбрать все сообщения</string>
+    <string name="select_all_conversations">Выбрать все диалоги</string>
     <string name="delete">Удалить</string>
     <string name="copy_message">Скопировать текст</string>
     <string name="resend">Переслать</string>
@@ -175,10 +185,18 @@
     <string name="copy_link">Копировать ссылку</string>
     <string name="attach_vcard">Прикрепите контакт как vCard</string>
     <string name="attach_plain_text">Прикрепить контакт как обычный текст</string>
+    <string name="send_as_scheduled_message_question">Вы хотите запланировать отправку сообщения позже?</string>
+    <string name="send_as_scheduled_message">Отправить как отложенное сообщение</string>
+    <string name="send_without_signature">Отправить без подписи</string>
+    <string name="send_without_delay">Отправить без задержки</string>
+    <string name="confirm_delete">Вы уверены, что хотите удалить этот диалог?</string>
+    <string name="confirm_archive">Вы уверены, что хотите архивировать этот диалог?</string>
     <!-- Templates -->
     <string name="type_template_text">Введите текст шаблона ...</string>
     <string name="delete_template">Вы действительно хотите удалить этот шаблон?</string>
+    <string name="edit_or_delete_template">Вы хотите изменить или удалить этот шаблон?</string>
     <string name="no_templates">Используйте кнопку <b> + </b>, чтобы создать шаблон</string>
+    <string name="edit">Редактировать</string>
     <!-- Compose Screen -->
     <string name="compose_message">Написать новое сообщение</string>
     <string name="send_message">Отправить сообщение</string>
@@ -190,6 +208,8 @@
     <string name="compose_all_contacts">Все контакты</string>
     <string name="private_conversation_disclaimer">Это <b> закрытый разговор </b> и не может быть открыт с экрана компоновки.</string>
     <!-- Onboarding Screen -->
+    <string name="google_requires_default_sms">В настоящее время Google требует, чтобы любые приложения SMS были установлены в качестве приложения обмена сообщениями по умолчанию, прежде чем они смогут получить доступ или отправить какие-либо сообщения. Это обязательное разрешение.</string>
+    <string name="google_requires_default_sms_policy">Просмотр политики</string>
     <string name="permissions_needed">Приложение не сможет работать без этих разрешений! Нужно принять их прежде чем мы продолжим.</string>
     <string name="loading_messages">Обработка...</string>
     <string name="loading_messages_summary">Загружаем ваши сообщения в приложение. Это не займёт много времени!</string>
@@ -200,7 +220,7 @@
     <string name="onboarding_title_3">Продвинутая персонализация</string>
     <string name="onboarding_content_1">Плавные переходы, продуманный дизайн и интеграция между множеством устройств.</string>
     <string name="onboarding_content_2">Переписывайтесь на своём планшете, умных часах или любом другом устройстве.</string>
-    <string name="onboarding_content_3">Закрепляйте, приглушайте, раскрашивайте и настраивайте уведомления для любого диалога. Сделайте Pulse своим.</string>
+    <string name="onboarding_content_3">Закрепляйте, приглушайте, раскрашивайте и настраивайте уведомления для любого диалога. Сделайте Link своим.</string>
     <string name="message_anywhere_onboarding_title_1">Переписывайте где угодно</string>
     <string name="message_anywhere_onboarding_title_2">Подписка или единоразовый платёж</string>
     <string name="message_anywhere_onboarding_title_3">Пробный период 7 дней</string>
@@ -215,21 +235,28 @@
     <string name="notification_ticker">Новое сообщение от %1$s</string>
     <plurals name="new_conversations">
         <item quantity="one">%1$d новый диалог</item>
+        <item quantity="other">%1$d новых диалогов</item>
         <item quantity="few">%1$d новых диалога</item>
         <item quantity="many">%1$d новых диалогов</item>
-        <item quantity="other">%1$d новых диалогов</item>
     </plurals>
     <plurals name="new_messages">
         <item quantity="one">%1$d новое сообщение</item>
+        <item quantity="other">%1$d новых сообщений</item>
         <item quantity="few">%1$d новых сообщения</item>
         <item quantity="many">%1$d новых сообщений</item>
-        <item quantity="other">%1$d новых сообщений</item>
     </plurals>
     <string name="read">Прочитано</string>
+    <string name="mark_as_read">пометить прочитанным</string>
     <string name="mute">Бесшумно</string>
     <string name="reply">Ответ</string>
     <string name="reply_to">Ответить %1$s</string>
     <string name="call">Вызов</string>
+    <string name="notification_action_reply">Ответить</string>
+    <string name="notification_action_call">Позвонить контакту</string>
+    <string name="notification_action_delete">Удалить сообщение</string>
+    <string name="notification_action_archive">Архивировать диалог</string>
+    <string name="notification_action_no_action">Не отображать действие</string>
+    <string name="notification_action_smart_reply">Предлагать быстрые действия</string>
     <string-array name="reply_choices">
         <item>Да</item>
         <item>Нет</item>
@@ -272,7 +299,9 @@
     <string name="be_careful_using_these_settings">Следуйте инструкциям и будьте осторожны, используя эти опции.</string>
     <string name="device_id">ID устройства</string>
     <string name="device_info">Об устройстве</string>
+    <string name="open_source_summary">Pulse - проект с открытым исходным кодом! Проверьте это на GitHub</string>
     <string name="website">Сайт</string>
+    <string name="view_platforms">Доступные платформы Pulse</string>
     <string name="access_messages_from_any_device">Перейти и обмениваться сообщениями с любого устройства!</string>
     <string name="beta_disclaimer">Проект находится в состоянии бета-теста, пожалуйста, сообщайте о любых неисправностях.</string>
     <string name="app_info">О приложении</string>
@@ -287,7 +316,7 @@
     <string name="issues">Трекер задач</string>
     <string name="issues_summary">Также может служить в качестве плана разработки</string>
     <string name="google_plus">Google+</string>
-    <string name="google_plus_summary">Бета-сообщество Pulse</string>
+    <string name="google_plus_summary">Бета-сообщество Link</string>
     <string name="email">Email</string>
     <string name="email_summary">luke@klinkerapps.com</string>
     <string name="twitter">Twitter</string>
@@ -295,9 +324,9 @@
     <string name="support">Поддержка</string>
     <plurals name="message_count">
         <item quantity="one">%1$d сообщение</item>
+        <item quantity="other">%1$d сообщения</item>
         <item quantity="few">%1$d сообщения</item>
         <item quantity="many">%1$d сообщений</item>
-        <item quantity="other">%1$d сообщений</item>
     </plurals>
     <plurals name="conversation_count">
         <item quantity="one">в %1$d диалоге</item>
@@ -311,6 +340,7 @@
     <string name="mute_conversation_summary">Скрыть уведомления диалога</string>
     <string name="private_conversation">Приватный диалог</string>
     <string name="private_conversation_summary">Скрыть содержание в уведомлениях</string>
+    <string name="private_conversation_summary_2">Скрыть содержание в уведомлениях и переместить этот разговор в раздел <i>Личные сообщения</i></string>
     <string name="primary_color">Основной цвет</string>
     <string name="primary_dark_color">Основной цвет фона</string>
     <string name="accent_color">Цвет акцента</string>
@@ -351,6 +381,7 @@
     <string name="theme_settings">Персонализация</string>
     <string name="theme_settings_category">Смотри и пробуй</string>
     <string name="conversation_list_category">Список диалогов</string>
+    <string name="message_list_category">Список сообщений</string>
     <string name="general_category">Основные</string>
     <string name="theme_settings_redirect">Тема</string>
     <string name="base_theme">Основная тема</string>
@@ -366,16 +397,27 @@
 темные темы будут использовать черную навигационную панель</string>
     <string name="apply_theme_globally">Применить для всех диалогов</string>
     <string name="apply_theme_globally_summary">Удалить все индивидуальные настройки оформления диалогов в пользу общей цветовой палитры.</string>
-    <string name="swipe_delete">Удалить жестом</string>
+    <string name="conversation_categories">Группировать по датам</string>
+    <string name="conversation_categories_summary">Группировать диалоги по датам (Сегодня, Вчера, На этой неделе и т.д.) вместо отображения даты для каждого диалога в списке</string>
+    <string name="message_timestamp">Метка времени в каждом сообщении</string>
+    <string name="message_timestamp_summary">Когда выключено, просто нажми на сообщение чтобы увидеть метку времени</string>
+    <string name="apply_primary_theme_toolbar">Применить Основной цвет к панели приложения</string>
+    <string name="apply_primary_theme_toolbar_summary">Должна ли панель приложения быть окрашенной</string>
+    <string name="swipe_delete">Удалить свайпом</string>
     <string name="swipe_actions">Жесты</string>
     <string name="swipe_actions_summary">Настройки жестов для диалогов</string>
     <string name="left_to_right_swipe">Жест слева</string>
     <string name="right_to_left_swipe">Жест справа</string>
     <string name="no_swipe">Отключить жест</string>
     <string name="blacklist_hint">Номер для добавления в ч/с</string>
+    <string name="enter_phrase">Введите фразу</string>
+    <string name="enter_phone">Введите номер телефона</string>
+    <string name="blacklist_phrase_hint">Введите фразу для ч/с</string>
     <string name="add_blacklist">%1$s\n\nВы уверены, что хотите добавить этот номер в чёрный список? Сообщения от него не будут сохранены и вы не будете получать уведомления при получении!</string>
+    <string name="add_blacklist_phrase">%1$s\n\nВы уверены, что хотите добавить фразу в чёрный список? Сообщения с этой фразой не будут сохранены и вы не будете получать уведомления при получении!</string>
     <string name="remove_blacklist">%1$s\n\nВы хотите удалить этот номер из ч/с?</string>
     <string name="blacklist_need_number">Нужно ввести телефонный номер, чтобы добавить в ч/с!</string>
+    <string name="blacklist_need_phrase">Нужно ввести фразу, чтобы добавить в ч/с!</string>
     <string name="no_blacklists">Тут никого нет</string>
     <string name="no_blacklists_summary">Добавляйте по-одному, нажав на кнопку Плюс!</string>
     <string name="add">Добавить</string>
@@ -392,6 +434,14 @@
     <string name="delete_account_summary">Удаляет учётную запись со всех ваших устройств, а так же с сервера. Это действие нельзя отменить!</string>
     <string name="delete_account_confirmation">Вы уверены, что хотите удалить свою учётную запись и всё, связанное с ней? Вы всегда можете зарегистрироваться ещё раз!</string>
     <string name="change_subscription">Изменить тип подписки</string>
+    <string name="trial_subscription_title">У вас осталось %s дней в пробной версии</string>
+    <string name="trial_subscription_summary">Нажмите здесь, чтобы обновить или отменить пробную версию!</string>
+    <string name="upgrade_or_cancel_title">Закончить пробный период?</string>
+    <string name="trial_expired">Спасибо за пробный период!</string>
+    <string name="upgrade_or_cancel">Вы можете обновить свою учетную запись до подписки или пожизненного членства, чтобы продолжать использовать Pulse на всех своих устройствах!\n\nХотите отменить?
+Ваша учетная запись будет удалена без какой-либо платы. Вы можете продолжать использовать приложение на своем телефоне бесплатно! Вы всегда можете вернуться.</string>
+    <string name="upgrade">Обновить!</string>
+    <string name="cancel_trial">Отменить пробную версию</string>
     <string name="cancel_on_the_play_store">Отменить и посмотреть вашу подписку в Play Store</string>
     <string name="resync_account">Повторная синхронизация</string>
     <string name="resync_account_summary">Отсутствуют сообщения? Используйте это, чтобы синхронизировать данные с основным устройством.</string>
@@ -416,13 +466,16 @@
     <string name="after_four_messages">После 4 сообщений</string>
     <string name="send_as_mms_summary">Длинные сообщения будут отправлены как MMS, вместо нескольких SMS</string>
     <string name="alert_types">Виды уведомлений</string>
+    <string name="notification_customization">Настройка уведомлений</string>
     <string name="alert_types_summary">Различные настройки уведомлений</string>
     <string name="strip_unicode">Не использовать Unicode</string>
     <string name="strip_unicode_summary">Специальные символы будут убраны из отправляемого сообщения</string>
     <string name="giffgaff_delivery">Отчёт о доставке Giffgaff</string>
     <string name="notification_actions">Быстрые действия в уведомлениях</string>
     <string name="notification_actions_summary">Можно включить не более трёх быстрых действий в уведомлениях</string>
+    <string name="notification_actions_summary_2">Обратите внимание, что быстрые действия в настоящее время доступны только на английском языке</string>
     <string name="mms_download_directory">Папка загрузки медиафайлов</string>
+    <string name="mms_download_directory_summary">Где вы хотите сохранить изображения и другие MMS файлы</string>
     <string name="refresh_firebase">Обновить учётную запись</string>
     <string name="refresh_firebase_summary">Сообщения не синхронизируются или не получается авторизоваться? Воспользуйтесь этим.</string>
     <string name="refreshing_notifications">Обновляем уведомления...</string>
@@ -434,11 +487,12 @@
     <string name="emoji_style_android_o">Google\'s Android O</string>
     <string name="settings_phone_number">Телефонный номер</string>
     <string name="disable_battery_optimization">Отключить оптимизацию батареи</string>
-    <string name="disable_battery_optimization_summary">Если сообщения не поступают с вашего телефона в Интернет, попробуйте отключить оптимизацию батареи для Pulse.</string>
+    <string name="disable_battery_optimization_summary">Если сообщения не поступают с вашего телефона в Интернет, попробуйте отключить оптимизацию батареи для Link.</string>
     <!-- MMS Configuration Settings -->
     <string name="max_mms_size">Максимальный размер изображения</string>
     <string name="max_mms_size_summary">Не устанавливайте это значение выше, чем позволяет ваш оператор</string>
     <string name="use_group_mms">Использовать групповые MMS</string>
+    <string name="use_group_mms_summary">Если этот параметр отключен, групповые сообщения будут отправляться в виде отдельных SMS-сообщений каждому из получателей.</string>
     <string name="auto_save_media">Автосохранение медиафайлов</string>
     <string name="auto_save_media_summary">Автоматически сохранять содержимое MMS в папке Загрузки при получении.</string>
     <string name="apn_configuration">Настройка APN</string>
@@ -451,15 +505,74 @@
     <string name="user_agent_profile_tag">Тэг профиля в системе</string>
     <!-- Advanced Features Settings -->
     <string name="signature">Подпись</string>
-    <string name="signature_summary">Подпись не будет отображаться в списке сообщений Pulse, её увидит только получатель сообщения.</string>
+    <string name="signature_summary">Подпись не будет отображаться в списке сообщений Link, её увидит только получатель сообщения.</string>
     <string name="cleanup_old_messages">Удалить старые сообщения</string>
     <string name="cleanup_old_messages_summary">Это выполняется один раз в день для удаления любых сообщений, которые были старше вашего выбранного периода времени</string>
     <string name="cleanup_old_messages_now_summary">Запуск удаления любых сообщений в этом разговоре старше выбранного периода времени</string>
     <string name="delayed_sending">Отложенная отправка</string>
+    <string name="delayed_sending_summary">Это дает вам возможность отменять и редактировать сообщения перед их отправкой</string>
+    <string name="messaging_features">Сообщения</string>
+    <string name="app_features">Приложение</string>
     <string name="quick_compose">Быстрый ответ</string>
+    <string name="quick_compose_notification">Показывать уведомление</string>
+    <string name="quick_compose_notification_summary">Всегда активное уведомление, чтобы быстро написать новое сообщение</string>
+    <string name="quick_compose_favorites">Любимые контакты</string>
+    <string name="quick_compose_favorites_summary">Эти контакты будут доступны в действиях уведомления</string>
+    <string name="quick_compose_favorites_title">Выберите до 3 контактов:</string>
     <string name="secure_private_conversations">Защищённые личные диалоги</string>
     <string name="secure_private_conversations_summary">Требуется ввести PIN-код для доступа к личным диалогам.</string>
     <string name="use_internal_browser">Использовать встроенный браузер</string>
+    <string name="use_smart_replies">Предлагать умные ответы</string>
+    <string name="use_smart_replies_summary">Pulse предложит соответствующие ответы, когда они будут доступны. Они генерируются непосредственно на устройстве, а не на удаленном сервере.</string>
+    <string name="use_smart_replies_dialog">Pulse предложит соответствующие ответы, когда они будут доступны. Они генерируются непосредственно на устройстве, а не на удаленном сервере.\n\nЕсли вы не хотите использовать эту функцию, ее можно отключить в настройках.</string>
+    <string name="use_smart_reply_settings">Настройки</string>
+    <string name="handle_messages_from_unknown_numbers">Получение сообщений от неизвестных контактов</string>
+    <string name="unknown_numbers_default">Получать сообщения</string>
+    <string name="unknown_numbers_mute">Отключить уведомления для диалога</string>
+    <string name="unknown_numbers_block">Заблокировать сообщение как спам. Будьте осторожны и помните, что вы это включили!</string>
+    <string name="message_backup">Резервное копирование сообщений</string>
+    <string name="message_backup_pref_summary">Боитесь потерять ваши сообщения? Pulse сохранит их</string>
+    <string name="message_backup_summary">Знаете ли вы: онлайн-сервис Pulse позволяет сохранить ваши сообщения.
+        Когда вы регистрируете учетную запись Pulse, вы можете войти в эту учетную запись на любом устройстве или планшете,
+        чтобы восстановить все ваши сообщения, автоматически!\n\nБольше нет необходимости делать ручное резервное копирование.
+        С Pulse все удобно, просто и полностью автоматически.</string>
+    <string name="message_backup_summary_have_account">Похоже, у вас уже есть учетная запись в Pulse, отлично!
+        С вашей учетной записью Pulse автоматически создаст резервную копию всех сообщений, которые вы отправляете и получаете. Когда вы
+        используйте на приложение на других ваших устройствах, вы на самом деле просто получаете доступ к этой резервной копии. Чтобы восстановить
+        сообщения на новое устройство, все, что вам нужно сделать, это войти в свою учетную запись.</string>
+    <string name="auto_reply_configuration">Настройка автоответов</string>
+    <string name="auto_reply_configuration_summary">Настройка автоматических ответов в зависимости от ситуации</string>
+    <string name="auto_replies">Автоматические ответы</string>
+    <string name="auto_reply_top_pref_summary">Режим вождения и отпуска имеют приоритет над всеми остальными ответами. Если один из них включен, другие автоответы не будут отправляться</string>
+    <string name="driving_mode">Режим вождения</string>
+    <string name="driving_mode_summary">Автоматический ответ на все сообщения, которые вы получите</string>
+    <string name="vacation_mode">Режим отпуска</string>
+    <string name="auto_reply_text">Текст сообщения</string>
+    <string name="create_auto_reply">Создать новый автоответ</string>
+    <string name="delete_auto_reply">Удалить автоответ?</string>
+    <string name="which_auto_reply_type">Какой тип автоответа вы хотите создать?</string>
+    <string name="keyword">Ключевое слово</string>
+    <string name="response">Ответ</string>
+    <string name="contact">Контакт</string>
+    <string name="folders_title">Папки</string>
+    <string name="create">Создать</string>
+    <string name="create_folder">Создать новую папку</string>
+    <string name="create_folder_summary">Поместите диалоги в папку, чтобы упростить организацию и быструю навигацию по вашим диалогам</string>
+    <string name="no_folders">Нет папок - нажмите, чтобы создать первую папку</string>
+    <string name="folder_name">Имя папки…</string>
+    <string name="private_conversations_cannot_be_added_to_folders">Личные сообщения не могут быть добавлены в папки.</string>
+    <string name="conversation_already_in_a_folder">Уже в другой папке.</string>
+    <string name="no_folder">Нет папки</string>
+    <!-- Open Source Experiments Settings -->
+    <string name="experiments_info_section_title">О чем эта страница?</string>
+    <string name="experiments_info_open_source">Pulse - проект с открытым исходным кодом!</string>
+    <string name="experiments_info_open_source_summary">Это означает, что любой разработчик может добавить код и новые функции в приложение.</string>
+    <string name="experiments_info_disclaimer_1">Этот раздел настроек - просто место для хранения функций, которые добавлены сообществом. <b> Эти функции официально не поддерживаются приложениями Klinker. </b> Они были добавлены и будут поддерживаться сообществом.</string>
+    <string name="experiments_info_disclaimer_2">Работоспособность этих функций не гарантируется, они могут работать нестабильно или могут быть отключены. <b> Эти функции не поддерживаются. </b></string>
+    <string name="experiments_info_disclaimer_3">Тем не менее, они не были бы добавлены в приложение, если бы они не работали, не решали определенную проблему или не добавляли функциональность приложения.</string>
+    <string name="experiments_preferences_section_title">Экспериментальные настройки</string>
+    <string name="smart_reply_timeout">Отправлять автоответы с задержкой</string>
+    <string name="smart_reply_timeout_summary">Автоматические ответы будут отправлены после короткой паузы</string>
     <!-- Theming Options -->
     <string name="day_night">Стандартная (День/Ночь)</string>
     <string name="always_light">Всегда светлая</string>
@@ -473,6 +586,16 @@
     <string name="no_scheduled_messages">Запланированных сообщений нет</string>
     <string name="no_scheduled_messages_summary">Можете создать новое, нажав на кнопку Плюс!</string>
     <string name="scheduled_message_in_future">Укажите нужное время в будущем!</string>
+    <string name="scheduled_repeat_never">Не повторять</string>
+    <string name="scheduled_repeat_daily">Повторять ежедневно</string>
+    <string name="scheduled_repeat_weekly">Повторять еженедельно</string>
+    <string name="scheduled_repeat_monthly">Повторять ежемесячно</string>
+    <string name="scheduled_repeat_yearly">Повторять раз в год</string>
+    <string name="remove_scheduled_message">Вы хотите удалить запланированное сообщение?</string>
+    <string name="select_image">Выберите сообщение из телефона</string>
+    <string name="select_gif">Поиск GIF</string>
+    <string name="media_on_primary_device">Мультимедиа в запланированном сообщении можно просматривать только в приложении телефона.</string>
+
     <!-- Encryption -->
     <string name="encrypting_and_uploading">Дешифрирование и загрузка...</string>
     <string name="encrypting_and_uploading_media">Дешифрирование и сжатие медиа-данных...</string>
@@ -488,14 +611,29 @@
     <string name="contact_card">Карточка контакта</string>
     <string name="conversation_with">Диалог с %1$s</string>
     <string name="send">Отправить</string>
+    <string name="quick_share">Быстрый обмен</string>
     <!-- Passcode Entry -->
+    <string name="biometric_prompt_title">Доступ к личным сообщениям</string>
+    <string name="biometric_prompt_summary">Авторизуйтесь используя ваши биометрические данные</string>
+    <string name="biometric_prompt_failed">Биометрическая аутентификация</string>
+    <string name="passcode">Использовать пароль</string>
+    <string name="forgot_passcode">Забыли пароль?</string>
+    <string name="set_passcode">Сохранить пароль</string>
+    <string name="confirm_fingerprint">Подтвердите отпечаток для продолжения. Прикоснитесь к сканеру.</string>
+    <string name="confirm_passcode">Подтвердите пароль для продолжения.</string>
+    <string name="confirm_link_password">Подтвердите данные учетные данные Link для продолжения.</string>
+    <string name="type_passcode">Создать пароль.</string>
+    <string name="incorrect_passcode">Неверный пароль.</string>
+    <string name="verify">Проверить</string>
+    <string name="enable_passcode_disclaimer">Личные сообщения могут быть защищены паролем или отпечатком пальца, чтобы только вы имели к ним доступ. \n\nЕсли
+      вы хотите включить эту защиту, установите пароль из раздела <i> Расширенные функции </i>.</string>
     <!-- Other -->
     <string name="updating_database">Ищем последние сообщения...</string>
     <string name="dashclock_description">Информация о непрочитанных SMS/MMS</string>
     <string name="default_text">Стандартный</string>
     <string name="did_you_know">Знаете ли вы?</string>
-    <string name="use_from_anywhere">Pulse может быть использован на любом подключенном устройстве - попробуйте уже сегодня!</string>
-    <string name="use_from_anywhere_short">Pulse можно использовать на любом вашем устройстве!</string>
+    <string name="use_from_anywhere">Link может быть использован на любом подключенном устройстве - попробуйте уже сегодня!</string>
+    <string name="use_from_anywhere_short">Link можно использовать на любом вашем устройстве!</string>
     <string name="learn_more">Узнать больше</string>
     <string name="dismiss">Отклонить</string>
     <string name="renew">Обновить</string>
@@ -507,15 +645,24 @@
     <string name="channel_settings">Настройки каналов уведомлений</string>
     <string name="channel_settings_summary">Каналы нужны, чтобы настраивать уведомления в Android 8 и выше.</string>
     <string name="restore_default_channel_settings">Восстановить стандартные настройки уведомлений</string>
+    <string name="restore_default_channel_settings_popup">Восстановлены стандартные настройки.</string>
     <string name="channels">Каналы</string>
     <string name="default_channel">Стандартный канал</string>
+    <string name="channels_global_warning">Многие глобальные настройки теперь возможны только для определенного канала.</string>
+    <string name="channels_global_warning_2">В Android Oreo приложения вынуждены проходить через <i> каналы уведомлений </i>, чтобы настроить мелодию звонка, вибрацию, светодиод и все другие параметры уведомлений. \n\n
+        Вы можете настроить эти параметры с помощью кнопки ниже и узнать больше об этом изменении в справке Pulse.</string>
+    <string name="channels_global_warning_3">В Android Oreo некоторые из перечисленных выше вариантов перенаправят вас на системные настройки <i> Каналы уведомлений </i> для настройки. Чтобы узнать больше об этих каналах, о том, как они работают и почему они должны использоваться, см. справку Pulse.</string>
     <string name="off">Не включать</string>
     <string name="on">Включать</string>
-    <string name="share_promo">Привет! Мне очень понравилось переписываться через Pulse! Попробуй и ты, по это ссылке: https://play.google.com/store/apps/details?id=xyz.stream.messenger</string>
+    <string name="share_promo">Привет! Мне очень понравилось переписываться через Link! Попробуй и ты, по это ссылке: https://play.google.com/store/apps/details?id=com.stream_suite.link</string>
     <string name="verifying_password">Проверяем пароль...</string>
     <!-- Rate it -->
     <string name="rate_it">Оценить!</string>
-    <string name="love_pulse_question">Понравился Pulse?</string>
+    <string name="no_thanks">Нет, спасибо</string>
+    <string name="rate_it_title">Высокий рейнтинг имеет большое значение</string>
+    <string name="rate_it_summary"><b> Высокий рейтинг </b> очень важен для продвижения приложения! Если вы хотите, чтобы приложение <i> продолжало развиваться </i>, пожалуйста, уделите этому немного времени.</string>
+    <string name="rate_it_not_ready"><b> Не готовы оценить? </b> Нет проблем. Нажмите кнопку назад вашего телефона, и я больше не буду вас беспокоить.</string>
+    <string name="love_pulse_question">Понравился Link?</string>
     <string name="give_a_rating">Оцените приложение или поделитесь им с вашими друзьями!\n\nВаша оценка на 5 звезд согреет моё сердце :)</string>
     <!-- Times -->
     <string name="one_second">1 секунда</string>
@@ -535,15 +682,19 @@
     <string name="no_subscription_found">Подписка не обнаружена!</string>
     <string name="cancelled_subscription_error">Похоже, вы отменили подписку. Если не обновить её в ближайшее время, то приложение отключит вас в течении 2 дней. Если это ошибка, то, пожалуйста, свяжитесь с нами с помощью email.</string>
     <string name="subscription_found">Подписка найдена - с возвращением!</string>
+    <string name="trial_finished">Похоже, вы уже использовали бесплатную пробную версию.</string>
     <string name="subscription_not_found">Подписка не найдена, давайте включим пробный период!</string>
     <string name="checking_for_active_subscriptions">Проверка подписки&#8230;</string>
     <string name="purchase_error_cancelled">Вы отменили покупку :(</string>
+    <string name="purchase_cancelled_trial_finished">Срок действия пробной версии истек, и покупка была отменена. Ваша учетная запись будет удалена. \n\n Вы можете снова её настроить,
+        если вы захотите работать с нескольких устройств!</string>
     <string name="purchase_error_bad_google_play">Ой-ой, похожу возникли проблемы с Google Play.</string>
     <string name="purchase_error_bad_sku">Хмм&#8230; Данная покупка не соответствует ни одной в наших записях.</string>
     <string name="subscriptions">Подписка включается после 7 дней пробного периода и может быть изменена или отменена в любое время</string>
     <string name="billed_immediately">Оплата происходит сразу.</string>
     <string name="lifetime_purchase">$10.99 - Пожизненная лицензия</string>
     <string name="lifetime_purchase_summary">Один платёж - пользуешься всегда!</string>
+    <string name="subscription_purchase_description">Низкая цена!</string>
     <string name="yearly_purchase">$5.99 - ежегодно</string>
     <string name="yearly_purchase_summary">Лучшее предложение.</string>
     <string name="three_month_purchase">$1.99 каждые три месяца</string>
@@ -552,7 +703,7 @@
     <string name="monthly_purchase_summary">Просто попробовать? Нет проблем.</string>
     <string name="change_subscription_message">Хотите улучшить? Отлично! После того как вы сделаете свой выбор на следующей странице, перейдите в Play Store  и отмените старую подписку.</string>
     <string name="beautiful_powerful_instant">Красивый, мощный, мгновенный.</string>
-    <string name="optimized_for_all_your_devices">Pulse оптимизирован под <b>любые</b> ваши устройства.
+    <string name="optimized_for_all_your_devices">Link оптимизирован под <b>любые</b> ваши устройства.
 Отправляйте текстовые сообщения через: web-приложение, ПК, планшет, умные часы и даже ТВ.</string>
     <string name="true_imessage_competitor">Первый <b>настоящий</b> конкурент iMessage на Android.</string>
     <string name="try_it">Попробуйте!</string>

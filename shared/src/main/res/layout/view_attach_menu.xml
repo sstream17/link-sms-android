@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/drawerBackground" />
+        android:background="@color/background" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/pulseColorPrimary"
+        android:background="@color/linkColorPrimary"
         android:fillViewport="true">
 
         <LinearLayout

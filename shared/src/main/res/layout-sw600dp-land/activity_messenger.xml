@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:background="@drawable/status_bar"
-        android:backgroundTint="@color/pulseColorPrimaryDark"
+        android:backgroundTint="@color/linkColorPrimaryDark"
         android:backgroundTintMode="multiply"
         android:fitsSystemWindows="true"
         android:orientation="horizontal"
@@ -44,7 +44,7 @@
             android:layout_width="292dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/drawerBackground"
+            android:background="@color/background"
             android:elevation="8dp"
             app:headerLayout="@layout/drawer_header"
             app:itemIconTint="@drawable/drawer_icon_selector"
@@ -72,7 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <xyz.stream.messenger.shared.view.WhitableToolbar
+                        <com.stream_suite.link.shared.view.WhitableToolbar
                             android:id="@+id/toolbar"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
@@ -87,7 +87,7 @@
                             android:textColor="@color/primaryText"
                             android:textColorHint="@color/secondaryText"
                             app:searchBackIcon="@drawable/ic_search_back"
-                            app:searchBackground="@color/drawerBackground"
+                            app:searchBackground="@color/background"
                             app:searchCloseIcon="@drawable/ic_search_close" />
 
                     </FrameLayout>
@@ -157,7 +157,7 @@
                 android:textColor="@color/primaryText"
                 android:textColorHint="@color/secondaryText"
                 app:searchBackIcon="@drawable/ic_search_back"
-                app:searchBackground="@color/drawerBackground"
+                app:searchBackground="@color/background"
                 app:searchCloseIcon="@drawable/ic_search_close" />
 
             <FrameLayout

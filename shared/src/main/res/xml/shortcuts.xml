@@ -11,9 +11,9 @@
         tools:targetApi="n_mr1">
 
         <intent
-            android:targetPackage="xyz.stream.messenger"
+            android:targetPackage="com.stream_suite.link"
             android:action="android.intent.action.VIEW"
-            android:targetClass="xyz.stream.messenger.activity.compose.ComposeActivity" />
+            android:targetClass="com.stream_suite.link.activity.compose.ComposeActivity" />
 
         <categories android:name="android.shortcut.conversation" />
 

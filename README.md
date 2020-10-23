@@ -6,7 +6,7 @@ The goal of this project is to create an SMS/MMS app that has full support for a
 that users love, is based on material design, and supports a strong end-to-end encryption version of a
 tablet/desktop messenger that sends messages through your personal phone number.
 
-Check out Pulse on the [Play Store](https://play.google.com/store/apps/details?id=xyz.stream.messenger)
+Check out Pulse on the [Play Store](https://play.google.com/store/apps/details?id=com.stream_suite.link)
 or the app's [website](https://messenger.klinkerapps.com/overview) for a more comprehensive overview
 of the app's features, platforms, and functionality!
 
@@ -37,6 +37,16 @@ build for anything, just leave it as is.
 
 If you are going to make a release build, you will need to add your keystore to the repo and fill in
 fields outlined by that file.
+
+### Running the Tests
+
+Pulse contains unit and integration tests. To run all of them, run:
+
+```
+$ ./gradlew testDebugUnitTest
+```
+
+Pulse uses Robolectric for Android related tests. It does not contain UI-espresso tests.
 
 ## Contributing to Pulse
 

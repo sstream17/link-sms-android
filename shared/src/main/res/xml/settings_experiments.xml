@@ -16,7 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:title="@string/experiments_info_section_title">
 
         <Preference
@@ -36,11 +36,17 @@
             android:key="@string/pref_open_source_link"
             android:summary="@string/experiments_info_disclaimer_3" />
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
-    <xyz.stream.messenger.shared.view.MaterialPreferenceCategory
+    <com.stream_suite.link.shared.view.MaterialPreferenceCategory
         android:title="@string/experiments_preferences_section_title">
 
-    </xyz.stream.messenger.shared.view.MaterialPreferenceCategory>
+        <SwitchPreference
+            android:key="@string/pref_blacklist_phrase_regex"
+            android:title="@string/blacklist_phrase_regex"
+            android:summary="@string/blacklist_phrase_regex_summary"
+            android:defaultValue="false" />
+
+    </com.stream_suite.link.shared.view.MaterialPreferenceCategory>
 
 </PreferenceScreen>

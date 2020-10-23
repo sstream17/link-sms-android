@@ -16,14 +16,16 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Main App Colors -->
-    <!--<color name="pulseColorPrimary">#428AFF</color>-->
-    <!--<color name="pulseColorPrimaryDark">#3778ED</color>-->
-    <!--<color name="pulseColorPrimaryLight">#82B9FF</color>-->
-    <color name="pulseColorPrimary">#1775D2</color>
-    <color name="pulseColorPrimaryDark">#1665C0</color>
-    <color name="pulseColorPrimaryLight">#63A3FF</color>
-    <color name="pulseColorAccent">#FF6E40</color>
+    <color name="linkColorPrimary">#33EF7E</color>
+    <color name="linkColorPrimaryDark">#00BB4F</color>
+    <color name="linkColorPrimaryLight">#78FFAF</color>
+    <color name="linkColorAccent">#33A4EF</color>
+
+    <!-- Pulse Colors -->
+    <color name="pulseOriginalColorPrimary">#1775D2</color>
+    <color name="pulseOriginalColorPrimaryDark">#1665C0</color>
+    <color name="pulseOriginalColorPrimaryLight">#63A3FF</color>
+    <color name="pulseOriginalColorAccent">#FF6E40</color>
 
     <!-- Material Design Colors -->
     <color name="materialRed">#F44336</color>
@@ -109,17 +111,16 @@
     <color name="colorToReplaceWhite">#F3F3F3</color>
 
     <!-- Theme Specific Colors -->
-    <color name="background">#F2F2F2</color>
-    <color name="dark_background">#374248</color>
+    <color name="background">@android:color/white</color>
+    <color name="statusBarBackground">#BFFFFFFF</color>
     <color name="quickReplyBackground">#FFFFFF</color>
     <color name="replyBarCard">#FFFFFF</color>
-    <color name="swipeBackground">#F2F2F2</color>
-    <color name="drawerBackground">@android:color/white</color>
+    <color name="elevatedCardBackground">@android:color/white</color>
     <color name="selectedBackground">#EEEEEE</color>
     <color name="primaryText">#E2000000</color>
     <color name="secondaryText">#8C000000</color>
     <color name="hintText">#999999</color>
-    <color name="divider">#e5e5e5</color>
+    <color name="divider">#DFDFDF</color>
     <color name="ripple">#22000000</color>
     <color name="code_block_color">#11000000</color>
 
@@ -138,6 +139,6 @@
 
     <color name="actionModeBackground">#303030</color>
 
-    <color name="navigationBarDivider">#00000000</color>
+    <color name="navigationBarDivider">#C5C5C5</color>
 
 </resources>

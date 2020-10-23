@@ -16,7 +16,7 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -46,6 +46,7 @@ dependencies {
 
     implementation 'io.fotoapparat:fotoapparat:2.6.1'
     implementation 'androidx.biometric:biometric:1.0.1'
+    implementation 'com.sensortower.usage:event-emitter-lib:1.0.0'
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.robolectric:robolectric:${versions.robolectric}"

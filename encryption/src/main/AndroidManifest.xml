@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<manifest package="xyz.stream.messenger.encryption">
+<manifest package="com.stream_suite.link.encryption">
 
     <application />
 
