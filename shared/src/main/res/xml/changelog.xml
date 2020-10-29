@@ -17,6 +17,12 @@
 <changelog>
 
     <version
+        name="0.6.1"
+        description="October 26th, 2020">
+        <text>Bug fixes</text>
+    </version>
+
+    <version
         name="0.6.0"
         description="October 17th, 2020">
         <text>Enhancing the layout for tablets to make better use of the available screen size</text>
