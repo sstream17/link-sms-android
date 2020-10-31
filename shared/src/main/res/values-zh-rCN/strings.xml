@@ -107,7 +107,7 @@
     <!-- Invite Friends Screen -->
     <string name="invite_friends_title">喜欢 Link 吗？</string>
     <string name="invite_friends_summary">我们自己还有许多用户也都非常喜欢这个应用。也正是有了大家的支持才使得这个应用变得更好。如果你也愿意支持我们，可以将应用分享给你的朋友们。\n\n选择下方你想要分享的朋友，将会发送一条包含简短介绍和应用链接的短信。</string>
-    <string name="invite_friends_sms">我在使用一款全新的短信应用，相信你也会喜欢它！另外，这是完全免费的，下载链接在此：http://messenger.klinkerapps.com</string>
+    <string name="invite_friends_sms">我在使用一款全新的短信应用，相信你也会喜欢它！另外，这是完全免费的，下载链接在此：http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">输入消息</string>
     <string name="type_message_to">在 %1$s 中输入消息</string>
@@ -304,9 +304,9 @@
     <string name="google_plus">G+社区</string>
     <string name="google_plus_summary">Link Beta 社区</string>
     <string name="email">电子邮件</string>
-    <string name="email_summary">pulsesmsapp@gmail.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">推特</string>
-    <string name="twitter_summary">\@PulseSMS</string>
+    <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">支持</string>
     <plurals name="message_count">
         <item quantity="other">%1$d 信息</item>

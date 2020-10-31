@@ -108,7 +108,7 @@ Je kan Link gebruiken om vanop <b>elk</b> toestel te sms\'en.</string>
     <!-- Invite Friends Screen -->
     <string name="invite_friends_title">Hou je van Link?</string>
     <string name="invite_friends_summary">Net zoals ons en vele andere! We proberen Link naar zoveel mogelijk gebruikers te krijgen als mogelijk zodat we kunnen blijven optimaliseren en functies kunnen blijven toevoegen. Nodig je vrienden uit en help ons bij het verspreiden!\n\nSelecteer vrienden die je wilt uitnodigen. Wij zenden hen een korte SMS met informatie en een link om Link te downloaden.</string>
-    <string name="invite_friends_sms">Ik gebruik een nieuwe SMS app en ik denk dat je er ook zal van gaan houden! En het is gratis om te downloaden: http://messenger.klinkerapps.com</string>
+    <string name="invite_friends_sms">Ik gebruik een nieuwe SMS app en ik denk dat je er ook zal van gaan houden! En het is gratis om te downloaden: http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Jouw bericht</string>
     <string name="type_message_to">Jouw bericht naar %1$s</string>
@@ -297,9 +297,9 @@ Je kan Link gebruiken om vanop <b>elk</b> toestel te sms\'en.</string>
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link Beta Community</string>
     <string name="email">E-mail</string>
-    <string name="email_summary">pulsesmsapp@gmail.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@PulseSMS</string>
+    <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Support</string>
     <plurals name="message_count">
         <item quantity="one">%1$d bericht</item>

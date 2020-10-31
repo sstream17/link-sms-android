@@ -97,7 +97,7 @@ Du kan bruge Link til at sende besked fra <b>alle</b>enheder!</string>
     <string name="invite_friends_title">Elsker du Link?</string>
     <string name="invite_friends_summary">Det gør vi, og det vil andre også! Vi forsøger at få det ud til så mange som muligt, så vi kan forsætte med at skabe den bedste tjeneste muligt, og ved at invitere dine venner til at prøve Link hjælper du med dette!
 \n\nSelect de venner forneden, som du vil invitere til app\'en, og de vil modtage en SMS med en kort beskrivelse og et downloadlink.</string>
-    <string name="invite_friends_sms">Jeg bruger en ny app til tekstbeskeder, og jeg er sikker på, du vil elske den! Den er oven i købet gratis, så du taber intet ved at prøve den: http://messenger.klinkerapps.com</string>
+    <string name="invite_friends_sms">Jeg bruger en ny app til tekstbeskeder, og jeg er sikker på, du vil elske den! Den er oven i købet gratis, så du taber intet ved at prøve den: http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Skriv besked</string>
     <string name="type_message_to">Skriv besked til %1$s</string>
@@ -242,9 +242,9 @@ Du kan bruge Link til at sende besked fra <b>alle</b>enheder!</string>
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link Beta fællesskab</string>
     <string name="email">E-mail</string>
-    <string name="email_summary">pulsesmsapp@gmail.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@PulseSMS</string>
+    <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Support</string>
     <plurals name="message_count">
         <item quantity="one">%1$d besked</item>

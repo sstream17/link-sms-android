@@ -39,25 +39,19 @@ class HelpAndFeedbackFragment : MaterialPreferenceFragmentCompat() {
 
         findPreference(getString(R.string.pref_help_faqs))
                 .setOnPreferenceClickListener {
-                    openWeb("https://messenger.klinkerapps.com/help/")
+                    openWeb("https://link.stream-suite.com/help/")
                     true
                 }
 
         findPreference(getString(R.string.pref_help_features))
                 .setOnPreferenceClickListener {
-                    openWeb("https://messenger.klinkerapps.com/overview/")
+                    openWeb("https://link.stream-suite.com/")
                     true
                 }
 
         findPreference(getString(R.string.pref_help_email))
                 .setOnPreferenceClickListener {
                     displayEmail()
-                    true
-                }
-
-        findPreference(getString(R.string.pref_help_twitter))
-                .setOnPreferenceClickListener {
-                    openWeb("https://twitter.com/KlinkerApps")
                     true
                 }
 
@@ -91,10 +85,10 @@ class HelpAndFeedbackFragment : MaterialPreferenceFragmentCompat() {
     }
 
     /**
-     * Sends an email to pulsesmsapp@gmail.com
+     * Sends an email to spencer@stream-suite.com
      */
     private fun displayEmail() {
-        val email = arrayOf("pulsesmsapp@gmail.com")
+        val email = arrayOf("spencer@stream-suite.com")
         val subject = getString(R.string.app_name) + " " + getString(R.string.support)
 
         val emailIntent = Intent(Intent.ACTION_SENDTO).apply {

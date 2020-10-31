@@ -7,7 +7,7 @@ that users love, is based on material design, and supports a strong end-to-end e
 tablet/desktop messenger that sends messages through your personal phone number.
 
 Check out Pulse on the [Play Store](https://play.google.com/store/apps/details?id=com.stream_suite.link)
-or the app's [website](https://messenger.klinkerapps.com/overview) for a more comprehensive overview
+or the app's [website](https://link.stream-suite.com) for a more comprehensive overview
 of the app's features, platforms, and functionality!
 
 Many other Pulse platforms are also open source (all but the backend). If you would like to take a

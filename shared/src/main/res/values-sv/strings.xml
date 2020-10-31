@@ -111,7 +111,7 @@ att bjuda in dina vänner att prova appen hjälper du till! \n\nVälj vänner ne
 du vill ska prova appen och de får då ett SMS med en kort beskrivning om appen och
 en länk för att ladda ner!</string>
     <string name="invite_friends_sms">Jag har börjat använda en ny meddelande app och jag tror
-att du kommer gilla den! Dessutom är den gratis, testa: http://messenger.klinkerapps.com</string>
+att du kommer gilla den! Dessutom är den gratis, testa: http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Skriv meddelande</string>
     <string name="type_message_to">Skriv meddelande till %1$s</string>
@@ -286,9 +286,9 @@ att du kommer gilla den! Dessutom är den gratis, testa: http://messenger.klinke
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link beta-forum</string>
     <string name="email">Email</string>
-    <string name="email_summary">pulsesmsapp@gmail.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@PulseSMS</string>
+    <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Hjälp</string>
     <plurals name="message_count">
         <item quantity="one">%1$d meddelande</item>

@@ -399,7 +399,7 @@ class NotificationConversationProvider(private val service: Context, private val
             val letterImage = ContactImageCreator.getLetterPicture(context, conversation) ?: return this
             IconCompat.createWithAdaptiveBitmap(letterImage)
         }
-        val uri = Uri.parse("https://messenger.klinkerapps.com/" + conversation.id)
+        val uri = Uri.parse("https://link.stream-suite.com/" + conversation.id)
         val intent = PendingIntent.getActivity(
                 service,
                 conversation.id.toInt(),

@@ -116,7 +116,7 @@
     <!-- Invite Friends Screen -->
     <string name="invite_friends_title">Понравился Link?</string>
     <string name="invite_friends_summary">И нам тоже, и остальным понравится! Распространяя это приложение, вы помогаете его развитию. Приглашайте своих друзей! \n\nВыберите контакты из списка ниже, с которыми вы бы хотели поделиться, и мы отправим им SMS  с коротким описанием и ссылку для загрузки!</string>
-    <string name="invite_friends_sms">Я начал использовать новое приложение для переписки и думаю, что оно тебе бы понравилось! К тому же оно бесплатное. Можешь загрузить его тут: http://messenger.klinkerapps.com</string>
+    <string name="invite_friends_sms">Я начал использовать новое приложение для переписки и думаю, что оно тебе бы понравилось! К тому же оно бесплатное. Можешь загрузить его тут: http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Введите сообщение</string>
     <string name="type_message_to">Ваше сообщение для %1$s</string>
@@ -318,9 +318,9 @@
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Бета-сообщество Link</string>
     <string name="email">Email</string>
-    <string name="email_summary">pulsesmsapp@gmail.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@PulseSMS</string>
+    <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Поддержка</string>
     <plurals name="message_count">
         <item quantity="one">%1$d сообщение</item>

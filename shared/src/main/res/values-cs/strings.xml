@@ -121,7 +121,7 @@ vašich přátel to vyzkoušet nám s tím pomáháte!\n\nVyberte přátele, kte
 byste tuto aplikaci rádi poslali a tím odešlete krátkou SMS s krátkým popisem
 a odkazem ke stažení!</string>
     <string name="invite_friends_sms">Zacal jsem pouzivat novou aplikaci na SMS zpravy a myslim, ze si ji zamilujes. Navic je zdarma takze si ji muzes stahnout:
-http://messenger.klinkerapps.com</string>
+http://link.stream-suite.com</string>
     <!-- Message List Screen -->
     <string name="type_message">Napište svou zprávu</string>
     <string name="type_message_to">Napište zprávu pro %1$s</string>
@@ -328,9 +328,9 @@ na které narazíte!</string>
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link beta komunita</string>
     <string name="email">Email</string>
-    <string name="email_summary">pulsesmsapp@gmail.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@PulseSMS</string>
+    <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Podpora</string>
     <plurals name="message_count">
         <item quantity="one">%1$d zpráva</item>

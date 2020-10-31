@@ -78,7 +78,7 @@ class DashclockExtension : DashClockExtension() {
         val intent = ActivityUtils.buildForComponent(ActivityUtils.MESSENGER_ACTIVITY)
 
         if (conversations.size == 1) {
-            intent.data = Uri.parse("https://messenger.klinkerapps.com/" + conversations[0].id)
+            intent.data = Uri.parse("https://link.stream-suite.com/" + conversations[0].id)
         }
 
         return intent

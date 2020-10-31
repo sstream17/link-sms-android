@@ -146,7 +146,7 @@ class PasscodePage(context: FloatingTutorialActivity) : TutorialPage(context) {
 
         if (!Account.exists()) {
             nextButton.setOnClickListener {
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://messenger.klinkerapps.com/forgot_passcode.html"))
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://link.stream-suite.com/forgot_passcode.html"))
                 getActivity().startActivity(browserIntent)
             }
         }

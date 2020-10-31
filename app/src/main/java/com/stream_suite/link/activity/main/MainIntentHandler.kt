@@ -33,7 +33,7 @@ class MainIntentHandler(private val activity: MessengerActivity) {
     }
 
     fun handleShortcutIntent(intent: Intent): Boolean {
-        if (intent.data != null && intent.dataString!!.contains("https://messenger.klinkerapps.com/")) {
+        if (intent.data != null && intent.dataString!!.contains("https://link.stream-suite.com/")) {
             try {
                 if (navController.isConversationListExpanded()) {
                     activity.onBackPressed()

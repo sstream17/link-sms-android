@@ -133,7 +133,7 @@
         a link to download!</string>
     <string name="invite_friends_sms">I started using a new texting app and I think
         you\'ll like it! Plus it\'s free, so might as well download it:
-        http://messenger.klinkerapps.com</string>
+        http://link.stream-suite.com</string>
 
     <!-- Message List Screen -->
     <string name="type_message">Type message</string>
@@ -345,9 +345,9 @@
     <string name="google_plus">Google+</string>
     <string name="google_plus_summary">Link Beta Community</string>
     <string name="email">Email</string>
-    <string name="email_summary">pulsesmsapp@gmail.com</string>
+    <string name="email_summary">spencer@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@PulseSMS</string>
+    <string name="twitter_summary">\@KlinkerApps</string>
     <string name="support">Support</string>
     <plurals name="message_count">
         <item quantity="one">%1$d message</item>
@@ -454,8 +454,6 @@
     <string name="add">Add</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="privacy_policy_summary">View our privacy policy on the web</string>
-    <string name="terms_of_service">Terms of Service</string>
-    <string name="terms_of_service_summary">View our terms of service on the web</string>
     <string name="account_expiring">Account Expiring!</string>
     <string name="signout_time">Signing out on: %1$s</string>
     <string name="lifetime_subscriber">Lifetime Subscriber</string>

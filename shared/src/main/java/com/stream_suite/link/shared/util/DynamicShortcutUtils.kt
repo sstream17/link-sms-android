@@ -23,7 +23,7 @@ class DynamicShortcutUtils(private val context: Context) {
             val infos = conversations.take(10).map { conversation ->
                 val messenger = ActivityUtils.buildForComponent(ActivityUtils.MESSENGER_ACTIVITY)
                 messenger.action = Intent.ACTION_VIEW
-                messenger.data = Uri.parse("https://messenger.klinkerapps.com/" + conversation.id)
+                messenger.data = Uri.parse("https://link.stream-suite.com/" + conversation.id)
 
                 val category = HashSet<String>()
                 category.add("android.shortcut.conversation")

@@ -54,12 +54,6 @@
             app:iconSpaceReserved="false" />
 
         <Preference
-            android:key="@string/pref_help_twitter"
-            android:title="@string/twitter"
-            android:summary="@string/twitter_summary"
-            app:iconSpaceReserved="false" />
-
-        <Preference
             android:key="@string/pref_help_issues"
             android:title="@string/issues"
             android:summary="@string/issues_summary"
