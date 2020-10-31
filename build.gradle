@@ -26,7 +26,7 @@ buildscript {
 
     def calendar = Calendar.getInstance()
     def year = calendar.get(Calendar.YEAR).toString()[-2..-1]
-    def day = calendar.get(Calendar.DAY_OF_YEAR)
+    def day = calendar.get(Calendar.DAY_OF_YEAR).toString().padLeft(3, '0')
     def buildNumber = "$year$day".toInteger()
 
     ext.buildInfo = [
