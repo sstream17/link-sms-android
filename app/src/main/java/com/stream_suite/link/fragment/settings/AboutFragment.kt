@@ -99,12 +99,6 @@ class AboutFragment : MaterialPreferenceFragmentCompat() {
                     true
                 }
 
-        findPreference(getString(R.string.pref_about_tos))
-                .setOnPreferenceClickListener {
-                    openWebsite("https://messenger.klinkerapps.com/tos.html")
-                    true
-                }
-
         findPreference(getString(R.string.pref_website))
                 .setOnPreferenceClickListener {
                     openWebsite("https://link.stream-suite.com/")
