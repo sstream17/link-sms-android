@@ -95,7 +95,7 @@ class AboutFragment : MaterialPreferenceFragmentCompat() {
 
         findPreference(getString(R.string.pref_about_privacy_policy))
                 .setOnPreferenceClickListener {
-                    openWebsite("https://link.stream-suite.com/privacy.html")
+                    openWebsite("https://link.stream-suite.com/privacy")
                     true
                 }
 
