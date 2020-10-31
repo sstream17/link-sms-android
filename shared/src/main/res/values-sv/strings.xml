@@ -288,7 +288,7 @@ att du kommer gilla den! Dessutom är den gratis, testa: http://link.stream-suit
     <string name="email">Email</string>
     <string name="email_summary">support@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@KlinkerApps</string>
+    <string name="twitter_summary"></string>
     <string name="support">Hjälp</string>
     <plurals name="message_count">
         <item quantity="one">%1$d meddelande</item>

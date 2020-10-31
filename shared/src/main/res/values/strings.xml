@@ -347,7 +347,7 @@
     <string name="email">Email</string>
     <string name="email_summary">support@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@KlinkerApps</string>
+    <string name="twitter_summary"></string>
     <string name="support">Support</string>
     <plurals name="message_count">
         <item quantity="one">%1$d message</item>

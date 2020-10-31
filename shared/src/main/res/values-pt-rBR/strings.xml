@@ -312,7 +312,7 @@ onde não existam configurações individuais para a conversa.</string>
     <string name="email">E-mail</string>
     <string name="email_summary">support@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@KlinkerApps</string>
+    <string name="twitter_summary"></string>
     <string name="support">Suporte</string>
     <plurals name="message_count">
         <item quantity="one">%1$d mensagem</item>

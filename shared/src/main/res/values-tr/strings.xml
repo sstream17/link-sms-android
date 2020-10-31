@@ -313,7 +313,7 @@ hadi başlatın!</string>
     <string name="email">E-posta</string>
     <string name="email_summary">support@stream-suite.com</string>
     <string name="twitter">Twitter</string>
-    <string name="twitter_summary">\@KlinkerApps</string>
+    <string name="twitter_summary"></string>
     <string name="support">Destek</string>
     <plurals name="message_count">
         <item quantity="one">%1$d mesaj</item>

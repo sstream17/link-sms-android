@@ -306,7 +306,7 @@
     <string name="email">电子邮件</string>
     <string name="email_summary">support@stream-suite.com</string>
     <string name="twitter">推特</string>
-    <string name="twitter_summary">\@KlinkerApps</string>
+    <string name="twitter_summary"></string>
     <string name="support">支持</string>
     <plurals name="message_count">
         <item quantity="other">%1$d 信息</item>
