@@ -85,10 +85,10 @@ class HelpAndFeedbackFragment : MaterialPreferenceFragmentCompat() {
     }
 
     /**
-     * Sends an email to spencer@stream-suite.com
+     * Sends an email to support@stream-suite.com
      */
     private fun displayEmail() {
-        val email = arrayOf("spencer@stream-suite.com")
+        val email = arrayOf("support@stream-suite.com")
         val subject = getString(R.string.app_name) + " " + getString(R.string.support)
 
         val emailIntent = Intent(Intent.ACTION_SENDTO).apply {

@@ -87,14 +87,14 @@ class SubscriptionExpirationCheckJob : BackgroundJob() {
         val renew = Intent(this, RedirectToMyAccount::class.java)
 
         val subject = "Pulse Subscription"
-        val uri = Uri.parse("mailto:spencer@stream-suite.com")
+        val uri = Uri.parse("mailto:support@stream-suite.com")
                 .buildUpon()
                 .appendQueryParameter("subject", subject)
                 .build()
 
         val email = Intent(Intent.ACTION_SENDTO, uri)
         email.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        email.putExtra(Intent.EXTRA_EMAIL, arrayOf("spencer@stream-suite.com"))
+        email.putExtra(Intent.EXTRA_EMAIL, arrayOf("support@stream-suite.com"))
         email.putExtra(Intent.EXTRA_SUBJECT, subject)
         email.putExtra(Intent.EXTRA_TEXT, "The Play Store sometimes sucks at determining what you have purchased in the past. Please include the order number of your purchase in this email (which can be found from the Play Store app). I will help you get it worked out!")
 
