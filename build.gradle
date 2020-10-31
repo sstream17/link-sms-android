@@ -24,10 +24,15 @@ apiKeys.load(new FileInputStream(propsFile))
 
 buildscript {
 
+    def calendar = Calendar.getInstance()
+    def year = calendar.get(Calendar.YEAR).toString()[-2..-1]
+    def day = calendar.get(Calendar.DAY_OF_YEAR)
+    def buildNumber = "$year$day".toInteger()
+
     ext.buildInfo = [
             'id'                : 'com.stream_suite.link',
             'name'              : '0.6.1',
-            'number'            : System.getenv("BUILD_NUMBER") as Integer ?: Calendar.getInstance().get(Calendar.DAY_OF_YEAR),
+            'number'            : buildNumber,
     ]
 
     ext.versions = [
