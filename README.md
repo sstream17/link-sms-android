@@ -11,7 +11,7 @@ or the app's [website](https://link.stream-suite.com) for a more comprehensive o
 of the app's features, platforms, and functionality!
 
 Many other Link platforms are also open source (all but the backend). If you would like to take a
-look at them, you can find them on [GitHub](https://github.com/sstream17?tab=repositories&q=pulse).
+look at them, you can find them on [GitHub](https://github.com/sstream17?tab=repositories&q=link).
 
 ## Compiling Link
 
