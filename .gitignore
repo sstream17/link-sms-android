@@ -8,6 +8,7 @@ local.properties
 *.avi
 api_keys.properties
 keystore.properties
+version.properties
 *.jks
 *.keystore
 .vs/
