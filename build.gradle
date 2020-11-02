@@ -27,7 +27,8 @@ buildscript {
     def calendar = Calendar.getInstance()
     def year = calendar.get(Calendar.YEAR).toString()[-2..-1]
     def day = calendar.get(Calendar.DAY_OF_YEAR).toString().padLeft(3, '0')
-    def buildNumber = "$year$day".toInteger()
+    def hour = calendar.get(Calendar.HOUR_OF_DAY).toString().padLeft(2, '0')
+    def buildNumber = "$year$day$hour".toInteger()
 
     ext.buildInfo = [
             'id'                : 'com.stream_suite.link',
