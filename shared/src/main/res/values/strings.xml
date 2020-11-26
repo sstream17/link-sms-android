@@ -800,8 +800,7 @@
         We do not have access to it and have no way to decrypt it.\n\n
         We use a variety of security measures to ensure that your personal information is appropriately protected when you enter, submit, or access it.
         This includes HTTPS/SSL and end-to-end encryption for all of your messages, conversations, and other pieces of personal user data within the app.
-        The only way to decrypt this data is by using your personal email and password combination.\n\n
-        Please read our <a href="https://link.stream-suite.com/privacy">Privacy Policy</a> to learn more about how we use your information.
+        The only way to decrypt this data is by using your personal email and password combination.
     </string>
     <string name="create_your_link_account">Create a Link account!</string>
     <string name="try_it">Try it!</string>
