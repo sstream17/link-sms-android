@@ -89,7 +89,12 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="SubscriptionPicker" parent="Theme.MaterialComponents.Light.Dialog.Alert" />
+    <style name="SubscriptionPicker" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/linkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/linkColorPrimaryDark</item>
+        <item name="colorSecondary">@color/linkColorAccent</item>
+        <item name="colorAccent">@color/linkColorAccent</item>
+    </style>
 
     <style name="Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_overflow</item>

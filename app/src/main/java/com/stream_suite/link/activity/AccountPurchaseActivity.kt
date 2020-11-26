@@ -8,14 +8,12 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.CheckBox
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-
+import androidx.appcompat.app.AppCompatActivity
 import com.stream_suite.link.R
 import com.stream_suite.link.fragment.settings.MyAccountFragment
 import com.stream_suite.link.shared.data.ColorSet
@@ -56,6 +54,7 @@ class AccountPurchaseActivity : AppCompatActivity() {
     private fun setUpInitialLayout() {
         findViewById<View>(R.id.try_it).setOnClickListener { tryIt() }
         findViewById<CheckBox>(R.id.checkbox_data_consent).setOnCheckedChangeListener { _, checked -> toggleDataUsageConsent(checked) }
+        findViewById<View>(R.id.data_consent_link).setOnClickListener { showDataUsage() }
 
         val startTime: Long = 500
         quickViewReveal(findViewById(R.id.icon_watch), startTime)
@@ -63,6 +62,13 @@ class AccountPurchaseActivity : AppCompatActivity() {
         quickViewReveal(findViewById(R.id.icon_computer), startTime + 150)
         quickViewReveal(findViewById(R.id.icon_phone), startTime + 225)
         quickViewReveal(findViewById(R.id.icon_notify), startTime + 300)
+    }
+
+    private fun showDataUsage() {
+        AlertDialog.Builder(this, R.style.SubscriptionPicker)
+                .setMessage(R.string.data_usage)
+                .setPositiveButton(R.string.close) { _, _ -> }
+                .show()
     }
 
     private fun toggleDataUsageConsent(checked: Boolean) {

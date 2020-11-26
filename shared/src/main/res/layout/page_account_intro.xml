@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/secondaryText"
-                android:text="@string/data_usage_1"
+                android:text="@string/data_usage_consent_1"
                 android:textColor="@color/primaryText"
                 android:textSize="16sp" />
 
@@ -116,7 +116,7 @@
                 android:id="@+id/data_consent_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/data_usage_2"
+                android:text="@string/data_usage_consent_2"
                 android:textColor="@color/materialBlueAccent"
                 android:textSize="16sp" />
 
