@@ -11,6 +11,8 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.ViewAnimationUtils
+import android.widget.CheckBox
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
@@ -27,6 +29,7 @@ class AccountPurchaseActivity : AppCompatActivity() {
 
     private var isInitial = true
     private var revealedPurchaseOptions = false
+    private var consentGiven = false
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +55,7 @@ class AccountPurchaseActivity : AppCompatActivity() {
 
     private fun setUpInitialLayout() {
         findViewById<View>(R.id.try_it).setOnClickListener { tryIt() }
+        findViewById<CheckBox>(R.id.checkbox_data_consent).setOnCheckedChangeListener { _, checked -> toggleDataUsageConsent(checked) }
 
         val startTime: Long = 500
         quickViewReveal(findViewById(R.id.icon_watch), startTime)
@@ -61,7 +65,16 @@ class AccountPurchaseActivity : AppCompatActivity() {
         quickViewReveal(findViewById(R.id.icon_notify), startTime + 300)
     }
 
+    private fun toggleDataUsageConsent(checked: Boolean) {
+        consentGiven = checked
+    }
+
     private fun tryIt() {
+        if (!consentGiven) {
+            Toast.makeText(this, R.string.data_usage_toast, Toast.LENGTH_LONG).show()
+            return
+        }
+
         slidePurchaseOptionsIn()
         com.stream_suite.link.api.implementation.firebase.AnalyticsHelper.accountTutorialFinished(this)
 

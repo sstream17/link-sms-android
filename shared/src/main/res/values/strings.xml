@@ -792,6 +792,9 @@
     <string name="trial_description">No competition can touch Link\'s <b>endless platform support</b> paired with its <b>low price</b>. Messages sync between all your devices, instantly and seamlessly.</string>
     <string name="purchase_description">Give the online version a try, for <b>seven days</b>, then you decide how you want to support the app:\n\n<b>$10.99</b> for a lifetime membership\n<b>$5.99</b> per year\n<b>$1.99</b> every three months\n<b>$0.99</b> per month</string>
     <string name="start_free_trial">Start your free trial!</string>
+    <string name="data_usage_1">I agree to the&#160;</string>
+    <string name="data_usage_2"><u>Data Usage</u></string>
+    <string name="data_usage_toast">You must agree to the Data Usage before you can create an account.</string>
     <string name="create_your_link_account">Create a Link account!</string>
     <string name="try_it">Try it!</string>
     <string name="select_purchase">Select Purchase</string>
