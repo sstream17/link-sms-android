@@ -1,4 +1,4 @@
-![feature graphic](/artwork/repo-header.png)
+![feature graphic](/artwork/repo_header.png)
 
 # Link SMS
 
